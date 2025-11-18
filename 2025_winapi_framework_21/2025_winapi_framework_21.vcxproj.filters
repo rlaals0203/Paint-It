@@ -47,6 +47,9 @@
     <Filter Include="Engine\02. Manager\Framework">
       <UniqueIdentifier>{ba46377c-5b24-444d-bb7f-74bf9c260e2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Player">
+      <UniqueIdentifier>{d0ac1a59-dbaa-4c76-8f89-0e3e62c98c9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -90,9 +93,6 @@
     </ClInclude>
     <ClInclude Include="DevScene.h">
       <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Engine\03. Object</Filter>
@@ -142,6 +142,9 @@
     <ClInclude Include="Floor.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -177,9 +180,6 @@
     </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>Engine\01. Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -228,6 +228,9 @@
     </ClCompile>
     <ClCompile Include="Floor.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
