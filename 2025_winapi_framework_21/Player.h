@@ -5,6 +5,7 @@ class Texture;
 struct PlayerStat //플레이어 스탯 저장 구조체
 {
 	float speed = 2.5f;
+	float delay = 1.f;
 };
 
 class Player : public Object
@@ -26,5 +27,6 @@ private:
 	bool m_isRight; //오른쪽을 보고 있는지
 	bool m_isDie;
 	bool m_isGrounded;
+	float m_coolTime;
 };
 

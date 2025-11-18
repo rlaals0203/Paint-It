@@ -10,6 +10,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+
 Player::Player()
 	: m_pTexture(nullptr)
 {
@@ -25,15 +26,10 @@ Player::Player()
 
 Player::~Player()
 {
-	//SAFE_DELETE(m_pTexture);
 }
 
 void Player::Render(HDC _hdc)
 {
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
-	int width = m_pTexture->GetWidth();
-	int height = m_pTexture->GetHeight();
 	ComponentRender(_hdc);
 }
 
@@ -68,6 +64,12 @@ void Player::Update()
 	}
 
 	Translate({dir.x * 100.f * fDT, dir.y * 100.f * fDT});
+	m_coolTime -= fDT;
+
+	if (GET_KEY(KEY_TYPE::F) && m_coolTime < 0.f)
+	{
+		CreateProjectile();	
+	}
 }
 
 void Player::Jump()
@@ -80,16 +82,22 @@ void Player::Jump()
 
 void Player::CreateProjectile()
 {
-	Projectile* proj = new Projectile;
-	// set
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
-	proj->SetPos(pos);
-	proj->SetSize({ 20.f,20.f });
-	static float angle = 0.f;
-	proj->SetAngle(angle * PI / 180);
-	angle += 10.f;
-	proj->SetDir({ 0.f,-1.f });
-	GET_SINGLE(SceneManager)->GetCurScene()
-		->AddObject(proj, Layer::PROJECTILE);
+	m_coolTime = m_stat.delay;
+	Vec2 offset = {-45.f, -45.f};
+
+	for (int i = 0; i < 3; i++)
+	{
+		Projectile* proj = new Projectile;
+		Vec2 pos = GetPos();
+		proj->SetPos(pos);
+		proj->SetSize({ 20.f,20.f });
+		Vec2 mousePos = GET_MOUSEPOS;
+		Vec2 dir = mousePos - pos;
+		offset.x += 45.f;
+		offset.y += 45.f;
+		proj->SetDir(dir + offset);
+
+		GET_SINGLE(SceneManager)->GetCurScene()
+			->AddObject(proj, Layer::PROJECTILE);
+	}
 }
