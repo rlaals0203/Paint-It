@@ -14,6 +14,7 @@ public:
 	virtual void EnterCollision(Collider* _other){}
 	virtual void StayCollision(Collider* _other) {}
 	virtual void ExitCollision(Collider* _other) {}
+	virtual void OnHit() {}
 public:
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }

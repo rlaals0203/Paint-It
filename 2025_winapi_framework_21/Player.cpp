@@ -92,7 +92,7 @@ void Player::CreateProjectile()
 		proj->SetPos(pos);
 		proj->SetSize({ 20.f,20.f });
 		Vec2 mousePos = GET_MOUSEPOS;
-		Vec2 dir = mousePos - pos;
+		Vec2 dir = mousePos - pos;	
 		offset.x += 45.f;
 		offset.y += 45.f;
 		proj->SetDir(dir + offset);
