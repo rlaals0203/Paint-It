@@ -50,6 +50,9 @@
     <Filter Include="Engine\03. Object\Player">
       <UniqueIdentifier>{d0ac1a59-dbaa-4c76-8f89-0e3e62c98c9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\06. Component\Entity">
+      <UniqueIdentifier>{4c9a382c-de47-4248-b64d-a36ae8e31f25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -145,6 +148,9 @@
     <ClInclude Include="Player.h">
       <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
+    <ClInclude Include="EntityHealth.h">
+      <Filter>Engine\06. Component\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -231,6 +237,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityHealth.cpp">
+      <Filter>Engine\06. Component\Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

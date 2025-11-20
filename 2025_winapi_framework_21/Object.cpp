@@ -6,6 +6,9 @@ Object::Object()
 	: m_pos{}
 	, m_size{}
 	, m_isDie(false)
+	, m_isBlink(false)
+	, m_blinkDur(0.1f)
+	, m_blinkTime(0.f)
 {
 
 }
@@ -19,15 +22,17 @@ Object::~Object()
 
 void Object::Update()
 {
-	if(GET_KEY(KEY_TYPE::LEFT))
-		m_pos.x -= 300.f * fDT;
-	if (GET_KEY(KEY_TYPE::RIGHT))
-		m_pos.x += 300.f *fDT;
-	if (GET_KEY(KEY_TYPE::UP))
-		m_pos.y -= 300.f * fDT;
-	if (GET_KEY(KEY_TYPE::DOWN))
-		m_pos.y += 300.f * fDT;
+	if (m_isBlink)
+	{
+		m_blinkTime -= fDT;
+		if (m_blinkTime <= 0.f)
+			m_isBlink = false;
+	}
 
+	if (GET_KEY(KEY_TYPE::T))
+	{
+		OnHit();
+	}
 }
 
 void Object::LateUpdate()
@@ -44,6 +49,8 @@ void Object::Render(HDC _hdc)
 {
 	RECT_RENDER(_hdc, m_pos.x, m_pos.y
 				, m_size.x, m_size.y);
+
+	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
 
 void Object::ComponentRender(HDC _hdc)
@@ -53,4 +60,10 @@ void Object::ComponentRender(HDC _hdc)
 		if (com != nullptr)
 			com->Render(_hdc);
 	}
+}
+
+void Object::OnHit()
+{
+	m_isBlink = true;
+	m_blinkTime = m_blinkDur;
 }

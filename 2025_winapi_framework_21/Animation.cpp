@@ -138,4 +138,18 @@ void Animation::Render(HDC _hdc)
         m_tex->GetTextureDC(),
         sx, sy, sw, sh,
         RGB(255, 0, 255));
+
+    if (obj->GetIsBlink())
+    {
+        HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+
+        RECT rc;
+        rc.left = dx;
+        rc.top = dy;
+        rc.right = dx + dw;
+        rc.bottom = dy + dh;
+
+        FillRect(_hdc, &rc, hBrush);
+        DeleteObject(hBrush);
+    }
 }

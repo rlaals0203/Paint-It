@@ -45,6 +45,8 @@ void Player::EnterCollision(Collider* _other)
 
 void Player::Update()
 {
+	Object::Update();
+
 	Vec2 dir = {};
 
 	if (GET_KEY(KEY_TYPE::D))
@@ -69,6 +71,15 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::F) && m_coolTime < 0.f)
 	{
 		CreateProjectile();	
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
+	{
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		Vec2 velo = rb->GetVelocity();
+		int force = m_isRight ? 1 : -1;
+		Vec2 dir = { (float)(force * 2500), velo.y };
+		rb->SetVelocity(dir);
 	}
 }
 

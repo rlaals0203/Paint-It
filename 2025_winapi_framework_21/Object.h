@@ -14,7 +14,6 @@ public:
 	virtual void EnterCollision(Collider* _other){}
 	virtual void StayCollision(Collider* _other) {}
 	virtual void ExitCollision(Collider* _other) {}
-	virtual void OnHit() {}
 public:
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
@@ -22,6 +21,8 @@ public:
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
+	const bool& GetIsBlink() const { return m_isBlink; }
+	void OnHit();
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -63,5 +64,8 @@ private:
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;
 	bool m_isDie;
+	bool m_isBlink;
+	float m_blinkDur;
+	float m_blinkTime;
 };
 
