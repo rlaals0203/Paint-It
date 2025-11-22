@@ -84,7 +84,7 @@ void Player::Update()
 		Vec2 playerPos = GetPos();
 		Vec2 shootDir = m_isRight ? Vec2{ 1.f, 0.f } : Vec2{ -1.f, 0.f };
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(EProjectile::Player, 20.f, playerPos, shootDir);
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::Player, 20.f, playerPos, shootDir);
 
 		m_coolTime = m_stat.delay;
 	}

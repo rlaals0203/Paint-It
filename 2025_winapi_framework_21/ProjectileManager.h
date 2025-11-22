@@ -1,7 +1,7 @@
 #pragma once
 #include"Projectile.h"
 
-enum EProjectile
+enum ProjectileType
 {
 	Player,
 	None
@@ -13,10 +13,10 @@ class ProjectileManager
 public:
 	void Init();
 public:
-	void RegisterProjectile(EProjectile _type, wstring _texture, float _speed, float _damage);
-	void SpawnProjectile(EProjectile _type, float _size, Vec2 _pos, Vec2 _dir);
-	void SpawnProjectile(EProjectile _type, float _size, Vec2 _pos, float _angle);
+	void RegisterProjectile(ProjectileType _type, wstring _texture, float _speed, float _damage);
+	void SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, Vec2 _dir);
+	void SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, float _angle);
 private:
-std::unordered_map<EProjectile, Projectile*> m_projectiles;
+std::unordered_map<ProjectileType, Projectile*> m_projectiles;
 };
 

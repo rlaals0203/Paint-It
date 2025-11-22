@@ -29,6 +29,7 @@ void Projectile::Render(HDC _hdc)
 	Vec2 size = GetSize();
 	int width = m_pTexture->GetWidth();
 	int height = m_pTexture->GetHeight();
+
 		::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)

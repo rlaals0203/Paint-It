@@ -6,7 +6,7 @@ class Texture;
 struct PlayerStat //플레이어 스탯 저장 구조체
 {
 	float speed = 2.5f;
-	float delay = 1.f;
+	float delay = 0.f;
 };
 
 class Player : public Object

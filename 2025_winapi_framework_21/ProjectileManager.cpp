@@ -8,14 +8,14 @@ void ProjectileManager::Init()
 }
 
 
-void ProjectileManager::RegisterProjectile(EProjectile _type, wstring _texture, float _speed, float _damage)
+void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _texture, float _speed, float _damage)
 {
 	auto proj = new Projectile();
 	proj->Init(_texture, _speed, _damage);
 	m_projectiles[_type] = proj;
 }
 
-void ProjectileManager::SpawnProjectile(EProjectile _type, float _size, Vec2 _pos, Vec2 _dir)
+void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, Vec2 _dir)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
@@ -32,7 +32,7 @@ void ProjectileManager::SpawnProjectile(EProjectile _type, float _size, Vec2 _po
 	}
 }
 
-void ProjectileManager::SpawnProjectile(EProjectile _type, float _size, Vec2 _pos, float _angle)
+void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, float _angle)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
