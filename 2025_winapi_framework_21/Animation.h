@@ -46,6 +46,7 @@ private:
 private:
     Animator* m_owner;
     Texture* m_tex;
+    Texture* m_whiteTex;
     std::wstring            m_name;
     std::vector<tAnimFrame> m_frames;
 

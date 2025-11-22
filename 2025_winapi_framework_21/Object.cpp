@@ -22,6 +22,11 @@ Object::~Object()
 
 void Object::Update()
 {
+	if (CheckOutofbounds()) //화면 밖으로 나가면 삭제
+	{
+		m_isDie = true;
+	}
+
 	if (m_isBlink)
 	{
 		m_blinkTime -= fDT;
@@ -47,9 +52,7 @@ void Object::LateUpdate()
 
 void Object::Render(HDC _hdc)
 {
-	RECT_RENDER(_hdc, m_pos.x, m_pos.y
-				, m_size.x, m_size.y);
-
+	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
 

@@ -60,6 +60,13 @@ public:
 		return component;
 	}
 private:
+	bool CheckOutofbounds()
+	{
+		Vec2 pos = GetPos();
+		return (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
+			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50);
+	}
+private:
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;

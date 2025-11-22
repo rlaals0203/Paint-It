@@ -60,20 +60,6 @@ void Core::MainRender()
 
 void Core::GameLoop()
 {
-	//time(NULL);
-	//clock();
-	//FrameSync();
-
-	/*static int cnt = 0;
-	++cnt;
-	static int prev = GetTickCount64();
-	int cur = GetTickCount64();
-	if (cur - prev >= 1000)
-	{
-	    prev = cur;
-	    cnt = 0;
-	}*/
-
 	MainUpdate();
 	MainRender();
 	GET_SINGLE(SceneManager)->GetCurScene()->FlushEvent();

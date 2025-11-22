@@ -10,7 +10,6 @@
 #include "Floor.h"
 void DevScene::Init()
 {
-	// Object ¹èÄ¡
 	Object* obj = new Enemy;
 	obj->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
 	obj->SetSize({ 100,100 });
@@ -28,7 +27,7 @@ void DevScene::Init()
 			Layer::DEFAULT
 			, { WINDOW_WIDTH / 2, 600 }
 	, { 100,100 });
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");

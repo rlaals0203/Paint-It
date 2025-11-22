@@ -17,6 +17,7 @@ Projectile::~Projectile()
 
 void Projectile::Update()
 {
+	Object::Update();
 	if (m_isAngle)
 		Translate({ cosf(m_angle) * 500.f * fDT,  sinf(m_angle) * 500.f * fDT });
 	else
