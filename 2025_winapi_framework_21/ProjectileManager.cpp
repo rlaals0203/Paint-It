@@ -15,7 +15,8 @@ void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _textur
 	m_projectiles[_type] = proj;
 }
 
-void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, Vec2 _dir)
+void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
+	Vec2 _dir, bool isPlayer)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
@@ -28,11 +29,13 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 		newProj->SetDir(_dir);
 		newProj->SetSize({ _size, _size });
 
-		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, Layer::PROJECTILE);
+		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
+		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
 	}
 }
 
-void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, float _angle)
+void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
+	float _angle, bool isPlayer)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
@@ -45,6 +48,7 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 		newProj->SetAngle(_angle);
 		newProj->SetSize({ _size, _size });
 
-		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, Layer::PROJECTILE);
+		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
+		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
 	}
 }
