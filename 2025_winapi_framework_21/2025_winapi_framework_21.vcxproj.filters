@@ -142,6 +142,14 @@
     <ClInclude Include="Floor.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossController.h" />
+    <ClInclude Include="BossModuleBase.h" />
+    <ClInclude Include="BossIdleModule.h" />
+    <ClInclude Include="BossPatternModule.h" />
+    <ClInclude Include="BossPattern.h" />
+    <ClInclude Include="TestBoss.h" />
+    <ClInclude Include="TestPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -229,5 +237,13 @@
     <ClCompile Include="Floor.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossController.cpp" />
+    <ClCompile Include="BossModuleBase.cpp" />
+    <ClCompile Include="BossIdleModule.cpp" />
+    <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="BossPattern.cpp" />
+    <ClCompile Include="TestBoss.cpp" />
+    <ClCompile Include="TestPattern.cpp" />
   </ItemGroup>
 </Project>
