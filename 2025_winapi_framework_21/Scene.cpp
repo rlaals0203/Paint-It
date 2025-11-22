@@ -88,23 +88,26 @@ void Scene::RequestDestroy(Object* obj)
 }
 void Scene::FlushEvent()
 {
-	// 삭제
+	for (auto& spawn : m_spawnObject)
+	{
+		AddObject(spawn.obj, spawn.type);
+	}
+	m_spawnObject.clear();
+
 	for (Object* d : m_killObject)
 	{
 		RemoveObject(d);
 		SAFE_DELETE(d);
 	}
 	m_killObject.clear();
-
-	// 생성
-
-	// 씬 변경
-
 }
 
-void Scene::RequestSpawn(Object* obj, Layer _type)
+void Scene::RequestSpawn(Object* _obj, Layer _type)
 {
-
+	SpawnObject newObj;
+	newObj.obj = _obj;
+	newObj.type = _type;
+	m_spawnObject.push_back(newObj);
 }
 
 
@@ -115,5 +118,4 @@ void Scene::RemoveObject(Object* _obj)
 		auto& v = m_vecObj[i];
 		v.erase(std::remove(v.begin(), v.end(), _obj), v.end());
 	}
-
 }

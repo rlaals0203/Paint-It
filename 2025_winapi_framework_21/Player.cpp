@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "ResourceManager.h"
+#include "ProjectileManager.h"
 #include "Texture.h"
 #include "Collider.h"
 #include "Animator.h"
@@ -16,12 +17,12 @@ Player::Player()
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo");
 	AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"jiwooFront",m_pTexture,{0.f,150.f}
 	,{50.f,50.f} ,{50.f,0.f} ,5,1.f);
 	animator->Play(L"jiwooFront");
-	AddComponent<Rigidbody>();
 }
 
 Player::~Player()
@@ -40,6 +41,16 @@ void Player::EnterCollision(Collider* _other)
 		Rigidbody* rb = GetComponent<Rigidbody>();
 		m_isGrounded = true;
 		rb->SetGrounded(true);
+	}
+}
+
+void Player::ExitCollision(Collider* _other)
+{
+	if (_other->GetName() == L"Floor")
+	{
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		rb->SetGrounded(false);
+		m_isGrounded = false;
 	}
 }
 
@@ -68,9 +79,14 @@ void Player::Update()
 	Translate({dir.x * 100.f * fDT, dir.y * 100.f * fDT});
 	m_coolTime -= fDT;
 
-	if (GET_KEY(KEY_TYPE::F) && m_coolTime < 0.f)
+	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime < 0.f)
 	{
-		CreateProjectile();	
+		Vec2 playerPos = GetPos();
+		Vec2 shootDir = m_isRight ? Vec2{ 1.f, 0.f } : Vec2{ -1.f, 0.f };
+
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(EProjectile::Player, 20.f, playerPos, shootDir);
+
+		m_coolTime = m_stat.delay;
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
@@ -78,37 +94,14 @@ void Player::Update()
 		Rigidbody* rb = GetComponent<Rigidbody>();
 		Vec2 velo = rb->GetVelocity();
 		int force = m_isRight ? 1 : -1;
-		Vec2 dir = { (float)(force * 2500), velo.y };
+		Vec2 dir = { (float)(force * 3500), velo.y };
 		rb->SetVelocity(dir);
 	}
 }
 
 void Player::Jump()
 {
-	m_isGrounded = false;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetVelocity({ rb->GetVelocity().x, -550.f });
 	rb->SetGrounded(false);
-}
-
-void Player::CreateProjectile()
-{
-	m_coolTime = m_stat.delay;
-	Vec2 offset = {-45.f, -45.f};
-
-	for (int i = 0; i < 3; i++)
-	{
-		Projectile* proj = new Projectile;
-		Vec2 pos = GetPos();
-		proj->SetPos(pos);
-		proj->SetSize({ 20.f,20.f });
-		Vec2 mousePos = GET_MOUSEPOS;
-		Vec2 dir = mousePos - pos;	
-		offset.x += 45.f;
-		offset.y += 45.f;
-		proj->SetDir(dir + offset);
-
-		GET_SINGLE(SceneManager)->GetCurScene()
-			->AddObject(proj, Layer::PROJECTILE);
-	}
 }

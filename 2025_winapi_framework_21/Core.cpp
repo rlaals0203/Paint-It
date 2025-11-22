@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "ProjectileManager.h"
 bool Core::Init(HWND _hWnd)
 {
 	m_hWnd = _hWnd;
@@ -20,6 +21,7 @@ bool Core::Init(HWND _hWnd)
 
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
+	GET_SINGLE(ProjectileManager)->Init();
 	if (!GET_SINGLE(ResourceManager)->Init())
 		return false;
 	GET_SINGLE(SceneManager)->Init();
@@ -45,6 +47,7 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(ResourceManager)->FmodUpdate();
 	GET_SINGLE(SceneManager)->Update();
+
 	//GET_SINGLE(CollisionManager)->Update();	
 }
 

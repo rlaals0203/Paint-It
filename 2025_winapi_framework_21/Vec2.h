@@ -39,6 +39,16 @@ public:
 	//	assert(!(0.f == _vOther.x || 0.f == _vOther.y));
 	//	return Vec2(x / _vOther.x, y / _vOther.y);
 	//}
+	Vec2 Rotate(const Vec2& v, float angle)
+	{
+		float cosA = cosf(angle);
+		float sinA = sinf(angle);
+
+		return Vec2(
+			v.x * cosA - v.y * sinA,
+			v.x * sinA + v.y * cosA
+		);
+	}
 	void operator+=(const Vec2& _other)
 	{
 		x += _other.x;
@@ -73,6 +83,7 @@ public:
 	{
 		return x * _other.y - y * _other.x;
 	}
+
 public:
 	float x = 0.f;
 	float y = 0.f;

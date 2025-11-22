@@ -151,6 +151,9 @@
     <ClInclude Include="EntityHealth.h">
       <Filter>Engine\06. Component\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -240,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="EntityHealth.cpp">
       <Filter>Engine\06. Component\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

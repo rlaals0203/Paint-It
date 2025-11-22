@@ -3,9 +3,9 @@
 #include "Object.h"
 Rigidbody::Rigidbody()
 	: m_mass(1.f)                // 질량 (1~5)
-	, m_friction(10.f)           // 지면 마찰
+	, m_friction(15.f)           // 지면 마찰
 	, m_force(0.f, 0.f)          // 누적 힘
-	, m_airDrag(10.f)            // 공중 감속
+	, m_airDrag(15.f)            // 공중 감속
 	, m_useGravity(true)         // 중력 사용 여부
 	, m_isKinematic(false)       // 키네마틱 여부
 

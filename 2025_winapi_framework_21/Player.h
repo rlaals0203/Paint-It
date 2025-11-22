@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "ProjectileLauncher.h"
 class Texture;
 
 struct PlayerStat //플레이어 스탯 저장 구조체
@@ -18,8 +19,7 @@ public:
 	void Render(HDC _hdc) override;
 	void Jump();
 	virtual void EnterCollision(Collider* _other)override;
-private:
-	void CreateProjectile();
+	virtual void ExitCollision(Collider* _other)override;
 private:
 	Texture* m_pTexture;
 	PlayerStat m_stat;
