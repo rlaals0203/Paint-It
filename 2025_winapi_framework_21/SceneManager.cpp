@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "SceneManager.h"
 #include "DevScene.h"
-#include "TestScene.h"
 #include "Object.h"
 #include "Collider.h"
 void SceneManager::PhysicsSyncColliders()
@@ -33,7 +32,6 @@ void SceneManager::Init()
 	m_curScene = nullptr;
 	// ¾À µî·Ï
 	RegisterScene(L"DevScene",std::make_shared<DevScene>());
-	RegisterScene(L"TestScene",std::make_shared<TestScene>());
 	
 	// Ã¹ ¾À ·Îµå
 	LoadScene(L"DevScene");
@@ -75,7 +73,6 @@ void SceneManager::LoadScene(const wstring& _name)
 	auto iter = m_mapScenes.find(_name);
 	if (iter != m_mapScenes.end())
 	{
-		//???
 		m_curScene = iter->second;
 		m_curScene->Init();
 	}

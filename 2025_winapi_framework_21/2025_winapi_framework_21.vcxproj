@@ -196,9 +196,9 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestBoss.h" />
     <ClInclude Include="TestPattern.h" />
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +233,9 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TestBoss.cpp" />
     <ClCompile Include="TestPattern.cpp" />
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc" />

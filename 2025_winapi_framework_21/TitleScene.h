@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
-class TestScene :
-    public Scene
+class TitleScene : Scene
 {
 public:
 	void Init() override;
