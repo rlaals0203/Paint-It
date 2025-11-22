@@ -5,74 +5,32 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "ResourceManager.h"
+#include "ProjectileManager.h"
 #include "Texture.h"
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+
 Player::Player()
 	: m_pTexture(nullptr)
 {
-	//m_pTexture = new Texture;
-	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
-	//path += L"Texture\\plane.bmp";
-	//m_pTexture->Load(path);
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo");
 	AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
-	(L"jiwooFront"
-	,m_pTexture
-	,{0.f,150.f}
-	,{50.f,50.f}
-	,{50.f,0.f}
-	,5,0.1f);
+	(L"jiwooFront",m_pTexture,{0.f,150.f}
+	,{50.f,50.f} ,{50.f,0.f} ,5,1.f);
 	animator->Play(L"jiwooFront");
-	AddComponent<Rigidbody>();
 }
 
 Player::~Player()
 {
-	//SAFE_DELETE(m_pTexture);
 }
 
 void Player::Render(HDC _hdc)
 {
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
-	int width = m_pTexture->GetWidth();
-	int height = m_pTexture->GetHeight();
-
-	// blt 종류
-	// 1. bitblt - 1:1 매칭, 가장 빠름
-	//::BitBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, width, height,
-	//	m_pTexture->GetTextureDC(),
-	//	0, 0, SRCCOPY);
-	
-	////// 2. TransparentBlt - 색상 빼기, 느림 
-	//::TransparentBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, width * 2, height,
-	//	m_pTexture->GetTextureDC(),
-	//	0, 0, width, height, RGB(255,0,255));
-	
-	////// 3. StretchBlt - 크기조절, 반전, 빠름
-	//::StretchBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, size.x, size.y,
-	//	m_pTexture->GetTextureDC(),
-	//	0, 0, width, height, SRCCOPY);
-
-	// 4. 회전 
-	//::PlgBlt()
-
-	// 5. alpha 값 조절
-	//::AlphaBlend()
 	ComponentRender(_hdc);
 }
 
@@ -81,63 +39,69 @@ void Player::EnterCollision(Collider* _other)
 	if (_other->GetName() == L"Floor")
 	{
 		Rigidbody* rb = GetComponent<Rigidbody>();
+		m_isGrounded = true;
 		rb->SetGrounded(true);
+	}
+}
+
+void Player::ExitCollision(Collider* _other)
+{
+	if (_other->GetName() == L"Floor")
+	{
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		rb->SetGrounded(false);
+		m_isGrounded = false;
 	}
 }
 
 void Player::Update()
 {
-	//Vec2 pos = GetPos();
-	//if (GET_KEY(KEY_TYPE::A))
-	//	pos.x -= 300.f * fDT;
-	//if (GET_KEY(KEY_TYPE::D))
-	//	pos.x += 300.f * fDT;
-	//if (GET_KEY(KEY_TYPE::W))
-	//	pos.y -= 300.f * fDT;
-	//if (GET_KEY(KEY_TYPE::S))
-	//	pos.y += 300.f * fDT;
-	//SetPos(pos);
+	Object::Update();
+
 	Vec2 dir = {};
-	if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-	if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
 
-	Translate({ dir.x * 300.f * fDT, dir.y * 300.f * fDT });
+	if (GET_KEY(KEY_TYPE::D))
+	{
+		m_isRight = true;
+		dir.x += m_stat.speed;
+	}
+	else if (GET_KEY(KEY_TYPE::A))
+	{
+		m_isRight = false;
+		dir.x -= m_stat.speed;
+	}
 
-	// 크기변경
-	float scaleDelta = 0.f;
-	float scaleSpeed = 1.f;
-	if (GET_KEY(KEY_TYPE::Q))
-		scaleDelta += scaleSpeed * fDT;
-	if (GET_KEY(KEY_TYPE::E))
-		scaleDelta -= scaleSpeed * fDT;
+	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded) //점프 시도
+	{
+		Jump();
+	}
 
-	float factor = 1.f + scaleDelta;
-	Scale({ factor, factor });
+	Translate({dir.x * 100.f * fDT, dir.y * 100.f * fDT});
+	m_coolTime -= fDT;
 
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();
+	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime < 0.f)
+	{
+		Vec2 playerPos = GetPos();
+		Vec2 shootDir = m_isRight ? Vec2{ 1.f, 0.f } : Vec2{ -1.f, 0.f };
+
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::Player, 20.f, playerPos, shootDir);
+
+		m_coolTime = m_stat.delay;
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
+	{
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		Vec2 velo = rb->GetVelocity();
+		int force = m_isRight ? 1 : -1;
+		Vec2 dir = { (float)(force * 3500), velo.y };
+		rb->SetVelocity(dir);
+	}
 }
 
-
-
-void Player::CreateProjectile()
+void Player::Jump()
 {
-	Projectile* proj = new Projectile;
-	// set
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
-	proj->SetPos(pos);
-	proj->SetSize({ 20.f,20.f });
-	static float angle = 0.f;
-	proj->SetAngle(angle * PI / 180);
-	angle += 10.f;
-	proj->SetDir({ 0.f,-1.f });
-	GET_SINGLE(SceneManager)->GetCurScene()
-		->AddObject(proj, Layer::PROJECTILE);
-	//scene->addobjet();
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	rb->SetVelocity({ rb->GetVelocity().x, -550.f });
+	rb->SetGrounded(false);
 }
-
-// DevScene에서 Enter를 누르면 TestScene으로 넘어갑니다.
-// TestScene에는 Enemy가 사각형으로 랜덤 위치에 랜덤색깔로 깜빡입니다.

@@ -21,6 +21,8 @@ public:
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
+	const bool& GetIsBlink() const { return m_isBlink; }
+	void OnHit();
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -58,9 +60,19 @@ public:
 		return component;
 	}
 private:
+	bool CheckOutofbounds()
+	{
+		Vec2 pos = GetPos();
+		return (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
+			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50);
+	}
+private:
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;
 	bool m_isDie;
+	bool m_isBlink;
+	float m_blinkDur;
+	float m_blinkTime;
 };
 

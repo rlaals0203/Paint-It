@@ -4,6 +4,7 @@ class Core
 {
 	DECLARE_SINGLE(Core);
 public:
+public:
 	bool Init(HWND _hWnd);
 	void GameLoop();
 	void CleanUp();
@@ -21,34 +22,3 @@ private:
 	HBITMAP m_hBackBit;
 	HDC  m_hBackDC;
 };
-
-
-
-//class Core
-//{
-//private:
-//	Core() {}
-//public:
-//	static Core* GetInst()
-//	{
-//		if (nullptr == m_pInst)
-//			m_pInst = new Core;
-//		return m_pInst;
-//	}
-//	static void DestroyInst()
-//	{
-//
-//	}
-//private:
-//	static Core m_pInst;
-//};
-
-
-//private:
-//	Core() {}
-//public:
-//	static Core* GetInst()
-//	{
-//		static Core inst;
-//		return &inst;
-//	}

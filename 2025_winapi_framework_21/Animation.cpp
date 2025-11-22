@@ -133,9 +133,22 @@ void Animation::Render(HDC _hdc)
     int sy = (int)fr.vLT.y;
     int sw = (int)fr.vSlice.x;
     int sh = (int)fr.vSlice.y;
-    BOOL debug = TransparentBlt(_hdc,
-        dx, dy, dw, dh,
-        m_tex->GetTextureDC(),
-        sx, sy, sw, sh,
-        RGB(255, 0, 255));
+
+    if (obj->GetIsBlink())
+    {
+        HDC texDC = m_whiteTex->GetTextureDC();
+        TransparentBlt(_hdc,
+            dx, dy, dw, dh,
+            texDC,
+            sx, sy, sw, sh,
+            RGB(255, 0, 255));
+    }
+    else
+    {
+        TransparentBlt(_hdc,
+            dx, dy, dw, dh,
+            m_tex->GetTextureDC(),
+            sx, sy, sw, sh,
+            RGB(255, 0, 255));
+    }
 }
