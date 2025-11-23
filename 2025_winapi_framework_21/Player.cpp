@@ -11,6 +11,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+#include "EntityHealth.h"
 
 Player::Player()
 	: m_pTexture(nullptr)
@@ -18,6 +19,8 @@ Player::Player()
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
+	auto* healthCompo = AddComponent<EntityHealth>();
+	healthCompo->SetDefaultHP(100.f);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"jiwooFront",m_pTexture,{0.f,150.f}

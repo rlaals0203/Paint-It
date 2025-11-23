@@ -100,9 +100,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -154,6 +151,15 @@
     <ClInclude Include="ProjectileManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossController.h" />
+    <ClInclude Include="BossIdleModule.h" />
+    <ClInclude Include="BossModuleBase.h" />
+    <ClInclude Include="BossPattern.h" />
+    <ClInclude Include="BossPatternModule.h" />
+    <ClInclude Include="TestBoss.h" />
+    <ClInclude Include="TestPattern.h" />
+    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -192,9 +198,6 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -247,5 +250,14 @@
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossController.cpp" />
+    <ClCompile Include="BossIdleModule.cpp" />
+    <ClCompile Include="BossModuleBase.cpp" />
+    <ClCompile Include="BossPattern.cpp" />
+    <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="TestBoss.cpp" />
+    <ClCompile Include="TestPattern.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
 </Project>

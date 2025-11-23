@@ -134,21 +134,27 @@ void Animation::Render(HDC _hdc)
     int sw = (int)fr.vSlice.x;
     int sh = (int)fr.vSlice.y;
 
+    BOOL debug = TransparentBlt(
+        _hdc,
+        dx, dy, dw, dh,
+        m_tex->GetTextureDC(),
+        sx, sy, sw, sh,
+        RGB(255, 0, 255)
+    );
+
+    // ±ô¹ÚÀÓ È¿°ú
     if (obj->GetIsBlink())
     {
-        HDC texDC = m_whiteTex->GetTextureDC();
-        TransparentBlt(_hdc,
-            dx, dy, dw, dh,
-            texDC,
-            sx, sy, sw, sh,
-            RGB(255, 0, 255));
-    }
-    else
-    {
-        TransparentBlt(_hdc,
-            dx, dy, dw, dh,
-            m_tex->GetTextureDC(),
-            sx, sy, sw, sh,
-            RGB(255, 0, 255));
+        HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+
+        RECT rc;
+        rc.left = dx;
+        rc.top = dy;
+        rc.right = dx + dw;
+        rc.bottom = dy + dh;
+
+        FillRect(_hdc, &rc, hBrush);
+        DeleteObject(hBrush);
     }
 }
+

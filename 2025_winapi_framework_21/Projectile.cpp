@@ -2,17 +2,26 @@
 #include "Projectile.h"
 #include "Texture.h"
 #include "ResourceManager.h"
+#include "EntityHealth.h"
 #include "Collider.h"
-Projectile::Projectile() : m_angle(0.f)
-{
-	auto* com = AddComponent<Collider>();
-	com->SetSize({ 20.f,20.f });
-	com->SetName(L"PlayerBullet");
-	com->SetTrigger(true);
-}
+
+Projectile::Projectile() : m_angle(0.f) {}
 
 Projectile::~Projectile()
 {
+}
+
+void Projectile::Init(wstring _texture, float _speed, float _damage)
+{
+	m_textureName = _texture;
+	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
+	m_speed = _speed;
+	m_damage = _damage;
+
+	auto* com = AddComponent<Collider>();
+	com->SetSize({ 20.f,20.f });
+	com->SetName(L"Proj");
+	com->SetTrigger(true);
 }
 
 void Projectile::Update()
@@ -38,4 +47,15 @@ void Projectile::Render(HDC _hdc)
 		m_pTexture->GetTextureDC(),
 		0, 0, width, height, RGB(255,0,255));
 		ComponentRender(_hdc);
+}
+
+void Projectile::EnterCollision(Collider* _other)
+{
+	_other->GetOwner()->GetComponent<EntityHealth>()->ApplyDamage(m_damage);
+	m_isDie = true;
+}
+
+void Projectile::ExitCollision(Collider* _other)
+{
+
 }

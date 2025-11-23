@@ -1,11 +1,15 @@
 #pragma once
 #include "Component.h"
 
-class EntityHealth : Component
+class EntityHealth : 
+	public Component
 {
 public:
 	EntityHealth();
 	~EntityHealth();
+	void Init() override;
+	void LateUpdate() override;
+	void Render(HDC _hdc) override;
 public:
 	const int& GetCurrentHp() const { return m_currentHp; }
 	const int& GetMaxHp() const { return m_maxHp; }
