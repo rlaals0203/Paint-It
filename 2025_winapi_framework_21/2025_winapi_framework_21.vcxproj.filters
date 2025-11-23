@@ -159,7 +159,10 @@
     <ClInclude Include="BossPatternModule.h" />
     <ClInclude Include="TestBoss.h" />
     <ClInclude Include="TestPattern.h" />
-    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TitleScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageText.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -258,6 +261,9 @@
     <ClCompile Include="BossPatternModule.cpp" />
     <ClCompile Include="TestBoss.cpp" />
     <ClCompile Include="TestPattern.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageText.cpp" />
   </ItemGroup>
 </Project>

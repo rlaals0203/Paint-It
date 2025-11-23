@@ -51,7 +51,7 @@ void Core::MainUpdate()
 
 void Core::MainRender()
 { 
-	::PatBlt(m_hBackDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WHITENESS);
+	::PatBlt(m_hBackDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, BLACKNESS);
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 	::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
 }

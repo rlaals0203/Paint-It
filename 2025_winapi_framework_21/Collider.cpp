@@ -14,7 +14,6 @@ Collider::~Collider()
 }
 void Collider::EnterCollision(Collider* _other)
 {
-	m_showDebug = true;
 	GetOwner()->EnterCollision(_other);
 
 }
@@ -25,7 +24,6 @@ void Collider::StayCollision(Collider* _other)
 
 void Collider::ExitCollision(Collider* _other)
 {
-	m_showDebug = false;
 	GetOwner()->ExitCollision(_other);
 
 }
