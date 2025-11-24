@@ -53,6 +53,9 @@
     <Filter Include="Engine\06. Component\Entity">
       <UniqueIdentifier>{4c9a382c-de47-4248-b64d-a36ae8e31f25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Misc">
+      <UniqueIdentifier>{6091a8bf-dc7a-44e3-b893-86a93e30a18f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -163,6 +166,12 @@
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="DamageText.h" />
+    <ClInclude Include="EffectManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -265,5 +274,11 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="DamageText.cpp" />
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

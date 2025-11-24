@@ -9,7 +9,7 @@ void TitleScene::Init()
 
 void TitleScene::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	if (GET_KEYDOWN(KEY_TYPE::R))
 	{
 		GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
 	}
