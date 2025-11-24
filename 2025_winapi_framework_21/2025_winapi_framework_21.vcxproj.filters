@@ -166,12 +166,13 @@
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="DamageText.h" />
+    <ClInclude Include="Effect.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>Engine\03. Object\Misc</Filter>
-    </ClInclude>
+    <ClInclude Include="MovePattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -274,11 +275,12 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="DamageText.cpp" />
+    <ClCompile Include="Effect.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>Engine\03. Object\Misc</Filter>
-    </ClCompile>
+    <ClCompile Include="MovePattern.cpp" />
   </ItemGroup>
 </Project>

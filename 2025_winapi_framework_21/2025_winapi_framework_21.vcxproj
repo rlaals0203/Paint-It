@@ -183,6 +183,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />

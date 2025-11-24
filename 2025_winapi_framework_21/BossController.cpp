@@ -10,7 +10,8 @@ BossController::BossController()
 
 BossController::~BossController()
 {
-	for (auto& item : m_ModuleMap) {
+	for (auto& item : m_ModuleMap) 
+	{
 		delete item.second;
 	}
 	m_ModuleMap.clear();
@@ -33,7 +34,8 @@ void BossController::Init()
 
 void BossController::LateUpdate()
 {
-	if (m_CurrentModule != nullptr && m_CurrentModule->GetActive()) {
+	if (m_CurrentModule != nullptr && m_CurrentModule->GetActive()) 
+	{
 		m_CurrentModule->UpdateModule();
 	}
 }
