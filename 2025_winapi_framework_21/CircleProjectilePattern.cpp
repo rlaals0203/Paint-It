@@ -22,12 +22,12 @@ void CircleProjectilePattern::Update()
 
 void CircleProjectilePattern::SetUsed()
 {
-	float angle = 360 / m_count;
+	float angle = 360.f / (float)m_count;
 	for (int i = 0; i < m_count; i++) {
 		GET_SINGLE(ProjectileManager)->SpawnProjectile(
 			m_type, 20.f, 
 			m_Controller->GetOwner()->GetPos(), 
 			angle * i);
 	}
-	GET_SINGLE(ImpulseManager)->ApplyImpulse(15.f, 0.5f);
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(20.f, 0.5f);
 }

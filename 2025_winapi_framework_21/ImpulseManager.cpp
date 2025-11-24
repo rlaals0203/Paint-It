@@ -10,7 +10,10 @@ void ImpulseManager::Update()
         m_offset = { x, y };
         m_duration -= fDT;
         if (m_duration < 0.f)
+        {
             m_isShaking = false;
+            m_offset = { 0, 0 };
+        }
     }
 }
 

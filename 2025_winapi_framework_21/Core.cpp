@@ -58,7 +58,6 @@ void Core::MainRender()
 	Vec2 offset = GET_SINGLE(ImpulseManager)->GetOffset();
 	int x = offset.x;
 	int y = offset.y;
-
 	::PatBlt(m_hBackDC, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, BLACKNESS);
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 	::BitBlt(m_hDC, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);

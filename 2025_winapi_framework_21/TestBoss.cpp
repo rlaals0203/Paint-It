@@ -22,6 +22,7 @@ TestBoss::TestBoss()
 	AddModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.70f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 125, 125 });
+	SetSize({ 250, 250 });
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(10000.f);
 
