@@ -3,6 +3,7 @@
 #include "MovePattern.h"
 #include "BossController.h"
 #include "ProjectileManager.h"
+#include "ImpulseManager.h"
 
 CircleProjectilePattern::CircleProjectilePattern(BossController* _controller,
 	ProjectileType _type, int _count) : BossPattern(_controller),
@@ -28,4 +29,5 @@ void CircleProjectilePattern::SetUsed()
 			m_Controller->GetOwner()->GetPos(), 
 			angle * i);
 	}
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(15.f, 0.5f);
 }
