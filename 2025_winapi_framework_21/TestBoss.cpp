@@ -2,12 +2,19 @@
 #include "TestBoss.h"
 #include "TestPattern.h"
 #include "MovePattern.h"
+#include "CircleProjectilePattern.h"
 #include "Collider.h"
+#include "ProjectileManager.h"
 #include "EntityHealth.h"
 
 TestBoss::TestBoss()
 {
 	AddModule(new TestPattern(m_Controller));
+	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
+	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
+	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 40));
+	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 50));
+	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 60));
 	AddModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.50f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.80f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
