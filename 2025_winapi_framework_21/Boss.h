@@ -10,9 +10,13 @@ public:
     Boss();
     ~Boss();
 public:
+    void MoveTransPos(Vec2 _delta)
+    {
+        Translate(_delta);
+    }
+public:
     void SetAnimation(wstring animationKey);
     void StopAnimation();
-public:
     void AddModule(BossPattern* addedPattern);
 protected:
     BossController* m_Controller;

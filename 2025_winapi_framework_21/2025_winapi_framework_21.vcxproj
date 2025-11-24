@@ -176,8 +176,6 @@
     <ClInclude Include="DamageText.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityHealth.h" />
     <ClInclude Include="Enums.h" />
@@ -185,6 +183,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MovePatttern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -220,14 +219,13 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DamageText.cpp" />
     <ClCompile Include="DevScene.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EntityHealth.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovePatttern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
