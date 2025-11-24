@@ -11,6 +11,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+#include "EntityHealth.h"
 
 Player::Player()
 	: m_pTexture(nullptr)
@@ -18,6 +19,8 @@ Player::Player()
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
+	auto* healthCompo = AddComponent<EntityHealth>();
+	healthCompo->SetDefaultHP(100.f);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"jiwooFront",m_pTexture,{0.f,150.f}
@@ -82,10 +85,11 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime < 0.f)
 	{
 		Vec2 playerPos = GetPos();
-		Vec2 shootDir = m_isRight ? Vec2{ 1.f, 0.f } : Vec2{ -1.f, 0.f };
+		Vec2 mousePos = GET_MOUSEPOS;
+		Vec2 dir = mousePos - playerPos;
+		dir.Normalize();
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::Player, 20.f, playerPos, shootDir, true);
-
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::Player, 20.f, playerPos, dir, true);
 		m_coolTime = m_stat.delay;
 	}
 

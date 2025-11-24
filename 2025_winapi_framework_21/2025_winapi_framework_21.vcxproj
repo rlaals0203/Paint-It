@@ -173,6 +173,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DamageText.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="Enemy.h" />
@@ -196,9 +197,9 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestBoss.h" />
     <ClInclude Include="TestPattern.h" />
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +216,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DamageText.cpp" />
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EntityHealth.cpp" />
@@ -233,9 +235,9 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TestBoss.cpp" />
     <ClCompile Include="TestPattern.cpp" />
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc" />

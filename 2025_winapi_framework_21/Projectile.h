@@ -9,15 +9,11 @@ class Projectile :
 public:
     Projectile();
     ~Projectile();
-    void Init(wstring _texture, float _speed, float _damage)
-    {
-        m_textureName = _texture;
-        m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
-        m_speed = _speed;
-        m_damage = _damage;
-    }
+    void Init(wstring _texture, float _speed, float _damage);
     void Update() override;
     void Render(HDC _hdc) override;
+    virtual void EnterCollision(Collider* _other)override;
+    virtual void ExitCollision(Collider* _other)override;
 public:
     void SetAngle(float _f)
     {

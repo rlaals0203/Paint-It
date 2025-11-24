@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "TestPattern.h"
 #include "BossController.h"
+#include "ProjectileManager.h"
 
 TestPattern::TestPattern(BossController* _controller)
 	:BossPattern(_controller)
@@ -20,6 +21,8 @@ void TestPattern::Update()
 	m_cooldownTimer += fDT;
 	if (m_cooldownTimer >= m_cooldown) 
 	{
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(Enemy, 20.f, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 },
+			90.f);
 		m_isUsed = false;
 	}
 }

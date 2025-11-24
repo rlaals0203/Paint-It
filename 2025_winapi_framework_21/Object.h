@@ -66,11 +66,12 @@ private:
 		return (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
 			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50);
 	}
+protected:
+	bool m_isDie;
 private:
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;
-	bool m_isDie;
 	bool m_isBlink;
 	float m_blinkDur;
 	float m_blinkTime;

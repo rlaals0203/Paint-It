@@ -2,12 +2,9 @@
 #include "SceneManager.h"
 #include "ProjectileManager.h"
 
-void ProjectileManager::Init()
-{
-	RegisterProjectile(Player, L"bullet", 10.f, 5.f);
-}
-
-
+/// <summary>
+/// 투사체 등록 (타입, 텍스쳐 이름, 속도, 데미지)
+/// </summary>
 void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _texture, float _speed, float _damage)
 {
 	auto proj = new Projectile();
@@ -15,6 +12,9 @@ void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _textur
 	m_projectiles[_type] = proj;
 }
 
+/// <summary>
+/// 투사체 소환 매서드 (타입, 크기, 위치, 방향, 플레이어 소유인가)
+/// </summary>
 void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
 	Vec2 _dir, bool isPlayer)
 {
@@ -34,6 +34,9 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 	}
 }
 
+/// <summary>
+/// 투사체 소환 매서드 (타입, 크기, 위치, 각도, 플레이어 소유인가)
+/// </summary>
 void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
 	float _angle, bool isPlayer)
 {
