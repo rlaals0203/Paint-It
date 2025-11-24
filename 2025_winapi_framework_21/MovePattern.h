@@ -1,13 +1,13 @@
 #pragma once
 #include "BossPattern.h"
 class Boss;
-class MovePatttern :
+class MovePattern :
     public BossPattern
 {
 public:
-    MovePatttern(BossController* _controller
+    MovePattern(BossController* _controller
         , Vec2 _movePos, float _speed, float _stopDistance);
-    ~MovePatttern();
+    ~MovePattern();
 
 public:
     virtual void Update() override;

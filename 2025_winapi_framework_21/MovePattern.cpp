@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "MovePatttern.h"
+#include "MovePattern.h"
 #include "BossController.h"
 #include "Boss.h"
 
-MovePatttern::MovePatttern(BossController* _controller
+MovePattern::MovePattern(BossController* _controller
 	, Vec2 _movePos, float _speed, float _stopDistance)
 	:BossPattern(_controller)
 	,m_movePos(_movePos)
@@ -14,11 +14,11 @@ MovePatttern::MovePatttern(BossController* _controller
 	m_boss = m_Controller->GetBoss();
 }
 
-MovePatttern::~MovePatttern()
+MovePattern::~MovePattern()
 {
 }
 
-void MovePatttern::Update()
+void MovePattern::Update()
 {
 	m_boss->MoveTransPos(m_moveDir * (fDT * m_speed));
 	m_startPos = m_boss->GetPos();
@@ -33,7 +33,7 @@ void MovePatttern::Update()
 	}
 }
 
-void MovePatttern::SetUsed()
+void MovePattern::SetUsed()
 {
 	m_startPos = m_boss->GetPos();
 	m_moveDir = m_movePos - m_startPos;
