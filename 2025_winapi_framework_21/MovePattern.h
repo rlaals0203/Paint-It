@@ -22,4 +22,7 @@ protected:
 
     float m_speed;
     float m_stopDistance;
+    float m_t = 0;
+    float m_duration = 1.0f;
+    Vec2 m_originPos;
 };

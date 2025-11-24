@@ -4,7 +4,7 @@
 
 void ProjectileManager::Init()
 {
-	RegisterProjectile(Player, L"bullet", 20.f, 5.f);
+	RegisterProjectile(Player, L"jiwoo", 20.f, 5.f);
 	RegisterProjectile(Enemy, L"bullet", 10.f, 5.f);
 }
 

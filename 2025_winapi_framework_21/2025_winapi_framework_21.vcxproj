@@ -176,6 +176,7 @@
     <ClInclude Include="DamageText.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
+    <ClInclude Include="Ease.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectData.h" />
     <ClInclude Include="EffectManager.h" />
