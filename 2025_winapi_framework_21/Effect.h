@@ -19,7 +19,6 @@ public:
     void Play(const EffectData& _data, bool _loop);
 private:
     Animator* m_animator;
-    Texture* m_tex;
     float m_duration;
     bool m_isPlaying;
 };

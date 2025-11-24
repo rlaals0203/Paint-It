@@ -2,14 +2,13 @@
 #include "Effect.h"
 #include "EffectManager.h"
 
-Effect::Effect() : m_animator(nullptr), 
-m_tex(nullptr), m_duration(0.f), m_isPlaying(false)
+Effect::Effect() : m_animator(nullptr), m_duration(0.f), m_isPlaying(false)
 {
 
 }
 
 Effect::~Effect()
-{
+{ 
 
 }
 
@@ -36,7 +35,6 @@ void Effect::Init(const EffectData& _data, float _duration, bool _loop)
         m_animator = AddComponent<Animator>();
 
     SetSize(_data.slice);
-    m_tex = _data.tex;
     m_duration = _duration;
     m_isPlaying = true;
     Play(_data, _loop);
