@@ -14,12 +14,12 @@ public:
     virtual void SetUsed() override;
 protected:
     Boss* m_boss;
-    
+
     Vec2  m_startPos;
     Vec2  m_movePos;
 
     Vec2  m_moveDir;
-    
+
     float m_speed;
     float m_stopDistance;
 };
