@@ -2,6 +2,12 @@
 #include "SceneManager.h"
 #include "ProjectileManager.h"
 
+void ProjectileManager::Init()
+{
+	RegisterProjectile(Player, L"bullet", 20.f, 5.f);
+	RegisterProjectile(Enemy, L"bullet", 10.f, 5.f);
+}
+
 /// <summary>
 /// 투사체 등록 (타입, 텍스쳐 이름, 속도, 데미지)
 /// </summary>
