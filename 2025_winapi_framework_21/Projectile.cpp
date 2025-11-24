@@ -6,6 +6,7 @@
 #include "EntityHealth.h"
 #include "Collider.h"
 #include "DamageText.h"
+#include "EffectManager.h"
 
 Projectile::Projectile() : m_angle(0.f) {}
 
@@ -58,6 +59,7 @@ void Projectile::EnterCollision(Collider* _other)
 	DamageText* dmgText = new DamageText();
 	dmgText->Init((int)m_damage, GetPos());
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
+	GET_SINGLE(EffectManager)->PlayEffect(EffectType::Player, GetPos(), 1.f, false);
 	SetDead();
 }
 

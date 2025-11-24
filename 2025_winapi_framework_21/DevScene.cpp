@@ -16,7 +16,7 @@ void DevScene::Init()
 	boss->SetSize({ 100, 100 });
 	AddObject(boss, Layer::ENEMY);
 
-	Spawn<Player>(Layer::PLAYER, { WINDOW_WIDTH / 2, 300}, { 100,100 });
+	Spawn<Player>(Layer::PLAYER, { WINDOW_WIDTH / 2, 550}, { 100,100 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100,100 });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);

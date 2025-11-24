@@ -8,7 +8,7 @@
 TestBoss::TestBoss()
 {
 	AddModule(new TestPattern(m_Controller));
-	AddModule(new MovePattern(m_Controller,{0,0},10.f,0.5f));
+	AddModule(new MovePattern(m_Controller,{0,0},100.f,0.5f));
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 125, 125 });
 	auto* healthCompo = AddComponent<EntityHealth>();

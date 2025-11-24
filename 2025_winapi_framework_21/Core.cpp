@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "ProjectileManager.h"
+#include "EffectManager.h"
 bool Core::Init(HWND _hWnd)
 {
 	m_hWnd = _hWnd;
@@ -21,9 +22,10 @@ bool Core::Init(HWND _hWnd)
 
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
-	GET_SINGLE(ProjectileManager)->Init();
 	if (!GET_SINGLE(ResourceManager)->Init())
 		return false;
+	GET_SINGLE(EffectManager)->Init();
+	GET_SINGLE(ProjectileManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 
 	return true;
