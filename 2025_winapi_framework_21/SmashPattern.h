@@ -11,11 +11,19 @@ public:
     virtual void Update() override;
     virtual void SetUsed() override;
 private:
+    void UpState();
+    void WaitState();
+    void FallState();
+private:
+    enum class State
+    {
+        Up,
+        Wait,
+        Fall,
+    };
+    State m_state;
     MoveComponent* m_moveComponent;
     bool m_isPlaying;
-    bool m_isPhase1;
-    bool m_isPhase2;
-    float m_phase1;
-    float m_phase2;
+    float m_delay;
 };
 

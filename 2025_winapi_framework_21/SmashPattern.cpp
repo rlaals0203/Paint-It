@@ -2,10 +2,13 @@
 #include "BossPattern.h"
 #include "SmashPattern.h"
 #include "BossController.h"
+#include "ImpulseManager.h"
 #include "DangerGizmo.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
-	: BossPattern(_controller),  m_moveComponent(nullptr)
+	: BossPattern(_controller), 
+	m_moveComponent(nullptr), 
+	m_state(State::Up)
 {
 }
 
@@ -15,14 +18,49 @@ SmashPattern::~SmashPattern()
 
 void SmashPattern::Update()
 {
-	if (!m_isPlaying) return;
-	m_phase1 -= fDT;
-	if (m_phase1 < 0.f && m_isPhase1)
+	switch (m_state)
 	{
-		m_isPhase1 = false;
-		Vec2 pos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT) - 50 };
+	case SmashPattern::State::Up: UpState();
+		break;
+	case SmashPattern::State::Wait: WaitState();
+		break;
+	case SmashPattern::State::Fall: FallState();
+		break;
+	default:
+		break;
+	}
+}
+
+void SmashPattern::UpState()
+{
+	auto* dangerGizmo = new DangerGizmo();
+	Vec2 gizmoPos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT)-175 };
+	dangerGizmo->SetDangerGizmo(gizmoPos, { 500.f, 150.f }, 2.f, 1.f);
+
+	m_state = State::Wait;
+}
+
+void SmashPattern::WaitState()
+{
+	m_delay -= fDT;
+	if (m_delay < 0.f)
+	{
+		Vec2 groundPos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT)-150 };
 		Vec2 start = m_Controller->GetOwner()->GetPos();
-		m_moveComponent->SetMove(start, pos, 1.f);
+		m_moveComponent->SetMove(start, groundPos, 0.3f);
+
+		m_state = State::Fall;
+		m_delay = 0.2f;
+	}
+}
+
+void SmashPattern::FallState()
+{
+	m_delay -= fDT;
+	if (m_delay < 0.f)
+	{
+		m_isUsed = false;
+		GET_SINGLE(ImpulseManager)->ApplyImpulse(50.f, 0.3f);
 	}
 }
 
@@ -36,12 +74,6 @@ void SmashPattern::SetUsed()
 	Vec2 start = m_Controller->GetOwner()->GetPos();
 	m_moveComponent->SetMove(start, skyPos, 2.f);
 
-	auto* dangerGizmo = new DangerGizmo();
-	Vec2 gizmoPos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT) - 100 };
-	dangerGizmo->SetDangerGizmo(gizmoPos, { 500.f, 200.f }, 2.f, 1.f);
-
-	m_phase1 = 3.f;
-	m_phase2 = 3.f;
-	m_isPlaying = true;
-	m_isPhase1 = true;
+	m_delay = 3.f;
+	BossPattern::SetUsed();
 }
