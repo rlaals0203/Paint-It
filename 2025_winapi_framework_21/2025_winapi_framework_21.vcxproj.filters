@@ -181,6 +181,11 @@
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
     <ClInclude Include="GuidedProjectilePattern.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UIText.h" />
+    <ClInclude Include="GameOverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -296,5 +301,10 @@
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="GuidedProjectilePattern.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
   </ItemGroup>
 </Project>

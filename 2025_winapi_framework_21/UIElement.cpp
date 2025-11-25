@@ -10,30 +10,21 @@ UIElement::~UIElement()
 {
 }
 
-void UIElement::Update()
-{
-	Object::Update();
-	CheckMouseOver();
-}
-
-void UIElement::Render(HDC _hdc)
-{
-	ComponentRender(_hdc);
-}
-
 void UIElement::CheckMouseOver()
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 
-	POINT rawMousePos = GET_SINGLE(InputManager)->GetMousePos();
-	Vec2 mousePos = Vec2(rawMousePos.x, rawMousePos.y);
+	POINT rawMousePos = GET_MOUSEPOS;
+	Vec2 mousePos = Vec2(rawMousePos);
+
+	RECT rect = RECT_MAKE(pos.x, pos.y, size.x, size.y);
 
 	bool wasMouseOver = m_isMouseOver;
-	m_isMouseOver = (mousePos.x >= pos.x - size.x / 2 &&
-		mousePos.x <= pos.x + size.x / 2 &&
-		mousePos.y >= pos.y - size.y / 2 &&
-		mousePos.y <= pos.y + size.y / 2);
+	m_isMouseOver = (mousePos.x >= rect.left &&
+		mousePos.x <= rect.right &&
+		mousePos.y >= rect.top &&
+		mousePos.y <= rect.bottom);
 
 	if (!wasMouseOver && m_isMouseOver)
 	{
@@ -51,3 +42,14 @@ void UIElement::CheckMouseOver()
 		OnMouseClick();
 	}
 }
+
+void UIElement::Update()
+{
+	Object::Update();
+}
+
+void UIElement::Render(HDC _hdc)
+{
+	ComponentRender(_hdc);
+}
+
