@@ -13,8 +13,10 @@ public:
     void SetDangerGizmo(Vec2 _pos, Vec2 _size, float _duration);
 private:
     float m_lifeTime;
+    float m_colorTime;
     Vec2 m_size;
     Vec2 m_pos;
     bool m_isPlaying;
+    bool m_isRed;
 };
 

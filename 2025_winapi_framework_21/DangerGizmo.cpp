@@ -13,16 +13,24 @@ DangerGizmo::~DangerGizmo()
 void DangerGizmo::Update()
 {
 	m_lifeTime -= fDT;
+	m_colorTime -= fDT;
+
 	if (m_lifeTime < 0.f)
 	{
 		m_isPlaying = false;
-		SetDead();
+		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
+	}
+
+	if (m_colorTime < 0.f)
+	{
+		m_isRed = !m_isRed;
+		m_colorTime = 0.1f;
 	}
 }
 
 void DangerGizmo::Render(HDC _hdc)
 {
-	GDISelector pen(_hdc, PenType::DANGER);
+	GDISelector pen(_hdc, m_isRed ? PenType::DANGER1 : PenType::DANGER2);
 	GDISelector brush(_hdc, BrushType::HOLLOW);
 	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
