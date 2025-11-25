@@ -19,7 +19,7 @@ void DevScene::Init()
 
 	Player* player = new Player();
 	player->SetPos({ WINDOW_WIDTH / 2, 550 });
-	player->SetSize({ 100, 100 });
+	player->SetSize({ 1.25f, 1.25f });
 	AddObject(player, Layer::PLAYER);
 
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100,100 });

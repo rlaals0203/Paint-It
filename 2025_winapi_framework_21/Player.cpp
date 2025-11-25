@@ -17,16 +17,28 @@
 Player::Player()
 	: m_pTexture(nullptr)
 {
-	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo");
+	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(100.f);
-	auto* animator = AddComponent<Animator>();
-	animator->CreateAnimation
-	(L"jiwooFront",m_pTexture,{0.f,150.f}
-	,{50.f,50.f} ,{50.f,0.f} ,5,1.f);
-	animator->Play(L"jiwooFront");
+	m_animator = AddComponent<Animator>();
+
+	m_animator->CreateAnimation
+	(L"playerIdle", m_pTexture,
+		{0.f,0.f}, {64.f, 64.f} ,
+		{64.f,0.f}, 8, 0.1f);
+
+	m_animator->CreateAnimation
+	(L"playerMove", m_pTexture,
+		{ 0.f, 64.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation
+	(L"playerJump", m_pTexture,
+		{ 0.f, 128.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+	m_animator->Play(L"playerIdle");
 }
 
 Player::~Player()
@@ -63,15 +75,21 @@ void Player::Update()
 	Object::Update();
 
 	Vec2 dir = {};
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	Vec2 velo = rb->GetVelocity();
+	wstring animParam;
+	m_isMoving = false;
 
 	if (GET_KEY(KEY_TYPE::D))
 	{
 		m_isRight = true;
+		m_isMoving = true;
 		dir.x += m_stat.speed;
 	}
 	else if (GET_KEY(KEY_TYPE::A))
 	{
 		m_isRight = false;
+		m_isMoving = true;
 		dir.x -= m_stat.speed;
 	}
 
@@ -96,12 +114,20 @@ void Player::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
 	{
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		Vec2 velo = rb->GetVelocity();
 		int force = m_isRight ? 1 : -1;
 		Vec2 dir = { (float)(force * 3500), velo.y };
 		rb->SetVelocity(dir);
 	}
+
+	if (!m_isGrounded)
+		animParam = L"playerJump";
+	else if (m_isMoving)
+		animParam = L"playerMove";
+	else
+		animParam = L"playerIdle";
+
+	if (animParam != m_animator->GetCurrent()->GetName())
+		m_animator->Play(animParam);
 }
 
 void Player::Jump()

@@ -22,7 +22,7 @@ void Projectile::Init(wstring _texture, float _speed, float _damage)
 	m_damage = _damage;
 
 	auto* com = AddComponent<Collider>();
-	com->SetSize({ 20.f,20.f });
+	com->SetSize({ 20, 20 });
 	com->SetName(L"Proj");
 	com->SetTrigger(true);
 }

@@ -39,7 +39,6 @@ public:
     int  GetCurFrame() const { return m_curFrame; }
     int  GetMaxFrame() const { return (int)m_frames.size(); }
     bool IsFinished()  const { return m_finished; }
-
 private:
     void AdvanceFrame();
 
@@ -47,7 +46,7 @@ private:
     Animator* m_owner;
     Texture* m_tex;
     Texture* m_whiteTex;
-    std::wstring            m_name;
+    std::wstring m_name;
     std::vector<tAnimFrame> m_frames;
 
     // 재생 상태

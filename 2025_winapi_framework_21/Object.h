@@ -22,6 +22,8 @@ public:
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
 	const bool& GetIsBlink() const { return m_isBlink; }
+	const bool& GetIsRight() const { return m_isRight; }
+
 	void OnHit();
 protected:
 	void Translate(Vec2 _delta)
@@ -68,6 +70,8 @@ private:
 	}
 protected:
 	bool m_isDie;
+	bool m_isRight; //오른쪽을 보고 있는지
+
 private:
 	Vec2 m_pos;
 	Vec2 m_size;
