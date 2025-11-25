@@ -4,6 +4,7 @@
 #include "BossController.h"
 #include "ProjectileManager.h"
 #include "ImpulseManager.h"
+#include "DangerGizmo.h"
 
 CircleProjectilePattern::CircleProjectilePattern(BossController* _controller,
 	ProjectileType _type, int _count) : BossPattern(_controller),
@@ -29,5 +30,8 @@ void CircleProjectilePattern::SetUsed()
 			m_Controller->GetOwner()->GetPos(), 
 			angle * i);
 	}
+
+	auto* dangerGizmo = new DangerGizmo();
+	dangerGizmo->SetDangerGizmo({ 500, 500 }, { 100, 100 }, 2.f);
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(22.5f, 0.4f);
 }

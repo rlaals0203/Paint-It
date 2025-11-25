@@ -175,6 +175,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DamageText.h" />
+    <ClInclude Include="DangerGizmo.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="Ease.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
     <ClCompile Include="CircleProjectilePattern.cpp" />
