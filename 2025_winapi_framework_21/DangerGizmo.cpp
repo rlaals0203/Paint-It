@@ -12,6 +12,15 @@ DangerGizmo::~DangerGizmo()
 
 void DangerGizmo::Update()
 {
+	if (m_isDelay)
+	{
+		m_delay -= fDT;
+		if (m_delay < 0.f)
+		{
+			m_isDelay = false;
+		}
+	}
+
 	m_lifeTime -= fDT;
 	m_colorTime -= fDT;
 
@@ -35,12 +44,14 @@ void DangerGizmo::Render(HDC _hdc)
 	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
 
-void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _duration)
+void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _duration, float _delay)
 {
 	SetPos(_pos);
 	SetSize(_size);
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::EFFECT);
 
+	m_isDelay = _delay > 0.f;
+	m_delay = _delay;
 	m_pos = _pos;
 	m_size = _size;
 	m_lifeTime = _duration;

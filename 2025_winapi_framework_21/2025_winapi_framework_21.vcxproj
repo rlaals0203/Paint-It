@@ -191,6 +191,7 @@
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />

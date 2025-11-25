@@ -160,6 +160,7 @@ inline float EaseInOutElastic(float t)
         return (powf(2, -20 * t + 10) *
             sinf((20 * t - 11.125f) * (2 * 3.1415926535f / 4.5f))) * 0.5f + 1;
     }
+
 }
 
 

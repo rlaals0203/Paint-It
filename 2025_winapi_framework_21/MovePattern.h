@@ -1,5 +1,6 @@
 #pragma once
 #include "BossPattern.h"
+#include "MoveComponent.h"
 class Boss;
 class MovePattern :
     public BossPattern
@@ -14,14 +15,10 @@ public:
     virtual void SetUsed() override;
 protected:
     Boss* m_boss;
-
+    MoveComponent* m_moveCompo;
     Vec2  m_startPos;
     Vec2  m_movePos;
-
-    Vec2  m_moveDir;
-
     float m_speed;
-    float m_stopDistance;
     float m_t = 0;
     float m_duration = 1.0f;
     Vec2 m_originPos;
