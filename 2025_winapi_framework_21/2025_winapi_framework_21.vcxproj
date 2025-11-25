@@ -169,6 +169,7 @@
     <ClInclude Include="BossModuleBase.h" />
     <ClInclude Include="BossPattern.h" />
     <ClInclude Include="BossPatternModule.h" />
+    <ClInclude Include="CircleProjectilePattern.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
@@ -176,7 +177,9 @@
     <ClInclude Include="DamageText.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
+    <ClInclude Include="Ease.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectData.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityHealth.h" />
@@ -184,11 +187,14 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="GuidedProjectilePattern.h" />
+    <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerFindManager.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Resource.h" />
@@ -215,6 +221,9 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="GuidedProjectilePattern.cpp" />
+    <ClCompile Include="ImpulseManager.cpp" />
+    <ClCompile Include="CircleProjectilePattern.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -232,6 +241,7 @@
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

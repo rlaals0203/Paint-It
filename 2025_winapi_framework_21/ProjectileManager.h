@@ -3,7 +3,7 @@
 
 enum ProjectileType
 {
-	Player,
+	PlayerProjectile,
 	Enemy,
 	None
 };

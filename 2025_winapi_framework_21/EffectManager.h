@@ -1,12 +1,14 @@
 #pragma once
 #include "Effect.h"
+#include "EffectData.h"
 
-enum EffectType
+enum class EffectType
 {
 	Player,
 	Enemy,
 	None
 };
+
 
 class EffectManager
 {
@@ -14,9 +16,13 @@ class EffectManager
 public:
 	void Init();
 public:
-	void RegisterEffect(EffectType _type, wstring _texture);
-	void PlayEffect(EffectType _type, float _duration, bool _isLoop = false);
+	void RegisterEffect(EffectType type, wstring animName,
+		Texture* tex, Vec2 lt, Vec2 slice, Vec2 step, 
+		UINT frameCount, float frameDuration);
+
+	void PlayEffect(EffectType _type, Vec2 _pos, 
+		float duration, bool _loop);
 private:
-	std::unordered_map<EffectType, Effect*> m_effects;
+	std::unordered_map<EffectType, EffectData> m_effects;
 };
 

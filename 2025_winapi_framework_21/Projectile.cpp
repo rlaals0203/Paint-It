@@ -6,6 +6,7 @@
 #include "EntityHealth.h"
 #include "Collider.h"
 #include "DamageText.h"
+#include "EffectManager.h"
 
 Projectile::Projectile() : m_angle(0.f) {}
 
@@ -31,7 +32,10 @@ void Projectile::Update()
 	float speed = m_speed * 100;
 	Object::Update();
 	if (m_isAngle)
-		Translate({ cosf(m_angle) * speed * fDT,  sinf(m_angle) * speed * fDT });
+	{
+		float rad = m_angle * (3.1415926f / 180.f);
+		Translate({ cosf(rad) * speed * fDT, sinf(rad) * speed * fDT });
+	}
 	else
 		Translate({ m_dir.x * speed * fDT,  m_dir.y * speed * fDT });
 }
@@ -58,6 +62,7 @@ void Projectile::EnterCollision(Collider* _other)
 	DamageText* dmgText = new DamageText();
 	dmgText->Init((int)m_damage, GetPos());
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
+	//GET_SINGLE(EffectManager)->PlayEffect(EffectType::Player, GetPos(), 1.f, false);
 	SetDead();
 }
 

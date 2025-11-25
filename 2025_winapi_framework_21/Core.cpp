@@ -6,6 +6,8 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "ProjectileManager.h"
+#include "EffectManager.h"
+#include "ImpulseManager.h"
 bool Core::Init(HWND _hWnd)
 {
 	m_hWnd = _hWnd;
@@ -21,9 +23,10 @@ bool Core::Init(HWND _hWnd)
 
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
-	GET_SINGLE(ProjectileManager)->Init();
 	if (!GET_SINGLE(ResourceManager)->Init())
 		return false;
+	GET_SINGLE(EffectManager)->Init();
+	GET_SINGLE(ProjectileManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 
 	return true;
@@ -47,13 +50,17 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(ResourceManager)->FmodUpdate();
 	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(ImpulseManager)->Update();
 }
 
 void Core::MainRender()
 { 
-	::PatBlt(m_hBackDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, BLACKNESS);
+	Vec2 offset = GET_SINGLE(ImpulseManager)->GetOffset();
+	int x = offset.x;
+	int y = offset.y;
+	::PatBlt(m_hBackDC, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, BLACKNESS);
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
-	::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
+	::BitBlt(m_hDC, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
 }
 
 
