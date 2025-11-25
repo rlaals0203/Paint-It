@@ -12,6 +12,7 @@
 #include "Animation.h"
 #include "Rigidbody.h"
 #include "EntityHealth.h"
+#include "PlayerFindManager.h"
 
 Player::Player()
 	: m_pTexture(nullptr)
@@ -89,7 +90,7 @@ void Player::Update()
 		Vec2 dir = mousePos - playerPos;
 		dir.Normalize();
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::Player, 20.f, playerPos, dir, true);
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile, 20.f, playerPos, dir, true);
 		m_coolTime = m_stat.delay;
 	}
 

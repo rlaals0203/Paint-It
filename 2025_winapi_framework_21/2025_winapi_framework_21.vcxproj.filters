@@ -173,6 +173,14 @@
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
     <ClInclude Include="MovePattern.h" />
+    <ClInclude Include="CircleProjectilePattern.h" />
+    <ClInclude Include="Ease.h" />
+    <ClInclude Include="EffectData.h" />
+    <ClInclude Include="ImpulseManager.h" />
+    <ClInclude Include="PlayerFindManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectilePattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -260,9 +268,6 @@
     <ClCompile Include="EntityHealth.cpp">
       <Filter>Engine\06. Component\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileManager.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossController.cpp" />
     <ClCompile Include="BossIdleModule.cpp" />
@@ -282,5 +287,14 @@
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="MovePattern.cpp" />
+    <ClCompile Include="ImpulseManager.cpp" />
+    <ClCompile Include="CircleProjectilePattern.cpp" />
+    <ClCompile Include="PlayerFindManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectilePattern.cpp" />
   </ItemGroup>
 </Project>

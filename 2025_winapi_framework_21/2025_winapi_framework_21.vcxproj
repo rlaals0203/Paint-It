@@ -187,6 +187,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MovePattern.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
     <ClCompile Include="CircleProjectilePattern.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -239,6 +241,7 @@
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

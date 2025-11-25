@@ -21,6 +21,7 @@ void BossModuleBase::EnterModule()
 
 void BossModuleBase::UpdateModule()
 {
+	cout << "SD";
 	if (m_AnimationKey != L"")
 	{
 		m_Controller->GetBoss()->SetAnimation(m_AnimationKey);

@@ -9,6 +9,7 @@
 #include "ResourceManager.h"
 #include "Floor.h"
 #include "TestBoss.h"
+#include "PlayerFindManager.h"
 void DevScene::Init()
 {
 	TestBoss* boss = new TestBoss();
@@ -16,11 +17,17 @@ void DevScene::Init()
 	boss->SetSize({ 100, 100 });
 	AddObject(boss, Layer::ENEMY);
 
-	Spawn<Player>(Layer::PLAYER, { WINDOW_WIDTH / 2, 550}, { 100,100 });
+	Player* player = new Player();
+	player->SetPos({ WINDOW_WIDTH / 2, 550 });
+	player->SetSize({ 100, 100 });
+	AddObject(player, Layer::PLAYER);
+
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100,100 });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
+
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 

@@ -29,5 +29,5 @@ void CircleProjectilePattern::SetUsed()
 			m_Controller->GetOwner()->GetPos(), 
 			angle * i);
 	}
-	GET_SINGLE(ImpulseManager)->ApplyImpulse(20.f, 0.5f);
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(22.5f, 0.4f);
 }
