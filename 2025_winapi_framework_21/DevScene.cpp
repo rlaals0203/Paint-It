@@ -15,6 +15,7 @@ void DevScene::Init()
 	TestBoss* boss = new TestBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
 	boss->SetSize({ 100, 100 });
+	boss->SetCanOutofBounds(false);
 	AddObject(boss, Layer::ENEMY);
 
 	Player* player = new Player();

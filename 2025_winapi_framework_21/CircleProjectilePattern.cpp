@@ -31,7 +31,5 @@ void CircleProjectilePattern::SetUsed()
 			angle * i);
 	}
 
-	auto* dangerGizmo = new DangerGizmo();
-	dangerGizmo->SetDangerGizmo({ 500, 500 }, { 100, 100 }, 2.f);
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(22.5f, 0.4f);
 }

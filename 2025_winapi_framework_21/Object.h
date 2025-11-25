@@ -25,6 +25,7 @@ public:
 	const bool& GetIsRight() const { return m_isRight; }
 
 	void OnHit();
+	void SetCanOutofBounds(bool canOut) { m_canOutofbounds = canOut; }
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -65,8 +66,8 @@ private:
 	bool CheckOutofbounds()
 	{
 		Vec2 pos = GetPos();
-		return (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
-			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50);
+		return (m_canOutofbounds && (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
+			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50));
 	}
 protected:
 	bool m_isDie;
@@ -79,5 +80,6 @@ private:
 	bool m_isBlink;
 	float m_blinkDur;
 	float m_blinkTime;
+	bool m_canOutofbounds;
 };
 

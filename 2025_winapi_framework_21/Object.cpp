@@ -7,6 +7,8 @@ Object::Object()
 	, m_size{}
 	, m_isDie(false)
 	, m_isBlink(false)
+	, m_canOutofbounds(true)
+	, m_isRight(false)
 	, m_blinkDur(0.1f)
 	, m_blinkTime(0.f)
 {
