@@ -185,12 +185,14 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityHealth.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="FallingPattern.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LineProjectilePattern.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
@@ -225,6 +227,7 @@
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
     <ClCompile Include="DangerGizmo.cpp" />
+    <ClCompile Include="FallingPattern.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
     <ClCompile Include="CircleProjectilePattern.cpp" />
@@ -241,6 +244,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LineProjectilePattern.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="MovePattern.cpp" />

@@ -34,6 +34,6 @@ void MovePattern::SetUsed()
 		m_moveCompo = m_boss->GetComponent<MoveComponent>();
 
 	m_startPos = m_boss->GetPos();
-	m_moveCompo->SetMove(m_startPos, m_movePos, m_duration);
+	m_moveCompo->SetMove(m_startPos, m_movePos, m_duration, EaseOutCubic);
 	BossPattern::SetUsed();
 }

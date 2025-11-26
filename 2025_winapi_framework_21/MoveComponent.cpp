@@ -29,7 +29,7 @@ void MoveComponent::LateUpdate()
     if (m_t >= 1.f)
         m_t = 1.f;
 
-    Vec2 pos = EaseLerp(m_start, m_target, m_t, EaseOutCubic);
+    Vec2 pos = EaseLerp(m_start, m_target, m_t, m_easeFunc);
     m_owner->SetPos(pos);
 
     if (m_t >= 1.f) {
@@ -41,7 +41,7 @@ void MoveComponent::Render(HDC _hdc)
 {
 }
 
-void MoveComponent::SetMove(Vec2 start, Vec2 target, float duration)
+void MoveComponent::SetMove(Vec2 start, Vec2 target, float duration, float(*_ease)(float))
 {
     if(m_owner == nullptr)
         m_owner = GetOwner();
@@ -50,5 +50,6 @@ void MoveComponent::SetMove(Vec2 start, Vec2 target, float duration)
     m_target = target;
     m_duration = duration;
     m_isMoving = true;
+    m_easeFunc = _ease;
     m_t = 0.f;
 }

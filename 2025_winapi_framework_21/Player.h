@@ -23,6 +23,7 @@ public:
 	virtual void ExitCollision(Collider* _other)override;
 private:
 	Texture* m_pTexture;
+	Texture* m_rpTexture;
 	Animator* m_animator;
 	PlayerStat m_stat;
 private:

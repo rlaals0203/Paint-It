@@ -16,6 +16,7 @@ private:
     void UpState();
     void WaitState();
     void FallState();
+    void GroundState();
     Vec2 GetOwnerPos() { return m_Controller->GetOwner()->GetPos(); }
 private:
     enum class State
@@ -23,9 +24,11 @@ private:
         Up,
         Wait,
         Fall,
+        Ground
     };
     State m_state;
     MoveComponent* m_moveComponent;
     bool m_isPlaying;
     float m_delay;
+    int m_count;
 };

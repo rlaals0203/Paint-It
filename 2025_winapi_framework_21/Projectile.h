@@ -9,7 +9,7 @@ class Projectile :
 public:
     Projectile();
     ~Projectile();
-    void Init(wstring _texture, float _speed, float _damage);
+    void Init(wstring _texture, float _damage);
     void Update() override;
     void Render(HDC _hdc) override;
     virtual void EnterCollision(Collider* _other)override;
@@ -26,6 +26,7 @@ public:
         m_dir.Normalize();
         m_isAngle = false;
     }
+    void SetSpeed(float _speed) { m_speed = _speed; }
     float GetSpeed() { return m_speed; }
     float GetDamage() { return m_damage; }
     wstring GetTexture() { return m_textureName; }
