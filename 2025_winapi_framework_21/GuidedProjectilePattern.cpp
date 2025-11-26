@@ -30,7 +30,7 @@ void GuidedProjectilePattern::Update()
 		dir.Normalize();
 
 		GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			m_type, 60.f, m_Controller->GetOwner()->GetPos(), dir);
+			m_type, 60.f, m_Controller->GetOwner()->GetPos(), dir, 15.f);
 	}
 
 	if (m_count == 0)

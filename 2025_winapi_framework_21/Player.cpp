@@ -125,7 +125,9 @@ void Player::Update()
 		Vec2 dir = mousePos - playerPos;
 		dir.Normalize();
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile, 20.f, playerPos, dir, true);
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile, 
+			20.f, playerPos, dir, 20.f, true);
+
 		m_coolTime = m_stat.delay;
 	}
 
