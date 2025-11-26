@@ -1,6 +1,7 @@
 #pragma once
 #include "BossPattern.h"
 #include "MoveComponent.h"
+#include "DOTweenCompo.h"
 class Boss;
 class MovePattern :
     public BossPattern
@@ -15,7 +16,7 @@ public:
     virtual void SetUsed() override;
 protected:
     Boss* m_boss;
-    MoveComponent* m_moveCompo;
+    DOTweenCompo* m_dotween;
     Vec2  m_startPos;
     Vec2  m_movePos;
     float m_speed;

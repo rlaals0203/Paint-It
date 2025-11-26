@@ -8,7 +8,7 @@
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
-	m_moveComponent(nullptr), 
+	m_dotween(nullptr),
 	m_state(State::Up)
 {
 }
@@ -50,7 +50,7 @@ void SmashPattern::WaitState()
 
 	Vec2 winSize = GET_WINDOWSIZE;
 	Vec2 groundPos = { winSize.x / 2, winSize.y - 150 };
-	m_moveComponent->SetMove(GetOwnerPos(), groundPos, 0.4f, EaseInExpo);
+	m_dotween->DOMove(groundPos, 0.4f, EaseInExpo);
 
 	m_state = State::Fall;
 	m_delay = 0.4f;
@@ -87,12 +87,12 @@ void SmashPattern::GroundState()
 
 void SmashPattern::SetUsed()
 {
-	if (m_moveComponent == nullptr)
-		m_moveComponent = m_Controller->GetOwner()
-		->GetComponent<MoveComponent>();
+	if (m_dotween == nullptr)
+		m_dotween = m_Controller->GetOwner()
+		->GetComponent<DOTweenCompo>();
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
-	m_moveComponent->SetMove(GetOwnerPos(), skyPos, 1.f, EaseInBack);
+	m_dotween->DOMove(skyPos, 1.f, EaseInBack);
 	m_delay = m_count = 3;
 	m_state = State::Up;
 

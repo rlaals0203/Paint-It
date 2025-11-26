@@ -23,6 +23,8 @@ void LineObject::Render(HDC _hdc)
 void LineObject::SetLine(float _duration, 
 	bool _isHori, bool _isPositive)
 {
+	m_isHori = _isHori;
+
 	if (_isHori) {
 		m_pos.y = (rand() % WINDOW_HEIGHT * 0.7f);
 		m_pos.x = _isPositive ? 0 - WINDOW_WIDTH / 2 : WINDOW_WIDTH * 2.f;
@@ -38,6 +40,13 @@ void LineObject::SetLine(float _duration,
 
 	SetPos(m_pos);
 	m_moveCompo = AddComponent<MoveComponent>();
-	m_moveCompo->SetMove(m_pos, m_target, _duration, EaseInExpo);
+	m_scaleCompo = AddComponent<ScaleComponent>();
+	m_moveCompo->DOMove(m_target, _duration, EaseInExpo);
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::EFFECT);
+}
+
+void LineObject::KillLine()
+{
+	if (!m_scaleCompo)
+		m_scaleCompo = AddComponent<ScaleComponent>();
 }

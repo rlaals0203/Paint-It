@@ -12,7 +12,7 @@ MovePattern::MovePattern(BossController* _controller
 	,m_movePos(_movePos)
 	, m_startPos({0,0})
 	, m_speed(_speed)
-	, m_moveCompo(nullptr)
+	, m_dotween(nullptr)
 {
 	m_boss = m_Controller->GetBoss();
 }
@@ -23,7 +23,7 @@ MovePattern::~MovePattern()
 
 void MovePattern::Update()
 {
-	if (!m_moveCompo->IsMoving())
+	if (!m_dotween->IsMoving())
 	{
 		m_isUsed = false;
 	}
@@ -31,11 +31,10 @@ void MovePattern::Update()
 
 void MovePattern::SetUsed()
 {
-	if (m_moveCompo == nullptr)
-		m_moveCompo = m_boss->GetComponent<MoveComponent>();
+	if (m_dotween == nullptr)
+		m_dotween = m_boss->GetComponent<DOTweenCompo>();
 
-	m_startPos = m_boss->GetPos();
-	m_moveCompo->SetMove(m_startPos, m_movePos, m_duration, EaseOutCubic);
+	m_dotween->DOMove(m_movePos, m_duration, EaseOutCubic);
 
 	auto* line = new LineObject();
 	line->SetLine(0.4f, false, false);

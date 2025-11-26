@@ -7,7 +7,7 @@
 #include "ProjectileManager.h"
 #include "EntityHealth.h"
 #include "GuidedProjectilePattern.h"
-#include "MoveComponent.h"
+#include "DOTweenCompo.h"
 #include "SmashPattern.h"
 
 
@@ -18,7 +18,7 @@ TestBoss::TestBoss()
 	SetSize({ 250, 250 });
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(10000.f);
-	AddComponent<MoveComponent>();
+	AddComponent<DOTweenCompo>();
 
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new SmashPattern(m_Controller));

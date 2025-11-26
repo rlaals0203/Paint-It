@@ -39,12 +39,12 @@ void ScaleComponent::Render(HDC _hdc)
 {
 }
 
-void ScaleComponent::SetScaling(Vec2 _start, Vec2 _target, float _duration, float(*_ease)(float))
+void ScaleComponent::SetSize(Vec2 _target, float _duration, float(*_ease)(float))
 {
     if (!m_owner)
         m_owner = GetOwner();
 
-    m_start = _start;
+    m_start = m_owner->GetSize();
     m_target = _target;
     m_duration = _duration;
     m_easeFunc = _ease;

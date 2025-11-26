@@ -2,6 +2,7 @@
 #include "BossPattern.h"
 #include "MoveComponent.h"
 #include "BossController.h"
+#include "DOTweenCompo.h"
 
 class SmashPattern :
     public BossPattern
@@ -27,7 +28,7 @@ private:
         Ground
     };
     State m_state;
-    MoveComponent* m_moveComponent;
+    DOTweenCompo* m_dotween;
     bool m_isPlaying;
     float m_delay;
     int m_count;

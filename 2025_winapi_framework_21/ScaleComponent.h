@@ -13,21 +13,21 @@ public:
     void LateUpdate() override;
     void Render(HDC _hdc) override;
 
-    void SetScaling(Vec2 _start, Vec2 _target, float _duration, float(*_ease)(float));
+    void SetSize(Vec2 _target, float _duration, float(*_ease)(float));
 
-    void SetScaleX(float _s, float _e, float _duration, float(*_ease)(float))
+    void DOScaleX(float _end, float _duration, float(*_ease)(float))
     {
-        SetScaling({ _s, m_owner->GetSize().y }, { _e, m_owner->GetSize().y }, _duration, _ease);
+        SetSize({ _end, m_owner->GetSize().y }, _duration, _ease);
     }
 
-    void SetScaleY(float _s, float _y, float _duration, float(*_ease)(float))
+    void DOScaleY(float _end, float _duration, float(*_ease)(float))
     {
-        SetScaling({ m_owner->GetSize().x, _s }, { m_owner->GetSize().x, _y }, _duration, _ease);
+        SetSize({ m_owner->GetSize().x, _end }, _duration, _ease);
     }
 
-    void SetScale(float _s, float _e, float _duration, float(*_ease)(float))
+    void DOScale(float _end, float _duration, float(*_ease)(float))
     {
-        SetScaling({ _s, _s }, { _e, _e }, _duration, _ease);
+        SetSize({ _end, _end }, _duration, _ease);
     }
 
 private:

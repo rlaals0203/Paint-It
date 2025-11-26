@@ -178,6 +178,7 @@
     <ClInclude Include="DangerGizmo.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
+    <ClInclude Include="DOTweenCompo.h" />
     <ClInclude Include="Ease.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectData.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="ScaleComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmashPattern.h" />
@@ -228,6 +230,7 @@
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
     <ClCompile Include="DangerGizmo.cpp" />
+    <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
@@ -258,6 +261,7 @@
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="ScaleComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmashPattern.cpp" />
