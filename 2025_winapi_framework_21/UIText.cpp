@@ -10,4 +10,6 @@ void UIText::Render(HDC _hdc)
 
 	DrawText(_hdc, m_text.c_str(), -1, &rect,
 		DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+	UIElement::Render(_hdc);
 }

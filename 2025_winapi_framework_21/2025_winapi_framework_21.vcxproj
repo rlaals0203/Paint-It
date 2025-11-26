@@ -213,6 +213,7 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
@@ -263,6 +264,7 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>

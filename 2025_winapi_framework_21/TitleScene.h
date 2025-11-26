@@ -12,6 +12,7 @@ private:
 	void Start();
 	void Setting();
 	void Exit();
+	void SettingSlider();
 private:
 	UIPanel* m_mainPanel;
 };

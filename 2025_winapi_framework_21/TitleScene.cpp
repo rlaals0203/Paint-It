@@ -5,6 +5,7 @@
 #include "UIPanel.h"
 #include "UIText.h"
 #include "UIButton.h"
+#include "UISlider.h"
 
 void TitleScene::Init()
 {
@@ -15,6 +16,8 @@ void TitleScene::Init()
 	AddObject(m_mainPanel, Layer::UI);
 
 	Title();
+
+	SettingSlider();
 
 	Start();
 	Exit();
@@ -69,4 +72,10 @@ void TitleScene::Exit()
 		{
 			::PostQuitMessage(0);
 		});
+}
+
+void TitleScene::SettingSlider()
+{
+	UISlider* uislider = m_mainPanel->AddUIElement<UISlider>();
+
 }
