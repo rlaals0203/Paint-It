@@ -22,8 +22,7 @@ void TestPattern::Update()
 	if (m_cooldownTimer >= m_cooldown) 
 	{
 		GET_SINGLE(ProjectileManager)->SpawnProjectile(Enemy, 20.f, 
-			{ m_Controller->GetOwner()->GetPos()},
-			90.f);
+			{ m_Controller->GetOwner()->GetPos()},90.f, 10.f);
 		m_isUsed = false;
 	}
 }

@@ -10,7 +10,8 @@ public:
 private:
 	Vec2 m_offset;
 	bool m_isShaking;
-	float m_intensity;
+	float m_impulse;
 	float m_duration;
+	float m_decrease;
 };
 

@@ -58,6 +58,8 @@ void ResourceManager::RegisterGDI()
 	// PEN 
 	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	m_Pens[(UINT)PenType::DANGER1] = ::CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
+	m_Pens[(UINT)PenType::DANGER2] = ::CreatePen(PS_SOLID, 2, RGB(255, 125, 50));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
@@ -187,6 +189,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"plane", L"Texture\\plane.bmp");
 	LoadTexture(L"bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"jiwoo", L"Texture\\jiwoo.bmp");
+	LoadTexture(L"player", L"Texture\\PlayerSheet.bmp");
+	LoadTexture(L"rplayer", L"Texture\\RPlayerSheet.bmp");
 }
 
 

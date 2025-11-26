@@ -4,6 +4,7 @@
 #include "BossController.h"
 #include "ProjectileManager.h"
 #include "ImpulseManager.h"
+#include "DangerGizmo.h"
 
 CircleProjectilePattern::CircleProjectilePattern(BossController* _controller,
 	ProjectileType _type, int _count) : BossPattern(_controller),
@@ -25,9 +26,10 @@ void CircleProjectilePattern::SetUsed()
 	float angle = 360.f / (float)m_count;
 	for (int i = 0; i < m_count; i++) {
 		GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			m_type, 20.f, 
+			m_type, 60.f, 
 			m_Controller->GetOwner()->GetPos(), 
-			angle * i);
+			angle * i, 10.f);
 	}
+
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(22.5f, 0.4f);
 }

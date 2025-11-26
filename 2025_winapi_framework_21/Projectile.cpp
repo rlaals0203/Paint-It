@@ -14,15 +14,13 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::Init(wstring _texture, float _speed, float _damage)
+void Projectile::Init(wstring _texture, float _damage)
 {
 	m_textureName = _texture;
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
-	m_speed = _speed;
 	m_damage = _damage;
 
 	auto* com = AddComponent<Collider>();
-	com->SetSize({ 20.f,20.f });
 	com->SetName(L"Proj");
 	com->SetTrigger(true);
 }

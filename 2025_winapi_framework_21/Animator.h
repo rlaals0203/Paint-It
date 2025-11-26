@@ -39,6 +39,4 @@ private:
     std::unordered_map<std::wstring, Animation*> m_mapAnim; // 소유권
     Animation* m_curAnimation; // 선택만
     bool       m_paused;
-
-
 };

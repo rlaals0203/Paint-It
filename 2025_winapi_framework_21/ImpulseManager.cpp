@@ -5,10 +5,11 @@ void ImpulseManager::Update()
 {
     if (m_isShaking)
     {
-        int x = (rand() % 100 - 50) * m_intensity / 50;
-        int y = (rand() % 100 - 50) * m_intensity / 50;
+        int x = (rand() % 100 - 50) * m_impulse / 50;
+        int y = (rand() % 100 - 50) * m_impulse / 50;
         m_offset = { x, y };
         m_duration -= fDT;
+        m_impulse -= m_decrease * fDT;
         if (m_duration < 0.f)
         {
             m_isShaking = false;
@@ -17,9 +18,10 @@ void ImpulseManager::Update()
     }
 }
 
-void ImpulseManager::ApplyImpulse(float _intensity, float _duration)
+void ImpulseManager::ApplyImpulse(float _impulse, float _duration)
 {
     m_isShaking = true;
-    m_intensity = _intensity;
+    m_impulse = _impulse;
     m_duration = _duration;
+    m_decrease = m_impulse / m_duration;
 }

@@ -22,7 +22,10 @@ public:
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
 	const bool& GetIsBlink() const { return m_isBlink; }
+	const bool& GetIsRight() const { return m_isRight; }
+
 	void OnHit();
+	void SetCanOutofBounds(bool canOut) { m_canOutofbounds = canOut; }
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -63,11 +66,13 @@ private:
 	bool CheckOutofbounds()
 	{
 		Vec2 pos = GetPos();
-		return (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
-			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50);
+		return (m_canOutofbounds && (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
+			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50));
 	}
 protected:
 	bool m_isDie;
+	bool m_isRight; //오른쪽을 보고 있는지
+
 private:
 	Vec2 m_pos;
 	Vec2 m_size;
@@ -75,5 +80,6 @@ private:
 	bool m_isBlink;
 	float m_blinkDur;
 	float m_blinkTime;
+	bool m_canOutofbounds;
 };
 
