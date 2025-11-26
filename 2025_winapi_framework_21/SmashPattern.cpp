@@ -34,7 +34,8 @@ void SmashPattern::Update()
 void SmashPattern::UpState()
 {
 	auto* dangerGizmo = new DangerGizmo();
-	Vec2 gizmoPos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT)-175 };
+	Vec2 winSize = GET_WINDOWSIZE;
+	Vec2 gizmoPos = { winSize.x / 2, winSize.y - 175 };
 	dangerGizmo->SetDangerGizmo(gizmoPos, { 500.f, 150.f }, 2.f, 1.f);
 
 	m_state = State::Wait;
@@ -45,9 +46,9 @@ void SmashPattern::WaitState()
 	m_delay -= fDT;
 	if (m_delay < 0.f)
 	{
-		Vec2 groundPos = { (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT)-150 };
-		Vec2 start = m_Controller->GetOwner()->GetPos();
-		m_moveComponent->SetMove(start, groundPos, 0.3f);
+		Vec2 winSize = GET_WINDOWSIZE;
+		Vec2 groundPos = { winSize.x / 2, winSize.y - 150 };
+		m_moveComponent->SetMove(GetOwnerPos(), groundPos, 0.3f);
 
 		m_state = State::Fall;
 		m_delay = 0.2f;
@@ -60,7 +61,7 @@ void SmashPattern::FallState()
 	if (m_delay < 0.f)
 	{
 		m_isUsed = false;
-		GET_SINGLE(ImpulseManager)->ApplyImpulse(50.f, 0.3f);
+		GET_SINGLE(ImpulseManager)->ApplyImpulse(60.f, 0.4f);
 	}
 }
 
@@ -71,9 +72,9 @@ void SmashPattern::SetUsed()
 		->GetComponent<MoveComponent>();
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
-	Vec2 start = m_Controller->GetOwner()->GetPos();
-	m_moveComponent->SetMove(start, skyPos, 2.f);
-
+	m_moveComponent->SetMove(GetOwnerPos(), skyPos, 2.f);
 	m_delay = 3.f;
+	m_state = State::Up;
+
 	BossPattern::SetUsed();
 }

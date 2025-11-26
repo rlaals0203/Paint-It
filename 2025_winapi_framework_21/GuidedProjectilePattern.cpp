@@ -11,7 +11,7 @@ GuidedProjectilePattern::GuidedProjectilePattern(BossController* _controller,
 	, m_player(nullptr)
 {
 	m_boss = m_Controller->GetBoss();
-
+	m_originCount = _count;
 }
 
 GuidedProjectilePattern::~GuidedProjectilePattern()
@@ -42,5 +42,6 @@ void GuidedProjectilePattern::SetUsed()
 	if(m_player == nullptr)
 		m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 
+	m_count = m_originCount;
 	BossPattern::SetUsed();
 }

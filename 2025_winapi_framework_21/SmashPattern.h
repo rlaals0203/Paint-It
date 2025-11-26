@@ -1,6 +1,8 @@
 #pragma once
 #include "BossPattern.h"
 #include "MoveComponent.h"
+#include "BossController.h"
+
 class SmashPattern :
     public BossPattern
 {
@@ -14,6 +16,7 @@ private:
     void UpState();
     void WaitState();
     void FallState();
+    Vec2 GetOwnerPos() { return m_Controller->GetOwner()->GetPos(); }
 private:
     enum class State
     {
@@ -26,4 +29,3 @@ private:
     bool m_isPlaying;
     float m_delay;
 };
-

@@ -18,6 +18,7 @@ public:								\
 #define GET_KEY(key) GET_SINGLE(InputManager)->IsPress(key)
 #define GET_KEYWIDTH(mainkey, modkey) GET_SINGLE(InputManager)->IsPressWith(mainkey, modkey)
 #define GET_MOUSEPOS GET_SINGLE(InputManager)->GetMousePos()
+#define GET_WINDOWSIZE { WINDOW_WIDTH, WINDOW_HEIGHT };
 
 // GDI «Ô∆€
 #define RECT_RENDER(hdc, posx, posy, sizex, sizey) Rectangle(hdc, (int)(posx-sizex/2),(int)(posy-sizey/2),(int)(posx+sizex/2),(int)(posy+sizey/2))

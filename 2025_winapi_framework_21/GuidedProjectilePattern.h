@@ -19,6 +19,7 @@ private:
     Player* m_player;
     float m_delay;
     float m_count;
+    float m_originCount;
     float m_currentTime;
     bool m_canFire;
     ProjectileType m_type;
