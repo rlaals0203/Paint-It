@@ -26,6 +26,7 @@ public:
         m_dir.Normalize();
         m_isAngle = false;
     }
+    void SetSpeed(float _speed) { m_speed = _speed; }
     float GetSpeed() { return m_speed; }
     float GetDamage() { return m_damage; }
     wstring GetTexture() { return m_textureName; }

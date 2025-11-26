@@ -22,7 +22,7 @@ void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _textur
 /// 투사체 소환 매서드 (타입, 크기, 위치, 방향, 플레이어 소유인가)
 /// </summary>
 void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
-	Vec2 _dir, bool isPlayer)
+	Vec2 _dir, bool isPlayer, float _speed)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
@@ -32,6 +32,7 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 		Projectile* newProj = new Projectile();
 		newProj->Init(proj->GetTexture(), proj->GetSpeed(), proj->GetDamage());
 		newProj->SetPos(_pos);
+		newProj->SetSpeed(_speed);
 		newProj->SetDir(_dir);
 		newProj->SetSize({ _size, _size });
 
@@ -44,7 +45,7 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 /// 투사체 소환 매서드 (타입, 크기, 위치, 각도, 플레이어 소유인가)
 /// </summary>
 void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
-	float _angle, bool isPlayer)
+	float _angle, bool isPlayer, float _speed)
 {
 	auto iter = m_projectiles.find(_type);
 	if (iter != m_projectiles.end())
@@ -53,6 +54,7 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 
 		Projectile* newProj = new Projectile();
 		newProj->Init(proj->GetTexture(), proj->GetSpeed(), proj->GetDamage());
+		newProj->SetSpeed(_speed);
 		newProj->SetPos(_pos);
 		newProj->SetAngle(_angle);
 		newProj->SetSize({ _size, _size });

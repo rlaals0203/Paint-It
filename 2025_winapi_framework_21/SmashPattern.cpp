@@ -4,6 +4,7 @@
 #include "BossController.h"
 #include "ImpulseManager.h"
 #include "DangerGizmo.h"
+#include "ProjectileManager.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -26,6 +27,7 @@ void SmashPattern::Update()
 		break;
 	case SmashPattern::State::Fall: FallState();
 		break;
+	case SmashPattern::State::Ground: GroundState();
 	default:
 		break;
 	}
@@ -60,8 +62,29 @@ void SmashPattern::FallState()
 	m_delay -= fDT;
 	if (m_delay < 0.f)
 	{
-		m_isUsed = false;
-		GET_SINGLE(ImpulseManager)->ApplyImpulse(60.f, 0.4f);
+		GET_SINGLE(ImpulseManager)->ApplyImpulse(60.f, 0.5f);
+		m_state = State::Ground;
+	}
+}
+
+void SmashPattern::GroundState()
+{
+	m_delay -= fDT;
+	if (m_delay < 0.f)
+	{
+		if (--m_count <= 0)
+			m_isUsed = false;
+
+		int count = 16 + (m_count * 4);
+		float angle = 360.f / (float)count;
+		for (int i = 0; i < count; i++) {
+			GET_SINGLE(ProjectileManager)->SpawnProjectile(
+				ProjectileType::Enemy, 60.f,
+				GetOwnerPos(), (m_count * 2.f) + angle * i, false,
+				5.f + (m_count * 1.5f));
+		}
+
+		m_delay = 0.2f;
 	}
 }
 
@@ -73,7 +96,7 @@ void SmashPattern::SetUsed()
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
 	m_moveComponent->SetMove(GetOwnerPos(), skyPos, 2.f);
-	m_delay = 3.f;
+	m_delay = m_count = 3;
 	m_state = State::Up;
 
 	BossPattern::SetUsed();

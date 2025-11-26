@@ -18,6 +18,7 @@ Player::Player()
 	: m_pTexture(nullptr)
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
+	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
@@ -30,14 +31,30 @@ Player::Player()
 		{64.f,0.f}, 8, 0.1f);
 
 	m_animator->CreateAnimation
+	(L"rplayerIdle", m_rpTexture,
+		{ 0.f,0.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation
 	(L"playerMove", m_pTexture,
 		{ 0.f, 64.f }, { 64.f, 64.f },
-		{ 64.f,0.f }, 8, 0.1f);
+		{ 64.f,0.f }, 8, 0.04f);
+
+	m_animator->CreateAnimation
+	(L"rplayerMove", m_rpTexture,
+		{ 0.f, 64.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.04f);
 
 	m_animator->CreateAnimation
 	(L"playerJump", m_pTexture,
 		{ 0.f, 128.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation
+	(L"rplayerJump", m_rpTexture,
+		{ 0.f, 128.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
 	m_animator->Play(L"playerIdle");
 }
 
@@ -120,11 +137,11 @@ void Player::Update()
 	}
 
 	if (!m_isGrounded)
-		animParam = L"playerJump";
+		animParam = m_isRight ? L"rplayerJump" : L"playerJump";
 	else if (m_isMoving)
-		animParam = L"playerMove";
+		animParam = m_isRight ? L"rplayerMove" : L"playerMove";
 	else
-		animParam = L"playerIdle";
+		animParam = m_isRight ? L"rplayerIdle" : L"playerIdle";
 
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);
