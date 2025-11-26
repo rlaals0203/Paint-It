@@ -192,6 +192,7 @@
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LineObject.h" />
     <ClInclude Include="LineProjectilePattern.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="MovePattern.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LineObject.cpp" />
     <ClCompile Include="LineProjectilePattern.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveComponent.cpp" />

@@ -4,6 +4,7 @@
 #include "Boss.h"
 #include "Ease.h"
 #include "MoveComponent.h"
+#include "LineObject.h"
 
 MovePattern::MovePattern(BossController* _controller
 	, Vec2 _movePos, float _speed, float _stopDistance)
@@ -35,5 +36,8 @@ void MovePattern::SetUsed()
 
 	m_startPos = m_boss->GetPos();
 	m_moveCompo->SetMove(m_startPos, m_movePos, m_duration, EaseOutCubic);
+
+	auto* line = new LineObject();
+	line->SetLine(0.4f, false, false);
 	BossPattern::SetUsed();
 }
