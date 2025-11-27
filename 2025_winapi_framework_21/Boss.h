@@ -17,6 +17,7 @@ public:
 public:
     void SetAnimation(wstring animationKey);
     void StopAnimation();
+    void ResetPattern();
     void AddModule(BossPattern* addedPattern);
 protected:
     BossController* m_Controller;

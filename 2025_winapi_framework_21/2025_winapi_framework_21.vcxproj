@@ -189,6 +189,7 @@
     <ClInclude Include="FallingPattern.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
@@ -215,6 +216,11 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UISlider.h" />
+    <ClInclude Include="UIText.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +233,7 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
@@ -266,6 +273,11 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UISlider.cpp" />
+    <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc" />

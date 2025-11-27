@@ -8,6 +8,7 @@ enum class Layer
 	PLAYERPROJECTILE,
 	ENEMYPROJECTILE,
 	EFFECT,
+	UI,
 	END
 };
 

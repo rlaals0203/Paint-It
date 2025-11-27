@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "UIButton.h"
+#include "InputManager.h"
 
 UIButton::UIButton()
 {
@@ -12,7 +13,8 @@ UIButton::~UIButton()
 
 void UIButton::Update()
 {
-	UIElement::Update();
+	UIText::Update();
+	CheckMouseOver();
 }
 
 void UIButton::Render(HDC _hdc)
@@ -37,12 +39,14 @@ void UIButton::Render(HDC _hdc)
 	HBRUSH hBrush = CreateSolidBrush(color);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(_hdc, hBrush);
 
+	RECT rect = RECT_MAKE(pos.x, pos.y, size.x, size.y);
+
 	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 
 	SelectObject(_hdc, oldBrush);
 	DeleteObject(hBrush);
 
-	UIElement::Render(_hdc);
+	UIText::Render(_hdc);
 }
 
 void UIButton::OnMouseClick()
