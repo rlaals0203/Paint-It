@@ -29,7 +29,7 @@ public:
 	virtual void OnMouseClick() {}
 
 protected:
-	void CheckMouseOver();
+	virtual void CheckMouseOver();
 
 protected:
 	UIState m_state = UIState::NORMAL;

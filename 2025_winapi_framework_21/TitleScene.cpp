@@ -77,5 +77,8 @@ void TitleScene::Exit()
 void TitleScene::SettingSlider()
 {
 	UISlider* uislider = m_mainPanel->AddUIElement<UISlider>();
+	uislider->SetPos({ WINDOW_WIDTH / 2, 300 });
+
+	uislider->SetSize({ 100, 50 });
 
 }
