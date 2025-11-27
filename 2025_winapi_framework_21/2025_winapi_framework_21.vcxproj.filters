@@ -235,6 +235,24 @@
     <ClInclude Include="FallingPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPanel.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -393,6 +411,24 @@
     </ClCompile>
     <ClCompile Include="FallingPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPanel.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
