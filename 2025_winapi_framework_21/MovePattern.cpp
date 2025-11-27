@@ -4,7 +4,7 @@
 #include "Boss.h"
 #include "Ease.h"
 #include "MoveComponent.h"
-#include "LineObject.h"
+#include "LazerObject.h"
 
 MovePattern::MovePattern(BossController* _controller
 	, Vec2 _movePos, float _speed, float _stopDistance)
@@ -35,8 +35,5 @@ void MovePattern::SetUsed()
 		m_dotween = m_boss->GetComponent<DOTweenCompo>();
 
 	m_dotween->DOMove(m_movePos, m_duration, EaseOutCubic);
-
-	auto* line = new LineObject();
-	line->SetLine(0.4f, false, false);
 	BossPattern::SetUsed();
 }

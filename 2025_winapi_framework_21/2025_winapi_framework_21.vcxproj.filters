@@ -56,6 +56,12 @@
     <Filter Include="Engine\03. Object\Misc">
       <UniqueIdentifier>{6091a8bf-dc7a-44e3-b893-86a93e30a18f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Boss">
+      <UniqueIdentifier>{e04e3572-1ee4-43a6-abc6-4fa8213cf593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Boss\Pattern">
+      <UniqueIdentifier>{07d81149-5099-4dd9-bfe6-a15d7108c6dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -154,33 +160,81 @@
     <ClInclude Include="ProjectileManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h" />
-    <ClInclude Include="BossController.h" />
-    <ClInclude Include="BossIdleModule.h" />
-    <ClInclude Include="BossModuleBase.h" />
-    <ClInclude Include="BossPattern.h" />
-    <ClInclude Include="BossPatternModule.h" />
-    <ClInclude Include="TestBoss.h" />
-    <ClInclude Include="TestPattern.h" />
     <ClInclude Include="TitleScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="DamageText.h" />
     <ClInclude Include="Effect.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="MovePattern.h" />
-    <ClInclude Include="CircleProjectilePattern.h" />
-    <ClInclude Include="Ease.h" />
-    <ClInclude Include="EffectData.h" />
-    <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="PlayerFindManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GuidedProjectilePattern.h" />
+    <ClInclude Include="Ease.h">
+      <Filter>Engine\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPatternModule.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleProjectilePattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectilePattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="LazerPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SmashPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DOTweenCompo.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpulseManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="LazerObject.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="DangerGizmo.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageText.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossController.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossIdleModule.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossModuleBase.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectData.h">
+      <Filter>Engine\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBoss.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -268,33 +322,77 @@
     <ClCompile Include="EntityHealth.cpp">
       <Filter>Engine\06. Component\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="BossController.cpp" />
-    <ClCompile Include="BossIdleModule.cpp" />
-    <ClCompile Include="BossModuleBase.cpp" />
-    <ClCompile Include="BossPattern.cpp" />
-    <ClCompile Include="BossPatternModule.cpp" />
-    <ClCompile Include="TestBoss.cpp" />
-    <ClCompile Include="TestPattern.cpp" />
     <ClCompile Include="TitleScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DamageText.cpp" />
     <ClCompile Include="Effect.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="MovePattern.cpp" />
-    <ClCompile Include="ImpulseManager.cpp" />
-    <ClCompile Include="CircleProjectilePattern.cpp" />
     <ClCompile Include="PlayerFindManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GuidedProjectilePattern.cpp" />
+    <ClCompile Include="BossPatternModule.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleProjectilePattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectilePattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="LazerPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="MovePattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SmashPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="DOTweenCompo.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpulseManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LazerObject.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="DangerGizmo.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageText.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossController.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossIdleModule.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossModuleBase.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBoss.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

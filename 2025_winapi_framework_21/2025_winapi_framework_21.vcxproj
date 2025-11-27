@@ -193,9 +193,8 @@
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="LineObject.h" />
-    <ClInclude Include="LineProjectilePattern.h" />
-    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="LazerObject.h" />
+    <ClInclude Include="LazerPattern.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
@@ -207,7 +206,6 @@
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Rigidbody.h" />
-    <ClInclude Include="ScaleComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmashPattern.h" />
@@ -248,10 +246,9 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="LineObject.cpp" />
-    <ClCompile Include="LineProjectilePattern.cpp" />
+    <ClCompile Include="LazerObject.cpp" />
+    <ClCompile Include="LazerPattern.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -261,7 +258,6 @@
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
-    <ClCompile Include="ScaleComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmashPattern.cpp" />

@@ -6,6 +6,7 @@ DOTweenCompo::DOTweenCompo() : m_owner(nullptr)
     , m_moveT(0.f), m_isMoving(false), m_moveEase(nullptr)
     , m_scaleStart({ 1,1 }), m_scaleTarget({ 1,1 }), m_scaleDuration(1.f)
     , m_scaleT(0.f), m_isScaling(false), m_scaleEase(nullptr)
+    , m_moveCallback(nullptr), m_scaleCallback(nullptr)
 {
 }
 
@@ -15,44 +16,56 @@ void DOTweenCompo::Init() { if (!m_owner) m_owner = GetOwner(); }
 
 void DOTweenCompo::LateUpdate()
 {
-    float dt = fDT;
-
     if (m_isMoving) {
-        m_moveT += dt / m_moveDuration;
+        m_moveT += fDT / m_moveDuration;
         if (m_moveT >= 1.f) m_moveT = 1.f;
 
         Vec2 pos = EaseLerp(m_moveStart, m_moveTarget, m_moveT, m_moveEase);
         m_owner->SetPos(pos);
 
-        if (m_moveT >= 1.f) m_isMoving = false;
+        if (m_moveT >= 1.f)
+        {
+            m_isMoving = false;
+            if (m_moveCallback) {
+                m_moveCallback();
+                m_moveCallback = nullptr;
+            }
+        }
     }
 
     if (m_isScaling) {
-        m_scaleT += dt / m_scaleDuration;
+        m_scaleT += fDT / m_scaleDuration;
         if (m_scaleT >= 1.f) m_scaleT = 1.f;
 
         Vec2 size = EaseLerp(m_scaleStart, m_scaleTarget, m_scaleT, m_scaleEase);
         m_owner->SetSize(size);
 
-        if (m_scaleT >= 1.f) m_isScaling = false;
+        if (m_scaleT >= 1.f) {
+            m_isScaling = false;
+            if (m_scaleCallback)
+            {
+                m_scaleCallback();
+                m_scaleCallback = nullptr;
+            }
+        }
     }
 }
 
 void DOTweenCompo::Render(HDC _hdc) {}
+void DOTweenCompo::DOMove(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove(_target, _duration, _ease, _callback); }
+void DOTweenCompo::DOMoveX(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove({ _target, m_owner->GetPos().y }, _duration, _ease, _callback); }
+void DOTweenCompo::DOMoveY(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove({ m_owner->GetPos().x, _target }, _duration, _ease, _callback); }
+void DOTweenCompo::DOLocalMove(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove(m_owner->GetPos() + _target, _duration, _ease, _callback); }
+void DOTweenCompo::DOLocalMoveX(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove({ m_owner->GetPos().x + _target, m_owner->GetPos().y }, _duration, _ease, _callback); }
+void DOTweenCompo::DOLocalMoveY(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartMove({ m_owner->GetPos().x, m_owner->GetPos().y + _target }, _duration, _ease, _callback); }
 
-void DOTweenCompo::DOMove(Vec2 _target, float _duration, float(*_ease)(float)) { StartMove(_target, _duration, _ease); }
-void DOTweenCompo::DOMoveX(float _target, float _duration, float(*_ease)(float)) { StartMove({ _target, m_owner->GetPos().y }, _duration, _ease); }
-void DOTweenCompo::DOMoveY(float _target, float _duration, float(*_ease)(float)) { StartMove({ m_owner->GetPos().x, _target }, _duration, _ease); }
-void DOTweenCompo::DOLocalMove(Vec2 _target, float _duration, float(*_ease)(float)) { StartMove(m_owner->GetPos() + _target, _duration, _ease); }
-void DOTweenCompo::DOLocalMoveX(float _target, float _duration, float(*_ease)(float)) { StartMove({ m_owner->GetPos().x + _target, m_owner->GetPos().y }, _duration, _ease); }
-void DOTweenCompo::DOLocalMoveY(float _target, float _duration, float(*_ease)(float)) { StartMove({ m_owner->GetPos().x, m_owner->GetPos().y + _target }, _duration, _ease); }
+void DOTweenCompo::DOSize(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale(_target, _duration, _ease, _callback); }
+void DOTweenCompo::DOScaleX(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale({ _target, m_owner->GetSize().y }, _duration, _ease, _callback); }
+void DOTweenCompo::DOScaleY(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale({ m_owner->GetSize().x, _target }, _duration, _ease, _callback); }
+void DOTweenCompo::DOScale(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale({ _target, _target }, _duration, _ease, _callback); }
 
-void DOTweenCompo::DOSize(Vec2 _target, float _duration, float(*_ease)(float)) { StartScale(_target, _duration, _ease); }
-void DOTweenCompo::DOScaleX(float _target, float _duration, float(*_ease)(float)) { StartScale({ _target, m_owner->GetSize().y }, _duration, _ease); }
-void DOTweenCompo::DOScaleY(float _target, float _duration, float(*_ease)(float)) { StartScale({ m_owner->GetSize().x, _target }, _duration, _ease); }
-void DOTweenCompo::DOScale(float _target, float _duration, float(*_ease)(float)) { StartScale({ _target, _target }, _duration, _ease); }
 
-void DOTweenCompo::StartMove(Vec2 _target, float _duration, float(*_ease)(float))
+void DOTweenCompo::StartMove(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback)
 {
     if (!m_owner) m_owner = GetOwner();
 
@@ -62,9 +75,10 @@ void DOTweenCompo::StartMove(Vec2 _target, float _duration, float(*_ease)(float)
     m_moveEase = _ease;
     m_moveT = 0.f;
     m_isMoving = true;
+    m_moveCallback = _callback;
 }
 
-void DOTweenCompo::StartScale(Vec2 _target, float _duration, float(*_ease)(float))
+void DOTweenCompo::StartScale(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback)
 {
     if (!m_owner) m_owner = GetOwner();
 
@@ -74,4 +88,5 @@ void DOTweenCompo::StartScale(Vec2 _target, float _duration, float(*_ease)(float
     m_scaleEase = _ease;
     m_scaleT = 0.f;
     m_isScaling = true;
+    m_scaleCallback = _callback;
 }
