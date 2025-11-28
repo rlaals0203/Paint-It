@@ -1,6 +1,5 @@
 #pragma once
 #include "BossPattern.h"
-#include "MoveComponent.h"
 
 class FallingPattern :
     public BossPattern

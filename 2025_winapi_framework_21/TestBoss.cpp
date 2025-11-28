@@ -12,15 +12,19 @@
 #include "LazerPattern.h"
 
 
-TestBoss::TestBoss()
+TestBoss::TestBoss() : Boss()
 {
+	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"fireboss");
 	auto* col = AddComponent<Collider>();
-	col->SetSize({ 125, 125 });
-	SetSize({ 250, 250 });
+	col->SetSize({ 100, 100 });
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(10000.f);
-	AddComponent<DOTweenCompo>()->Init();
 
+	m_Animator->CreateAnimation(L"FireBoss", m_texture,
+		{ 0.f, 0.f }, { 48.f, 48.f },
+		{ 48.f, 0.f }, 8, 0.1f);
+	SetAnimation(L"FireBoss");
+	AddComponent<DOTweenCompo>()->Init();
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new LazerPattern(m_Controller, 5));
@@ -41,4 +45,16 @@ TestBoss::TestBoss()
 
 TestBoss::~TestBoss()
 {
+}
+
+void TestBoss::Update()
+{
+	SetSize({ 4.f, 4.f });
+	Object::Update();
+}
+
+void TestBoss::Render(HDC _hdc)
+{
+	Object::Render(_hdc);
+	ComponentRender(_hdc);
 }

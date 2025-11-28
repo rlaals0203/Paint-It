@@ -21,17 +21,12 @@ void BossModuleBase::EnterModule()
 
 void BossModuleBase::UpdateModule()
 {
-	cout << "SD";
-	if (m_AnimationKey != L"")
-	{
-		m_Controller->GetBoss()->SetAnimation(m_AnimationKey);
-	}
+
 }
 
 void BossModuleBase::ExitModule()
 {
 	m_Active = false;
-	m_Controller->GetBoss()->StopAnimation();
 }
 
 void BossModuleBase::SetAnimationKey(wstring _key)
