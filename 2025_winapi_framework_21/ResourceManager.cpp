@@ -196,6 +196,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"player", L"Texture\\PlayerSheet.bmp");
 	LoadTexture(L"rplayer", L"Texture\\RPlayerSheet.bmp");
 	LoadTexture(L"fireboss", L"Texture\\FireBoss.bmp");
+	LoadTexture(L"firebossblink", L"Texture\\FireBossBlink.bmp");
+	LoadTexture(L"playerblink", L"Texture\\PlayerBlink.bmp");
 }
 
 

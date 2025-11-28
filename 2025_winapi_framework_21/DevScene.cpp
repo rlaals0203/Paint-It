@@ -8,11 +8,11 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "Floor.h"
-#include "TestBoss.h"
+#include "FireBoss.h"
 #include "PlayerFindManager.h"
 void DevScene::Init()
 {
-	TestBoss* boss = new TestBoss();
+	FireBoss* boss = new FireBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
 	boss->SetSize({ 100, 100 });
 	boss->SetCanOutofBounds(false);

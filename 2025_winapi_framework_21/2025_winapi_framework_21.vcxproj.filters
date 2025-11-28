@@ -229,7 +229,7 @@
     <ClInclude Include="EffectData.h">
       <Filter>Engine\99. Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TestBoss.h">
+    <ClInclude Include="FireBoss.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="FallingPattern.h">
@@ -406,7 +406,7 @@
     <ClCompile Include="BossModuleBase.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="TestBoss.cpp">
+    <ClCompile Include="FireBoss.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="FallingPattern.cpp">

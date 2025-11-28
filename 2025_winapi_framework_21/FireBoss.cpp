@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TestBoss.h"
+#include "FireBoss.h"
 #include "TestPattern.h"
 #include "MovePattern.h"
 #include "CircleProjectilePattern.h"
@@ -12,18 +12,26 @@
 #include "LazerPattern.h"
 
 
-TestBoss::TestBoss() : Boss()
+FireBoss::FireBoss() : Boss()
+	, m_animName(L"FireBoss"), m_blinkName(L"FireBossBlink")
 {
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"fireboss");
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
+
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(10000.f);
 
-	m_Animator->CreateAnimation(L"FireBoss", m_texture,
+	m_Animator->CreateAnimation(m_animName, m_texture,
 		{ 0.f, 0.f }, { 48.f, 48.f },
 		{ 48.f, 0.f }, 8, 0.1f);
-	SetAnimation(L"FireBoss");
+
+	m_Animator->CreateAnimation(m_blinkName, m_blinkTexture,
+		{ 0.f, 0.f }, { 48.f, 48.f },
+		{ 48.f, 0.f }, 8, 0.1f);
+
+	SetAnimation(m_animName);
 	AddComponent<DOTweenCompo>()->Init();
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new SmashPattern(m_Controller));
@@ -43,17 +51,23 @@ TestBoss::TestBoss() : Boss()
 	AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.5f, 10));
 }
 
-TestBoss::~TestBoss()
+FireBoss::~FireBoss()
 {
 }
 
-void TestBoss::Update()
+void FireBoss::Update()
 {
 	SetSize({ 4.f, 4.f });
 	Object::Update();
+
+	if (m_hasBlinked != m_isBlink)
+	{
+		m_hasBlinked = m_isBlink;
+		m_Animator->Play(m_hasBlinked ? m_blinkName : m_animName);
+	}
 }
 
-void TestBoss::Render(HDC _hdc)
+void FireBoss::Render(HDC _hdc)
 {
 	Object::Render(_hdc);
 	ComponentRender(_hdc);

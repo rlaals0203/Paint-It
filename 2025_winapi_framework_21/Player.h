@@ -24,6 +24,7 @@ public:
 private:
 	Texture* m_pTexture;
 	Texture* m_rpTexture;
+	Texture* m_blinkTexture;
 	Animator* m_animator;
 	PlayerStat m_stat;
 private:
@@ -31,5 +32,15 @@ private:
 	bool m_isGrounded;
 	float m_coolTime;
 	float m_isMoving;
+
+	std::wstring m_playerIdle;
+	std::wstring m_rplayerIdle;
+	std::wstring m_bplayerIdle;
+	std::wstring m_playerMove;
+	std::wstring m_rplayerMove;
+	std::wstring m_bplayerMove;
+	std::wstring m_playerJump;
+	std::wstring m_rPlayerJump;
+	std::wstring m_bplayerJump;
 };
 
