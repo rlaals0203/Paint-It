@@ -10,9 +10,7 @@
 
 Projectile::Projectile() : m_angle(0.f) {}
 
-Projectile::~Projectile()
-{
-}
+Projectile::~Projectile() { }
 
 void Projectile::Init(wstring _texture, float _damage)
 {
@@ -27,7 +25,7 @@ void Projectile::Init(wstring _texture, float _damage)
 
 void Projectile::Update()
 {
-	float speed = m_speed * 100;
+	float speed = m_speed;
 	Object::Update();
 	if (m_isAngle)
 	{
@@ -62,8 +60,4 @@ void Projectile::EnterCollision(Collider* _other)
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
 	//GET_SINGLE(EffectManager)->PlayEffect(EffectType::Player, GetPos(), 1.f, false);
 	SetDead();
-}
-
-void Projectile::ExitCollision(Collider* _other)
-{
 }

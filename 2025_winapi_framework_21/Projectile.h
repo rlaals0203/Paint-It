@@ -9,11 +9,10 @@ class Projectile :
 public:
     Projectile();
     ~Projectile();
-    void Init(wstring _texture, float _damage);
     void Update() override;
     void Render(HDC _hdc) override;
-    virtual void EnterCollision(Collider* _other)override;
-    virtual void ExitCollision(Collider* _other)override;
+    virtual void Init(std::wstring _texture, float _damage);
+    virtual void EnterCollision(Collider* _other) override;
 public:
     void SetAngle(float _f)
     {
@@ -26,15 +25,16 @@ public:
         m_dir.Normalize();
         m_isAngle = false;
     }
-    void SetSpeed(float _speed) { m_speed = _speed; }
+    void SetSpeed(float _speed) { m_speed = _speed * 100; }
     float GetSpeed() { return m_speed; }
     float GetDamage() { return m_damage; }
-    wstring GetTexture() { return m_textureName; }
-private:
+    std::wstring GetTexture() { return m_textureName; }
+protected:
     Texture* m_pTexture;
-    wstring m_textureName;
-    float m_angle;
     float m_speed;
+private:
+    std::wstring m_textureName;
+    float m_angle;
     float m_damage;
     bool m_isAngle;
     Vec2 m_dir;
