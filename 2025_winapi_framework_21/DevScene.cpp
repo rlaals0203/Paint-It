@@ -14,7 +14,7 @@ void DevScene::Init()
 {
 	FireBoss* boss = new FireBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
-	boss->SetSize({ 100, 100 });
+	boss->SetSize({ 5.f, 5.f });
 	boss->SetCanOutofBounds(false);
 	AddObject(boss, Layer::ENEMY);
 

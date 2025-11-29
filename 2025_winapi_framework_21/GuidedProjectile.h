@@ -1,5 +1,6 @@
 #pragma once
 #include "Projectile.h"
+#include "Player.h"
 class GuidedProjectile :
     public Projectile
 {
@@ -7,7 +8,7 @@ public:
     GuidedProjectile();
     ~GuidedProjectile();
 
-    void Init(std::wstring _texture, float _damage) override;
+    void Init(std::wstring _texture, float _speed, float _damage, float _lifeTime);
     void Update() override;
     void Render(HDC _hdc) override;
 

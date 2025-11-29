@@ -10,6 +10,7 @@
 #include "DOTweenCompo.h"
 #include "SmashPattern.h"
 #include "LazerPattern.h"
+#include "DrawProjectilePattern.h"
 
 
 FireBoss::FireBoss() : Boss()
@@ -22,6 +23,7 @@ FireBoss::FireBoss() : Boss()
 	col->SetSize({ 100, 100 });
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(10000.f);
+	AddComponent<DOTweenCompo>();
 
 	m_Animator->CreateAnimation(m_animName, m_texture,
 		{ 0.f, 0.f }, { 48.f, 48.f },
@@ -32,7 +34,7 @@ FireBoss::FireBoss() : Boss()
 		{ 48.f, 0.f }, 8, 0.1f);
 
 	SetAnimation(m_animName);
-	AddComponent<DOTweenCompo>()->Init();
+	AddModule(new DrawProjectilePattern(m_Controller, L"brush", L"brush", 0.25f, 10.f));
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new LazerPattern(m_Controller, 5));
@@ -57,7 +59,6 @@ FireBoss::~FireBoss()
 
 void FireBoss::Update()
 {
-	SetSize({ 4.f, 4.f });
 	Object::Update();
 
 	if (m_hasBlinked != m_isBlink)

@@ -32,10 +32,11 @@ public:
 protected:
     Texture* m_pTexture;
     float m_speed;
+    float m_damage;
+    float m_lifeTime;
 private:
     std::wstring m_textureName;
     float m_angle;
-    float m_damage;
     bool m_isAngle;
     Vec2 m_dir;
 };
