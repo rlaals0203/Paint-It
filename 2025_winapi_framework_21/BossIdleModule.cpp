@@ -6,8 +6,8 @@ BossIdleModule::BossIdleModule(BossController* controller)
 	: BossModuleBase(controller)
 	, m_cooldownTimer(0.f)
 	, m_cooldown(0.f)
-	, m_minCooldown(1)
-	, m_maxCooldown(2)
+	, m_minCooldown(0.5f)
+	, m_maxCooldown(1.5f)
 {
 
 }

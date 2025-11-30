@@ -46,13 +46,13 @@ FireBoss::FireBoss() : Boss()
 	AddModule(new SmashPattern(m_Controller));
 	AddModule(new LazerPattern(m_Controller, 5));
 	AddModule(new LazerPattern(m_Controller, 5));
-	AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.5f, 10));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 40));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 40));
-	AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.5f, 10));
+	//AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.5f, 10));
+	//AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
+	//AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
+	//AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
+	//AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 40));
+	//AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 40));
+	//AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.5f, 10));
 }
 
 FireBoss::~FireBoss()
