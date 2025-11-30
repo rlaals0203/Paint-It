@@ -4,9 +4,10 @@
 #include "BossPattern.h"
 
 BossPatternModule::BossPatternModule(BossController* _controller)
-	: BossModuleBase(_controller)
-	, m_CurrentPattern(nullptr)
-	, m_PatternIndex(0)
+	: BossModuleBase(_controller), 
+	m_CurrentPattern(nullptr), 
+	m_PatternIndex(0), 
+	m_isMoveTurn(false)
 {
 }
 
@@ -25,6 +26,7 @@ void BossPatternModule::UpdateModule()
 {
 	if (!m_CurrentPattern->IsUsed()) 
 	{
+		m_isMoveTurn = !m_isMoveTurn;
 		m_Controller->ChangeModule(L"IdleModule");
 		return;
 	}
@@ -51,8 +53,24 @@ void BossPatternModule::AddPattern(BossPattern* _addPattern)
 	ShufflePattern();
 }
 
+void BossPatternModule::AddMovePattern(MovePattern* p)
+{
+	m_movePatterns.push_back(p);
+}
+
+
 void BossPatternModule::SelectPattern()
 {
+	cout << m_movePatterns.size();
+	if (m_isMoveTurn && m_movePatterns.size() > 0)
+	{
+		int idx = rand() % m_movePatterns.size();
+		m_CurrentPattern = m_movePatterns[idx];
+
+		m_CurrentPattern->SetUsed();
+		return;
+	}
+
 	if (m_PatternIndex >= m_Patterns.size())
 	{
 		ShufflePattern();

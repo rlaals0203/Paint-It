@@ -1,6 +1,6 @@
 #pragma once
 #include "BossModuleBase.h"
-//#include "BossController.h"
+#include "MovePattern.h"
 
 class BossController;
 class BossPattern;
@@ -21,6 +21,7 @@ public:
 
 public:
     void AddPattern(BossPattern* _addPattern);
+    void AddMovePattern(MovePattern* _addPattern);
 
 private:
     void SelectPattern();
@@ -28,9 +29,12 @@ private:
 
 private:
     vector<BossPattern*> m_Patterns;
+    vector<MovePattern*> m_movePatterns;
     BossPattern* m_CurrentPattern;
 
     vector<int> m_Orders;
     int m_PatternIndex;
+    int m_lastIndex;
+    bool m_isMoveTurn;
 };
 

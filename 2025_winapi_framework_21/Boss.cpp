@@ -49,3 +49,9 @@ void Boss::AddModule(BossPattern* addedPattern)
 	BossPatternModule* patternMoudle = (BossPatternModule*)(m_Controller->GetModule(L"PatternModule"));
 	patternMoudle->AddPattern(addedPattern);
 }
+
+void Boss::AddMoveModule(MovePattern* addedPattern)
+{
+	BossPatternModule* patternMoudle = (BossPatternModule*)(m_Controller->GetModule(L"PatternModule"));
+	patternMoudle->AddMovePattern(addedPattern);
+}
