@@ -6,8 +6,8 @@
 #include "BossPatternModule.h"
 #include "EntityHealth.h"
 
-Boss::Boss()
-	: m_Controller(nullptr)
+Boss::Boss() : Object(),
+	m_Controller(nullptr)
 	, m_Animator(nullptr)
 {
 	m_Controller = AddComponent<BossController>();
@@ -17,14 +17,8 @@ Boss::Boss()
 	m_Controller->AddModule(L"PatternModule", new BossPatternModule(m_Controller));
 	m_Controller->ChangeModule(L"IdleModule");
 
-	EntityHealth* health = AddComponent<EntityHealth>();
-	health->SetDefaultHP(100);
-
 	m_Animator = AddComponent<Animator>();
 	m_Animator->SetOwner(this);
-	//이런식으로 BossPattern 넣으면 됨
-	//BossPatternModule* patternMoudle = (BossPatternModule*)(m_Controller->GetModule(L"PatternModule"));
-	//patternMoudle->AddPattern(new BossPattern(~~));
 }
 
 Boss::~Boss()

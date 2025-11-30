@@ -211,7 +211,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmashPattern.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestBoss.h" />
+    <ClInclude Include="FireBoss.h" />
     <ClInclude Include="TestPattern.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
@@ -268,7 +268,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmashPattern.cpp" />
-    <ClCompile Include="TestBoss.cpp" />
+    <ClCompile Include="FireBoss.cpp" />
     <ClCompile Include="TestPattern.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />

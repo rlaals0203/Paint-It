@@ -31,7 +31,7 @@ void LazerPattern::SetUsed()
 	for (int i = 0; i < m_count; i++) {
 		auto* lazer = new LazerObject();
 		auto combo = combos[(i + random) % 4];
-		lazer->ShowLine(0.3f, combo.first, combo.second);
+		lazer->ShowLine(0.4f, combo.first, combo.second);
 		m_lineVec.push_back(lazer);
 	}
 

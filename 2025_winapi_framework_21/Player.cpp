@@ -17,45 +17,75 @@
 Player::Player()
 	: m_pTexture(nullptr)
 {
-	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
-	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetDefaultHP(100.f);
+
+	#pragma region  animation
+	m_playerIdle = L"playerIdle";
+	m_rplayerIdle = L"rplayerIdle";
+	m_playerMove = L"playerMove";
+	m_rplayerMove = L"rplayerMove";
+	m_playerJump = L"playerJump";
+	m_rPlayerJump = L"rplayerJump";
+	m_bplayerIdle = L"bplayerIdle";
+	m_bplayerMove = L"bplayerMove";
+	m_bplayerJump = L"bplayerJump";
+
+	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
+	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
 	m_animator = AddComponent<Animator>();
 
-	m_animator->CreateAnimation
-	(L"playerIdle", m_pTexture,
-		{0.f,0.f}, {64.f, 64.f} ,
-		{64.f,0.f}, 8, 0.1f);
-
-	m_animator->CreateAnimation
-	(L"rplayerIdle", m_rpTexture,
+	m_animator->CreateAnimation(
+		m_playerIdle, m_pTexture,
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
-	m_animator->CreateAnimation
-	(L"playerMove", m_pTexture,
-		{ 0.f, 64.f }, { 64.f, 64.f },
-		{ 64.f,0.f }, 8, 0.04f);
-
-	m_animator->CreateAnimation
-	(L"rplayerMove", m_rpTexture,
-		{ 0.f, 64.f }, { 64.f, 64.f },
-		{ 64.f,0.f }, 8, 0.04f);
-
-	m_animator->CreateAnimation
-	(L"playerJump", m_pTexture,
-		{ 0.f, 128.f }, { 64.f, 64.f },
+	m_animator->CreateAnimation(
+		m_rplayerIdle, m_rpTexture,
+		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
-	m_animator->CreateAnimation
-	(L"rplayerJump", m_rpTexture,
-		{ 0.f, 128.f }, { 64.f, 64.f },
+	m_animator->CreateAnimation(
+		m_playerMove, m_pTexture,
+		{ 0.f,64.f }, { 64.f,64.f },
+		{ 64.f,0.f }, 8, 0.04f);
+
+	m_animator->CreateAnimation(
+		m_rplayerMove, m_rpTexture,
+		{ 0.f,64.f }, { 64.f,64.f },
+		{ 64.f,0.f }, 8, 0.04f);
+
+	m_animator->CreateAnimation(
+		m_playerJump, m_pTexture,
+		{ 0.f,128.f }, { 64.f,64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
-	m_animator->Play(L"playerIdle");
+	m_animator->CreateAnimation(
+		m_rPlayerJump, m_rpTexture,
+		{ 0.f,128.f }, { 64.f,64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation(
+		m_bplayerIdle, m_blinkTexture,
+		{ 0.f,0.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation(
+		m_bplayerIdle, m_blinkTexture,
+		{ 0.f,0.f }, { 64.f, 64.f },
+		{ 64.f,0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation(
+		m_bplayerMove, m_blinkTexture,
+		{ 0.f,64.f }, { 64.f,64.f },
+		{ 64.f,0.f }, 8, 0.04f);
+
+
+	m_animator->Play(m_playerIdle);
+	#pragma endregion
 }
 
 Player::~Player()
@@ -139,11 +169,11 @@ void Player::Update()
 	}
 
 	if (!m_isGrounded)
-		animParam = m_isRight ? L"rplayerJump" : L"playerJump";
+		animParam = m_isRight ? m_rPlayerJump : m_playerJump;
 	else if (m_isMoving)
-		animParam = m_isRight ? L"rplayerMove" : L"playerMove";
+		animParam = m_isRight ? m_rplayerMove : m_playerMove;
 	else
-		animParam = m_isRight ? L"rplayerIdle" : L"playerIdle";
+		animParam = m_isRight ? m_rplayerIdle : m_playerIdle;
 
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);

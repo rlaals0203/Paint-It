@@ -21,8 +21,6 @@ public:
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
-	const bool& GetIsBlink() const { return m_isBlink; }
-	const bool& GetIsRight() const { return m_isRight; }
 
 	void OnHit();
 	void SetCanOutofBounds(bool canOut) { m_canOutofbounds = canOut; }
@@ -72,12 +70,12 @@ private:
 protected:
 	bool m_isDie;
 	bool m_isRight; //오른쪽을 보고 있는지
+	bool m_isBlink;
 
 private:
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;
-	bool m_isBlink;
 	float m_blinkDur;
 	float m_blinkTime;
 	bool m_canOutofbounds;
