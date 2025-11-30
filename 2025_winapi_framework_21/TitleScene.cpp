@@ -2,6 +2,7 @@
 #include "TitleScene.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 #include "UIPanel.h"
 #include "UIText.h"
 #include "UIButton.h"
@@ -9,17 +10,14 @@
 
 void TitleScene::Init()
 {
-	m_mainPanel = new UIPanel();
-
-	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
-
-	AddObject(m_mainPanel, Layer::UI);
+	CreatePanel();
 
 	Title();
 
-	SettingSlider();
+	SettingPanel();
 
 	Start();
+	Setting();
 	Exit();
 }
 
@@ -30,6 +28,23 @@ void TitleScene::Update()
 	{
 		GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
 	}*/
+}
+
+void TitleScene::CreatePanel()
+{
+	m_mainPanel = new UIPanel();
+
+	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+
+	AddObject(m_mainPanel, Layer::UI);
+
+	m_settingPanel = new UIPanel();
+
+	m_settingPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+
+	AddObject(m_settingPanel, Layer::UI);
+	
+	m_settingPanel->SetActive(false);
 }
 
 void TitleScene::Title()
@@ -56,13 +71,22 @@ void TitleScene::Start()
 
 void TitleScene::Setting()
 {
+	UIButton* setting = m_mainPanel->AddUIElement<UIButton>();
+	setting->SetPos({ WINDOW_WIDTH / 2, 570 });
+	setting->SetText(L"¼³Á¤");
+	setting->SetSize({ 100, 50 });
+	setting->SetCallback([=]()
+		{
+			m_mainPanel->SetActive(false);
+			m_settingPanel->SetActive(true);
+		});
 }
 
 void TitleScene::Exit()
 {
 	UIButton* exit = m_mainPanel->AddUIElement<UIButton>();
 	
-	exit->SetPos({ WINDOW_WIDTH / 2, 600 });
+	exit->SetPos({ WINDOW_WIDTH / 2, 640 });
 
 	exit->SetSize({ 100, 50 });
 
@@ -74,11 +98,53 @@ void TitleScene::Exit()
 		});
 }
 
-void TitleScene::SettingSlider()
+void TitleScene::SettingPanel()
 {
-	UISlider* uislider = m_mainPanel->AddUIElement<UISlider>();
-	uislider->SetPos({ WINDOW_WIDTH / 2, 300 });
+	//slider
+	UISlider* BGMslider = m_settingPanel->AddUIElement<UISlider>();
+	BGMslider->SetPos(
+		{
+			(int)(WINDOW_WIDTH / 3.25f)
+			, WINDOW_HEIGHT / 3
+		});
 
-	uislider->SetSize({ 100, 50 });
+	BGMslider->SetSize({ 500, 50 });
 
+	BGMslider->SetCallback([=](float value)
+		{
+			GET_SINGLE(ResourceManager)
+				->Volume(SOUND_CHANNEL::BGM, value);
+		});
+	
+	UISlider* EFFECTslider = m_settingPanel->AddUIElement<UISlider>();
+	EFFECTslider->SetPos(
+		{
+			(int)(WINDOW_WIDTH / 3.25f)
+			, WINDOW_HEIGHT / 2
+		});
+
+	EFFECTslider->SetSize({ 500, 50 });
+
+	EFFECTslider->SetCallback([=](float value)
+		{
+			GET_SINGLE(ResourceManager)
+				->Volume(SOUND_CHANNEL::EFFECT, value);
+		});
+
+	//text
+
+	//close Btn
+	UIButton* exit = m_settingPanel->AddUIElement<UIButton>();
+
+	exit->SetPos({ WINDOW_WIDTH - 100, 100 });
+
+	exit->SetSize({ 40, 40 });
+
+	exit->SetText(L"X");
+
+	exit->SetCallback([=]()
+		{
+			m_mainPanel->SetActive(true);
+			m_settingPanel->SetActive(false);
+		});
 }

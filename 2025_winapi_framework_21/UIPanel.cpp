@@ -2,6 +2,7 @@
 #include "UIPanel.h"
 
 UIPanel::UIPanel()
+	: m_isActive(true)
 {
 }
 
@@ -16,6 +17,9 @@ UIPanel::~UIPanel()
 
 void UIPanel::Update()
 {
+	if (!m_isActive)
+		return;
+
 	Object::Update();
 
 	for (UIElement* child : m_children)
@@ -26,6 +30,8 @@ void UIPanel::Update()
 
 void UIPanel::Render(HDC _hdc)
 {
+	if (!m_isActive)
+		return;
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 

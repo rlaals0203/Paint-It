@@ -27,6 +27,10 @@ public:
     void SetTrackTexture(Texture* tex) { m_trackTex = tex; }
     void SetThumbTexture(Texture* tex) { m_thumbTex = tex; }
 
+public:
+    void SetFillColor(COLORREF color) { m_fillColor = color; }
+
+
 protected:
     virtual void OnMouseDown();
     virtual void OnMouseUp();
@@ -47,8 +51,11 @@ private:
     std::function<void(float)> m_callback = nullptr;
 
 private:
+
     Texture* m_trackTex = nullptr;
     Texture* m_thumbTex = nullptr;
+
+    COLORREF m_fillColor = RGB(80, 160, 255);
 
     bool m_dragging = false;
 
