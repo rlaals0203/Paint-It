@@ -1,123 +1,191 @@
 #include "pch.h"
 #include "UISlider.h"
+#include "Texture.h"
+#include "InputManager.h"
 
-UISlider::UISlider()
+
+UISlider::UISlider() 
 {
-    m_minValue = 0.0f;
-    m_maxValue = 1.0f;
-    m_value = 0.5f;
-    m_isDragging = false;
-    SetSize({ 200.0f, 20.0f });
-    SetPos({ 10.0f, 10.0f });
+
 }
 
-UISlider::~UISlider()
+UISlider::~UISlider() 
 {
+
 }
 
-void UISlider::SetRange(float min, float max)
-{
-    m_minValue = min;
-    m_maxValue = max;
-    if (m_value < m_minValue) m_value = m_minValue;
-    if (m_value > m_maxValue) m_value = m_maxValue;
-}
-
-void UISlider::SetValue(float value)
-{
-    float clamped = std::clamp(value, m_minValue, m_maxValue);
-    if (m_value != clamped) {
-        m_value = clamped;
-        if (m_onValueChanged) m_onValueChanged(m_value);
-    }
-}
-
-float UISlider::GetValue() const
-{
-    return m_value;
-}
-
-void UISlider::SetOnValueChanged(std::function<void(float)> callback)
-{
-    m_onValueChanged = callback;
-}
 
 void UISlider::Update()
 {
     CheckMouseOver();
-    if (m_isDragging) {
-        POINT pt;
-        GetCursorPos(&pt);
-        ScreenToClient(GetActiveWindow(), &pt);
-        float pos = static_cast<float>(pt.x) - GetPos().x;
-        float newValue = PositionToValue(pos);
-        SetValue(newValue);
+    if (m_dragging)
+    {
+        POINT pt = GET_MOUSEPOS;
+        OnMouseDrag(pt);
     }
-    UIElement::Update();
 }
 
-void UISlider::Render(HDC _hdc)
+void UISlider::Render(HDC hdc)
 {
-    Vec2 pos = GetPos();
+    Vector2 pos = GetPos();
+    Vector2 size = GetSize();
 
-    Vec2 size = GetSize();
+    int trackHeight = (int)(size.y * 0.3f);
+    //int centerX = (int)(pos.x + size.x * 0.5f);
+    //지금은 pos.x가 가운데가 아닌 왼쪽 끝을 나타냄 이를 바꿀것
+    int centerY = (int)(pos.y + size.y * 0.5f);
 
-    RECT rc
+    m_trackRect = {
+        (LONG)pos.x,
+        (LONG)(centerY - trackHeight / 2),
+        (LONG)(pos.x + size.x),
+        (LONG)(centerY + trackHeight / 2)
+    };
+
+    if (m_trackTex)
     {
-        pos.x,
-        pos.y,
-        pos.x + size.x,
-        pos.y + size.y
-    };
+        //todo : 텍스처 그리기 구현
+    }
+    else
+    {
+        HBRUSH brush = CreateSolidBrush(RGB(180, 180, 180));
+        FillRect(hdc, &m_trackRect, brush);
+        DeleteObject(brush);
+    }
 
-    FillRect(_hdc, &rc, (HBRUSH)(COLOR_BTNFACE + 1));
+    int thumbX = PosFromValue(m_value);
+    int thumbY = centerY;
 
-    float handlePos = ValueToPosition(m_value);
-    RECT handleRc = {
-        (pos.x + handlePos) - 5,
-        pos.y - 5,
-        (pos.x + handlePos) + 5,
-        (pos.y + size.y) + 5
-    };
-    FillRect(_hdc, &handleRc, (HBRUSH)(COLOR_HIGHLIGHT + 1));
+    RECT fillRect = { m_trackRect.left, m_trackRect.top, thumbX, m_trackRect.bottom };
+    HBRUSH fbrush = CreateSolidBrush(m_fillColor);
+    FillRect(hdc, &fillRect, fbrush);
+    DeleteObject(fbrush);
 
-    UIElement::Render(_hdc);
+    if (m_thumbTex)
+    {
+        //todo : 텍스처 그리기 구현
+    }
+    else
+    {
+        HBRUSH brush = CreateSolidBrush(RGB(50, 150, 250));
+        HBRUSH old = (HBRUSH)SelectObject(hdc, brush);
+        Ellipse(hdc, thumbX - m_thumbRadius, thumbY - m_thumbRadius, thumbX + m_thumbRadius, thumbY + m_thumbRadius);
+        SelectObject(hdc, old);
+        DeleteObject(brush);
+    }
 }
 
 void UISlider::OnMouseClick()
 {
-    m_isDragging = true;
-    POINT pt;
-    GetCursorPos(&pt);
-    ScreenToClient(GetActiveWindow(), &pt);
-    float pos = static_cast<float>(pt.x) - GetPos().x;
-    float newValue = PositionToValue(pos);
-    SetValue(newValue);
+    POINT pt = GET_MOUSEPOS;
+    float old = m_value;
+    m_value = ValueFromPos(pt.x);
+    if (m_value != old && m_callback)
+    {
+        m_callback(m_value);
+    }
 }
 
-void UISlider::OnMouseEnter()
+void UISlider::OnMouseDown()
 {
-
+    m_dragging = true;
 }
 
-void UISlider::OnMouseExit()
+void UISlider::OnMouseUp()
 {
-    m_isDragging = false;
+    m_dragging = false;
 }
 
-float UISlider::ValueToPosition(float value) const
+void UISlider::OnMouseDrag(POINT pt)
 {
-    float barStart = 0.0f;
-    float barEnd = GetSize().x;
-    float t = (value - m_minValue) / (m_maxValue - m_minValue);
-    return barStart + t * (barEnd - barStart);
+    float old = m_value;
+    m_value = ValueFromPos(pt.x);
+    if (m_value != old && m_callback) m_callback(m_value);
 }
 
-float UISlider::PositionToValue(float pos) const
+void UISlider::CheckMouseOver()
 {
-    float barStart = 0.0f;
-    float barEnd = GetSize().x;
-    float t = (pos - barStart) / (barEnd - barStart);
-    t = std::clamp(t, 0.0f, 1.0f);
-    return m_minValue + t * (m_maxValue - m_minValue);
+    Vector2 pos = GetPos();
+    Vector2 size = GetSize();
+
+    POINT raw = GET_MOUSEPOS;
+    Vec2 mouse = Vec2(raw);
+
+    int trackHeight = (int)(size.y * 0.3f);
+    int cx = (int)(pos.x + size.x * 0.5f);
+    int cy = (int)(pos.y + size.y * 0.5f);
+
+    RECT trackRect = {
+        (LONG)pos.x,
+        (LONG)(cy - trackHeight / 2),
+        (LONG)(pos.x + size.x),
+        (LONG)(cy + trackHeight / 2)
+    };
+
+    int thumbX = PosFromValue(m_value);
+    int thumbY = cy;
+
+    RECT thumbRect = {
+        thumbX - m_thumbRadius,
+        thumbY - m_thumbRadius,
+        thumbX + m_thumbRadius,
+        thumbY + m_thumbRadius
+    };
+
+    bool was = m_isMouseOver;
+    bool overTrack = (mouse.x >= trackRect.left && mouse.x <= trackRect.right && mouse.y >= trackRect.top && mouse.y <= trackRect.bottom);
+    bool overThumb = (mouse.x >= thumbRect.left && mouse.x <= thumbRect.right && mouse.y >= thumbRect.top && mouse.y <= thumbRect.bottom);
+
+    m_isMouseOver = overTrack || overThumb;
+
+    if (!was && m_isMouseOver)
+    {
+        OnMouseEnter();
+        SetUIState(UIState::HOVER);
+    }
+    else if (was && !m_isMouseOver)
+    {
+        OnMouseExit();
+        SetUIState(UIState::NORMAL);
+    }
+
+    if (!m_dragging && m_isMouseOver && GET_SINGLE(InputManager)->IsDown(KEY_TYPE::LBUTTON))
+    {
+        if (overThumb)
+        {
+            OnMouseDown();
+        }
+        else if (overTrack) 
+        { 
+            OnMouseClick(); 
+            m_dragging = true; 
+        }
+    }
+    else if (m_dragging && GET_SINGLE(InputManager)->IsUp(KEY_TYPE::LBUTTON))
+    {
+        OnMouseUp();
+    }
+}
+
+float UISlider::ValueFromPos(int x)
+{
+    float ratio = float(x - m_trackRect.left) / float(m_trackRect.right - m_trackRect.left);
+    ratio = std::max(0.0f, std::min(1.0f, ratio));
+    return m_min + ratio * (m_max - m_min);
+}
+
+int UISlider::PosFromValue(float value)
+{
+    float ratio = (value - m_min) / (m_max - m_min);
+    return int(m_trackRect.left + ratio * (m_trackRect.right - m_trackRect.left));
+}
+
+void UISlider::SetValue(float value)
+{
+    float old = m_value;
+    m_value = std::max(m_min, std::min(m_max, value));
+    if (m_value != old && m_callback)
+    {
+        m_callback(m_value);
+    }
 }

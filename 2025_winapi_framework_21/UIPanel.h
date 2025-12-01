@@ -23,7 +23,12 @@ public:
 		return element;
 	}
 
+public:
+	void SetActive(bool active) { m_isActive = active; }
+
 private:
+	bool m_isActive;
+
 	vector<UIElement*> m_children;
 	COLORREF m_backgroundColor = RGB(50, 50, 50);
 };

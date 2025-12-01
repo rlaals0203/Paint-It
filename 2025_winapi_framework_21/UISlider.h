@@ -1,7 +1,8 @@
 #pragma once
 #include "UIElement.h"
-class UISlider :
-    public UIElement
+
+class Texture;
+class UISlider : public UIElement
 {
 public:
     UISlider();
@@ -9,31 +10,59 @@ public:
 
 public:
     virtual void Update() override;
-    virtual void Render(HDC _hdc) override;
+    virtual void Render(HDC hdc) override;
+
+public:
+    void SetRange(float minVal, float maxVal)
+    {
+        m_min = minVal;
+        m_max = maxVal;
+    }
+
+public:
+    void SetValue(float value);
+    float GetValue() const { return m_value; }
+
+public:
+    void SetTrackTexture(Texture* tex) { m_trackTex = tex; }
+    void SetThumbTexture(Texture* tex) { m_thumbTex = tex; }
+
+public:
+    void SetFillColor(COLORREF color) { m_fillColor = color; }
+
+
+protected:
+    virtual void OnMouseDown();
+    virtual void OnMouseUp();
+    virtual void OnMouseDrag(POINT mousePos);
 
 public:
     virtual void OnMouseClick() override;
-    virtual void OnMouseEnter() override;
-    virtual void OnMouseExit() override;
+    virtual void CheckMouseOver() override;
 
 public:
-    void SetRange(float min, float max);
-    void SetValue(float value);
-    float GetValue() const;
-
-public:
-    void SetOnValueChanged(std::function<void(float)> callback);
+    void SetCallback(std::function<void(float)> callback) { m_callback = callback; }
 
 private:
-    float ValueToPosition(float value) const;
-    float PositionToValue(float pos) const;
+    float ValueFromPos(int x);
+    int PosFromValue(float value);
 
 private:
-    float m_minValue = 0.0f;
-    float m_maxValue = 1.0f;
-    float m_value = 0.5f;
+    std::function<void(float)> m_callback = nullptr;
 
-    bool m_isDragging = false;
-    std::function<void(float)> m_onValueChanged;
+private:
+
+    Texture* m_trackTex = nullptr;
+    Texture* m_thumbTex = nullptr;
+
+    COLORREF m_fillColor = RGB(80, 160, 255);
+
+    bool m_dragging = false;
+
+    RECT m_trackRect = { 0 };
+    int m_thumbRadius = 8;
+
+    float m_min = 0;
+    float m_max = 1;
+    float m_value = 50;
 };
-
