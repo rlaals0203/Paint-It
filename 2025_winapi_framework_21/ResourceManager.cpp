@@ -201,6 +201,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"brush", L"Texture\\Brush.bmp");
 	LoadTexture(L"background1", L"Texture\\background1.bmp");
 	LoadTexture(L"smashsmoke", L"Texture\\BossSmashSmoke.bmp");
+	LoadTexture(L"floor", L"Texture\\floor.bmp");
 }
 
 

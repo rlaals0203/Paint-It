@@ -21,7 +21,7 @@ void ProjectileManager::RegisterProjectile(ProjectileType _type, wstring _textur
 /// <summary>
 /// 투사체 소환 매서드 (타입, 크기, 위치, 방향, 플레이어 소유인가)
 /// </summary>
-void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
+Projectile* ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos,
 	Vec2 _dir, float _speed, bool isPlayer)
 {
 	auto iter = m_projectiles.find(_type);
@@ -38,13 +38,15 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 
 		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
+		return newProj;
 	}
+	return nullptr;
 }
 
 /// <summary>
 /// 투사체 소환 매서드 (타입, 크기, 위치, 각도, 플레이어 소유인가)
 /// </summary>
-void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos, 
+Projectile* ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos,
 	float _angle, float _speed, bool isPlayer)
 {
 	auto iter = m_projectiles.find(_type);
@@ -61,5 +63,7 @@ void ProjectileManager::SpawnProjectile(ProjectileType _type, float _size, Vec2 
 
 		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
+		return newProj;
 	}
+	return nullptr;
 }

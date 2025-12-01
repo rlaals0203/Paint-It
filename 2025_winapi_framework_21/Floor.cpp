@@ -19,9 +19,4 @@ void Floor::Update()
 
 void Floor::Render(HDC _hdc)
 {
-	Vec2 size = GetSize();
-	Vec2 pos = GetPos();
-	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
-	ComponentRender(_hdc);
-
 }
