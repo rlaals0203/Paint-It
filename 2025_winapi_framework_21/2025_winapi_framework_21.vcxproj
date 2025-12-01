@@ -192,6 +192,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="GuidedLazerPattern.h" />
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
+    <ClCompile Include="GuidedLazerPattern.cpp" />
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />

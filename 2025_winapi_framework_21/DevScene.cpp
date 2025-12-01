@@ -24,10 +24,14 @@ void DevScene::Init()
 	player->SetSize({ 1.25f, 1.25f });
 	AddObject(player, Layer::PLAYER);
 
-	SpriteObject* obj = new SpriteObject(L"background1", Layer::BACKGROUND);
-	obj->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
-	obj->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+	SpriteObject* bg = new SpriteObject(L"background1", Layer::BACKGROUND, false);
+	bg->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	bg->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });
+
+	SpriteObject* floor = new SpriteObject(L"floor", Layer::BACKGROUND, false);
+	floor->SetSize({ WINDOW_WIDTH, 100 });
+	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);

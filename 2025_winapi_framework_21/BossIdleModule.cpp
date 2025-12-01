@@ -7,7 +7,7 @@ BossIdleModule::BossIdleModule(BossController* controller)
 	, m_cooldownTimer(0.f)
 	, m_cooldown(0.f)
 	, m_minCooldown(0.5f)
-	, m_maxCooldown(1.5f)
+	, m_maxCooldown(1.f)
 {
 
 }

@@ -5,9 +5,13 @@
 
 void EffectManager::Init()
 {
-    RegisterEffect(EffectType::Player, L"jiwooFront", 
+    RegisterEffect(EffectType::TestPlayer, L"jiwooFront",
         GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo")
-        , {0.f,150.f} , { 50.f,50.f }, { 50.f,0.f }, 5, 1.f);
+        , { 0.f,150.f }, { 50.f,50.f }, { 50.f,0.f }, 5, 1.f);
+
+    RegisterEffect(EffectType::SmashSmoke, L"SmashSmoke", 
+        GET_SINGLE(ResourceManager)->GetTexture(L"smashsmoke")
+        , {0.f, 0.f} , { 64.f, 64.f }, { 64.f ,0.f }, 8, 0.125f);
 }
 
 void EffectManager::RegisterEffect(EffectType type, wstring animName, Texture* tex,
@@ -25,13 +29,14 @@ void EffectManager::RegisterEffect(EffectType type, wstring animName, Texture* t
     m_effects[type] = data;
 }
 
-void EffectManager::PlayEffect(EffectType _type, Vec2 _pos, 
+void EffectManager::PlayEffect(EffectType _type, Vec2 _pos, Vec2 _size,
     float _duration, bool _loop)
 {
     Effect* eff = new Effect();
 
     auto& data = m_effects[_type];
     eff->SetPos(_pos);
+    eff->SetSize(_size);
     eff->Init(data, _duration, _loop);
     GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(eff, Layer::EFFECT);
 }

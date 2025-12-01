@@ -5,6 +5,7 @@
 #include "ImpulseManager.h"
 #include "DangerGizmo.h"
 #include "ProjectileManager.h"
+#include "EffectManager.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -61,7 +62,10 @@ void SmashPattern::FallState()
 	m_delay -= fDT;
 	if (m_delay > 0.f) return;
 
+	Vec2 winSize = GET_WINDOWSIZE;
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(60.f, 0.5f);
+	GET_SINGLE(EffectManager)->PlayEffect(EffectType::SmashSmoke, 
+		{ winSize.x / 2, winSize.y - 400 }, { 10.f, 10.f }, 2.f);
 	m_state = State::Ground;
 }
 

@@ -2,7 +2,8 @@
 #include "DrawProjectilePattern.h"
 #include "DOTweenCompo.h"
 #include "Object.h"
-#include "SceneManager.h"
+#include "ProjectileManager.h"
+#include "PlayerFindManager.h"
 
 DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
 	std::wstring _texture, std::wstring _sprite, float _delay, float _damage)
@@ -11,8 +12,10 @@ DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
 	m_sprite(_sprite),
 	m_delay(_delay),
 	m_damage(_damage),
-	m_time(1.5f),
-	m_brushObj(nullptr)
+	m_time(0.5f),
+	m_fireTime(1.f),
+	m_brushObj(nullptr),
+	m_isFireTime(false)
 {
 }
 
@@ -23,42 +26,43 @@ DrawProjectilePattern::~DrawProjectilePattern()
 void DrawProjectilePattern::Update()
 {
 	m_projTime -= fDT;
-	m_time -= fDT;
+	m_fireTime -= fDT;
 
-	if (m_projTime <= 0.f) {
+	if (m_projTime <= 0.f && !m_isFireTime) {
 		m_projTime = m_delay;
-		auto* proj = new GuidedProjectile();
-		proj->Init(m_texture, 100.f, m_damage, 5.f);
-		proj->SetPos(m_brushObj->GetPos());
-		proj->SetSize({ 50.f, 50.f });
-		proj->SetStop();
-		m_projectiles.push_back(proj);
-		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(proj, Layer::ENEMYPROJECTILE);
+		m_projectiles.push(GET_SINGLE(ProjectileManager)
+			->SpawnProjectile(Enemy, 65.f, m_brushObj->GetPos(), 0.f, 0.f));
 	}
 
-	if (m_time <= 0.f)
+	if (m_fireTime <= 0.f)
 	{
-		for (auto proj : m_projectiles)
-		{
-			proj->SetPlay();
-		}
+		m_isFireTime = true;
+		auto* proj = m_projectiles.top();
+		auto* dotween = proj->AddComponent<DOTweenCompo>();
+		dotween->DOMove(m_player->GetPos(), 0.5f, EaseInCubic, [proj]()
+			{
+				proj->SetDead();
+			});
 
-		m_projectiles.clear();
-		m_isUsed = false;
+		m_fireTime = 0.15f;
+		m_projectiles.pop();
+
+		if (m_projectiles.size() == 0)
+			m_isUsed = false;
 	}
 }
 
 void DrawProjectilePattern::SetUsed()
 {
-	m_time = 1.5f;
+	m_isFireTime = false;
+	m_time = m_fireTime =1.f;
 	m_projTime = m_delay;
-	auto* brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
+	auto* brushObj = m_brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
 	auto* dotweenCompo = brushObj->AddComponent<DOTweenCompo>();
 	brushObj->SetSize({150.f, 150.f});
 	brushObj->SetPos({ 100.f, WINDOW_HEIGHT - 200.f });
-
-	m_brushObj = brushObj;
 	dotweenCompo->DOLocalMoveY(-400.f, m_time, EaseLinear, [this]() {m_brushObj->SetDead(); });
+	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 
 	BossPattern::SetUsed();
 }
