@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "ProjectileManager.h"
 #include "PlayerFindManager.h"
+#include "EffectManager.h"
 
 DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
 	std::wstring _texture, std::wstring _sprite, float _delay, float _damage)
@@ -41,6 +42,7 @@ void DrawProjectilePattern::Update()
 		auto* dotween = proj->AddComponent<DOTweenCompo>();
 		dotween->DOMove(m_player->GetPos(), 0.5f, EaseInCubic, [proj]()
 			{
+				GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, proj->GetPos(), { 10.f, 10.f }, 2.f);
 				proj->SetDead();
 			});
 
@@ -60,8 +62,8 @@ void DrawProjectilePattern::SetUsed()
 	auto* brushObj = m_brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
 	auto* dotweenCompo = brushObj->AddComponent<DOTweenCompo>();
 	brushObj->SetSize({150.f, 150.f});
-	brushObj->SetPos({ 100.f, WINDOW_HEIGHT - 200.f });
-	dotweenCompo->DOLocalMoveY(-400.f, m_time, EaseLinear, [this]() {m_brushObj->SetDead(); });
+	brushObj->SetPos({ -100, WINDOW_HEIGHT / 2 });
+	dotweenCompo->DOLocalMoveX(1400.f, m_time, EaseLinear, [this]() {m_brushObj->SetDead(); });
 	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 
 	BossPattern::SetUsed();

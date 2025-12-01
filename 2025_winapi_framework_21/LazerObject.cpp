@@ -21,9 +21,9 @@ void LazerObject::Update()
 		if (m_hasAnim == false)
 		{
 			if (m_isHori)
-				m_dotweenCompo->DOScaleY(15.f, 0.3f, EaseOutBack);
+				m_dotweenCompo->DOScaleY(15.f, 0.3f, EaseOutElastic);
 			else
-				m_dotweenCompo->DOScaleX(15.f, 0.3f, EaseOutBack);
+				m_dotweenCompo->DOScaleX(15.f, 0.3f, EaseOutElastic);
 		}
 		else
 			m_dotweenCompo->DOMove(m_target, m_duration, EaseInExpo);
