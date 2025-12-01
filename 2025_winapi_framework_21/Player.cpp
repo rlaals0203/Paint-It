@@ -31,12 +31,13 @@ Player::Player()
 	m_rplayerMove = L"rplayerMove";
 	m_playerJump = L"playerJump";
 	m_rPlayerJump = L"rplayerJump";
-	m_bplayerIdle = L"bplayerIdle";
-	m_bplayerMove = L"bplayerMove";
-	m_bplayerJump = L"bplayerJump";
+	m_bplayer = L"bplayer";
+	m_brplayer = L"brplayer";
 
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
 	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
+	m_rblinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayerblink");
 	m_animator = AddComponent<Animator>();
 
 	m_animator->CreateAnimation(
@@ -70,19 +71,14 @@ Player::Player()
 		{ 64.f,0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(
-		m_bplayerIdle, m_blinkTexture,
+		m_bplayer, m_blinkTexture,
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(
-		m_bplayerIdle, m_blinkTexture,
+		m_brplayer, m_rblinkTexture,
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
-
-	m_animator->CreateAnimation(
-		m_bplayerMove, m_blinkTexture,
-		{ 0.f,64.f }, { 64.f,64.f },
-		{ 64.f,0.f }, 8, 0.04f);
 
 
 	m_animator->Play(m_playerIdle);
@@ -181,6 +177,9 @@ void Player::Update()
 		animParam = m_isRight ? m_rplayerMove : m_playerMove;
 	else
 		animParam = m_isRight ? m_rplayerIdle : m_playerIdle;
+
+	if (m_isBlink)
+		animParam = m_isRight ? m_bplayer : m_brplayer;
 
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);

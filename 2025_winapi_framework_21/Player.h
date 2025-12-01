@@ -5,9 +5,9 @@
 #include "EntityHealth.h"
 class Texture;
 
-struct PlayerStat //플레이어 스탯 저장 구조체
+struct PlayerStat
 {
-	float speed = 2.5f;
+	float speed = 3.f;
 	float delay = 0.5f;
 };
 
@@ -26,6 +26,8 @@ private:
 	Texture* m_pTexture;
 	Texture* m_rpTexture;
 	Texture* m_blinkTexture;
+	Texture* m_rblinkTexture;
+
 	Animator* m_animator;
 	PlayerStat m_stat;
 	EntityHealth* m_healthCompo;
@@ -37,12 +39,12 @@ private:
 
 	std::wstring m_playerIdle;
 	std::wstring m_rplayerIdle;
-	std::wstring m_bplayerIdle;
 	std::wstring m_playerMove;
 	std::wstring m_rplayerMove;
-	std::wstring m_bplayerMove;
 	std::wstring m_playerJump;
 	std::wstring m_rPlayerJump;
-	std::wstring m_bplayerJump;
+
+	std::wstring m_bplayer;
+	std::wstring m_brplayer;
 };
 
