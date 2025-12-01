@@ -7,6 +7,7 @@ class TitleScene : public Scene
 public:
 	void Init() override;
 	void Update() override;
+	void Release() override;
 private:
 	void CreatePanel();
 	void Title();

@@ -31,7 +31,7 @@ void UISlider::Render(HDC hdc)
     Vector2 size = GetSize();
 
     int trackHeight = (int)(size.y * 0.3f);
-    int centerX = (int)(pos.x + size.x * 0.5f);
+    //int centerX = (int)(pos.x + size.x * 0.5f);
     int centerY = (int)(pos.y + size.y * 0.5f);
 
     m_trackRect = {

@@ -63,6 +63,6 @@ private:
     int m_thumbRadius = 8;
 
     float m_min = 0;
-    float m_max = 100;
+    float m_max = 1;
     float m_value = 50;
 };

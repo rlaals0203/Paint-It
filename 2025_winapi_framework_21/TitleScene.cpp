@@ -19,6 +19,9 @@ void TitleScene::Init()
 	Start();
 	Setting();
 	Exit();
+
+	GET_SINGLE(ResourceManager)
+		->Play(L"BGM");
 }
 
 void TitleScene::Update()
@@ -28,6 +31,12 @@ void TitleScene::Update()
 	{
 		GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
 	}*/
+}
+
+void TitleScene::Release()
+{
+	GET_SINGLE(ResourceManager)
+		->Stop(SOUND_CHANNEL::BGM);
 }
 
 void TitleScene::CreatePanel()
@@ -114,8 +123,13 @@ void TitleScene::SettingPanel()
 		{
 			GET_SINGLE(ResourceManager)
 				->Volume(SOUND_CHANNEL::BGM, value);
-		});
+		}); 
+
+	BGMslider->SetRange(0,1);
 	
+	BGMslider->SetValue(1);
+
+
 	UISlider* EFFECTslider = m_settingPanel->AddUIElement<UISlider>();
 	EFFECTslider->SetPos(
 		{
@@ -130,6 +144,10 @@ void TitleScene::SettingPanel()
 			GET_SINGLE(ResourceManager)
 				->Volume(SOUND_CHANNEL::EFFECT, value);
 		});
+
+	EFFECTslider->SetRange(0, 1);
+	
+	EFFECTslider->SetValue(1);
 
 	//text
 
