@@ -7,6 +7,7 @@
 #include "UIText.h"
 #include "UIButton.h"
 #include "UISlider.h"
+#include "UIImage.h"
 
 void TitleScene::Init()
 {
@@ -58,11 +59,14 @@ void TitleScene::CreatePanel()
 
 void TitleScene::Title()
 {
-	UIText* title = m_mainPanel->AddUIElement<UIText>();
+	UIImage* title = m_mainPanel->AddUIElement<UIImage>();
 	
-	title->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 });
-	title->SetText(L"대충 타이틀");
-	title->SetSize({ 300, 150 });
+	title->SetImage(L"brush");
+	title->SetSize({ 300, 300 });
+	
+	Vec2 size = title->GetSize();
+
+	title->SetPos({ WINDOW_WIDTH / 2 - size.x / 2, WINDOW_HEIGHT / 3 - size.y / 2 });
 }
 
 void TitleScene::Start()
