@@ -1,10 +1,10 @@
 #pragma once
-#include "UIElement.h"
+#include "UIText.h"
 
 class EntityHealth;
 
 class UIBossHP :
-    public UIElement
+    public UIText
 {
 public:
     UIBossHP();

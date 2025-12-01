@@ -32,6 +32,7 @@ void UISlider::Render(HDC hdc)
 
     int trackHeight = (int)(size.y * 0.3f);
     //int centerX = (int)(pos.x + size.x * 0.5f);
+    //지금은 pos.x가 가운데가 아닌 왼쪽 끝을 나타냄 이를 바꿀것
     int centerY = (int)(pos.y + size.y * 0.5f);
 
     m_trackRect = {

@@ -11,13 +11,34 @@
 #include "FireBoss.h"
 #include "PlayerFindManager.h"
 #include "SpriteObject.h"
+#include "UIPanel.h"
+#include "UIBossHP.h"
+#include "EntityHealth.h"
+
+
 void DevScene::Init()
 {
+	m_mainPanel = new UIPanel();
+
+	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+
+	AddObject(m_mainPanel, Layer::UI);
+
+	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
+
+	bossHP->SetText(L"보스 [유화]");
+
+	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
+	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
+
+
 	FireBoss* boss = new FireBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
 	boss->SetSize({ 5.f, 5.f });
 	boss->SetCanOutofBounds(false);
 	AddObject(boss, Layer::ENEMY);
+
+	bossHP->SetHealthCompo(boss->GetComponent<EntityHealth>());
 
 	Player* player = new Player();
 	player->SetPos({ WINDOW_WIDTH / 2, 550 });
