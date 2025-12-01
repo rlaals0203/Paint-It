@@ -49,6 +49,28 @@ void DOTweenCompo::LateUpdate()
             }
         }
     }
+
+    if (m_isParabola)
+    {
+        m_paraT += fDT / m_paraDuration;
+        if (m_paraT >= 1.f) m_paraT = 1.f;
+
+        float t = m_paraT;
+        Vec2 pos = EaseLerp(m_paraStartPos, m_paraTargetPos, t, m_paraEase);
+        float arc = m_parabolaHeight * (1.f - (2.f * t - 1.f) * (2.f * t - 1.f));
+        pos.y -= arc;
+
+        m_owner->SetPos(pos);
+
+        if (t >= 1.f)
+        {
+            m_isParabola = false;
+            if (m_paraCallback) {
+                m_paraCallback();
+                m_paraCallback = nullptr;
+            }
+        }
+    }
 }
 
 void DOTweenCompo::Render(HDC _hdc) {}
@@ -64,6 +86,19 @@ void DOTweenCompo::DOScaleX(float _target, float _duration, float(*_ease)(float)
 void DOTweenCompo::DOScaleY(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale({ m_owner->GetSize().x, _target }, _duration, _ease, _callback); }
 void DOTweenCompo::DOScale(float _target, float _duration, float(*_ease)(float), std::function<void()> _callback) { StartScale({ _target, _target }, _duration, _ease, _callback); }
 
+void DOTweenCompo::DOParabola(Vec2 _target, float _height, float _duration, float(*_ease)(float), std::function<void()> _callback)
+{
+    if (!m_owner) m_owner = GetOwner();
+
+    m_isParabola = true;
+    m_parabolaHeight = _height;
+    m_paraStartPos = m_owner->GetPos();
+    m_paraTargetPos = _target;
+    m_paraDuration = _duration;
+    m_paraEase = _ease;
+    m_paraCallback = _callback;
+    m_paraT = 0.f;
+}
 
 void DOTweenCompo::StartMove(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback)
 {

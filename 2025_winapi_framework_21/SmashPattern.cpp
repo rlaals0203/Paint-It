@@ -77,10 +77,7 @@ void SmashPattern::GroundState()
 	int count = 15 + (m_count * 3);
 	float angle = 360.f / (float)count;
 	for (int i = 0; i < count; i++) {
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			ProjectileType::Enemy, 60.f,
-			GetOwnerPos(), (m_count * 2.f) + angle * i, 
-			4.f + (m_count * 1.f));
+
 	}
 
 	if (--m_count <= 0)
