@@ -179,6 +179,7 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="DOTweenCompo.h" />
+    <ClInclude Include="DrawProjectilePattern.h" />
     <ClInclude Include="Ease.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectData.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmashPattern.h" />
+    <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="FireBoss.h" />
     <ClInclude Include="TestPattern.h" />
@@ -234,10 +237,12 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="DrawProjectilePattern.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
+    <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
     <ClCompile Include="CircleProjectilePattern.cpp" />
@@ -270,6 +275,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmashPattern.cpp" />
     <ClCompile Include="FireBoss.cpp" />
+    <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="TestPattern.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />

@@ -155,8 +155,14 @@ void Player::Update()
 		Vec2 dir = mousePos - playerPos;
 		dir.Normalize();
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile, 
-			20.f, playerPos, dir, 20.f, true);
+		float centerAngle = atan2f(dir.y, dir.x) * (180.f / PI);
+		float angles[3] = { centerAngle, centerAngle - 15.f, centerAngle + 15.f };
+
+		for (int i = 0; i < 3; i++)
+		{
+			GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
+				20.f, playerPos, angles[i], 20.f, true);
+		}
 
 		m_coolTime = m_stat.delay;
 	}
