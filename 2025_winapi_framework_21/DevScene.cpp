@@ -10,6 +10,7 @@
 #include "Floor.h"
 #include "FireBoss.h"
 #include "PlayerFindManager.h"
+#include "SpriteObject.h"
 void DevScene::Init()
 {
 	FireBoss* boss = new FireBoss();
@@ -23,7 +24,11 @@ void DevScene::Init()
 	player->SetSize({ 1.25f, 1.25f });
 	AddObject(player, Layer::PLAYER);
 
+	SpriteObject* obj = new SpriteObject(L"background1", Layer::BACKGROUND);
+	obj->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	obj->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });
+
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);

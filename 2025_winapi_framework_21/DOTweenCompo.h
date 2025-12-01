@@ -21,7 +21,7 @@ public:
     void DOLocalMoveX(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
     void DOLocalMoveY(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
 
-    void DOSize(Vec2 _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
+    void DOScale(Vec2 _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
     void DOScaleX(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
     void DOScaleY(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
     void DOScale(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);

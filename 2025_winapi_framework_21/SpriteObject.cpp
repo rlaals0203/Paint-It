@@ -3,10 +3,10 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 
-SpriteObject::SpriteObject(std::wstring _texture)
+SpriteObject::SpriteObject(std::wstring _texture, Layer _layer)
 {
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::DEFAULT);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, _layer);
 }
 
 SpriteObject::~SpriteObject() { }

@@ -52,7 +52,7 @@ void DrawProjectilePattern::SetUsed()
 {
 	m_time = 1.5f;
 	m_projTime = m_delay;
-	auto* brushObj = new SpriteObject(m_sprite);
+	auto* brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
 	auto* dotweenCompo = brushObj->AddComponent<DOTweenCompo>();
 	brushObj->SetSize({150.f, 150.f});
 	brushObj->SetPos({ 100.f, WINDOW_HEIGHT - 200.f });

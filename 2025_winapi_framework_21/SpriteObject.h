@@ -5,7 +5,7 @@ class SpriteObject :
     public Object
 {
 public:
-    SpriteObject(std::wstring _texture);
+    SpriteObject(std::wstring _texture, Layer _layer);
     ~SpriteObject();
 
     void Render(HDC _hdc);
