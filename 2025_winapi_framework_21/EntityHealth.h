@@ -15,8 +15,10 @@ public:
 	const int& GetMaxHp() const { return m_maxHp; }
 	void ApplyDamage(int _damage);
 	void SetDefaultHP(int _hp) { m_maxHp = m_currentHp = _hp; }
+	void SetIsPlayer(bool _isBoss = true) { m_isBoss = _isBoss; }
 private:
 	int m_maxHp;
 	int m_currentHp;
+	bool m_isBoss;
 };
 

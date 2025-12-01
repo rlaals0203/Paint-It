@@ -12,6 +12,10 @@ void EffectManager::Init()
     RegisterEffect(EffectType::SmashSmoke, L"SmashSmoke", 
         GET_SINGLE(ResourceManager)->GetTexture(L"smashsmoke")
         , {0.f, 0.f} , { 64.f, 64.f }, { 64.f ,0.f }, 8, 0.125f);
+
+    RegisterEffect(EffectType::FireExplosion, L"FireExplosion",
+        GET_SINGLE(ResourceManager)->GetTexture(L"fireexplosion")
+        , { 0.f, 0.f }, { 32.f, 32.f }, { 32.f ,0.f }, 8, 0.1f);
 }
 
 void EffectManager::RegisterEffect(EffectType type, wstring animName, Texture* tex,

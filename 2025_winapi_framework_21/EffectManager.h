@@ -6,6 +6,7 @@ enum class EffectType
 {
 	TestPlayer,
 	SmashSmoke,
+	FireExplosion,
 	None
 };
 
