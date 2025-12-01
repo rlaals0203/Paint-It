@@ -128,13 +128,13 @@ void Player::Update()
 	{
 		m_isRight = true;
 		m_isMoving = true;
-		dir.x += m_stat.speed;
+		dir.x += m_speed;
 	}
 	else if (GET_KEY(KEY_TYPE::A))
 	{
 		m_isRight = false;
 		m_isMoving = true;
-		dir.x -= m_stat.speed;
+		dir.x -= m_speed;
 	}
 
 	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded) //점프 시도
@@ -161,7 +161,7 @@ void Player::Update()
 				50.f, playerPos, angles[i], 20.f, true);
 		}
 
-		m_coolTime = m_stat.delay;
+		m_coolTime = m_delay;
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
@@ -183,6 +183,16 @@ void Player::Update()
 
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);
+
+	if (m_isOiled)
+	{
+		m_oiledTime -= fDT;
+		if (m_oiledTime <= 0.f)
+		{
+			m_isOiled = false;
+			m_speed = 3.f;
+		}
+	}
 }
 
 void Player::Jump()

@@ -6,6 +6,7 @@
 #include "DangerGizmo.h"
 #include "ProjectileManager.h"
 #include "EffectManager.h"
+#include "SpriteObject.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -74,16 +75,22 @@ void SmashPattern::GroundState()
 	m_delay -= fDT;
 	if (m_delay > 0.f) return;
 
-	int count = 15 + (m_count * 3);
-	float angle = 360.f / (float)count;
-	for (int i = 0; i < count; i++) {
+	auto* drop = new SpriteObject(L"bullet", Layer::EFFECT);
+	drop->SetSize({ 50.f, 50.f });
+	drop->SetPos({ m_Controller->GetOwner()->GetPos() });
 
-	}
+	auto* dotweenCompo = drop->AddComponent<DOTweenCompo>();
+	float x = WINDOW_WIDTH * 0.05f + (rand() % (int)(WINDOW_WIDTH * 0.9f));
+	float height = 300 + (rand() % 200);
+	dotweenCompo->DOParabola({ x, WINDOW_HEIGHT - 100.f }, height, height * 0.003f, EaseOutSine, [drop]()
+		{
+			drop->SetDead();
+		});
 
 	if (--m_count <= 0)
 		m_isUsed = false;
 
-	m_delay = 0.2f;
+	m_delay = 0.02f;
 }
 
 void SmashPattern::SetUsed()
@@ -94,7 +101,8 @@ void SmashPattern::SetUsed()
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
 	m_dotween->DOMove(skyPos, 1.f, EaseInBack);
-	m_delay = m_count = 3;
+	m_delay = 3;
+	m_count = 6;
 	m_state = State::Up;
 
 	BossPattern::SetUsed();

@@ -253,6 +253,25 @@
     <ClInclude Include="GameOverScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBossHP.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawProjectilePattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedLazerPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectile.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="OilObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -430,5 +449,24 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UIBossHP.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawProjectilePattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedLazerPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectile.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="OilObject.cpp" />
   </ItemGroup>
 </Project>

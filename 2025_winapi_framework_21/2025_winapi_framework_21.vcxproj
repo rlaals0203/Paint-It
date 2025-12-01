@@ -201,6 +201,7 @@
     <ClInclude Include="LazerPattern.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OilObject.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFindManager.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OilObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
