@@ -34,7 +34,6 @@ void Effect::Init(const EffectData& _data, float _duration, bool _loop)
     if (m_animator == nullptr)
         m_animator = AddComponent<Animator>();
 
-    SetSize(_data.slice);
     m_duration = _duration;
     m_isPlaying = true;
     Play(_data, _loop);
