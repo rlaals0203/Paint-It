@@ -2,6 +2,7 @@
 #include "LazerObject.h"
 #include "Ease.h"
 #include "SceneManager.h"
+#include "ImpulseManager.h"
 #include "DangerGizmo.h"
 
 LazerObject::LazerObject() : m_pos({}), m_isDelay(true)
@@ -29,6 +30,7 @@ void LazerObject::Update()
 			m_dotweenCompo->DOMove(m_target, m_duration, EaseInExpo);
 
 		m_isDelay = false;
+		GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.5f);
 	}
 }
 

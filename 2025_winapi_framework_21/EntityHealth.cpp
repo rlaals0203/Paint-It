@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "EntityHealth.h"
 #include "Object.h"
+#include "SceneManager.h"
 
 EntityHealth::EntityHealth() : 
 	m_maxHp(0), 
+    m_isBoss(true),
 	m_currentHp(0) { }
 
 EntityHealth::~EntityHealth() { }
@@ -19,6 +21,7 @@ void EntityHealth::LateUpdate()
 
 void EntityHealth::Render(HDC _hdc)
 {
+    if (m_isBoss) return;
     Object* owner = GetOwner();
     Vec2 pos = owner->GetPos();
 
@@ -51,6 +54,11 @@ void EntityHealth::ApplyDamage(int _damage)
 
 	if (m_currentHp <= 0.f)
 	{
+        if (m_isBoss == false)
+        {
+            GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
+        }
+
 		owner->SetDead();
 	}
 }

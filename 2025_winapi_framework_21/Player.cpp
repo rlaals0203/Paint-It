@@ -21,6 +21,7 @@ Player::Player()
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
+	healthCompo->SetIsPlayer(false);
 	healthCompo->SetDefaultHP(100.f);
 
 	#pragma region  animation
@@ -161,7 +162,7 @@ void Player::Update()
 		for (int i = 0; i < 3; i++)
 		{
 			GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
-				20.f, playerPos, angles[i], 20.f, true);
+				50.f, playerPos, angles[i], 20.f, true);
 		}
 
 		m_coolTime = m_stat.delay;

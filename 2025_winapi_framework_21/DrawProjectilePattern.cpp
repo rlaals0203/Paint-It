@@ -5,6 +5,7 @@
 #include "ProjectileManager.h"
 #include "PlayerFindManager.h"
 #include "EffectManager.h"
+#include "ImpulseManager.h"
 
 DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
 	std::wstring _texture, std::wstring _sprite, float _delay, float _damage)
@@ -40,9 +41,10 @@ void DrawProjectilePattern::Update()
 		m_isFireTime = true;
 		auto* proj = m_projectiles.top();
 		auto* dotween = proj->AddComponent<DOTweenCompo>();
-		dotween->DOMove(m_player->GetPos(), 0.5f, EaseInCubic, [proj]()
+		dotween->DOMove(m_player->GetPos(), 0.4f, EaseInCubic, [proj]()
 			{
-				GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, proj->GetPos(), { 10.f, 10.f }, 2.f);
+				GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, proj->GetPos(), { 3.f, 3.f }, 0.9f);
+				GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.5f);
 				proj->SetDead();
 			});
 
@@ -62,7 +64,7 @@ void DrawProjectilePattern::SetUsed()
 	auto* brushObj = m_brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
 	auto* dotweenCompo = brushObj->AddComponent<DOTweenCompo>();
 	brushObj->SetSize({150.f, 150.f});
-	brushObj->SetPos({ -100, WINDOW_HEIGHT / 2 });
+	brushObj->SetPos({ -100, WINDOW_HEIGHT / 3 });
 	dotweenCompo->DOLocalMoveX(1400.f, m_time, EaseLinear, [this]() {m_brushObj->SetDead(); });
 	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 

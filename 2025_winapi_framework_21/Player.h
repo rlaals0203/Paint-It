@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "ProjectileLauncher.h"
 #include "Animator.h"
+#include "EntityHealth.h"
 class Texture;
 
 struct PlayerStat //플레이어 스탯 저장 구조체
@@ -27,6 +28,7 @@ private:
 	Texture* m_blinkTexture;
 	Animator* m_animator;
 	PlayerStat m_stat;
+	EntityHealth* m_healthCompo;
 private:
 	bool m_isDie;
 	bool m_isGrounded;
