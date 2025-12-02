@@ -289,7 +289,9 @@
     <ClInclude Include="PrismBoss.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="MakePrismPattern.h" />
+    <ClInclude Include="MakePrismPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -494,6 +496,8 @@
     <ClCompile Include="PrismBoss.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="MakePrismPattern.cpp" />
+    <ClCompile Include="MakePrismPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

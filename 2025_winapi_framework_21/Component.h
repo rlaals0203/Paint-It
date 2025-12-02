@@ -15,6 +15,11 @@ public:
 		m_owner = _owner;
 	}
 	Object* GetOwner() const { return m_owner; }
+
+	void SetActive(bool _active) { m_isActive = _active; }
+	bool IsActive() const { return m_isActive; }
+protected:
+	bool m_isActive = true;
 private:
 	Object* m_owner;
 };

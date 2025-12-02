@@ -47,7 +47,7 @@ void Object::LateUpdate()
 {
 	for (Component* com : m_vecComponents)
 	{
-		if (com != nullptr)
+		if (com != nullptr && com->IsActive())
 			com->LateUpdate();
 	}
 
@@ -63,7 +63,7 @@ void Object::ComponentRender(HDC _hdc)
 {
 	for (Component* com : m_vecComponents)
 	{
-		if (com != nullptr)
+		if (com != nullptr && com->IsActive())
 			com->Render(_hdc);
 	}
 }
