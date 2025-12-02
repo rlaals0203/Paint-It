@@ -17,6 +17,7 @@ public:
 	void CheckLayer(Layer _left, Layer _right);
 	void CheckReset();
 private:
+	float Dot(Vec2 a, Vec2 b);
 	void CollisionLayerUpdate(Layer _left, Layer _right);
 	bool IsCollision(Collider* _left, Collider* _right);
 	ULONGLONG MakePairKey(UINT a, UINT b);

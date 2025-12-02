@@ -17,6 +17,7 @@ public:
     void ExitCollision(Collider* _other); // 충돌해제
 public:
     UINT GetID() const { return m_ID; }
+    float GetRotation() { return m_rotation; }
     void SetSize(Vec2 _size) { m_size = _size; }
     const Vec2& GetSize() const { return m_size; }
     void SetOffSetPos(Vec2 _OffsetPos)
@@ -34,6 +35,7 @@ public:
     void SetTrigger(bool t) { m_isTrigger = t; }
     bool IsTrigger() const { return m_isTrigger; }
 private:
+    float m_rotation;
     wstring m_name;   // 콜라이더 식별용 이름
     bool m_isTrigger = false;
     Vec2 m_size; // 콜라이더 크기

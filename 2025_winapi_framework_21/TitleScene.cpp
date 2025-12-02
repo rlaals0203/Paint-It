@@ -61,12 +61,13 @@ void TitleScene::Title()
 {
 	UIImage* title = m_mainPanel->AddUIElement<UIImage>();
 	
-	title->SetImage(L"brush");
+	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 3  });
 	title->SetSize({ 300, 300 });
+
+	title->SetImage(L"brush");
 	
 	Vec2 size = title->GetSize();
 
-	title->SetPos({ WINDOW_WIDTH / 2 - size.x / 2, WINDOW_HEIGHT / 3 - size.y / 2 });
 }
 
 void TitleScene::Start()
@@ -117,7 +118,7 @@ void TitleScene::SettingPanel()
 	UISlider* BGMslider = m_settingPanel->AddUIElement<UISlider>();
 	BGMslider->SetPos(
 		{
-			(int)(WINDOW_WIDTH / 3.25f)
+			WINDOW_WIDTH / 2
 			, WINDOW_HEIGHT / 3
 		});
 
@@ -137,7 +138,7 @@ void TitleScene::SettingPanel()
 	UISlider* EFFECTslider = m_settingPanel->AddUIElement<UISlider>();
 	EFFECTslider->SetPos(
 		{
-			(int)(WINDOW_WIDTH / 3.25f)
+			WINDOW_WIDTH / 2
 			, WINDOW_HEIGHT / 2
 		});
 
