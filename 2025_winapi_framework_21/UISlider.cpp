@@ -180,6 +180,27 @@ int UISlider::PosFromValue(float value)
     return int(m_trackRect.left + ratio * (m_trackRect.right - m_trackRect.left));
 }
 
+void UISlider::SetPos(Vec2 pos)
+{
+    m_pos = pos;
+    Vec2 size = GetSize();
+    Vec2 setPos = pos;
+    setPos.x = m_pos.x - size.x / 2;
+    setPos.y = m_pos.y - size.y / 2;
+    Object::SetPos(setPos);
+}
+
+void UISlider::SetSize(Vec2 size)
+{
+    Object::SetSize(size);
+
+    Vec2 pos = GetPos();
+    Vec2 setPos = pos;
+    setPos.x = m_pos.x - size.x / 2;
+    setPos.y = m_pos.y - size.y / 2;
+    Object::SetPos(setPos);
+}
+
 void UISlider::SetValue(float value)
 {
     float old = m_value;

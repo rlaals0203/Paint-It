@@ -15,10 +15,13 @@ public:
 	virtual void StayCollision(Collider* _other) {}
 	virtual void ExitCollision(Collider* _other) {}
 public:
+	virtual void SetPos(Vec2 _pos) { m_pos = _pos; }
+	virtual void SetSize(Vec2 _size) { m_size = _size; }
+	float GetRotation() const { return m_rotation; }
+	void SetRotation(float rot) { m_rotation = rot; }
+public:
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
-	void SetPos(Vec2 _pos) { m_pos = _pos; }
-	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
 
@@ -73,6 +76,7 @@ protected:
 	bool m_isBlink;
 
 private:
+	float m_rotation;
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;

@@ -11,6 +11,7 @@ Object::Object()
 	, m_isRight(false)
 	, m_blinkDur(0.08f)
 	, m_blinkTime(0.f)
+	,m_rotation(0.f)
 {
 
 }

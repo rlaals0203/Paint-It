@@ -35,6 +35,27 @@ void UIImage::Render(HDC _hdc)
 		0, 0, m_width, m_height, RGB(255,0,255));
 }
 
+void UIImage::SetPos(Vec2 pos)
+{
+	m_pos = pos;
+	Vec2 size = GetSize();
+	Vec2 setPos = pos;
+	setPos.x = m_pos.x - size.x / 2;
+	setPos.y = m_pos.y - size.y / 2;
+	Object::SetPos(setPos);
+}
+
+void UIImage::SetSize(Vec2 size)
+{
+	Object::SetSize(size);
+
+	Vec2 pos = GetPos();
+	Vec2 setPos = pos;
+	setPos.x = m_pos.x - size.x / 2;
+	setPos.y = m_pos.y - size.y / 2;
+	Object::SetPos(setPos);
+}
+
 void UIImage::SetImage(wstring imageName)
 {
 	m_image = GET_SINGLE(ResourceManager)->GetTexture(imageName);

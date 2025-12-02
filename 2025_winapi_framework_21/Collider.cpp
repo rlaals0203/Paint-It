@@ -53,6 +53,8 @@ void Collider::LateUpdate()
 	Object* owner = GetOwner();
 	Vec2 pos = owner->GetPos();
 	m_updatedPos = pos + m_offsetPos;
+
+	m_rotation = owner->GetRotation();
 }
 
 

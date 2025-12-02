@@ -17,7 +17,12 @@ public:
     {
         m_min = minVal;
         m_max = maxVal;
+        SetValue(m_value);
     }
+
+public:
+    void SetPos(Vec2 pos) override;
+    void SetSize(Vec2 size) override;
 
 public:
     void SetValue(float value);
@@ -51,6 +56,7 @@ private:
     std::function<void(float)> m_callback = nullptr;
 
 private:
+    Vec2 m_pos;
 
     Texture* m_trackTex = nullptr;
     Texture* m_thumbTex = nullptr;

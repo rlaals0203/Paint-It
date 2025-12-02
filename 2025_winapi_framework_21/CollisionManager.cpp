@@ -126,15 +126,94 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 
 }
 
-bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
+float CollisionManager::Dot(Vec2 a, Vec2 b)
 {
-	Vec2 leftPos = _left->GetUpdatedPos();
-	Vec2 rightPos = _right->GetUpdatedPos();
-	Vec2 leftSize = _left->GetSize();
-	Vec2 rightSize = _right->GetSize();
+	//내적 구하기
+	return a.x * b.x + a.y * b.y;
+}
 
+bool CollisionManager::IsCollision(Collider* A, Collider* B)
+{
+
+#pragma region 이전 코드
+	/*Vec2 leftPos = A->GetUpdatedPos();
+	Vec2 rightPos = B->GetUpdatedPos();
+	Vec2 leftSize = A->GetSize();
+	Vec2 rightSize = B->GetSize();
 	return (fabsf(rightPos.x - leftPos.x) < (leftSize.x + rightSize.x) / 2.f
-		&& fabsf(rightPos.y - leftPos.y) < (leftSize.y + rightSize.y) / 2.f);
+		&& fabsf(rightPos.y - leftPos.y) < (leftSize.y + rightSize.y) / 2.f);*/
+#pragma endregion
+
+	// 중심
+	Vec2 cA = A->GetUpdatedPos();
+	Vec2 cB = B->GetUpdatedPos();
+
+	// 크기 → 반너비
+	Vec2 sA = A->GetSize() * 0.5f;
+	Vec2 sB = B->GetSize() * 0.5f;
+
+	// 회전 값 => 라디안으로 변경후 저장
+	float rA = A->GetRotation() * PI / 180;
+	float rB = B->GetRotation() * PI / 180;
+
+	// A의 로컬축
+	// A를 기준으로 x축과 y축의 방향이 어디로 되어있는지
+	// 예)회전 0도일 때 X축 = (1, 0), Y축 = (0, 1)
+	//회전이 90도일때 X축 = (0, 1), Y축 = (-1, 0)
+	
+	//x축
+	Vec2 uA_x = { cosf(rA), sinf(rA) };
+	//y축 (x축으로부터 반시계 방향으로 90도 회전한 값)
+	Vec2 uA_y = { -sinf(rA), cosf(rA) };
+	
+	//B의 로컬축
+	//x축
+	Vec2 uB_x = { cosf(rB), sinf(rB) };
+	//y축 (x축으로부터 반시계 방향으로 90도 회전한 값)
+	Vec2 uB_y = { -sinf(rB), cosf(rB) };
+
+	//중심간의 거리
+	Vec2 d = { cB.x - cA.x, cB.y - cA.y };
+
+	Vec2 axes[4] = { uA_x, uA_y, uB_x, uB_y };
+
+	//축 오차 줄이기 및 정규화 값 0확인
+	const float EPS = 1e-6f;
+
+	for (int i = 0; i < 4; ++i)
+	{
+		Vec2 axis = axes[i];
+
+		// 정규화
+		float len = sqrtf(axis.x * axis.x + axis.y * axis.y);
+		if (len < EPS)
+			continue;
+
+		axis.x /= len;
+		axis.y /= len;
+
+		//fabsf는 절대값을 구하는 함수
+
+		// 중심 거리의 투영
+		float dist = fabsf(Dot(d, axis));
+
+		// A의 투영 반경
+		float rAproj =
+			fabsf(Dot(uA_x, axis)) * sA.x +
+			fabsf(Dot(uA_y, axis)) * sA.y;
+
+		// B의 투영 반경
+		float rBproj =
+			fabsf(Dot(uB_x, axis)) * sB.x +
+			fabsf(Dot(uB_y, axis)) * sB.y;
+
+		// 축 안겹침
+		if (dist > rAproj + rBproj + EPS)
+			return false;
+	}
+	
+	//모든 축의 겹침 즉 충돌
+	return true;
 }
 
 ULONGLONG CollisionManager::MakePairKey(UINT a, UINT b)
