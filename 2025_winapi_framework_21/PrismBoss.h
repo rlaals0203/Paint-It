@@ -2,6 +2,7 @@
 #include "Boss.h"
 #include "Animator.h"
 
+class PrismObject;
 class PrismBoss :
     public Boss
 {
@@ -12,6 +13,10 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 public:
+    void AddPrism(PrismObject* _prism) { m_prismObjects.push_back(_prism); }
+    void RemovePrism() { m_prismObjects.pop_back(); }
+    int GetPrismCount() { return m_prismObjects.size(); }
+public:
     void SetShieldMode(bool _isShieldMode) { m_isShieldMode = _isShieldMode; }
 public:
 private:
@@ -21,5 +26,6 @@ private:
     bool m_isShieldMode;
     const std::wstring m_animName;
     const std::wstring m_blinkName;
+    std::vector<PrismObject*> m_prismObjects;
 };
 

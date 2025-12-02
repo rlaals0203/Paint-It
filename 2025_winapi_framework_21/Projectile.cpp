@@ -12,7 +12,7 @@ Projectile::Projectile() : m_angle(0.f) {}
 
 Projectile::~Projectile() { }
 
-void Projectile::Init(wstring _texture, float _damage)
+void Projectile::Init(std::wstring _texture, float _damage)
 {
 	m_textureName = _texture;
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
@@ -58,6 +58,5 @@ void Projectile::EnterCollision(Collider* _other)
 	DamageText* dmgText = new DamageText();
 	dmgText->Init((int)m_damage, GetPos());
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
-	//GET_SINGLE(EffectManager)->PlayEffect(EffectType::Player, GetPos(), 1.f, false);
 	SetDead();
 }
