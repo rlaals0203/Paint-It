@@ -16,7 +16,7 @@
 #include "EntityHealth.h"
 
 
-void DevScene::Init()
+void Stage1::Init()
 {
 	m_mainPanel = new UIPanel();
 
@@ -59,11 +59,11 @@ void DevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::OIL);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
-
+	
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
-void DevScene::Update()
+void Stage1::Update()
 {
 	Scene::Update();
 

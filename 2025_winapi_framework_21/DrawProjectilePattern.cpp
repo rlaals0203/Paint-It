@@ -8,9 +8,8 @@
 #include "ImpulseManager.h"
 
 DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
-	std::wstring _texture, std::wstring _sprite, float _delay, float _damage)
+	std::wstring _sprite, float _delay, float _damage)
 	: BossPattern(_controller),
-	m_texture(_texture),
 	m_sprite(_sprite),
 	m_delay(_delay),
 	m_damage(_damage),
@@ -32,8 +31,10 @@ void DrawProjectilePattern::Update()
 
 	if (m_projTime <= 0.f && !m_isFireTime) {
 		m_projTime = m_delay;
+		Vec2 pos = m_brushObj->GetPos();
+		pos.y += 50;
 		m_projectiles.push(GET_SINGLE(ProjectileManager)
-			->SpawnProjectile(Enemy, 65.f, m_brushObj->GetPos(), 0.f, 0.f));
+			->SpawnProjectile(DrawProjectile, 40.f, pos, 0.f, 0.f));
 	}
 
 	if (m_fireTime <= 0.f)
@@ -64,7 +65,7 @@ void DrawProjectilePattern::SetUsed()
 	auto* brushObj = m_brushObj = new SpriteObject(m_sprite, Layer::EFFECT);
 	auto* dotweenCompo = brushObj->AddComponent<DOTweenCompo>();
 	brushObj->SetSize({150.f, 150.f});
-	brushObj->SetPos({ -100, WINDOW_HEIGHT / 3 });
+	brushObj->SetPos({ -100, WINDOW_HEIGHT / 4 });
 	dotweenCompo->DOLocalMoveX(1400.f, m_time, EaseLinear, [this]() {m_brushObj->SetDead(); });
 	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 

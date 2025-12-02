@@ -4,6 +4,7 @@
 enum ProjectileType
 {
 	PlayerProjectile,
+	DrawProjectile,
 	Enemy,
 	None
 };

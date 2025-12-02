@@ -9,14 +9,13 @@ class DrawProjectilePattern :
     public BossPattern
 {
 public:
-    DrawProjectilePattern(BossController* _controller, std::wstring _texture, std::wstring _sprite, float _delay, float _damage);
+    DrawProjectilePattern(BossController* _controller, std::wstring _sprite, float _delay, float _damage);
     ~DrawProjectilePattern();
 public:
     virtual void Update() override;
     virtual void SetUsed() override;
 private:
     std::stack<Projectile*> m_projectiles;
-    std::wstring m_texture;
     std::wstring m_sprite;
     Player* m_player;
     SpriteObject* m_brushObj;

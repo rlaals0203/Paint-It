@@ -190,9 +190,7 @@ void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _he
 
 void ResourceManager::RegisterTexture()
 {
-	LoadTexture(L"plane", L"Texture\\plane.bmp");
 	LoadTexture(L"bullet", L"Texture\\Bullet.bmp");
-	LoadTexture(L"jiwoo", L"Texture\\jiwoo.bmp");
 	LoadTexture(L"player", L"Texture\\PlayerSheet.bmp");
 	LoadTexture(L"rplayer", L"Texture\\RPlayerSheet.bmp");
 	LoadTexture(L"fireboss", L"Texture\\FireBoss.bmp");
