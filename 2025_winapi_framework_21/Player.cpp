@@ -18,7 +18,9 @@ Player::Player()
 	: m_pTexture(nullptr)
 {
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
-	AddComponent<Collider>();
+	auto* col = AddComponent<Collider>();
+	col->SetName(L"Player");
+
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetIsPlayer(false);
@@ -166,8 +168,9 @@ void Player::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
 	{
-		int force = m_isRight ? 1 : -1;
-		Vec2 dir = { (float)(force * 3500), velo.y };
+		int direction = m_isRight ? 1 : -1;
+		float power = m_isOiled ? 1000 : 3500;
+		Vec2 dir = { (float)(direction * power), velo.y };
 		rb->SetVelocity(dir);
 	}
 

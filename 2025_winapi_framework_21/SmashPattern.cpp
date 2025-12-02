@@ -7,6 +7,7 @@
 #include "ProjectileManager.h"
 #include "EffectManager.h"
 #include "SpriteObject.h"
+#include "OilObject.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -84,6 +85,9 @@ void SmashPattern::GroundState()
 	float height = 300 + (rand() % 200);
 	dotweenCompo->DOParabola({ x, WINDOW_HEIGHT - 100.f }, height, height * 0.003f, EaseOutSine, [drop]()
 		{
+			auto* oil = new OilObject(L"bullet", Layer::OIL);
+			oil->SetPos({ drop->GetPos() });
+
 			drop->SetDead();
 		});
 

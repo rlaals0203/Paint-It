@@ -10,9 +10,10 @@ public:
     ~OilObject();
 
     void Render(HDC _hdc) override;
+    void Update() override;
     void EnterCollision(Collider* _other);
 
 private:
-    Player* m_player;
+    float m_lifeTime;
 };
 

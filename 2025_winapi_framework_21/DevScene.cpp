@@ -56,6 +56,7 @@ void DevScene::Init()
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::OIL);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
 
