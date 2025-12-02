@@ -16,9 +16,11 @@ public:
 	void ApplyDamage(int _damage);
 	void SetDefaultHP(int _hp) { m_maxHp = m_currentHp = _hp; }
 	void SetIsPlayer(bool _isBoss = true) { m_isBoss = _isBoss; }
+	void SubscribeOnDead(std::function<void()> _callback) { m_callback = _callback; }
 private:
 	int m_maxHp;
 	int m_currentHp;
 	bool m_isBoss;
+	std::function<void()> m_callback;
 };
 

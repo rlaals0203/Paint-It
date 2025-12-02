@@ -2,7 +2,6 @@
 #include "PrismBoss.h"
 #include "Collider.h"
 #include "DOTweenCompo.h" 
-#include "EntityHealth.h"
 #include "ResourceManager.h"
 #include "MakePrismPattern.h"
 
@@ -20,8 +19,8 @@ PrismBoss::PrismBoss() : Boss()
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
-	auto* healthCompo = AddComponent<EntityHealth>();
-	healthCompo->SetDefaultHP(10000.f);
+	m_healthCompo = AddComponent<EntityHealth>();
+	m_healthCompo->SetDefaultHP(10000.f);
 	AddComponent<DOTweenCompo>();
 
 	m_Animator->CreateAnimation(m_animName, m_texture,
@@ -41,10 +40,10 @@ PrismBoss::PrismBoss() : Boss()
 	AddMoveModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
 	AddModule(new MakePrismPattern(m_Controller));
-	//AddModule(new SmashPattern(m_Controller));
-	//AddModule(new DrawProjectilePattern(m_Controller, L"knife", 0.075f, 10.f));
-	//AddModule(new LazerPattern(m_Controller, 5));
-	//AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.4f, 10));
+	AddModule(new SmashPattern(m_Controller));
+	AddModule(new DrawProjectilePattern(m_Controller, L"knife", 0.075f, 10.f));
+	AddModule(new LazerPattern(m_Controller, 5));
+	AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.4f, 10));
 }
 
 PrismBoss::~PrismBoss()
@@ -59,6 +58,11 @@ void PrismBoss::Update()
 	{
 		m_hasBlinked = m_isBlink;
 		m_Animator->Play(m_hasBlinked ? m_blinkName : m_animName);
+	}
+
+	if (GetPrismCount() > 0)
+	{
+		//m_healthCompo.
 	}
 }
 

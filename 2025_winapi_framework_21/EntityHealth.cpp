@@ -54,6 +54,12 @@ void EntityHealth::ApplyDamage(int _damage)
 
 	if (m_currentHp <= 0.f)
 	{
+        if (m_callback != nullptr)
+        {
+            m_callback();
+            m_callback = nullptr;
+        }
+
         if (m_isBoss == false)
         {
             GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");

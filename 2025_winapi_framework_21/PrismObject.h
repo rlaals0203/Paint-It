@@ -11,8 +11,8 @@ public:
     PrismObject(Vec2 _pos, PrismBoss* _boss);
     ~PrismObject();
 public:
-    void Update() override;
     void Render(HDC _hdc) override;
+    void OnDead();
 private:
     EntityHealth* m_healthCompo;
     Animator* m_animator;
