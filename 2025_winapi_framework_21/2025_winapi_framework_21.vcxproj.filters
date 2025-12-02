@@ -280,6 +280,8 @@
     <ClInclude Include="OilObject.h">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="PrismBoss.h" />
+    <ClInclude Include="Stage2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -475,5 +477,7 @@
     <ClCompile Include="OilObject.cpp">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="PrismBoss.cpp" />
+    <ClCompile Include="Stage2.cpp" />
   </ItemGroup>
 </Project>

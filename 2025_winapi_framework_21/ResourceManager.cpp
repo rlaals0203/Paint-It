@@ -204,6 +204,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"knife", L"Texture\\knife.bmp");
 	LoadTexture(L"fireexplosion", L"Texture\\fireexplosion.bmp");
 	LoadTexture(L"firebullet", L"Texture\\firebossbullet.bmp");
+	LoadTexture(L"prismboss", L"Texture\\PrismBoss.bmp");
+	LoadTexture(L"bluebackground", L"Texture\\bluebackground.bmp");
 }
 
 

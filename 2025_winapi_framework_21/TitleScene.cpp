@@ -77,7 +77,7 @@ void TitleScene::Start()
 	start->SetSize({ 100, 50 });
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
+			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
 		});
 
 }

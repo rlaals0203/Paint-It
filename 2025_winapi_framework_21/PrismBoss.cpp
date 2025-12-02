@@ -1,21 +1,20 @@
 #include "pch.h"
-#include "FireBoss.h"
-#include "MovePattern.h"
-#include "CircleProjectilePattern.h"
+#include "PrismBoss.h"
 #include "Collider.h"
 #include "DOTweenCompo.h" 
 #include "EntityHealth.h"
-#include "ProjectileManager.h"
+#include "ResourceManager.h"
+
 #include "GuidedProjectilePattern.h"
 #include "SmashPattern.h"
 #include "LazerPattern.h"
 #include "DrawProjectilePattern.h"
 
+PrismBoss::PrismBoss() : Boss()
+, m_animName(L"PrismBoss"), m_blinkName(L"PrismBossBlink")
 
-FireBoss::FireBoss() : Boss()
-	, m_animName(L"FireBoss"), m_blinkName(L"FireBossBlink")
 {
-	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"fireboss");
+	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
 
 	auto* col = AddComponent<Collider>();
@@ -44,14 +43,13 @@ FireBoss::FireBoss() : Boss()
 	AddModule(new DrawProjectilePattern(m_Controller, L"knife", 0.075f, 10.f));
 	AddModule(new LazerPattern(m_Controller, 5));
 	AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.4f, 10));
-	AddModule(new CircleProjectilePattern(m_Controller, ProjectileType::Enemy, 30));
 }
 
-FireBoss::~FireBoss()
+PrismBoss::~PrismBoss()
 {
 }
 
-void FireBoss::Update()
+void PrismBoss::Update()
 {
 	Object::Update();
 
@@ -62,7 +60,7 @@ void FireBoss::Update()
 	}
 }
 
-void FireBoss::Render(HDC _hdc)
+void PrismBoss::Render(HDC _hdc)
 {
 	Object::Render(_hdc);
 	ComponentRender(_hdc);

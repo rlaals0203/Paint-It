@@ -205,6 +205,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFindManager.h" />
+    <ClInclude Include="PrismBoss.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Resource.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmashPattern.h" />
     <ClInclude Include="SpriteObject.h" />
+    <ClInclude Include="Stage2.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="FireBoss.h" />
     <ClInclude Include="Texture.h" />
@@ -270,6 +272,7 @@
     <ClCompile Include="OilObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFindManager.cpp" />
+    <ClCompile Include="PrismBoss.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
@@ -280,6 +283,7 @@
     <ClCompile Include="SmashPattern.cpp" />
     <ClCompile Include="FireBoss.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
+    <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
