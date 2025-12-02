@@ -199,6 +199,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LazerObject.h" />
     <ClInclude Include="LazerPattern.h" />
+    <ClInclude Include="MakePrismPattern.h" />
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OilObject.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFindManager.h" />
     <ClInclude Include="PrismBoss.h" />
+    <ClInclude Include="PrismObject.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Resource.h" />
@@ -267,12 +269,14 @@
     <ClCompile Include="LazerObject.cpp" />
     <ClCompile Include="LazerPattern.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MakePrismPattern.cpp" />
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OilObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="PrismBoss.cpp" />
+    <ClCompile Include="PrismObject.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

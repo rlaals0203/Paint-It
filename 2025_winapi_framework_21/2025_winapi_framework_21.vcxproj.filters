@@ -280,8 +280,16 @@
     <ClInclude Include="OilObject.h">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="PrismBoss.h" />
-    <ClInclude Include="Stage2.h" />
+    <ClInclude Include="Stage2.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PrismObject.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="PrismBoss.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="MakePrismPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -477,7 +485,15 @@
     <ClCompile Include="OilObject.cpp">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="PrismBoss.cpp" />
-    <ClCompile Include="Stage2.cpp" />
+    <ClCompile Include="Stage2.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PrismObject.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="PrismBoss.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="MakePrismPattern.cpp" />
   </ItemGroup>
 </Project>
