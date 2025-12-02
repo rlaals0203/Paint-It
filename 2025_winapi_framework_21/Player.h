@@ -5,10 +5,9 @@
 #include "EntityHealth.h"
 class Texture;
 
-struct PlayerStat //플레이어 스탯 저장 구조체
+struct PlayerStat
 {
-	float speed = 2.5f;
-	float delay = 0.5f;
+
 };
 
 class Player : public Object
@@ -22,27 +21,40 @@ public:
 	void Jump();
 	virtual void EnterCollision(Collider* _other)override;
 	virtual void ExitCollision(Collider* _other)override;
+	void SetSpeed(float _speed){ m_speed = _speed; }
+	void SetOiledTime(float _time) { 
+		m_oiledTime = _time; 
+		m_isOiled = true; 
+		m_speed = 1.f;
+	}
+
 private:
 	Texture* m_pTexture;
 	Texture* m_rpTexture;
 	Texture* m_blinkTexture;
+	Texture* m_rblinkTexture;
+
 	Animator* m_animator;
 	PlayerStat m_stat;
 	EntityHealth* m_healthCompo;
 private:
 	bool m_isDie;
 	bool m_isGrounded;
+	bool m_isOiled;
 	float m_coolTime;
 	float m_isMoving;
+	float m_speed = 3.f;
+	float m_delay = 0.5f;
+	float m_oiledTime;
 
 	std::wstring m_playerIdle;
 	std::wstring m_rplayerIdle;
-	std::wstring m_bplayerIdle;
 	std::wstring m_playerMove;
 	std::wstring m_rplayerMove;
-	std::wstring m_bplayerMove;
 	std::wstring m_playerJump;
 	std::wstring m_rPlayerJump;
-	std::wstring m_bplayerJump;
+
+	std::wstring m_bplayer;
+	std::wstring m_brplayer;
 };
 

@@ -8,9 +8,9 @@ public:
     SpriteObject(std::wstring _texture, Layer _layer, bool _isTrans = true);
     ~SpriteObject();
 
-    void Render(HDC _hdc);
-private:
+    void virtual Render(HDC _hdc);
+protected:
     Texture* m_texture;
-    bool _isTrans;
+    bool m_isTrans;
 };
 

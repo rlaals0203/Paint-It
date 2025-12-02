@@ -5,10 +5,6 @@
 
 void EffectManager::Init()
 {
-    RegisterEffect(EffectType::TestPlayer, L"jiwooFront",
-        GET_SINGLE(ResourceManager)->GetTexture(L"jiwoo")
-        , { 0.f,150.f }, { 50.f,50.f }, { 50.f,0.f }, 5, 1.f);
-
     RegisterEffect(EffectType::SmashSmoke, L"SmashSmoke", 
         GET_SINGLE(ResourceManager)->GetTexture(L"smashsmoke")
         , {0.f, 0.f} , { 64.f, 64.f }, { 64.f ,0.f }, 8, 0.125f);

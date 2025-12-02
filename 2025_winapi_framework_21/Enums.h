@@ -7,6 +7,7 @@ enum class Layer
 	ENEMY,
 	PLAYERPROJECTILE,
 	ENEMYPROJECTILE,
+	OIL,
 	EFFECT,
 	UI,
 	END

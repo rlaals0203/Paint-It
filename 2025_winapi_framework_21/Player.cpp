@@ -18,7 +18,9 @@ Player::Player()
 	: m_pTexture(nullptr)
 {
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
-	AddComponent<Collider>();
+	auto* col = AddComponent<Collider>();
+	col->SetName(L"Player");
+
 	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetIsPlayer(false);
@@ -31,12 +33,13 @@ Player::Player()
 	m_rplayerMove = L"rplayerMove";
 	m_playerJump = L"playerJump";
 	m_rPlayerJump = L"rplayerJump";
-	m_bplayerIdle = L"bplayerIdle";
-	m_bplayerMove = L"bplayerMove";
-	m_bplayerJump = L"bplayerJump";
+	m_bplayer = L"bplayer";
+	m_brplayer = L"brplayer";
 
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
 	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
+	m_rblinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayerblink");
 	m_animator = AddComponent<Animator>();
 
 	m_animator->CreateAnimation(
@@ -70,19 +73,14 @@ Player::Player()
 		{ 64.f,0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(
-		m_bplayerIdle, m_blinkTexture,
+		m_bplayer, m_blinkTexture,
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(
-		m_bplayerIdle, m_blinkTexture,
+		m_brplayer, m_rblinkTexture,
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
-
-	m_animator->CreateAnimation(
-		m_bplayerMove, m_blinkTexture,
-		{ 0.f,64.f }, { 64.f,64.f },
-		{ 64.f,0.f }, 8, 0.04f);
 
 
 	m_animator->Play(m_playerIdle);
@@ -132,13 +130,13 @@ void Player::Update()
 	{
 		m_isRight = true;
 		m_isMoving = true;
-		dir.x += m_stat.speed;
+		dir.x += m_speed;
 	}
 	else if (GET_KEY(KEY_TYPE::A))
 	{
 		m_isRight = false;
 		m_isMoving = true;
-		dir.x -= m_stat.speed;
+		dir.x -= m_speed;
 	}
 
 	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded) //점프 시도
@@ -165,13 +163,14 @@ void Player::Update()
 				50.f, playerPos, angles[i], 20.f, true);
 		}
 
-		m_coolTime = m_stat.delay;
+		m_coolTime = m_delay;
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
 	{
-		int force = m_isRight ? 1 : -1;
-		Vec2 dir = { (float)(force * 3500), velo.y };
+		int direction = m_isRight ? 1 : -1;
+		float power = m_isOiled ? 1000 : 3500;
+		Vec2 dir = { (float)(direction * power), velo.y };
 		rb->SetVelocity(dir);
 	}
 
@@ -182,8 +181,21 @@ void Player::Update()
 	else
 		animParam = m_isRight ? m_rplayerIdle : m_playerIdle;
 
+	if (m_isBlink)
+		animParam = m_isRight ? m_bplayer : m_brplayer;
+
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);
+
+	if (m_isOiled)
+	{
+		m_oiledTime -= fDT;
+		if (m_oiledTime <= 0.f)
+		{
+			m_isOiled = false;
+			m_speed = 3.f;
+		}
+	}
 }
 
 void Player::Jump()

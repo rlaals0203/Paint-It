@@ -32,7 +32,7 @@ void SceneManager::Init()
 {
 	m_curScene = nullptr;
 	// ¾À µî·Ï
-	RegisterScene(L"DevScene",std::make_shared<DevScene>());
+	RegisterScene(L"DevScene",std::make_shared<Stage1>());
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	
 	// Ã¹ ¾À ·Îµå

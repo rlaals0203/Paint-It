@@ -6,6 +6,8 @@
 #include "DangerGizmo.h"
 #include "ProjectileManager.h"
 #include "EffectManager.h"
+#include "SpriteObject.h"
+#include "OilObject.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -74,19 +76,25 @@ void SmashPattern::GroundState()
 	m_delay -= fDT;
 	if (m_delay > 0.f) return;
 
-	int count = 15 + (m_count * 3);
-	float angle = 360.f / (float)count;
-	for (int i = 0; i < count; i++) {
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			ProjectileType::Enemy, 60.f,
-			GetOwnerPos(), (m_count * 2.f) + angle * i, 
-			4.f + (m_count * 1.f));
-	}
+	auto* drop = new SpriteObject(L"bullet", Layer::EFFECT);
+	drop->SetSize({ 50.f, 50.f });
+	drop->SetPos({ m_Controller->GetOwner()->GetPos() });
+
+	auto* dotweenCompo = drop->AddComponent<DOTweenCompo>();
+	float x = WINDOW_WIDTH * 0.05f + (rand() % (int)(WINDOW_WIDTH * 0.9f));
+	float height = 300 + (rand() % 200);
+	dotweenCompo->DOParabola({ x, WINDOW_HEIGHT - 100.f }, height, height * 0.003f, EaseOutSine, [drop]()
+		{
+			auto* oil = new OilObject(L"bullet", Layer::OIL);
+			oil->SetPos({ drop->GetPos() });
+
+			drop->SetDead();
+		});
 
 	if (--m_count <= 0)
 		m_isUsed = false;
 
-	m_delay = 0.2f;
+	m_delay = 0.02f;
 }
 
 void SmashPattern::SetUsed()
@@ -97,7 +105,8 @@ void SmashPattern::SetUsed()
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
 	m_dotween->DOMove(skyPos, 1.f, EaseInBack);
-	m_delay = m_count = 3;
+	m_delay = 3;
+	m_count = 6;
 	m_state = State::Up;
 
 	BossPattern::SetUsed();

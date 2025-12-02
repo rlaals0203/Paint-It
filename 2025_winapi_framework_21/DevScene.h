@@ -2,7 +2,7 @@
 #include "Scene.h"
 
 class UIPanel;
-class DevScene : public Scene
+class Stage1 : public Scene
 {
 public:
 	void Init() override;

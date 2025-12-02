@@ -26,6 +26,8 @@ public:
     void DOScaleY(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
     void DOScale(float _target, float _duration, float(*_ease)(float) = EaseLinear, std::function<void()> _callback = nullptr);
 
+    void DOParabola(Vec2 _target, float _height, float _duration, float(*_ease)(float), std::function<void()> _callback);
+
     bool IsMoving() const { return m_isMoving; }
     bool IsScaling() const { return m_isScaling; }
 
@@ -51,4 +53,13 @@ private:
     bool m_isScaling;
     float(*m_scaleEase)(float);
     std::function<void()> m_scaleCallback;
+
+    bool m_isParabola = false;
+    float m_parabolaHeight = 0.f;
+    Vec2 m_paraStartPos;
+    Vec2 m_paraTargetPos;
+    float m_paraDuration = 1.f;
+    float m_paraT = 0.f;
+    float(*m_paraEase)(float) = nullptr;
+    std::function<void()> m_paraCallback = nullptr;
 };
