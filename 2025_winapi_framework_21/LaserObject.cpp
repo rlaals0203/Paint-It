@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "LazerObject.h"
+#include "LaserObject.h"
 #include "Ease.h"
 #include "SceneManager.h"
 #include "ImpulseManager.h"
@@ -8,17 +8,17 @@
 #include "EntityHealth.h"
 #include "DamageText.h"
 
-LazerObject::LazerObject() : m_pos({}), m_isDelay(true), m_length(2000.f)
+LaserObject::LaserObject() : m_pos({}), m_isDelay(true), m_length(2000.f)
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
 	m_collider = AddComponent<Collider>();
 }
 
-LazerObject::~LazerObject()
+LaserObject::~LaserObject()
 {
 }
 
-void LazerObject::Update()
+void LaserObject::Update()
 {
 	m_delay -= fDT;
 	m_collider->SetSize(GetSize());
@@ -32,7 +32,7 @@ void LazerObject::Update()
 	}
 }
 
-void LazerObject::Render(HDC _hdc)
+void LaserObject::Render(HDC _hdc)
 {
 	GDISelector pen(_hdc, PenType::LAZER);
 	GDISelector brush(_hdc, BrushType::LAZER);
@@ -46,7 +46,7 @@ void LazerObject::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
-void LazerObject::ShowLine(Vec2 _start, float _angle, float _duration)
+void LaserObject::ShowLine(Vec2 _start, float _angle, float _duration)
 {
 	m_angle = _angle;
 	m_pos = _start;
@@ -58,7 +58,7 @@ void LazerObject::ShowLine(Vec2 _start, float _angle, float _duration)
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYPROJECTILE);
 }
 
-void LazerObject::SetLine()
+void LaserObject::SetLine()
 {
 	m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
 	m_dir.Normalize();
@@ -78,7 +78,7 @@ void LazerObject::SetLine()
 	ShowDangerGizmo(finalPos, finalSize);
 }
 
-void LazerObject::HideLine()
+void LaserObject::HideLine()
 {
 	if (!m_dotweenCompo)
 		m_dotweenCompo = AddComponent<DOTweenCompo>();
@@ -86,7 +86,7 @@ void LazerObject::HideLine()
 	m_dotweenCompo->DOScaleY(0.f, 0.2f, EaseInBack, [this]() {SetDead(); });
 }
 
-void LazerObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
+void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
 	auto* dangerGizmo = new DangerGizmo();
 	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, 1.f);

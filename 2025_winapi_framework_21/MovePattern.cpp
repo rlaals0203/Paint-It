@@ -3,7 +3,6 @@
 #include "BossController.h"
 #include "Boss.h"
 #include "Ease.h"
-#include "LazerObject.h"
 
 MovePattern::MovePattern(BossController* _controller
 	, Vec2 _movePos, float _speed, float _stopDistance)

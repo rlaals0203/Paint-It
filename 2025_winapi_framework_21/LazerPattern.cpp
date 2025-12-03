@@ -30,7 +30,7 @@ void LazerPattern::SetUsed()
 	float angle = 20;
 	for (int i = 0; i < 6; i++) {
 		angle += 20.f;
-		auto* lazer = new LazerObject();
+		auto* lazer = new LaserObject();
 		lazer->ShowLine({ WINDOW_WIDTH / 2, -50 }, angle, 0.2f);
 		m_lineVec.push_back(lazer);
 	}

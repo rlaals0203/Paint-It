@@ -1,7 +1,6 @@
 #pragma once
 #include "BossPattern.h"
-#include "BossPattern.h"
-#include "LazerObject.h"
+#include "LaserObject.h"
 
 class LazerPattern :
     public BossPattern
@@ -13,14 +12,8 @@ public:
     virtual void Update() override;
     virtual void SetUsed() override;
 private:
-    std::vector<LazerObject*> m_lineVec;
+    std::vector<LaserObject*> m_lineVec;
     int m_count;
     float m_duration;
-
-    std::pair<bool, bool> combos[4] = {
-    {true, false},
-    {false, true},
-    {true, true},
-    {false, false} };
 };
 

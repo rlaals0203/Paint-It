@@ -190,7 +190,7 @@
     <ClInclude Include="ImpulseManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="LazerObject.h">
+    <ClInclude Include="LaserObject.h">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClInclude>
     <ClInclude Include="DangerGizmo.h">
@@ -256,9 +256,6 @@
     <ClInclude Include="FallingPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
     </ClInclude>
-    <ClInclude Include="GuidedLazerPattern.h">
-      <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
-    </ClInclude>
     <ClInclude Include="GuidedProjectilePattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
     </ClInclude>
@@ -292,7 +289,10 @@
     <ClInclude Include="MakePrismPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
-    <ClInclude Include="RotateRender.h" />
+    <ClInclude Include="RotateRender.h">
+      <Filter>Engine\08. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedLaserPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -401,7 +401,7 @@
     <ClCompile Include="ImpulseManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="LazerObject.cpp">
+    <ClCompile Include="LaserObject.cpp">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClCompile>
     <ClCompile Include="DangerGizmo.cpp">
@@ -464,9 +464,6 @@
     <ClCompile Include="FallingPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
     </ClCompile>
-    <ClCompile Include="GuidedLazerPattern.cpp">
-      <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
-    </ClCompile>
     <ClCompile Include="GuidedProjectilePattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\FireBoss</Filter>
     </ClCompile>
@@ -500,6 +497,9 @@
     <ClCompile Include="MakePrismPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
-    <ClCompile Include="RotateRender.cpp" />
+    <ClCompile Include="RotateRender.cpp">
+      <Filter>Engine\08. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedLaserPattern.cpp" />
   </ItemGroup>
 </Project>

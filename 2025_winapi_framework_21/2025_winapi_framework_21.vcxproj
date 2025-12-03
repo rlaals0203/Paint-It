@@ -192,12 +192,12 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GDISelector.h" />
-    <ClInclude Include="GuidedLazerPattern.h" />
+    <ClInclude Include="GuidedLaserPattern.h" />
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="LazerObject.h" />
+    <ClInclude Include="LaserObject.h" />
     <ClInclude Include="LazerPattern.h" />
     <ClInclude Include="MakePrismPattern.h" />
     <ClInclude Include="MovePattern.h" />
@@ -249,7 +249,7 @@
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
-    <ClCompile Include="GuidedLazerPattern.cpp" />
+    <ClCompile Include="GuidedLaserPattern.cpp" />
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
@@ -267,7 +267,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="LazerObject.cpp" />
+    <ClCompile Include="LaserObject.cpp" />
     <ClCompile Include="LazerPattern.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MakePrismPattern.cpp" />

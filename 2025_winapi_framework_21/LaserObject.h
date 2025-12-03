@@ -3,12 +3,12 @@
 #include "DOTweenCompo.h"
 #include "Collider.h"
 
-class LazerObject :
+class LaserObject :
     public Object
 {
 public:
-    LazerObject();
-    ~LazerObject();
+    LaserObject();
+    ~LaserObject();
 
     virtual void Update() override;
     virtual void Render(HDC _hdc) override;
