@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "RotateRender.h"
 
-void RotateRender::RotateRectRender(HDC hdc, Vec2 pos, Vec2 size, float angleRad)
+void RotateRender::RotateRectRender(HDC hdc, Vec2 pos, Vec2 size, float _angle)
 {
     Vec2 half = size * 0.5f;
 
@@ -14,7 +14,7 @@ void RotateRender::RotateRectRender(HDC hdc, Vec2 pos, Vec2 size, float angleRad
     };
 
     for (int i = 0; i < 4; i++)
-        p[i] = p[i].Rotate(p[i], angleRad) + pos;
+        p[i] = p[i].Rotate(p[i], _angle) + pos;
 
     POINT pts[4] =
     {

@@ -4,10 +4,14 @@
 #include "SceneManager.h"
 #include "ImpulseManager.h"
 #include "DangerGizmo.h"
+#include "RotateRender.h"
+#include "EntityHealth.h"
+#include "DamageText.h"
 
-LazerObject::LazerObject() : m_pos({}), m_isDelay(true)
+LazerObject::LazerObject() : m_pos({}), m_isDelay(true), m_length(2000.f)
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
+	m_collider = AddComponent<Collider>();
 }
 
 LazerObject::~LazerObject()
@@ -17,17 +21,11 @@ LazerObject::~LazerObject()
 void LazerObject::Update()
 {
 	m_delay -= fDT;
-	if (m_delay < 0.f && m_isDelay)
+	m_collider->SetSize(GetSize());
+
+	if (m_delay <= 0.f && m_isDelay)
 	{
-		if (m_hasAnim == false)
-		{
-			if (m_isHori)
-				m_dotweenCompo->DOScaleY(15.f, 0.3f, EaseOutElastic);
-			else
-				m_dotweenCompo->DOScaleX(15.f, 0.3f, EaseOutElastic);
-		}
-		else
-			m_dotweenCompo->DOMove(m_target, m_duration, EaseInExpo);
+		m_dotweenCompo->DOScaleX(m_length, m_duration, EaseInExpo);
 
 		m_isDelay = false;
 		GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.5f);
@@ -40,20 +38,51 @@ void LazerObject::Render(HDC _hdc)
 	GDISelector brush(_hdc, BrushType::LAZER);
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+
+	float halfLen = size.x * 0.5f;
+	Vec2 renderOffset = m_dir * halfLen;
+	pos = pos + renderOffset;
+	RotateRender::RotateRectRender(_hdc, pos, size, m_angle);
+	ComponentRender(_hdc);
 }
 
-void LazerObject::ShowLine(float _duration, 
-	bool _isHori, bool _isPositive, bool _hasAnim)
+void LazerObject::ShowLine(Vec2 _start, float _angle, float _duration)
 {
-	m_isHori = _isHori;
-	m_isPosi = _isPositive;
-	m_hasAnim = _hasAnim;
-	SetLine(_hasAnim);
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::EFFECT);
-
-	m_delay = m_hasAnim ? 1.f : 1.15f;
+	m_angle = _angle;
+	m_pos = _start;
+	m_delay = 1.f;
 	m_duration = _duration;
+
+	SetRotation(m_angle);
+	SetLine();
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYPROJECTILE);
+}
+
+void LazerObject::SetLine()
+{
+	Vec2 dir = { cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f) };
+	m_dir = dir;
+	m_dir.Normalize();
+	SetSize({ 0.f, 15.f });
+	float halfLen = GetSize().x * 0.5f;
+
+	Vec2 rotOffset = {
+	rotOffset.x = halfLen * m_dir.x,
+	rotOffset.y = halfLen * m_dir.y };
+	SetPos(m_pos + rotOffset);
+
+	m_collider->SetOffSetPos(rotOffset);
+	m_collider->SetRotation(m_angle);
+
+	Vec2 finalSize = { m_length, 15.f };  // 최종 크기
+	float finalHalfLen = finalSize.x * 0.5f;
+	Vec2 finalRotOffset = {
+		finalRotOffset.x = finalHalfLen * m_dir.x,
+		finalRotOffset.y = finalHalfLen * m_dir.y
+	};
+	Vec2 finalPos = m_pos + finalRotOffset;  // 최종 위치
+
+	ShowDangerGizmo(finalPos, finalSize);
 }
 
 void LazerObject::HideLine()
@@ -61,48 +90,11 @@ void LazerObject::HideLine()
 	if (!m_dotweenCompo)
 		m_dotweenCompo = AddComponent<DOTweenCompo>();
 
-	if (m_isHori)
-		m_dotweenCompo->DOScaleY(0.f, 0.25f, EaseInBack, [this]() {
-				GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
-			});
-	else
-		m_dotweenCompo->DOScaleX(0.f, 0.25f, EaseInBack, [this]() {
-				GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
-			});
+	m_dotweenCompo->DOScaleY(0.f, 0.2f, EaseInBack, [this]() {SetDead(); });
 }
 
-void LazerObject::SetLine(bool hasAnim)
-{
-	if (m_isHori) {
-		m_pos.y = (float)(rand() % (int)(WINDOW_HEIGHT * 0.7f));
-		m_pos.x = m_isPosi ? 0 - WINDOW_WIDTH : WINDOW_WIDTH * 2.f;
-		m_target = { 0.f, m_pos.y };
-		SetSize({ (float)WINDOW_WIDTH * 2, 15.f });
-		ShowDangerGizmo();
-
-		if (hasAnim == false) {
-			m_pos = m_target;
-			SetSize({ GetSize().x, 0.f });
-		}
-	}
-	else {
-		m_pos.x = (float)(rand() % (int)(WINDOW_WIDTH * 0.7f));
-		m_pos.y = m_isPosi ? 0 - WINDOW_HEIGHT : WINDOW_HEIGHT * 2.f;
-		m_target = { m_pos.x, 0.f };
-		SetSize({ 15.f, (float)WINDOW_HEIGHT * 2 });
-		ShowDangerGizmo();
-
-		if (hasAnim == false) {
-			m_pos = m_target;
-			SetSize({ 0.f, GetSize().y });
-		}
-	}
-
-	SetPos(m_pos);
-}
-
-void LazerObject::ShowDangerGizmo()
+void LazerObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
 	auto* dangerGizmo = new DangerGizmo();
-	dangerGizmo->SetDangerGizmo(m_target, GetSize(), 1.f);
+	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, 1.f);
 }

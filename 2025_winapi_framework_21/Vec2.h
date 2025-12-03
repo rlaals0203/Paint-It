@@ -46,8 +46,9 @@ public:
 	//}
 	Vec2 Rotate(const Vec2& v, float angle)
 	{
-		float cosA = cosf(angle);
-		float sinA = sinf(angle);
+		float rad = angle * 3.141592f / 180.f;
+		float cosA = cosf(rad);
+		float sinA = sinf(rad);
 
 		return Vec2(
 			v.x * cosA - v.y * sinA,

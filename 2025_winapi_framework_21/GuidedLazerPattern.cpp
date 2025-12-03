@@ -23,7 +23,7 @@ void GuidedLazerPattern::Update()
 	{
 		m_time = m_duration;
 		auto* lazer = new LazerObject();
-		lazer->ShowLine(1.f, false, true);
+		lazer->ShowLine({ 500.f, 500.f }, 1.f, false);
 		m_lazers.push(lazer);
 	}
 }

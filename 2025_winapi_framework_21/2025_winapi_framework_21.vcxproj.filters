@@ -292,6 +292,7 @@
     <ClInclude Include="MakePrismPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="RotateRender.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -499,5 +500,6 @@
     <ClCompile Include="MakePrismPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
+    <ClCompile Include="RotateRender.cpp" />
   </ItemGroup>
 </Project>

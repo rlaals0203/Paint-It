@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "DangerGizmo.h"
 #include "SceneManager.h"
+#include "RotateRender.h"
 
 DangerGizmo::DangerGizmo() : m_isPlaying(false)
 {
@@ -47,10 +48,12 @@ void DangerGizmo::Render(HDC _hdc)
 	if (m_isPlaying == false) return;
 	GDISelector pen(_hdc, m_isRed ? PenType::DANGER1 : PenType::DANGER2);
 	GDISelector brush(_hdc, BrushType::HOLLOW);
+
+	RotateRender::RotateRectRender(_hdc, GetPos(), GetSize(), m_angle);
 	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
 
-void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _duration, float _delay)
+void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _angle, float _duration, float _delay)
 {
 	SetPos(_pos);
 	SetSize(_size);
@@ -59,6 +62,7 @@ void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _duration, float _
 	m_isDelay = _delay > 0.f;
 	m_isPlaying = !m_isDelay;
 	m_delay = _delay;
+	m_angle = _angle;
 	m_pos = _pos;
 	m_size = _size;
 	m_lifeTime = _duration;

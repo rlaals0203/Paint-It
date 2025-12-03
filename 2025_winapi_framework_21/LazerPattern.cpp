@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "LazerPattern.h"
+#include "BossController.h"
 
 LazerPattern::LazerPattern(BossController* _controller, int _count)
 	: BossPattern(m_Controller), m_count(_count)
@@ -27,11 +28,11 @@ void LazerPattern::Update()
 
 void LazerPattern::SetUsed()
 {
-	int random = rand() % 4;
-	for (int i = 0; i < m_count; i++) {
+	float angle = 45;
+	for (int i = 0; i < 6; i++) {
+		angle += 20.f;
 		auto* lazer = new LazerObject();
-		auto combo = combos[(i + random) % 4];
-		lazer->ShowLine(0.4f, combo.first, combo.second);
+		lazer->ShowLine(m_Controller->g, angle, 0.2f);
 		m_lineVec.push_back(lazer);
 	}
 

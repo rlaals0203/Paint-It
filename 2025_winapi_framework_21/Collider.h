@@ -18,6 +18,7 @@ public:
 public:
     UINT GetID() const { return m_ID; }
     float GetRotation() { return m_rotation; }
+    void SetRotation(float _rotation) { m_rotation = _rotation; }
     void SetSize(Vec2 _size) { m_size = _size; }
     const Vec2& GetSize() const { return m_size; }
     void SetOffSetPos(Vec2 _OffsetPos)

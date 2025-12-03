@@ -167,6 +167,8 @@ inline float EaseInOutElastic(float t)
 template<typename Vec>
 inline Vec EaseLerp(const Vec& start, const Vec& end, float t, float(*easeFunc)(float))
 {
-    float e = easeFunc(t);
+    float e = 1.f;
+    if (easeFunc)
+        e = easeFunc(t);
     return start + (end - start) * e;
 }

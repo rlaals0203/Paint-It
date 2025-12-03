@@ -50,7 +50,6 @@ void Object::LateUpdate()
 		if (com != nullptr && com->IsActive())
 			com->LateUpdate();
 	}
-
 }
 
 void Object::Render(HDC _hdc)
