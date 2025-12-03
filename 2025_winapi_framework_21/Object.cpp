@@ -25,9 +25,9 @@ Object::~Object()
 
 void Object::Update()
 {
-	if (CheckOutofbounds()) //화면 밖으로 나가면 삭제
+	if (CheckOutofbounds())
 	{
-		//m_isDie = true;
+		m_isDie = true;
 	}
 
 	if (m_isBlink)

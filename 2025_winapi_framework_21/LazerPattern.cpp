@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "LazerPattern.h"
-#include "BossController.h"
 
 LazerPattern::LazerPattern(BossController* _controller, int _count)
-	: BossPattern(m_Controller), m_count(_count)
+	: BossPattern(_controller), m_count(_count)
 {
 }
 
@@ -28,11 +27,11 @@ void LazerPattern::Update()
 
 void LazerPattern::SetUsed()
 {
-	float angle = 45;
+	float angle = 20;
 	for (int i = 0; i < 6; i++) {
 		angle += 20.f;
 		auto* lazer = new LazerObject();
-		lazer->ShowLine(m_Controller->g, angle, 0.2f);
+		lazer->ShowLine({ WINDOW_WIDTH / 2, -50 }, angle, 0.2f);
 		m_lineVec.push_back(lazer);
 	}
 

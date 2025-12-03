@@ -60,28 +60,21 @@ void LazerObject::ShowLine(Vec2 _start, float _angle, float _duration)
 
 void LazerObject::SetLine()
 {
-	Vec2 dir = { cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f) };
-	m_dir = dir;
+	m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
 	m_dir.Normalize();
+
 	SetSize({ 0.f, 15.f });
+
 	float halfLen = GetSize().x * 0.5f;
+	Vec2 offset = m_dir * halfLen;
+	SetPos(m_pos + offset);
 
-	Vec2 rotOffset = {
-	rotOffset.x = halfLen * m_dir.x,
-	rotOffset.y = halfLen * m_dir.y };
-	SetPos(m_pos + rotOffset);
-
-	m_collider->SetOffSetPos(rotOffset);
+	m_collider->SetOffSetPos(offset);
 	m_collider->SetRotation(m_angle);
 
-	Vec2 finalSize = { m_length, 15.f };  // 최종 크기
-	float finalHalfLen = finalSize.x * 0.5f;
-	Vec2 finalRotOffset = {
-		finalRotOffset.x = finalHalfLen * m_dir.x,
-		finalRotOffset.y = finalHalfLen * m_dir.y
-	};
-	Vec2 finalPos = m_pos + finalRotOffset;  // 최종 위치
-
+	Vec2 finalSize = { m_length, 15.f };
+	Vec2 finalOffset = m_dir * (finalSize.x * 0.5f);
+	Vec2 finalPos = m_pos + finalOffset;
 	ShowDangerGizmo(finalPos, finalSize);
 }
 

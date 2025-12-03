@@ -11,7 +11,7 @@
 #include "DrawProjectilePattern.h"
 
 PrismBoss::PrismBoss() : Boss()
-, m_animName(L"PrismBoss"), m_blinkName(L"PrismBossBlink")
+, m_animName(L"PrismBoss"), m_blinkName(L"PrismBossBlink"), m_shield(nullptr)
 
 {
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
@@ -60,9 +60,28 @@ void PrismBoss::Update()
 		m_Animator->Play(m_hasBlinked ? m_blinkName : m_animName);
 	}
 
-	if (GetPrismCount() > 0)
+	if (GetPrismCount() > 0 && m_isShieldMode == false)
 	{
-		//m_healthCompo.
+		m_healthCompo->SetActive(false);
+		m_shield = new SpriteObject(L"bossshield", Layer::EFFECT);
+		m_shield->SetSize({ 170.f, 170.f });
+		m_isShieldMode = true;
+	}
+	else if(GetPrismCount() == 0 && m_isShieldMode)
+	{
+		m_healthCompo->SetActive(true);
+
+		m_isShieldMode = false;
+		if (m_shield != nullptr)
+			m_shield->SetDead();
+		m_shield = nullptr;
+	}
+
+	if (m_isShieldMode)
+	{
+		Vec2 pos = GetPos();
+		pos.y += 20.f;
+		m_shield->SetPos(pos);
 	}
 }
 

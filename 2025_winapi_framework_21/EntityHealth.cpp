@@ -48,6 +48,7 @@ void EntityHealth::Render(HDC _hdc)
 
 void EntityHealth::ApplyDamage(int _damage)
 {
+    if (m_isActive == false) return;
 	m_currentHp -= _damage;
 	Object* owner = GetOwner();
 	owner->OnHit();

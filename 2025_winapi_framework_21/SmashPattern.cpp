@@ -41,7 +41,7 @@ void SmashPattern::UpState()
 	auto* dangerGizmo = new DangerGizmo();
 	Vec2 winSize = GET_WINDOWSIZE;
 	Vec2 gizmoPos = { winSize.x / 2, winSize.y - 175 };
-	dangerGizmo->SetDangerGizmo(gizmoPos, { 500.f, 150.f }, 2.5f, 0.7f);
+	dangerGizmo->SetDangerGizmo(gizmoPos, { 500.f, 150.f }, 0.f, 2.5f, 0.7f);
 
 	m_state = State::Wait;
 }

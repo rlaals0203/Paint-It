@@ -3,7 +3,7 @@
 #include "SceneManager.h"
 #include "RotateRender.h"
 
-DangerGizmo::DangerGizmo() : m_isPlaying(false)
+DangerGizmo::DangerGizmo() : m_isPlaying(false), m_angle(0.f)
 {
 }
 
@@ -50,7 +50,6 @@ void DangerGizmo::Render(HDC _hdc)
 	GDISelector brush(_hdc, BrushType::HOLLOW);
 
 	RotateRender::RotateRectRender(_hdc, GetPos(), GetSize(), m_angle);
-	RECT_RENDER(_hdc, m_pos.x, m_pos.y, m_size.x, m_size.y);
 }
 
 void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _angle, float _duration, float _delay)

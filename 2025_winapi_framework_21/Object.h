@@ -67,8 +67,8 @@ private:
 	bool CheckOutofbounds()
 	{
 		Vec2 pos = GetPos();
-		return (m_canOutofbounds && (pos.x > WINDOW_WIDTH + 50 || pos.x < -50
-			|| pos.y > WINDOW_HEIGHT + 50 || pos.y < -50));
+		return (m_canOutofbounds && (pos.x > WINDOW_WIDTH + 500 || pos.x < -500
+			|| pos.y > WINDOW_HEIGHT + 500 || pos.y < -500));
 	}
 protected:
 	bool m_isDie;
