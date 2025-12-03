@@ -23,7 +23,7 @@ public:
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
 	const Vec2& GetPos() const { return m_pos; }
-	const Vec2& GetSize()const { return m_size; }
+	const Vec2& GetSize()const { return m_size; }}
 
 	void OnHit();
 	void SetCanOutofBounds(bool canOut) { m_canOutofbounds = canOut; }

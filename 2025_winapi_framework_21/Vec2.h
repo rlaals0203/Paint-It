@@ -54,6 +54,15 @@ public:
 			v.x * sinA + v.y * cosA
 		);
 	}
+	Vec2 Rotate(float angle) const
+	{
+		float c = cosf(angle);
+		float s = sinf(angle);
+		return {
+			x * c - y * s,
+			x * s + y * c
+		};
+	}
 	void operator+=(const Vec2& _other)
 	{
 		x += _other.x;
