@@ -16,10 +16,13 @@ public:
 public:
     void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
+    void HideLineWithAnim();
     void SetLine();
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
-public:
     void SetWidth(float _width) { m_width = _width; }
+    Vec2 GetLaserHitPoint();
+    Vec2 GetDirection() { return m_dir; }
+
 private:
     DOTweenCompo* m_dotweenCompo;
     Collider* m_collider;

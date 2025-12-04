@@ -298,6 +298,7 @@
     <ClInclude Include="GuidedLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="ReflectLazerPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -508,5 +509,6 @@
     <ClCompile Include="GuidedLaserPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
+    <ClCompile Include="ReflectLazerPattern.cpp" />
   </ItemGroup>
 </Project>

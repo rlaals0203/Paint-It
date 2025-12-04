@@ -102,6 +102,10 @@ public:
 	{
 		return a + (b - a) * t;
 	}
+	Vec2 Reflect(Vec2& dir, Vec2& normal)
+	{
+		return dir - normal * (2.f * dir.Dot(normal));
+	}
 public:
 	float x = 0.f;
 	float y = 0.f;
