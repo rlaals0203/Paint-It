@@ -76,7 +76,6 @@ void TitleScene::Start()
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
 	start->SetText(L"½ÃÀÛ");
 	start->SetSize({ 100, 50 });
-	start->SetNormalTexture()
 	start->SetCallback([=]()
 		{
 			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
