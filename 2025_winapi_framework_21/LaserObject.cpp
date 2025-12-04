@@ -8,7 +8,7 @@
 #include "EntityHealth.h"
 #include "DamageText.h"
 
-LaserObject::LaserObject() : m_pos({}), m_isDelay(true), m_length(2000.f)
+LaserObject::LaserObject() : m_pos({}), m_isDelay(true), m_length(2000.f), m_delay(1.f), m_width(15.f)
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
 	m_collider = AddComponent<Collider>();
@@ -46,16 +46,22 @@ void LaserObject::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
-void LaserObject::ShowLine(Vec2 _start, float _angle, float _duration)
+void LaserObject::EnterCollision(Collider* _other)
+{
+	auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
+	health->ApplyDamage(10.f);
+}
+
+void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _delay)
 {
 	m_angle = _angle;
 	m_pos = _start;
-	m_delay = 1.f;
 	m_duration = _duration;
+	m_delay = _delay;
 
 	SetRotation(m_angle);
 	SetLine();
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
 }
 
 void LaserObject::SetLine()
@@ -63,7 +69,7 @@ void LaserObject::SetLine()
 	m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
 	m_dir.Normalize();
 
-	SetSize({ 0.f, 15.f });
+	SetSize({ 0.f, m_width });
 
 	float halfLen = GetSize().x * 0.5f;
 	Vec2 offset = m_dir * halfLen;
@@ -72,7 +78,7 @@ void LaserObject::SetLine()
 	m_collider->SetOffSetPos(offset);
 	m_collider->SetRotation(m_angle);
 
-	Vec2 finalSize = { m_length, 15.f };
+	Vec2 finalSize = { m_length, m_width };
 	Vec2 finalOffset = m_dir * (finalSize.x * 0.5f);
 	Vec2 finalPos = m_pos + finalOffset;
 	ShowDangerGizmo(finalPos, finalSize);
@@ -83,11 +89,12 @@ void LaserObject::HideLine()
 	if (!m_dotweenCompo)
 		m_dotweenCompo = AddComponent<DOTweenCompo>();
 
+	m_collider->SetActive(false);
 	m_dotweenCompo->DOScaleY(0.f, 0.2f, EaseInBack, [this]() {SetDead(); });
 }
 
 void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
 	auto* dangerGizmo = new DangerGizmo();
-	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, 1.f);
+	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
 }

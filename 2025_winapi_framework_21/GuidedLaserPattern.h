@@ -2,6 +2,7 @@
 #include "BossPattern.h"
 #include "LaserObject.h"
 #include "Player.h"
+#include <queue>
 
 class GuidedLaserPattern :
     public BossPattern
@@ -15,9 +16,10 @@ public:
     void SetLaser();
 private:
     Player* m_player;
-    std::stack<LaserObject*> m_lasers;
+    std::queue<LaserObject*> m_lasers;
     int m_count;
     float m_time;
     float m_delay;
+    float m_deleteTime;
 };
 

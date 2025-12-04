@@ -19,7 +19,7 @@ void GuidedProjectile::Init(std::wstring _texture, float _speed, float _damage, 
 	m_damage = _damage;
 	m_lifeTime = _lifeTime;
 	m_target = GET_SINGLE(PlayerFindManager)->GetPlayer();
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
 }
 
 void GuidedProjectile::Update()

@@ -2,6 +2,7 @@
 #include "EntityHealth.h"
 #include "Object.h"
 #include "SceneManager.h"
+#include "DamageText.h"
 
 EntityHealth::EntityHealth() : 
 	m_maxHp(0), 
@@ -53,6 +54,10 @@ void EntityHealth::ApplyDamage(int _damage)
 	Object* owner = GetOwner();
 	owner->OnHit();
 
+    DamageText* dmgText = new DamageText();
+    dmgText->Init(_damage, GetOwner()->GetPos());
+    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
+
 	if (m_currentHp <= 0.f)
 	{
         if (m_callback != nullptr)
@@ -63,7 +68,7 @@ void EntityHealth::ApplyDamage(int _damage)
 
         if (m_isBoss == false)
         {
-            GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
+            //GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
         }
 
 		owner->SetDead();

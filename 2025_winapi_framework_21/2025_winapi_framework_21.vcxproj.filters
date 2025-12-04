@@ -293,6 +293,9 @@
       <Filter>Engine\08. Module</Filter>
     </ClInclude>
     <ClInclude Include="GuidedLaserPattern.h" />
+    <ClInclude Include="Random.h">
+      <Filter>Engine\99. Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">

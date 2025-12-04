@@ -10,13 +10,16 @@ public:
     LaserObject();
     ~LaserObject();
 
-    virtual void Update() override;
-    virtual void Render(HDC _hdc) override;
+    void Update() override;
+    void Render(HDC _hdc) override;
+    void EnterCollision(Collider* _other) override;
 public:
-    void ShowLine(Vec2 _start, float _angle, float _duration);
+    void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
     void SetLine();
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
+public:
+    void SetWidth(float _width) { m_width = _width; }
 private:
     DOTweenCompo* m_dotweenCompo;
     Collider* m_collider;
@@ -27,5 +30,6 @@ private:
     float m_duration;
     float m_angle;
     float m_length;
+    float m_width;
 };
 

@@ -27,6 +27,7 @@ namespace fs = std::filesystem;
 #include "Enums.h"
 #include "TimeManager.h"
 #include "GDISelector.h"
+#include "Random.h"
 
 // 정적 라이브러리
 #pragma comment(lib, "winmm.lib")

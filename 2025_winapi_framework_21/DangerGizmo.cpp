@@ -30,13 +30,13 @@ void DangerGizmo::Update()
 	m_lifeTime -= fDT;
 	m_colorTime -= fDT;
 
-	if (m_lifeTime < 0.f)
+	if (m_lifeTime <= 0.f)
 	{
 		m_isPlaying = false;
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
 	}
 
-	if (m_colorTime < 0.f)
+	if (m_colorTime <= 0.f)
 	{
 		m_isRed = !m_isRed;
 		m_colorTime = 0.1f;

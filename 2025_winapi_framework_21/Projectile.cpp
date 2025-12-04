@@ -55,8 +55,5 @@ void Projectile::Render(HDC _hdc)
 void Projectile::EnterCollision(Collider* _other)
 {
 	_other->GetOwner()->GetComponent<EntityHealth>()->ApplyDamage(m_damage);
-	DamageText* dmgText = new DamageText();
-	dmgText->Init((int)m_damage, GetPos());
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
 	SetDead();
 }

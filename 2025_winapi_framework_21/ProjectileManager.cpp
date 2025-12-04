@@ -37,7 +37,7 @@ Projectile* ProjectileManager::SpawnProjectile(ProjectileType _type, float _size
 		newProj->SetDir(_dir);
 		newProj->SetSize({ _size, _size });
 
-		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
+		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYOBSTACLE;
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
 		return newProj;
 	}
@@ -62,7 +62,7 @@ Projectile* ProjectileManager::SpawnProjectile(ProjectileType _type, float _size
 		newProj->SetAngle(_angle);
 		newProj->SetSize({ _size, _size });
 
-		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYPROJECTILE;
+		Layer projLayer = isPlayer ? Layer::PLAYERPROJECTILE : Layer::ENEMYOBSTACLE;
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(newProj, projLayer);
 		return newProj;
 	}

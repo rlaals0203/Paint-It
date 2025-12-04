@@ -27,6 +27,7 @@ void Object::Update()
 {
 	if (CheckOutofbounds())
 	{
+		cout << "»èÁ¦";
 		m_isDie = true;
 	}
 
