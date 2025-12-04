@@ -29,8 +29,11 @@ public:
     float GetValue() const { return m_value; }
 
 public:
+    void SetThunbRadius(int radius) { m_thumbRadius = radius; }
+
     void SetTrackTexture(Texture* tex) { m_trackTex = tex; }
     void SetThumbTexture(Texture* tex) { m_thumbTex = tex; }
+    void SetFillTexture(Texture* tex) { m_fillTex = tex; }
 
 public:
     void SetFillColor(COLORREF color) { m_fillColor = color; }
@@ -60,6 +63,7 @@ private:
 
     Texture* m_trackTex = nullptr;
     Texture* m_thumbTex = nullptr;
+    Texture* m_fillTex = nullptr;
 
     COLORREF m_fillColor = RGB(80, 160, 255);
 

@@ -61,7 +61,7 @@ void TitleScene::Title()
 {
 	UIImage* title = m_mainPanel->AddUIElement<UIImage>();
 	
-	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 3  });
+	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 2  });
 	title->SetSize({ 300, 300 });
 
 	title->SetImage(L"brush");
@@ -76,6 +76,7 @@ void TitleScene::Start()
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
 	start->SetText(L"½ÃÀÛ");
 	start->SetSize({ 100, 50 });
+	start->SetNormalTexture()
 	start->SetCallback([=]()
 		{
 			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
@@ -121,6 +122,14 @@ void TitleScene::SettingPanel()
 			WINDOW_WIDTH / 2
 			, WINDOW_HEIGHT / 3
 		});
+	BGMslider->SetTrackTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"floor"));
+	BGMslider->SetThumbTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"brush"));
+	BGMslider->SetFillTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"background1"));
+
+	BGMslider->SetThunbRadius(25);
 
 	BGMslider->SetSize({ 500, 50 });
 

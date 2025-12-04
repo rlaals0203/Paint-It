@@ -42,9 +42,22 @@ void UISlider::Render(HDC hdc)
         (LONG)(centerY + trackHeight / 2)
     };
 
+    LONG width = 0, height = 0;
+
     if (m_trackTex)
     {
         //todo : 텍스처 그리기 구현
+        int width = m_trackTex->GetWidth();
+        int height = m_trackTex->GetHeight();
+
+        TransparentBlt(hdc,
+            m_trackRect.left, m_trackRect.top,       
+            m_trackRect.right - m_trackRect.left,
+            m_trackRect.bottom - m_trackRect.top,
+            m_trackTex->GetTextureDC(),
+            0, 0,
+            width,height,
+            RGB(255, 0, 255));
     }
     else
     {
@@ -56,14 +69,45 @@ void UISlider::Render(HDC hdc)
     int thumbX = PosFromValue(m_value);
     int thumbY = centerY;
 
-    RECT fillRect = { m_trackRect.left, m_trackRect.top, thumbX, m_trackRect.bottom };
-    HBRUSH fbrush = CreateSolidBrush(m_fillColor);
-    FillRect(hdc, &fillRect, fbrush);
-    DeleteObject(fbrush);
+    if (m_fillTex)
+    {
+        //todo : 텍스처 그리기 구현
+        int width = m_fillTex->GetWidth();
+        int height = m_fillTex->GetHeight();
+
+        TransparentBlt(hdc,
+            m_trackRect.left, m_trackRect.top,
+            thumbX - m_trackRect.left,
+            m_trackRect.bottom - m_trackRect.top,
+            m_fillTex->GetTextureDC(),
+            0, 0,
+            width, height,
+            RGB(255, 0, 255));
+    }
+    else
+    {
+        RECT fillRect = { m_trackRect.left, m_trackRect.top, thumbX, m_trackRect.bottom };
+        HBRUSH fbrush = CreateSolidBrush(m_fillColor);
+        FillRect(hdc, &fillRect, fbrush);
+        DeleteObject(fbrush);
+    }
 
     if (m_thumbTex)
     {
         //todo : 텍스처 그리기 구현
+        int width = m_thumbTex->GetWidth();
+        int height = m_thumbTex->GetHeight();
+
+        TransparentBlt(hdc,
+            thumbX - m_thumbRadius,
+            thumbY - m_thumbRadius, 
+            m_thumbRadius * 2,
+            m_thumbRadius * 2,  
+            m_thumbTex->GetTextureDC(),
+            0, 0,
+            width, height,
+            RGB(255, 0, 255));
+
     }
     else
     {
@@ -131,7 +175,7 @@ void UISlider::CheckMouseOver()
         thumbX + m_thumbRadius,
         thumbY + m_thumbRadius
     };
-
+    
     bool was = m_isMouseOver;
     bool overTrack = (mouse.x >= trackRect.left && mouse.x <= trackRect.right && mouse.y >= trackRect.top && mouse.y <= trackRect.bottom);
     bool overThumb = (mouse.x >= thumbRect.left && mouse.x <= thumbRect.right && mouse.y >= thumbRect.top && mouse.y <= thumbRect.bottom);

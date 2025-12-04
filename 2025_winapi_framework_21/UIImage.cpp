@@ -24,11 +24,11 @@ void UIImage::Render(HDC _hdc)
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 
-	RECT rc = RECT_MAKE(pos.x, pos.y, size.x, size.y);
+	//RECT rc = RECT_MAKE(pos.x, pos.y, size.x, size.y);
 
 	::TransparentBlt(_hdc
-		, pos.x
-		, pos.y
+		, pos.x 
+		, pos.y 
 		, size.x
 		, size.y
 		,m_image->GetTextureDC(),
