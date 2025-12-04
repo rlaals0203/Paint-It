@@ -292,9 +292,11 @@
     <ClInclude Include="RotateRender.h">
       <Filter>Engine\08. Module</Filter>
     </ClInclude>
-    <ClInclude Include="GuidedLaserPattern.h" />
     <ClInclude Include="Random.h">
       <Filter>Engine\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedLaserPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -503,6 +505,8 @@
     <ClCompile Include="RotateRender.cpp">
       <Filter>Engine\08. Module</Filter>
     </ClCompile>
-    <ClCompile Include="GuidedLaserPattern.cpp" />
+    <ClCompile Include="GuidedLaserPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
