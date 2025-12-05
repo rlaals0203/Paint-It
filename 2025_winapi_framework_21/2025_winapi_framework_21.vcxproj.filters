@@ -71,6 +71,9 @@
     <Filter Include="Engine\03. Object\Boss\Pattern\FireBoss">
       <UniqueIdentifier>{e1668f09-7d5f-4120-8056-b55c472485ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Player\Skill">
+      <UniqueIdentifier>{8dfe5ab2-7f5f-423a-8c86-113af71b1a3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -298,6 +301,9 @@
     <ClInclude Include="GuidedLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="BurstSkill.h">
+      <Filter>Engine\03. Object\Player\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -507,6 +513,9 @@
     </ClCompile>
     <ClCompile Include="GuidedLaserPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="BurstSkill.cpp">
+      <Filter>Engine\03. Object\Player\Skill</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
