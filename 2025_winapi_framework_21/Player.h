@@ -19,12 +19,13 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void Jump();
+	void UseBurstSkill();
 	virtual void EnterCollision(Collider* _other)override;
 	virtual void ExitCollision(Collider* _other)override;
-	void SetSpeed(float _speed){ m_speed = _speed; }
-	void SetOiledTime(float _time) { 
-		m_oiledTime = _time; 
-		m_isOiled = true; 
+	void SetSpeed(float _speed) { m_speed = _speed; }
+	void SetOiledTime(float _time) {
+		m_oiledTime = _time;
+		m_isOiled = true;
 		m_speed = 1.f;
 	}
 
@@ -47,6 +48,9 @@ private:
 	float m_delay = 0.5f;
 	float m_oiledTime;
 
+	float m_burstCoolTime = 3.f;
+	float m_burstCooldown = 0.f;
+
 	std::wstring m_playerIdle;
 	std::wstring m_rplayerIdle;
 	std::wstring m_playerMove;
@@ -57,4 +61,3 @@ private:
 	std::wstring m_bplayer;
 	std::wstring m_brplayer;
 };
-
