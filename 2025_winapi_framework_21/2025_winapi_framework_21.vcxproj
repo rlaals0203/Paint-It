@@ -170,6 +170,7 @@
     <ClInclude Include="BossModuleBase.h" />
     <ClInclude Include="BossPattern.h" />
     <ClInclude Include="BossPatternModule.h" />
+    <ClInclude Include="BossShield.h" />
     <ClInclude Include="BurstSkill.h" />
     <ClInclude Include="CircleProjectilePattern.h" />
     <ClInclude Include="Collider.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="BossModuleBase.cpp" />
     <ClCompile Include="BossPattern.cpp" />
     <ClCompile Include="BossPatternModule.cpp" />
+    <ClCompile Include="BossShield.cpp" />
     <ClCompile Include="BurstSkill.cpp" />
     <ClCompile Include="DrawProjectilePattern.cpp" />
     <ClCompile Include="GameOverScene.cpp" />

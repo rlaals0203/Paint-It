@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "EntityHealth.h"
 #include "SpriteObject.h"
+#include "BossShield.h"
 
 class PrismObject;
 class PrismBoss :
@@ -24,8 +25,9 @@ public:
 private:
     EntityHealth* m_healthCompo;
     Texture* m_texture;
+    Texture* m_shieldTexture;
     Texture* m_blinkTexture;
-    SpriteObject* m_shield;
+    BossShield* m_shield;
     bool m_hasBlinked;
     bool m_isShieldMode;
     const std::wstring m_animName;

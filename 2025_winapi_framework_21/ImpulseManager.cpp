@@ -5,8 +5,8 @@ void ImpulseManager::Update()
 {
     if (m_isShaking)
     {
-        int x = (rand() % 100 - 50) * m_impulse / 50;
-        int y = (rand() % 100 - 50) * m_impulse / 50;
+        float x = Random::Range(-m_impulse, m_impulse);
+        float y = Random::Range(-m_impulse, m_impulse);
         m_offset = { x, y };
         m_duration -= fDT;
         m_impulse -= m_decrease * fDT;

@@ -6,18 +6,16 @@
 #include "MakePrismPattern.h"
 #include "GuidedLaserPattern.h"
 #include "ReflectLazerPattern.h"
-
-#include "GuidedProjectilePattern.h"
-#include "SmashPattern.h"
 #include "LazerPattern.h"
-#include "DrawProjectilePattern.h"
+#include "AroundLaserPattern.h"
+#include "SkyLaserPattern.h"
 
 PrismBoss::PrismBoss() : Boss()
 , m_animName(L"PrismBoss"), m_blinkName(L"PrismBossBlink"), m_shield(nullptr)
-
 {
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
+	m_shieldTexture = GET_SINGLE(ResourceManager)->GetTexture(L"bossshield");
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
@@ -41,13 +39,12 @@ PrismBoss::PrismBoss() : Boss()
 	AddMoveModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_Controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
-	//AddModule(new MakePrismPattern(m_Controller));
-	//AddModule(new LazerPattern(m_Controller, 5));
-	//AddModule(new GuidedLaserPattern(m_Controller, 10));
+	AddModule(new MakePrismPattern(m_Controller));
+	AddModule(new LazerPattern(m_Controller, 5));
 	AddModule(new ReflectLazerPattern(m_Controller, 10));
-	//AddModule(new SmashPattern(m_Controller));
-	//AddModule(new DrawProjectilePattern(m_Controller, L"knife", 0.075f, 10.f));
-	//AddModule(new GuidedProjectilePattern(m_Controller, ProjectileType::Enemy, 0.4f, 10));
+	AddModule(new AroundLaserPattern(m_Controller, 10));
+	AddModule(new SkyLaserPattern(m_Controller, 10));
+	AddModule(new GuidedLaserPattern(m_Controller, 10));
 }
 
 PrismBoss::~PrismBoss()
@@ -67,8 +64,8 @@ void PrismBoss::Update()
 	if (GetPrismCount() > 0 && m_isShieldMode == false)
 	{
 		m_healthCompo->SetActive(false);
-		m_shield = new SpriteObject(L"bossshield", Layer::EFFECT);
-		m_shield->SetSize({ 170.f, 170.f });
+		m_shield = new BossShield();
+		m_shield->SetSize({ 5.f, 5.f });
 		m_isShieldMode = true;
 	}
 	else if(GetPrismCount() == 0 && m_isShieldMode)
@@ -84,7 +81,6 @@ void PrismBoss::Update()
 	if (m_isShieldMode)
 	{
 		Vec2 pos = GetPos();
-		pos.y += 20.f;
 		m_shield->SetPos(pos);
 	}
 }
