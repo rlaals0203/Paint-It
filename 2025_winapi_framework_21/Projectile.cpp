@@ -54,6 +54,14 @@ void Projectile::Render(HDC _hdc)
 
 void Projectile::EnterCollision(Collider* _other)
 {
-	_other->GetOwner()->GetComponent<EntityHealth>()->ApplyDamage(m_damage);
+	auto* healthCompo = _other->GetOwner()->GetComponent<EntityHealth>();
+	DamageText* dmgText = new DamageText();
+	dmgText->Init(std::to_wstring((int)m_damage), GetPos());
+
+	if (healthCompo)
+	{
+		healthCompo->ApplyDamage(m_damage, false);
+	}
+
 	SetDead();
 }

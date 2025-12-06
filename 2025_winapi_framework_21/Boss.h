@@ -11,6 +11,8 @@ class Boss :
 public:
     Boss();
     ~Boss();
+
+    void Update() override;
 public:
     void MoveTransPos(Vec2 _delta)
     {
@@ -23,8 +25,12 @@ public:
     void AddModule(BossPattern* addedPattern);
     void AddMoveModule(MovePattern* addedPattern);
 protected:
-    BossController* m_Controller;
-    Animator* m_Animator;
+    BossController* m_controller;
+    Animator* m_animator;
+
+    bool m_isBlinking;
+    std::wstring m_animName;
+    std::wstring m_blinkName;
 };
 
  

@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "EntityHealth.h"
 #include "Object.h"
-#include "SceneManager.h"
 #include "DamageText.h"
 
 EntityHealth::EntityHealth() : 
@@ -47,16 +46,18 @@ void EntityHealth::Render(HDC _hdc)
     DeleteObject(hBrush);
 }
 
-void EntityHealth::ApplyDamage(int _damage)
+void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
 {
     if (m_isActive == false) return;
 	m_currentHp -= _damage;
 	Object* owner = GetOwner();
 	owner->OnHit();
 
-    DamageText* dmgText = new DamageText();
-    dmgText->Init(_damage, GetOwner()->GetPos());
-    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dmgText, Layer::EFFECT);
+    if (_isDamageText)
+    {
+        DamageText* dmgText = new DamageText();
+        dmgText->Init(std::to_wstring(_damage), GetOwner()->GetPos());
+    }
 
 	if (m_currentHp <= 0.f)
 	{

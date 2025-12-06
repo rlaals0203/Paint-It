@@ -13,7 +13,7 @@ public:
 public:
 	const int& GetCurrentHp() const { return m_currentHp; }
 	const int& GetMaxHp() const { return m_maxHp; }
-	void ApplyDamage(int _damage);
+	void ApplyDamage(int _damage, bool _isDamageText = true);
 	void SetDefaultHP(int _hp) { m_maxHp = m_currentHp = _hp; }
 	void SetIsPlayer(bool _isBoss = true) { m_isBoss = _isBoss; }
 	void SubscribeOnDead(std::function<void()> _callback) { m_callback = _callback; }
