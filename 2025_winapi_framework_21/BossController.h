@@ -22,6 +22,7 @@ public:
 	BossModuleBase* GetModule(wstring _key);
 	void AddModule(wstring _key, BossModuleBase* _module);
 	void ChangeModule(wstring _key);
+	void ClearModule();
 private:
 	Boss* m_boss;
 

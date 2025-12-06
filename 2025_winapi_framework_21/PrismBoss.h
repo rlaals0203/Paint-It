@@ -24,6 +24,9 @@ public:
 private:
     void ActiveShield();
     void InActiveShield();
+    void CheckAwaken();
+    void Changing();
+    void AddAwakenPattern();
 private:
     EntityHealth* m_healthCompo;
     Texture* m_texture;
@@ -32,6 +35,7 @@ private:
     BossShield* m_shield;
     bool m_isShieldMode;
     std::wstring m_awakenName;
+    std::wstring m_changingName;
     std::vector<PrismObject*> m_prismObjects;
 
     bool m_awakenMode;

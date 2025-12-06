@@ -10,13 +10,18 @@
 #include "LazerPattern.h"
 #include "AroundLaserPattern.h"
 #include "SkyLaserPattern.h"
+#include "BossController.h"
 
 PrismBoss::PrismBoss() : Boss(), 
 	m_awakenName(L"PrismAwaken"),
-	m_shield(nullptr)
+	m_shield(nullptr),
+	m_awakenMode(false),
+	m_isChanging(false)
 {
 	m_animName = L"PrismBoss";
 	m_blinkName = L"PrismBossBlink";
+	m_awakenName = L"PrismAwaken";
+	m_changingName = L"PrismChanging";
 
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
@@ -25,7 +30,7 @@ PrismBoss::PrismBoss() : Boss(),
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(10000.f);
+	m_healthCompo->SetDefaultHP(300.f);
 	AddComponent<DOTweenCompo>();
 
 	m_animator->CreateAnimation(m_animName, m_texture,
@@ -33,8 +38,12 @@ PrismBoss::PrismBoss() : Boss(),
 		{ 48.f, 0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(m_awakenName, m_texture,
-		{ 0.f, 0.f }, { 48.f, 48.f },
+		{ 0.f, 96.f }, { 48.f, 48.f },
 		{ 48.f, 0.f }, 8, 0.1f);
+
+	m_animator->CreateAnimation(m_changingName, m_texture,
+		{ 0.f, 48.f }, { 48.f, 48.f },
+		{ 48.f, 0.f }, 10, 0.1f);
 
 	m_animator->CreateAnimation(m_blinkName, m_blinkTexture,
 		{ 0.f, 0.f }, { 48.f, 48.f },
@@ -62,17 +71,14 @@ PrismBoss::~PrismBoss()
 
 void PrismBoss::Update()
 {
-	Boss::Update();
+	CheckAwaken();
 
-	if (!m_awakenMode)
-	{
-		int currrent = m_healthCompo->GetCurrentHp();
-		int max = m_healthCompo->GetMaxHp();
-		if (currrent / max <= 0.3f)
-		{
-			m_awakenMode = true;
-		}
+	if (m_isChanging) {
+		Changing();
+		return;
 	}
+
+	Boss::Update();
 
 	if (GetPrismCount() > 0 && m_isShieldMode == false)
 		ActiveShield();
@@ -106,4 +112,41 @@ void PrismBoss::InActiveShield()
 	if (m_shield != nullptr)
 		m_shield->SetDead();
 	m_shield = nullptr;
+}
+
+void PrismBoss::CheckAwaken()
+{
+	if (!m_isChanging && !m_awakenMode)
+	{
+		int currrent = m_healthCompo->GetCurrentHp();
+		int max = m_healthCompo->GetMaxHp();
+		if ((float)currrent / max <= 0.3f)
+		{
+			m_isChanging = true;
+			m_animator->Play(m_changingName);
+		}
+	}
+}
+
+void PrismBoss::Changing()
+{
+	m_changeTime -= fDT;
+	if (m_changeTime <= 0.f)
+	{
+		m_isChanging = false;
+		m_awakenMode = true;
+		m_animator->Play(m_awakenName);
+		m_animName = m_awakenName;
+		ClearModule();
+	}
+}
+
+void PrismBoss::AddAwakenPattern()
+{
+	AddModule(new MakePrismPattern(m_controller));
+	AddModule(new LazerPattern(m_controller, 8));
+	AddModule(new ReflectLazerPattern(m_controller, 15));
+	AddModule(new AroundLaserPattern(m_controller, 15));
+	AddModule(new SkyLaserPattern(m_controller, 15));
+	AddModule(new GuidedLaserPattern(m_controller, 12));
 }

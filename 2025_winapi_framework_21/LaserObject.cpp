@@ -8,7 +8,14 @@
 #include "EntityHealth.h"
 #include "DamageText.h"
 
-LaserObject::LaserObject() : m_pos({}), m_isDelay(true), m_length(2000.f), m_delay(1.f), m_width(15.f)
+LaserObject::LaserObject() : 
+	m_pos({}), 
+	m_isDelay(true), 
+	m_length(2000.f),
+	m_delay(1.f), 
+	m_width(15.f),
+	m_penType(PenType::LAZER),
+	m_brushType(BrushType::LAZER)
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
 	m_collider = AddComponent<Collider>();
@@ -34,8 +41,8 @@ void LaserObject::Update()
 
 void LaserObject::Render(HDC _hdc)
 {
-	GDISelector pen(_hdc, PenType::LAZER);
-	GDISelector brush(_hdc, BrushType::LAZER);
+	GDISelector pen(_hdc, m_penType);
+	GDISelector brush(_hdc, m_brushType);
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 

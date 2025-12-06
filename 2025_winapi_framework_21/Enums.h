@@ -17,12 +17,12 @@ enum class Layer
 
 enum class PenType
 {
-	RED, GREEN, DANGER1, DANGER2, LIGHTRED, LAZER, END
+	RED, GREEN, DANGER1, DANGER2, LIGHTRED, LAZER, LAZER2, END
 };
 
 enum class BrushType
 {
-	HOLLOW, RED, GREEN, LIGHTRED, LAZER, END
+	HOLLOW, RED, GREEN, LIGHTRED, LAZER, LAZER2, END
 };
 
 enum class FontType

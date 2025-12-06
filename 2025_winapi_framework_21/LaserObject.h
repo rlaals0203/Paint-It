@@ -20,6 +20,11 @@ public:
     void SetLine();
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
     void SetWidth(float _width) { m_width = _width; }
+    void SetColor(PenType _pen, BrushType _brush)
+    {
+        m_penType = _pen;
+        m_brushType = _brush;
+    }
     Vec2 GetLaserHitPoint();
     Vec2 GetDirection() { return m_dir; }
 
@@ -28,6 +33,10 @@ private:
     Collider* m_collider;
     Vec2 m_pos;
     Vec2 m_dir;
+
+    PenType m_penType;
+    BrushType m_brushType;
+
     bool m_isDelay;
     float m_delay;
     float m_duration;

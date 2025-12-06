@@ -24,6 +24,7 @@ public:
     void ResetPattern();
     void AddModule(BossPattern* addedPattern);
     void AddMoveModule(MovePattern* addedPattern);
+    void ClearModule();
 protected:
     BossController* m_controller;
     Animator* m_animator;
