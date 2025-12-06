@@ -44,6 +44,7 @@ void SkyLaserPattern::MakeLaser()
 		pos = {(WINDOW_WIDTH / m_count) * m_remainCount , 0};
 
 	laser->SetWidth(WINDOW_WIDTH / m_count);
+	laser->SetColor(m_penType, m_brushType);
 	laser->InitLaser(pos, 90, 0.05f, 0.2f);
 	m_lasers.push(laser);
 }

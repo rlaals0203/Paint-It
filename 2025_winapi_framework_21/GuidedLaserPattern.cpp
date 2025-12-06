@@ -47,7 +47,9 @@ void GuidedLaserPattern::SetLaser()
 
 	float angleRad = atan2(dir.y, dir.x);
 	float angle = angleRad * 180.f / PI;
+
 	laser->SetWidth(15.f);
+	laser->SetColor(m_penType, m_brushType);
 	laser->InitLaser(spawnPos, angle, 0.15f, 0.3f);
 	m_lasers.push(laser);
 }

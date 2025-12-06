@@ -138,14 +138,15 @@ void PrismBoss::Changing()
 		m_animator->Play(m_awakenName);
 		m_animName = m_awakenName;
 		ClearModule();
+		AddAwakenPattern();
 	}
 }
 
 void PrismBoss::AddAwakenPattern()
 {
-	AddModule(new MakePrismPattern(m_controller));
-	AddModule(new ReflectLazerPattern(m_controller, 15));
-	AddModule(new AroundLaserPattern(m_controller, 15));
-	AddModule(new SkyLaserPattern(m_controller, 15));
-	AddModule(new GuidedLaserPattern(m_controller, 12));
+	//AddModule(new MakePrismPattern(m_controller));
+	//AddModule(new AroundLaserPattern(m_controller, 15, true, 0.05f, 1.f));
+	//AddModule(new SkyLaserPattern(m_controller, 6, true, 0.34f, 0.28f));
+	//AddModule(new GuidedLaserPattern(m_controller, 20, true, 0.05f, 0.5f));
+	AddModule(new ReflectLazerPattern(m_controller, 15, true, 0.07f, 0.5f));
 }

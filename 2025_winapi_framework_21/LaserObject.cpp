@@ -56,7 +56,7 @@ void LaserObject::Render(HDC _hdc)
 void LaserObject::EnterCollision(Collider* _other)
 {
 	auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
-	health->ApplyDamage(10.f);
+	health->ApplyDamage(5.f);
 }
 
 void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _delay)

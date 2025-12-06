@@ -23,6 +23,5 @@ void MakePrismPattern::SetUsed()
 	PrismBoss* boss = dynamic_cast<PrismBoss*>(m_Controller->GetBoss());
 	auto* prism = new PrismObject({x, y}, boss);
 	boss->AddPrism(prism);
-	cout << "SDf";
 	m_isUsed = false;
 }

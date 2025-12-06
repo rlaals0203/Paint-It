@@ -17,14 +17,14 @@ void ReflectLazerPattern::Update()
     m_remainTime -= fDT;
     if (m_remainTime <= 0.f && m_remainCount > 0)
     {
-        if (m_isFirst)
-        {
+        if (m_isFirst) {
             m_prevPos = m_Controller->GetOwner()->GetPos();
             m_prevAngle = Random::Range(25, 150);
             m_isFirst = false;
         }
 
         auto* laser = new LaserObject();
+        laser->SetColor(m_penType, m_brushType);
         laser->InitLaser(m_prevPos, m_prevAngle, m_delay, 0.25f);
         m_lasers.push(laser);
 
@@ -42,11 +42,11 @@ void ReflectLazerPattern::Update()
             normal = Vec2(0.f, -1.f);
 
         Vec2 reflectDir = dir - normal * (2.f * dir.Dot(normal));
-        float angleOffset = Random::Range(0, 15);
+        float angleOffset = Random::Range(-30, 30);
         float angle = angleOffset + atan2f(reflectDir.y, reflectDir.x) * 180.f / PI;
 
         m_prevPos = hit;
-        m_prevAngle = angle;
+        m_prevAngle = angle; m_delay;
 
         m_remainCount--;
         m_remainTime = m_delay;
@@ -58,5 +58,6 @@ void ReflectLazerPattern::Update()
 void ReflectLazerPattern::SetUsed()
 {
     BaseLazerPattern::SetUsed();
+    m_isFirst = true;
     m_remainDeleteTime = m_startDeleteTime;
 }
