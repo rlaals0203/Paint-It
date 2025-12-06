@@ -2,10 +2,10 @@
 #include "ReflectLazerPattern.h"
 #include "BossController.h"
 
-ReflectLazerPattern::ReflectLazerPattern(BossController* _controller, int _count)
- : BossPattern(_controller), m_isFirst(true)
-{
-    m_originCount = _count;
+ReflectLazerPattern::ReflectLazerPattern(BossController* _controller, int _count, bool _isAwaken, float _delay, float _deleteTime)
+    : BaseLazerPattern(_controller, _count, _isAwaken, _delay, _deleteTime) {
+    m_startDeleteTime = _deleteTime;
+    SetDeleteTime(_delay);
 }
 
 ReflectLazerPattern::~ReflectLazerPattern()
@@ -14,8 +14,8 @@ ReflectLazerPattern::~ReflectLazerPattern()
 
 void ReflectLazerPattern::Update()
 {
-    m_time -= fDT;
-    if (m_time <= 0.f && m_count > 0)
+    m_remainTime -= fDT;
+    if (m_remainTime <= 0.f && m_remainCount > 0)
     {
         if (m_isFirst)
         {
@@ -25,7 +25,7 @@ void ReflectLazerPattern::Update()
         }
 
         auto* laser = new LaserObject();
-        laser->InitLaser(m_prevPos, m_prevAngle, m_duration, 0.25f);
+        laser->InitLaser(m_prevPos, m_prevAngle, m_delay, 0.25f);
         m_lasers.push(laser);
 
         Vec2 hit = laser->GetLaserHitPoint();
@@ -48,29 +48,15 @@ void ReflectLazerPattern::Update()
         m_prevPos = hit;
         m_prevAngle = angle;
 
-        m_count--;
-        m_time = m_duration;
+        m_remainCount--;
+        m_remainTime = m_delay;
     }
 
-    if (m_lasers.size() > 0)
-    {
-        m_deleteTime -= fDT;
-        if (m_deleteTime <= 0.f) {
-            auto* laser = m_lasers.front();
-            m_lasers.pop();
-            laser->HideLine();
-            m_deleteTime = m_duration;
-        }
-    }
-
-    if (m_count == 0 && m_lasers.size() == 0)
-        m_isUsed = false;
+    BaseLazerPattern::Update();
 }
 
 void ReflectLazerPattern::SetUsed()
 {
-	m_time  = m_duration;
-    m_count = m_originCount;
-    m_deleteTime = 0.5f;
-	BossPattern::SetUsed();
+    BaseLazerPattern::SetUsed();
+    m_remainDeleteTime = m_startDeleteTime;
 }

@@ -1,28 +1,18 @@
 #pragma once
-#include "BossPattern.h"
-#include <queue>
+#include "BaseLazerPattern.h"
 
 
 class LaserObject;
 class AroundLaserPattern :
-    public BossPattern
+    public BaseLazerPattern
 {
 public:
-    AroundLaserPattern(BossController* _controller, int count);
+    AroundLaserPattern(BossController* _controller, int _count, bool _isAwaken = false, float _delay = 0.07f, float _deleteTime = 1.f);
     ~AroundLaserPattern();
 public:
     void Update() override;
     void SetUsed() override;
 private:
     void MakeLaser();
-
-private:
-    std::queue<LaserObject*> m_lasers;
-    int m_countNormal;
-    int m_count;
-    float m_time;
-    float m_delay;
-    float m_deleteTime;
-    float m_delete;
 };
 

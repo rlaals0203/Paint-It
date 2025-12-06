@@ -1,14 +1,12 @@
 #pragma once
-#include "BossPattern.h"
-#include <queue>
-
+#include "BaseLazerPattern.h"
 
 class LaserObject;
 class SkyLaserPattern :
-    public BossPattern
+    public BaseLazerPattern
 {
 public:
-    SkyLaserPattern(BossController* _controller, int count);
+    SkyLaserPattern(BossController* _controller, int _count, bool _isAwaken = false, float _delay = 0.34f, float _deleteTime = 0.28f);
     ~SkyLaserPattern();
 public:
     void Update() override;
@@ -17,13 +15,6 @@ private:
     void MakeLaser();
 
 private:
-    std::queue<LaserObject*> m_lasers;
     bool m_isGoRight;
-    int m_countNormal;
-    int m_count;
-    float m_time;
-    float m_delay;
-    float m_deleteTime;
-    float m_delete;
 };
 

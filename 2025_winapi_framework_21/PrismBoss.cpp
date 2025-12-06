@@ -144,7 +144,6 @@ void PrismBoss::Changing()
 void PrismBoss::AddAwakenPattern()
 {
 	AddModule(new MakePrismPattern(m_controller));
-	AddModule(new LazerPattern(m_controller, 8));
 	AddModule(new ReflectLazerPattern(m_controller, 15));
 	AddModule(new AroundLaserPattern(m_controller, 15));
 	AddModule(new SkyLaserPattern(m_controller, 15));
