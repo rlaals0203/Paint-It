@@ -46,21 +46,26 @@ void UIButton::Render(HDC _hdc)
 	if (m_currentTexture)
 	{
 		int width = m_currentTexture->GetWidth();
-		int height = m_normalTexture->GetHeight();
+		int height = m_currentTexture->GetHeight();
 
 		Vec2 pos = GetPos();
 		Vec2 size = GetSize();
 
-		TransparentBlt(_hdc
-			, pos.x
-			, pos.y
-			, size.x
-			, size.y
-			, m_currentTexture->GetTextureDC(),
-			0, 0,
-			width, height,
-			RGB(255, 0, 255));
+		int drawX = pos.x - size.x / 2;
+		int drawY = pos.y - size.y / 2;
 
+		TransparentBlt(
+			_hdc,
+			drawX,
+			drawY,
+			size.x,
+			size.y,
+			m_currentTexture->GetTextureDC(),
+			0, 0,
+			width,
+			height,
+			RGB(255, 0, 255)
+		);
 	}
 	else
 	{
