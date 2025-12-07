@@ -210,7 +210,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"bluebackground", L"Texture\\bluebackground.bmp");
 	LoadTexture(L"bossshield", L"Texture\\bossshield.bmp");
 	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
-	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
+	LoadTexture(L"torch", L"Texture\\torch.bmp");
 }
 
 

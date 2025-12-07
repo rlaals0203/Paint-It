@@ -37,7 +37,7 @@ PrismBoss::PrismBoss() : Boss(),
 
 	m_animator->CreateAnimation(m_changingName, m_texture,
 		{ 0.f, 48.f }, { 48.f, 48.f },
-		{ 48.f, 0.f }, 10, 0.1f);
+		{ 48.f, 0.f }, 30, 0.15f);
 
 	m_animator->CreateAnimation(m_blinkName, m_blinkTexture,
 		{ 0.f, 0.f }, { 48.f, 48.f },

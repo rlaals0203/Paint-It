@@ -40,7 +40,7 @@ private:
 
     bool m_awakenMode;
     bool m_isChanging;
-    float m_changeTime = 2.f;
+    float m_changeTime = 4.5f;
 
 };
 
