@@ -18,14 +18,14 @@ void GuidedProjectile::Init(std::wstring _texture, float _speed, float _damage, 
 	m_speed = _speed;
 	m_damage = _damage;
 	m_lifeTime = _lifeTime;
-	m_target = GET_SINGLE(PlayerFindManager)->GetPlayer();
+	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
 }
 
 void GuidedProjectile::Update()
 {
 	if (m_isStop) return;
-	Vec2 dir = (m_target->GetPos() - GetPos());
+	Vec2 dir = (m_player->GetPos() - GetPos());
 	dir.Normalize();
 	Translate({ dir.x * m_speed * fDT,  dir.y * m_speed * fDT });
 
@@ -45,4 +45,8 @@ void GuidedProjectile::Render(HDC _hdc)
 void GuidedProjectile::EnterCollision(Collider* _other)
 {
 	Projectile::EnterCollision(_other);
+}
+
+void GuidedProjectile::HandleDead()
+{
 }

@@ -62,6 +62,7 @@ PrismBoss::PrismBoss() : Boss(),
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetDefaultHP(300.f);
+	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	AddComponent<DOTweenCompo>();
 }
 
@@ -71,8 +72,6 @@ PrismBoss::~PrismBoss()
 
 void PrismBoss::Update()
 {
-	CheckAwaken();
-
 	if (m_isChanging) {
 		Changing();
 		return;
@@ -114,20 +113,6 @@ void PrismBoss::InActiveShield()
 	m_shield = nullptr;
 }
 
-void PrismBoss::CheckAwaken()
-{
-	if (!m_isChanging && !m_awakenMode)
-	{
-		int currrent = m_healthCompo->GetCurrentHp();
-		int max = m_healthCompo->GetMaxHp();
-		if ((float)currrent / max <= 0.3f)
-		{
-			m_isChanging = true;
-			m_animator->Play(m_changingName);
-		}
-	}
-}
-
 void PrismBoss::Changing()
 {
 	m_changeTime -= fDT;
@@ -149,4 +134,10 @@ void PrismBoss::AddAwakenPattern()
 	AddModule(new SkyLaserPattern(m_controller, 6, true, 0.34f, 0.28f));
 	AddModule(new GuidedLaserPattern(m_controller, 20, true, 0.05f, 0.5f));
 	AddModule(new ReflectLazerPattern(m_controller, 13, true, 0.075f, 0.5f));
+}
+
+void PrismBoss::HandlePhase()
+{
+	m_isChanging = true;
+	m_animator->Play(m_changingName);
 }

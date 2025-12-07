@@ -322,6 +322,7 @@
     <ClInclude Include="ArtBoss.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="SkullProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -556,5 +557,6 @@
     <ClCompile Include="ArtBoss.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="SkullProjectile.cpp" />
   </ItemGroup>
 </Project>

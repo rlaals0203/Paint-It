@@ -3,9 +3,10 @@
 #include "Object.h"
 #include "DamageText.h"
 
-EntityHealth::EntityHealth() : 
-	m_maxHp(0), 
+EntityHealth::EntityHealth() :
+    m_maxHp(0),
     m_isBoss(true),
+    m_hasInvoked(false),
 	m_currentHp(0) { }
 
 EntityHealth::~EntityHealth() { }
@@ -59,14 +60,18 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
         dmgText->Init(std::to_wstring(_damage), GetOwner()->GetPos());
     }
 
-	if (m_currentHp <= 0.f)
-	{
+    if ((float)m_currentHp / m_maxHp <= m_threshold)
+    {
+        m_threshold - true;
         if (m_callback != nullptr)
         {
             m_callback();
             m_callback = nullptr;
         }
+    }
 
+	if (m_currentHp <= 0.f)
+	{
         if (m_isBoss == false)
         {
             //GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");

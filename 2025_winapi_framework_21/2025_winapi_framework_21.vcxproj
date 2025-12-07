@@ -224,6 +224,7 @@
     <ClInclude Include="RotateRender.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SkullProjectile.h" />
     <ClInclude Include="SkyLaserPattern.h" />
     <ClInclude Include="SmashPattern.h" />
     <ClInclude Include="SpriteObject.h" />
@@ -301,6 +302,7 @@
     <ClCompile Include="RotateRender.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SkullProjectile.cpp" />
     <ClCompile Include="SkyLaserPattern.cpp" />
     <ClCompile Include="SmashPattern.cpp" />
     <ClCompile Include="FireBoss.cpp" />

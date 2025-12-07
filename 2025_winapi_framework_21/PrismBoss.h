@@ -17,16 +17,16 @@ public:
     void Render(HDC _hdc) override;
 public:
     void AddPrism(PrismObject* _prism) { m_prismObjects.push_back(_prism); }
-    void RemovePrism() { m_prismObjects.pop_back(); cout << "»èÁ¦"; }
+    void RemovePrism() { m_prismObjects.pop_back(); }
     int GetPrismCount() { return m_prismObjects.size(); }
 public:
     void SetShieldMode(bool _isShieldMode) { m_isShieldMode = _isShieldMode; }
 private:
     void ActiveShield();
     void InActiveShield();
-    void CheckAwaken();
     void Changing();
     void AddAwakenPattern();
+    void HandlePhase();
 private:
     EntityHealth* m_healthCompo;
     Texture* m_texture;
