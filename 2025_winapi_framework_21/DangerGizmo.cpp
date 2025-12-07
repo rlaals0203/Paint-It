@@ -56,7 +56,7 @@ void DangerGizmo::SetDangerGizmo(Vec2 _pos, Vec2 _size, float _angle, float _dur
 {
 	SetPos(_pos);
 	SetSize(_size);
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::EFFECT);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::GIZMO);
 
 	m_isDelay = _delay > 0.f;
 	m_isPlaying = !m_isDelay;

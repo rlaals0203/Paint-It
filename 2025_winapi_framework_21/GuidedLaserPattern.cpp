@@ -2,9 +2,12 @@
 #include "GuidedLaserPattern.h"
 #include "PlayerFindManager.h"
 
-GuidedLaserPattern::GuidedLaserPattern(BossController* _controller, int _count)
-	: BossPattern(_controller), m_count(_count), m_delay(0.07f), m_player(nullptr)
+GuidedLaserPattern::GuidedLaserPattern(BossController* _controller, int _count, bool _isAwaken, float _delay, float _deleteTime) 
+	: BaseLazerPattern(_controller, _count, _isAwaken, _delay, _deleteTime), 
+	m_player(nullptr)
 {
+	m_startDeleteTime = _deleteTime;
+	SetDeleteTime(_delay);
 	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 }
 
@@ -14,35 +17,21 @@ GuidedLaserPattern::~GuidedLaserPattern()
 
 void GuidedLaserPattern::Update()
 {
-	m_time -= fDT;
-	if (m_time <= 0.f && m_count > 0)
+	BaseLazerPattern::Update();
+
+	m_remainTime -= fDT;
+	if (m_remainTime <= 0.f && m_remainCount > 0)
 	{
 		SetLaser();
-		m_time = m_delay;
-		m_count--;
+		m_remainTime = m_delay;
+		m_remainCount--;
 	}
-
-	if (m_lasers.size() > 0)
-	{
-		m_deleteTime -= fDT;
-		if (m_deleteTime <= 0.f) {
-			auto* laser = m_lasers.front();
-			m_lasers.pop();
-			laser->HideLine();
-			m_deleteTime = m_delay;
-		}
-	}
-
-	if (m_count == 0 && m_lasers.size() == 0)
-		m_isUsed = false;
 }
 
 void GuidedLaserPattern::SetUsed()
 {
-	m_time = m_delay;
-	m_deleteTime = 0.5f;
-	m_count = 10;
-	BossPattern::SetUsed();
+	BaseLazerPattern::SetUsed();
+	m_remainDeleteTime = m_startDeleteTime;
 }
 
 void GuidedLaserPattern::SetLaser()

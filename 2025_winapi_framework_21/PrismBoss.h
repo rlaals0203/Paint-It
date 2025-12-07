@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "EntityHealth.h"
 #include "SpriteObject.h"
+#include "BossShield.h"
 
 class PrismObject;
 class PrismBoss :
@@ -20,16 +21,26 @@ public:
     int GetPrismCount() { return m_prismObjects.size(); }
 public:
     void SetShieldMode(bool _isShieldMode) { m_isShieldMode = _isShieldMode; }
-public:
+private:
+    void ActiveShield();
+    void InActiveShield();
+    void CheckAwaken();
+    void Changing();
+    void AddAwakenPattern();
 private:
     EntityHealth* m_healthCompo;
     Texture* m_texture;
+    Texture* m_shieldTexture;
     Texture* m_blinkTexture;
-    SpriteObject* m_shield;
-    bool m_hasBlinked;
+    BossShield* m_shield;
     bool m_isShieldMode;
-    const std::wstring m_animName;
-    const std::wstring m_blinkName;
+    std::wstring m_awakenName;
+    std::wstring m_changingName;
     std::vector<PrismObject*> m_prismObjects;
+
+    bool m_awakenMode;
+    bool m_isChanging;
+    float m_changeTime = 2.f;
+
 };
 

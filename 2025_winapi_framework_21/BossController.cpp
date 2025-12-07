@@ -73,3 +73,8 @@ void BossController::ChangeModule(wstring _key)
 	m_CurrentModule = m_ModuleMap[_key];
 	m_CurrentModule->EnterModule();
 }
+
+void BossController::ClearModule()
+{
+}
+

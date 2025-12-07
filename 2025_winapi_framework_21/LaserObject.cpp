@@ -8,7 +8,14 @@
 #include "EntityHealth.h"
 #include "DamageText.h"
 
-LaserObject::LaserObject() : m_pos({}), m_isDelay(true), m_length(2000.f), m_delay(1.f), m_width(15.f)
+LaserObject::LaserObject() : 
+	m_pos({}), 
+	m_isDelay(true), 
+	m_length(2000.f),
+	m_delay(1.f), 
+	m_width(15.f),
+	m_penType(PenType::LAZER),
+	m_brushType(BrushType::LAZER)
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
 	m_collider = AddComponent<Collider>();
@@ -28,14 +35,14 @@ void LaserObject::Update()
 		m_dotweenCompo->DOScaleX(m_length, m_duration, EaseInExpo);
 
 		m_isDelay = false;
-		GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.5f);
+		GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, 0.5f);
 	}
 }
 
 void LaserObject::Render(HDC _hdc)
 {
-	GDISelector pen(_hdc, PenType::LAZER);
-	GDISelector brush(_hdc, BrushType::LAZER);
+	GDISelector pen(_hdc, m_penType);
+	GDISelector brush(_hdc, m_brushType);
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 
@@ -68,12 +75,12 @@ void LaserObject::SetLine()
 {
 	m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
 	m_dir.Normalize();
+	SetPos(m_pos);
 
 	SetSize({ 0.f, m_width });
 
 	float halfLen = GetSize().x * 0.5f;
 	Vec2 offset = m_dir * halfLen;
-	SetPos(m_pos + offset);
 
 	m_collider->SetOffSetPos(offset);
 	m_collider->SetRotation(m_angle);
@@ -82,6 +89,8 @@ void LaserObject::SetLine()
 	Vec2 finalOffset = m_dir * (finalSize.x * 0.5f);
 	Vec2 finalPos = m_pos + finalOffset;
 	ShowDangerGizmo(finalPos, finalSize);
+
+	Vec2 pos = GetLaserHitPoint();
 }
 
 void LaserObject::HideLine()
@@ -97,4 +106,25 @@ void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
 	auto* dangerGizmo = new DangerGizmo();
 	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
+}
+
+Vec2 LaserObject::GetLaserHitPoint()
+{
+	Vec2 start = GetPos();
+	Vec2 dir = m_dir;
+
+	float tx, ty;
+
+	if (dir.x > 0)
+		tx = (WINDOW_WIDTH - start.x) / dir.x;
+	else
+		tx = (0 - start.x) / dir.x;
+
+	if (dir.y > 0)
+		ty = (WINDOW_HEIGHT - start.y) / dir.y;
+	else
+		ty = (0 - start.y) / dir.y;
+
+	float t = (tx < ty) ? tx : ty;
+	return start + dir * t;
 }

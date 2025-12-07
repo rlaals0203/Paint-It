@@ -3,55 +3,34 @@
 #include "LaserObject.h"
 #include "BossController.h"
 
-SkyLaserPattern::SkyLaserPattern(BossController* _controller, int _count)
-	: BossPattern(_controller)
-	, m_countNormal(_count - 1)
-	, m_count(_count - 1)
-	, m_delay(0.34f)
-	, m_delete(0.28f)
-{
+SkyLaserPattern::SkyLaserPattern(BossController* _controller, int _count, bool _isAwaken, float _delay, float _deleteTime)
+	: BaseLazerPattern(_controller, _count, _isAwaken, _delay, _deleteTime) {
+	m_deleteTime = _deleteTime;
 }
 
-SkyLaserPattern::~SkyLaserPattern()
-{
-}
+SkyLaserPattern::~SkyLaserPattern() { }
 
 void SkyLaserPattern::Update()
 {
-	m_time -= fDT;
-	if (m_time <= 0.f && m_count >= 0)
+	m_remainTime -= fDT;
+	if (m_remainTime <= 0.f && m_remainCount >= 0)
 	{
 		MakeLaser();
-		m_time = m_delay;
-		m_count--;
-		if (m_lasers.size() == 1 && m_count >= 0 && m_deleteTime <= 0.f)
+		m_remainTime = m_delay;
+		m_remainCount--;
+		if (m_lasers.size() == 1 && m_remainCount >= 0 && m_remainDeleteTime <= 0.f)
 		{
-			m_deleteTime = m_delete;
+			m_remainDeleteTime = m_deleteTime;
 		}
 	}
 
-	if (m_lasers.size() > 0)
-	{
-		m_deleteTime -= fDT;
-		if (m_deleteTime <= 0.f) {
-			auto* laser = m_lasers.front();
-			m_lasers.pop();
-			laser->HideLine();
-			m_deleteTime = m_delete;
-		}
-	}
-
-	if (m_count == -1 && m_lasers.size() == 0)
-		m_isUsed = false;
+	BaseLazerPattern::Update();
 }
 
 void SkyLaserPattern::SetUsed()
 {
 	m_isGoRight = rand() % 2 == 0;
-	m_time = m_delay;
-	m_deleteTime = m_delete;
-	m_count = m_countNormal;
-	BossPattern::SetUsed();
+	BaseLazerPattern::SetUsed();
 }
 
 void SkyLaserPattern::MakeLaser()
@@ -60,17 +39,11 @@ void SkyLaserPattern::MakeLaser()
 	Vector2 pos;
 
 	if (m_isGoRight)
-	{
-		pos = { (WINDOW_WIDTH / m_countNormal) * (m_countNormal - m_count) , 0 };
-	}
+		pos = { (WINDOW_WIDTH / m_count) * (m_count - m_remainCount) , 0 };
 	else
-	{
-		pos = {(WINDOW_WIDTH / m_countNormal) * m_count , 0};
-	}
+		pos = {(WINDOW_WIDTH / m_count) * m_remainCount , 0};
 
-
-
-	laser->SetWidth(WINDOW_WIDTH / m_countNormal);
+	laser->SetWidth(WINDOW_WIDTH / m_count);
 	laser->InitLaser(pos, 90, 0.05f, 0.2f);
 	m_lasers.push(laser);
 }

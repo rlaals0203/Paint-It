@@ -298,6 +298,20 @@
     <ClInclude Include="GuidedLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="BossShield.h" />
+    <ClInclude Include="BurstSkill.h" />
+    <ClInclude Include="SkyLaserPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectLazerPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseLazerPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="AroundLaserPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -506,6 +520,20 @@
       <Filter>Engine\08. Module</Filter>
     </ClCompile>
     <ClCompile Include="GuidedLaserPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="BossShield.cpp" />
+    <ClCompile Include="BurstSkill.cpp" />
+    <ClCompile Include="ReflectLazerPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyLaserPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseLazerPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="AroundLaserPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
   </ItemGroup>

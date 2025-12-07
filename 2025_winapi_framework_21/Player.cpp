@@ -13,9 +13,12 @@
 #include "Rigidbody.h"
 #include "EntityHealth.h"
 #include "PlayerFindManager.h"
+#include "BurstSkill.h"
 
 Player::Player()
 	: m_pTexture(nullptr)
+	, m_burstCoolTime(3.f)
+	, m_burstCooldown(0.f)
 {
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
 	auto* col = AddComponent<Collider>();
@@ -26,7 +29,7 @@ Player::Player()
 	healthCompo->SetIsPlayer(false);
 	healthCompo->SetDefaultHP(100.f);
 
-	#pragma region  animation
+#pragma region  animation
 	m_playerIdle = L"playerIdle";
 	m_rplayerIdle = L"rplayerIdle";
 	m_playerMove = L"playerMove";
@@ -84,7 +87,7 @@ Player::Player()
 
 
 	m_animator->Play(m_playerIdle);
-	#pragma endregion
+#pragma endregion
 }
 
 Player::~Player()
@@ -139,12 +142,12 @@ void Player::Update()
 		dir.x -= m_speed;
 	}
 
-	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded) //점프 시도
+	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded)
 	{
 		Jump();
 	}
 
-	Translate({dir.x * 100.f * fDT, dir.y * 100.f * fDT});
+	Translate({ dir.x * 100.f * fDT, dir.y * 100.f * fDT });
 	m_coolTime -= fDT;
 
 	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime < 0.f)
@@ -172,6 +175,13 @@ void Player::Update()
 		float power = m_isOiled ? 1000 : 3500;
 		Vec2 dir = { (float)(direction * power), velo.y };
 		rb->SetVelocity(dir);
+	}
+
+	m_burstCooldown -= fDT;
+	if (GET_KEYDOWN(KEY_TYPE::E) && m_burstCooldown <= 0.f)
+	{
+		UseBurstSkill();
+		m_burstCooldown = m_burstCoolTime;
 	}
 
 	if (!m_isGrounded)
@@ -203,4 +213,11 @@ void Player::Jump()
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetVelocity({ rb->GetVelocity().x, -550.f });
 	rb->SetGrounded(false);
+}
+
+void Player::UseBurstSkill()
+{
+	BurstSkill* burst = new BurstSkill();
+	burst->Init(GetPos(), 150.f, 0.5f);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(burst, Layer::EFFECT);
 }

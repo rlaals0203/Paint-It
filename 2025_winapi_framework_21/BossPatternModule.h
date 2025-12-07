@@ -22,7 +22,7 @@ public:
 public:
     void AddPattern(BossPattern* _addPattern);
     void AddMovePattern(MovePattern* _addPattern);
-
+    void ClearPattern();
 private:
     void SelectPattern();
     void ShufflePattern();

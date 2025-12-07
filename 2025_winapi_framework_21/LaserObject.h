@@ -16,15 +16,27 @@ public:
 public:
     void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
+    void HideLineWithAnim();
     void SetLine();
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
-public:
     void SetWidth(float _width) { m_width = _width; }
+    void SetColor(PenType _pen, BrushType _brush)
+    {
+        m_penType = _pen;
+        m_brushType = _brush;
+    }
+    Vec2 GetLaserHitPoint();
+    Vec2 GetDirection() { return m_dir; }
+
 private:
     DOTweenCompo* m_dotweenCompo;
     Collider* m_collider;
     Vec2 m_pos;
     Vec2 m_dir;
+
+    PenType m_penType;
+    BrushType m_brushType;
+
     bool m_isDelay;
     float m_delay;
     float m_duration;

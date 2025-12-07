@@ -58,6 +58,11 @@ void BossPatternModule::AddMovePattern(MovePattern* p)
 	m_movePatterns.push_back(p);
 }
 
+void BossPatternModule::ClearPattern()
+{
+	m_Patterns.clear();
+}
+
 
 void BossPatternModule::SelectPattern()
 {

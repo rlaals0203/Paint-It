@@ -3,51 +3,30 @@
 #include "LaserObject.h"
 #include "BossController.h"
 
-AroundLaserPattern::AroundLaserPattern(BossController* _controller, int count)
-	: BossPattern(_controller)
-	, m_countNormal(count)
-	, m_count(count)
-	, m_delay(0.07f)
-	, m_delete(0.14f)
+AroundLaserPattern::AroundLaserPattern(BossController* _controller, int _count, bool _isAwaken, float _delay, float _deleteTime)
+	: BaseLazerPattern(_controller, _count, _isAwaken, _delay, _deleteTime)
 {
-
+	SetDeleteTime(0.14f);
 }
 
-AroundLaserPattern::~AroundLaserPattern()
-{
-}
+AroundLaserPattern::~AroundLaserPattern() { }
 
 void AroundLaserPattern::Update()
 {
-	m_time -= fDT;
-	if (m_time <= 0.f && m_count > 0)
-	{
+	m_remainTime -= fDT;
+	if (m_remainTime <= 0.f && m_remainCount > 0) {
 		MakeLaser();
-		m_time = m_delay;
-		m_count--;
+		m_remainTime = m_delay;
+		m_remainCount--;
 	}
 
-	if (m_lasers.size() > 0)
-	{
-		m_deleteTime -= fDT;
-		if (m_deleteTime <= 0.f) {
-			auto* laser = m_lasers.front();
-			m_lasers.pop();
-			laser->HideLine();
-			m_deleteTime = m_delete;
-		}
-	}
-
-	if (m_count == 0 && m_lasers.size() == 0)
-		m_isUsed = false;
+	BaseLazerPattern::Update();
 }
 
 void AroundLaserPattern::SetUsed()
 {
-	m_time = m_delay;
-	m_deleteTime = 1.f;
-	m_count = m_countNormal;
-	BossPattern::SetUsed();
+	BaseLazerPattern::SetUsed();
+	m_remainDeleteTime = 1.f;
 }
 
 void AroundLaserPattern::MakeLaser()
@@ -55,9 +34,7 @@ void AroundLaserPattern::MakeLaser()
 	LaserObject* laser = new LaserObject();
 
 	Vector2 pos = m_Controller->GetOwner()->GetPos();
-
-	float angle = (360 / m_countNormal) * m_count;
-
+	float angle = (360 / m_count) * m_remainCount;
 	laser->SetWidth(20.f);
 	laser->InitLaser(pos, angle, 0.25f, 0.2f);
 	m_lasers.push(laser);
