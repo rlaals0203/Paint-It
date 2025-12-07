@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "Stage2.h"
-#include "PrismBoss.h"
+#include "Stage3.h"
+#include "ArtBoss.h" //
 #include "Object.h"
 #include "Player.h"
 #include "InputManager.h"
@@ -15,18 +15,19 @@
 #include "UIBossHP.h"
 #include "EntityHealth.h"
 
-void Stage2::Init()
+
+void Stage3::Init()
 {
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);
 
 	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
-	bossHP->SetText(L"보스 [프리즘]");
+	bossHP->SetText(L"보스 [유화]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
 
-	PrismBoss* boss = new PrismBoss();
+	ArtBoss* boss = new ArtBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
 	boss->SetSize({ 5.f, 5.f });
 	boss->SetCanOutofBounds(false);
@@ -55,7 +56,7 @@ void Stage2::Init()
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
 }
 
-void Stage2::Update()
+void Stage3::Update()
 {
 	Scene::Update();
 }

@@ -27,12 +27,6 @@ PrismBoss::PrismBoss() : Boss(),
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
 	m_shieldTexture = GET_SINGLE(ResourceManager)->GetTexture(L"bossshield");
 
-	auto* col = AddComponent<Collider>();
-	col->SetSize({ 100, 100 });
-	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(300.f);
-	AddComponent<DOTweenCompo>();
-
 	m_animator->CreateAnimation(m_animName, m_texture,
 		{ 0.f, 0.f }, { 48.f, 48.f },
 		{ 48.f, 0.f }, 8, 0.1f);
@@ -63,6 +57,12 @@ PrismBoss::PrismBoss() : Boss(),
 	AddModule(new AroundLaserPattern(m_controller, 10));
 	AddModule(new SkyLaserPattern(m_controller, 10));
 	AddModule(new GuidedLaserPattern(m_controller, 10));
+
+	auto* col = AddComponent<Collider>();
+	col->SetSize({ 100, 100 });
+	m_healthCompo = AddComponent<EntityHealth>();
+	m_healthCompo->SetDefaultHP(300.f);
+	AddComponent<DOTweenCompo>();
 }
 
 PrismBoss::~PrismBoss()
@@ -144,9 +144,9 @@ void PrismBoss::Changing()
 
 void PrismBoss::AddAwakenPattern()
 {
-	//AddModule(new MakePrismPattern(m_controller));
-	//AddModule(new AroundLaserPattern(m_controller, 15, true, 0.05f, 1.f));
-	//AddModule(new SkyLaserPattern(m_controller, 6, true, 0.34f, 0.28f));
-	//AddModule(new GuidedLaserPattern(m_controller, 20, true, 0.05f, 0.5f));
-	AddModule(new ReflectLazerPattern(m_controller, 15, true, 0.07f, 0.5f));
+	AddModule(new MakePrismPattern(m_controller));
+	AddModule(new AroundLaserPattern(m_controller, 15, true, 0.05f, 1.f));
+	AddModule(new SkyLaserPattern(m_controller, 6, true, 0.34f, 0.28f));
+	AddModule(new GuidedLaserPattern(m_controller, 20, true, 0.05f, 0.5f));
+	AddModule(new ReflectLazerPattern(m_controller, 13, true, 0.075f, 0.5f));
 }

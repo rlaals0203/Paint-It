@@ -298,8 +298,6 @@
     <ClInclude Include="GuidedLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
-    <ClInclude Include="BossShield.h" />
-    <ClInclude Include="BurstSkill.h" />
     <ClInclude Include="SkyLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClInclude>
@@ -311,6 +309,18 @@
     </ClInclude>
     <ClInclude Include="AroundLaserPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="BossShield.h">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="BurstSkill.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage3.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtBoss.h">
+      <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -522,8 +532,6 @@
     <ClCompile Include="GuidedLaserPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
-    <ClCompile Include="BossShield.cpp" />
-    <ClCompile Include="BurstSkill.cpp" />
     <ClCompile Include="ReflectLazerPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
     </ClCompile>
@@ -535,6 +543,18 @@
     </ClCompile>
     <ClCompile Include="AroundLaserPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="BossShield.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\Prism</Filter>
+    </ClCompile>
+    <ClCompile Include="BurstSkill.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage3.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtBoss.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
