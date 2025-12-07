@@ -76,6 +76,13 @@ void TitleScene::Start()
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
 	start->SetText(L"½ÃÀÛ");
 	start->SetSize({ 100, 50 });
+
+	Texture* normal = GET_SINGLE(ResourceManager)->GetTexture(L"floor");
+	Texture* hover = GET_SINGLE(ResourceManager)->GetTexture(L"fireboss");
+	Texture* pressed = GET_SINGLE(ResourceManager)->GetTexture(L"brush");
+
+
+	start->SetAllTexture(normal , hover, pressed);
 	start->SetCallback([=]()
 		{
 			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
