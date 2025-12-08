@@ -8,13 +8,20 @@
 
 OilObject::OilObject(std::wstring _texture, Layer _layer) : SpriteObject(_texture, _layer, true)
 {
-	m_texture = GET_SINGLE(ResourceManager)->GetTexture(_texture);
 	m_lifeTime = 20.f;
 
-	SetSize({ 50.f, 10.f });
+	SetSize({ 65.f, 60.f });
 	auto* col = AddComponent<Collider>();
 	col->SetSize({50.f, 50.f});
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, _layer);
+
+	m_textures[0] = GET_SINGLE(ResourceManager)->GetTexture(L"oil1");
+	m_textures[1] = GET_SINGLE(ResourceManager)->GetTexture(L"oil2");
+	m_textures[2] = GET_SINGLE(ResourceManager)->GetTexture(L"oil31");
+
+	int index = Random::Range(0, 2);
+	m_isTrans = true;
+	m_texture = m_textures[index];
 }
 
 OilObject::~OilObject()
@@ -24,7 +31,6 @@ OilObject::~OilObject()
 void OilObject::Render(HDC _hdc)
 {
 	SpriteObject::Render(_hdc);
-	Object::Render(_hdc);
 	ComponentRender(_hdc);
 }
 

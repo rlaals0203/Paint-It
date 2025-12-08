@@ -3,6 +3,7 @@
 #include "BossController.h"
 #include "ProjectileManager.h"
 #include "PlayerFindManager.h"
+#include "SkullProjectile.h"
 
 GuidedProjectilePattern::GuidedProjectilePattern(BossController* _controller,
 	ProjectileType _type, float _delay, int _count)
@@ -29,8 +30,9 @@ void GuidedProjectilePattern::Update()
 		Vec2 dir = m_player->GetPos() - pos;
 		dir.Normalize();
 
-		GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			m_type, 60.f, m_Controller->GetOwner()->GetPos(), dir, 15.f);
+		SkullProjectile* proj = new SkullProjectile();
+		proj->Init(3.f, 10, 8.f);
+		proj->SetPos(pos);
 	}
 
 	if (m_count == 0)

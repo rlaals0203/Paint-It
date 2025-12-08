@@ -40,11 +40,10 @@ FireBoss::FireBoss() : Boss()
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
-	AddModule(new SmashPattern(m_controller));
-	AddModule(new DrawProjectilePattern(m_controller, L"knife", 0.075f, 10.f));
-	AddModule(new LazerPattern(m_controller, 5));
+	//AddModule(new SmashPattern(m_controller));
+	//AddModule(new DrawProjectilePattern(m_controller, L"knife", 0.075f, 10.f));
 	AddModule(new GuidedProjectilePattern(m_controller, ProjectileType::Enemy, 0.4f, 10));
-	AddModule(new CircleProjectilePattern(m_controller, ProjectileType::Enemy, 20));
+	//AddModule(new CircleProjectilePattern(m_controller, ProjectileType::Enemy, 20));
 }
 
 FireBoss::~FireBoss()

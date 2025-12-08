@@ -66,6 +66,7 @@ void SmashPattern::FallState()
 
 	Vec2 winSize = GET_WINDOWSIZE;
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(60.f, 0.5f);
+	GET_SINGLE(ResourceManager)->Play(L"smash");
 	GET_SINGLE(EffectManager)->PlayEffect(EffectType::SmashSmoke, 
 		{ winSize.x / 2, winSize.y - 400 }, { 10.f, 10.f }, 2.f);
 	m_state = State::Ground;
@@ -85,9 +86,10 @@ void SmashPattern::GroundState()
 	float height = 300 + (rand() % 200);
 	dotweenCompo->DOParabola({ x, WINDOW_HEIGHT - 100.f }, height, height * 0.003f, EaseOutSine, [drop]()
 		{
+			if (drop == nullptr) return;
 			auto* oil = new OilObject(L"bullet", Layer::OIL);
-			oil->SetPos({ drop->GetPos() });
-
+			Vec2 pos = drop->GetPos();
+			oil->SetPos(pos);
 			drop->SetDead();
 		});
 
@@ -105,7 +107,7 @@ void SmashPattern::SetUsed()
 
 	Vec2 skyPos = { (float)(WINDOW_WIDTH / 2), -200.f };
 	m_dotween->DOMove(skyPos, 1.f, EaseInBack);
-	m_delay = 3;
+	m_delay = 3;	
 	m_count = 6;
 	m_state = State::Up;
 

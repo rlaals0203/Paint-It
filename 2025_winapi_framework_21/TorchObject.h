@@ -9,15 +9,14 @@ class TorchObject :
 public:
     TorchObject(int m_count, Vec2 _pos, float _offset = 0.f);
     ~TorchObject();
-
+public:
     void Render(HDC _hdc) override;
     void Update() override;
 private:
     void HandleDead();
     void FireProjectile();
 private:
-    EntityHealth* m_healthCompo;
-    DOTweenCompo* m_dotween;
+    DOTweenCompo* m_dotweenCompo;
     Animator* m_animator;
     std::wstring m_animName;
     Vec2 m_pos;

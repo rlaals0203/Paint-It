@@ -15,5 +15,6 @@ public:
 
 private:
     float m_lifeTime;
+    Texture* m_textures[];
 };
 

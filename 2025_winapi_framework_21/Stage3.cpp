@@ -39,7 +39,7 @@ void Stage3::Init()
 	player->SetSize({ 1.25f, 1.25f });
 	AddObject(player, Layer::PLAYER);
 
-	SpriteObject* bg = new SpriteObject(L"bluebackground", Layer::BACKGROUND, false);
+	SpriteObject* bg = new SpriteObject(L"background3", Layer::BACKGROUND, false);
 	bg->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
 	bg->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });

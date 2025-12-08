@@ -18,7 +18,6 @@ TorchObject::TorchObject(int _count, Vec2 _pos, float _offset) :
 	m_delay = 3.f;
 
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMY);
-
 	m_animName = L"torch";
 	auto* texture = GET_SINGLE(ResourceManager)->GetTexture(L"torch");
 	m_animator = AddComponent<Animator>();
@@ -28,14 +27,11 @@ TorchObject::TorchObject(int _count, Vec2 _pos, float _offset) :
 
 	m_animator->Play(m_animName);
 
-	m_healthCompo = new EntityHealth();
-	m_healthCompo->SetDefaultHP(100);
-	m_healthCompo->SubscribeHealthThreshold([this]() {HandleDead(); }, 0.f);
-
 	SetSize({ 4, 6 });
-	SetPos(_pos);
-	m_dotween = AddComponent<DOTweenCompo>();
-	m_dotween->DOLocalMoveY(150.f, 1.f, EaseOutBack);
+	SetPos(m_pos);
+	m_dotweenCompo = AddComponent<DOTweenCompo>();
+	m_dotweenCompo->DOLocalMoveY(150.f, 1.f, EaseOutBack);
+	m_pos.y += 170.f;
 
 	AddComponent<Collider>();
 }
@@ -66,7 +62,7 @@ void TorchObject::Update()
 void TorchObject::HandleDead()
 {
 	m_isDead = true;
-	m_dotween->DOLocalMoveY(-150.f, 0.5f, EaseInBack, [this]() { SetDead(); });
+	m_dotweenCompo->DOLocalMoveY(-150.f, 0.5f, EaseInBack, [this]() { SetDead(); });
 }
 
 void TorchObject::FireProjectile()
