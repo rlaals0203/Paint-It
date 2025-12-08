@@ -71,6 +71,12 @@
     <Filter Include="Engine\03. Object\Boss\Pattern\FireBoss">
       <UniqueIdentifier>{e1668f09-7d5f-4120-8056-b55c472485ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Boss\Pattern\ArtBoss">
+      <UniqueIdentifier>{5f8c06b8-8de4-490e-8e3b-2989ea08e5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Projectile">
+      <UniqueIdentifier>{a1211601-0288-4a5f-94d6-348c5a26dcff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_21.h">
@@ -118,9 +124,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceBase.h">
       <Filter>Engine\05. Resource</Filter>
     </ClInclude>
@@ -156,9 +159,6 @@
     </ClInclude>
     <ClInclude Include="Rigidbody.h">
       <Filter>Engine\06. Component\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Floor.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Engine\03. Object\Player</Filter>
@@ -241,9 +241,6 @@
     <ClInclude Include="UIBossHP.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="GuidedProjectile.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -322,10 +319,27 @@
     <ClInclude Include="ArtBoss.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="SkullProjectile.h" />
-    <ClInclude Include="TorchObject.h" />
-    <ClInclude Include="ExplosionProjectile.h" />
-    <ClInclude Include="BlackHolePattern.h" />
+    <ClInclude Include="BlackHolePattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionProjectile.h">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectile.h">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="SkullProjectile.h">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchObject.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -365,9 +379,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
       <Filter>Engine\05. Resource</Filter>
     </ClCompile>
@@ -403,9 +414,6 @@
     </ClCompile>
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Floor.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Engine\03. Object\Player</Filter>
@@ -482,9 +490,6 @@
     <ClCompile Include="UIImage.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="GuidedProjectile.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -560,9 +565,26 @@
     <ClCompile Include="ArtBoss.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="SkullProjectile.cpp" />
-    <ClCompile Include="TorchObject.cpp" />
-    <ClCompile Include="ExplosionProjectile.cpp" />
-    <ClCompile Include="BlackHolePattern.cpp" />
+    <ClCompile Include="BlackHolePattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionProjectile.cpp">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectile.cpp">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="SkullProjectile.cpp">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Engine\03. Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchObject.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
