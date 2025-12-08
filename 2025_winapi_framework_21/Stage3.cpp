@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Stage3.h"
-#include "ArtBoss.h" //
+#include "ArtBoss.h"
 #include "Object.h"
 #include "Player.h"
 #include "InputManager.h"
@@ -14,6 +14,7 @@
 #include "UIPanel.h"
 #include "UIBossHP.h"
 #include "EntityHealth.h"
+#include "Platform.h"
 
 
 void Stage3::Init()
@@ -53,7 +54,10 @@ void Stage3::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::OIL);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::PLATFORM);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
+
+	auto* plat1 = new Platform({-100, 500}, {200, 500});
 }
 
 void Stage3::Update()

@@ -211,6 +211,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="OilObject.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFindManager.h" />
     <ClInclude Include="PrismBoss.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OilObject.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="PrismBoss.cpp" />

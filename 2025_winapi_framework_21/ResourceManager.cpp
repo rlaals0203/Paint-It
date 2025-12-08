@@ -228,6 +228,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"sliderfill", L"Texture\\UISliderFull.bmp");
 	LoadTexture(L"xbutton", L"Texture\\UIXButton.bmp");
 	LoadTexture(L"crosshair", L"Texture\\crosshair.bmp");
+	LoadTexture(L"platform", L"Texture\\platform.bmp");
 }
 
 
