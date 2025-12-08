@@ -75,14 +75,52 @@ void UISlider::Render(HDC hdc)
         int width = m_fillTex->GetWidth();
         int height = m_fillTex->GetHeight();
 
-        TransparentBlt(hdc,
-            m_trackRect.left, m_trackRect.top,
-            thumbX - m_trackRect.left,
-            m_trackRect.bottom - m_trackRect.top,
+        int corner = 6; // 剧率 气 6px
+
+        int drawX = m_trackRect.left;
+        int drawY = m_trackRect.top;
+        int drawW = thumbX - m_trackRect.left;
+        int drawH = m_trackRect.bottom - m_trackRect.top;
+
+        //哭率
+        TransparentBlt(
+            hdc,
+            drawX, drawY,
+            corner, drawH,
             m_fillTex->GetTextureDC(),
             0, 0,
-            width, height,
-            RGB(255, 0, 255));
+            corner, height,
+            RGB(255, 0, 255)
+        );
+
+        //啊款单
+        int centerSrcX = corner;
+        int centerSrcW = width - corner * 2;
+
+        int centerDstX = drawX + corner;
+        int centerDstW = drawW - corner * 2;
+
+        TransparentBlt(
+            hdc,
+            centerDstX, drawY,
+            centerDstW, drawH,
+            m_fillTex->GetTextureDC(),
+            centerSrcX, 0,
+            centerSrcW, height,
+            RGB(255, 0, 255)
+        );
+
+        //坷弗率
+        TransparentBlt(
+            hdc,
+            drawX + drawW - corner, drawY,
+            corner, drawH,
+            m_fillTex->GetTextureDC(),
+            width - corner, 0,
+            corner, height,
+            RGB(255, 0, 255)
+        );
+
     }
     else
     {
