@@ -31,7 +31,7 @@ void GuidedProjectilePattern::Update()
 		dir.Normalize();
 
 		SkullProjectile* proj = new SkullProjectile();
-		proj->Init(3.f, 10, 8.f);
+		proj->Init(2.f, 10, 8.f);
 		proj->SetPos(pos);
 	}
 

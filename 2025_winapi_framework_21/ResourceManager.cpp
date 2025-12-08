@@ -216,6 +216,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"oil2", L"Texture\\oil2.bmp");
 	LoadTexture(L"oil3", L"Texture\\oil3.bmp");
 	LoadTexture(L"skull", L"Texture\\skull.bmp");
+	LoadTexture(L"playerbullet", L"Texture\\playerbullet.bmp");
 }
 
 

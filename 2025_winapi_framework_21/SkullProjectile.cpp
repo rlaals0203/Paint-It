@@ -18,7 +18,7 @@ SkullProjectile::SkullProjectile()
 	m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 
 	auto* col = AddComponent<Collider>();
-	col->SetSize({ 50, 50 });
+	col->SetSize({ 20, 20 });
 
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetDefaultHP(40.f);
@@ -82,6 +82,8 @@ void SkullProjectile::Update()
 	
 	if (animParam != m_animator->GetCurrent()->GetName())
 		m_animator->Play(animParam);
+
+	Object::Update();
 }
 
 void SkullProjectile::Render(HDC _hdc)
