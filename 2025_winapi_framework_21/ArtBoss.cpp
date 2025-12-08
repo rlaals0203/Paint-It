@@ -3,7 +3,7 @@
 #include "Collider.h"
 #include "DOTweenCompo.h" 
 #include "ResourceManager.h"
-#include "ReflectLazerPattern.h"
+#include "BlackHolePattern.h"
 
 ArtBoss::ArtBoss()
 {
@@ -29,7 +29,7 @@ ArtBoss::ArtBoss()
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
-	AddModule(new ReflectLazerPattern(m_controller, 10));
+	AddModule(new BlackHolePattern(m_controller, 500));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });

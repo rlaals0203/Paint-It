@@ -7,6 +7,7 @@ enum ProjectileType
 	DrawProjectile,
 	Enemy,
 	ExplosionProjectile,
+	BlackHoleProjectile,
 	None
 };
 
@@ -20,6 +21,8 @@ public:
 	Projectile* SpawnProjectile(ProjectileType _type, float _size,
 		Vec2 _pos, Vec2 _dir , float _speed, bool _isPlayer = false);
 	Projectile* SpawnProjectile(ProjectileType _type, float _size,
+		Vec2 _pos, float _angle, float _speed, bool _isPlayer = false);
+	Projectile* SpawnProjectileVariant(Projectile* _projectile, float _size,
 		Vec2 _pos, float _angle, float _speed, bool _isPlayer = false);
 private:
 std::unordered_map<ProjectileType, Projectile*> m_projectiles;

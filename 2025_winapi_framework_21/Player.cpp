@@ -148,6 +148,15 @@ void Player::FireProjectile()
 
 	for (int i = 0; i < 3; i++)
 	{
+		if (m_completedFire)
+		{
+			int rand = Random::Range(0, 5);
+			if (rand == 1)
+			{
+
+			}
+		}
+
 		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
 			50.f, playerPos, angles[i], 20.f, true);
 	}

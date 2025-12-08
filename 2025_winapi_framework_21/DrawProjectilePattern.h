@@ -3,7 +3,6 @@
 #include "GuidedProjectile.h"
 #include "SpriteObject.h"
 #include "Player.h"
-#include <stack>
 
 class DrawProjectilePattern :
     public BossPattern

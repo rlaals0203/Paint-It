@@ -325,6 +325,7 @@
     <ClInclude Include="SkullProjectile.h" />
     <ClInclude Include="TorchObject.h" />
     <ClInclude Include="ExplosionProjectile.h" />
+    <ClInclude Include="BlackHolePattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -562,5 +563,6 @@
     <ClCompile Include="SkullProjectile.cpp" />
     <ClCompile Include="TorchObject.cpp" />
     <ClCompile Include="ExplosionProjectile.cpp" />
+    <ClCompile Include="BlackHolePattern.cpp" />
   </ItemGroup>
 </Project>

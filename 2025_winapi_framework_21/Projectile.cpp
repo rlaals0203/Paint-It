@@ -29,7 +29,7 @@ void Projectile::Update()
 	Object::Update();
 	if (m_isAngle)
 	{
-		float rad = m_angle * (3.1415926f / 180.f);
+		float rad = m_angle * (PI / 180.f);
 		Translate({ cosf(rad) * speed * fDT, sinf(rad) * speed * fDT });
 	}
 	else
