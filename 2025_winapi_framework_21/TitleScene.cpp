@@ -141,6 +141,7 @@ void TitleScene::SettingPanel()
 
 
 	UISlider* EFFECTslider = m_settingPanel->AddUIElement<UISlider>();
+	
 	EFFECTslider->SetPos(
 		{
 			WINDOW_WIDTH / 2
@@ -159,7 +160,31 @@ void TitleScene::SettingPanel()
 	
 	EFFECTslider->SetValue(1);
 
-	//text
+	UIText* BGMtext = m_settingPanel->AddUIElement<UIText>();
+	
+	BGMtext->SetPos(
+		{
+			(LONG)(WINDOW_WIDTH / 3.5f)
+			, WINDOW_HEIGHT / 3
+		});
+
+	BGMtext->SetSize({ 120,40 });
+
+	BGMtext->SetText(L"BGM");
+	BGMtext->SetTextColor(RGB(255, 255, 255));
+	
+	UIText* EFFECTText = m_settingPanel->AddUIElement<UIText>();
+
+	EFFECTText->SetPos(
+		{
+			(LONG)(WINDOW_WIDTH / 3.5f)
+			, WINDOW_HEIGHT / 2
+		});
+
+	EFFECTText->SetSize({ 120,40 });
+
+	EFFECTText->SetText(L"SFX");
+	EFFECTText->SetTextColor(RGB(255,255,255));
 
 	//close Btn
 	UIButton* exit = m_settingPanel->AddUIElement<UIButton>();
