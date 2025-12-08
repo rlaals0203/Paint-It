@@ -8,7 +8,7 @@ void UIText::Render(HDC _hdc)
 
 	RECT rect = RECT_MAKE(pos.x, pos.y, size.x, size.y);
 
-	SetTextColor(m_textColor);
+	::SetTextColor(_hdc,m_textColor);
 	SetBkMode(_hdc, TRANSPARENT);
 
 	DrawText(_hdc, m_text.c_str(), -1, &rect,
