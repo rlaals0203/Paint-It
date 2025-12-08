@@ -16,7 +16,7 @@ public:
 	void SetSize(Vec2 size) override;
 
 public:
-	void SetImage(wstring imageName);
+	void SetImage(Texture* image);
 
 private:
 	Texture* m_image;

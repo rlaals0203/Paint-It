@@ -14,6 +14,8 @@ bool ResourceManager::Init()
 	m_resourcePath = resourceDir.native();
 	if (!RegisterFontFile(L"Font\\나눔손글씨 암스테르담.ttf"))
 		return false;
+	if (!RegisterFontFile(L"Font\\DeterminationMonoK.ttf"))
+		return false;
 	RegisterGDI();
 	RegisterTexture();
 
@@ -69,6 +71,7 @@ void ResourceManager::RegisterGDI()
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
+	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
 
 }
 
@@ -211,12 +214,13 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"bossshield", L"Texture\\bossshield.bmp");
 	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
 	LoadTexture(L"torch", L"Texture\\torch.bmp");
-	LoadTexture(L"background3", L"Texture\\background3.bmp");
-	LoadTexture(L"oil1", L"Texture\\oil1.bmp");
-	LoadTexture(L"oil2", L"Texture\\oil2.bmp");
-	LoadTexture(L"oil3", L"Texture\\oil3.bmp");
-	LoadTexture(L"skull", L"Texture\\skull.bmp");
-	LoadTexture(L"playerbullet", L"Texture\\playerbullet.bmp");
+	LoadTexture(L"button", L"Texture\\UIButton.bmp");
+	LoadTexture(L"buttonhover", L"Texture\\UIButton_HoverRed.bmp");
+	LoadTexture(L"panel", L"Texture\\UIPanel.bmp");
+	LoadTexture(L"slider", L"Texture\\UISliderEmpty.bmp");
+	LoadTexture(L"slidericon", L"Texture\\UISliderIcon.bmp");
+	LoadTexture(L"sliderfill", L"Texture\\UISliderFull.bmp");
+	LoadTexture(L"xbutton", L"Texture\\UIXButton.bmp");
 }
 
 
