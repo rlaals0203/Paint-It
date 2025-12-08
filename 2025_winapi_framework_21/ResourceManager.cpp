@@ -55,8 +55,8 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 0));
 	m_Brushs[(UINT)BrushType::LIGHTRED] = (HBRUSH)::CreateSolidBrush(RGB(255, 150, 150));
 	m_Brushs[(UINT)BrushType::GREEN] = (HBRUSH)::CreateSolidBrush(RGB(134, 229, 134));
-	m_Brushs[(UINT)BrushType::LAZER] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
-	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(120, 25, 250));
+	m_Brushs[(UINT)BrushType::LAZER] = (HBRUSH)::CreateSolidBrush(RGB(108, 141, 250));
+	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
 
 	// PEN 
 	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
@@ -64,8 +64,8 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::DANGER1] = ::CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
 	m_Pens[(UINT)PenType::DANGER2] = ::CreatePen(PS_SOLID, 2, RGB(255, 125, 50));
 	m_Pens[(UINT)PenType::LIGHTRED] = ::CreatePen(PS_SOLID, 1, RGB(255, 150, 150));
-	m_Pens[(UINT)PenType::LAZER] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
-	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(250, 100, 60));
+	m_Pens[(UINT)PenType::LAZER] = ::CreatePen(PS_SOLID, 5, RGB(140, 176, 255));
+	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
@@ -177,8 +177,8 @@ SoundInfo* ResourceManager::FindSound(const wstring& _key)
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
-	LoadSound(L"Shoot", L"Sound\\laserShoot.wav", false);
+	LoadSound(L"laser", L"Sound\\laser.mp3", false);
+	LoadSound(L"smash", L"Sound\\smash.mp3", false);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)
@@ -210,7 +210,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"bluebackground", L"Texture\\bluebackground.bmp");
 	LoadTexture(L"bossshield", L"Texture\\bossshield.bmp");
 	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
-	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
+	LoadTexture(L"torch", L"Texture\\torch.bmp");
 }
 
 

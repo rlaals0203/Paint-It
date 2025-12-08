@@ -5,6 +5,8 @@
 #include "Object.h"
 #include "Collider.h"
 #include "Stage2.h"
+#include "Stage3.h"
+
 void SceneManager::PhysicsSyncColliders()
 {
 	for (UINT i = 0; i < (UINT)Layer::END; ++i)
@@ -33,9 +35,10 @@ void SceneManager::Init()
 {
 	m_curScene = nullptr;
 	// ¾À µî·Ï
-	RegisterScene(L"DevScene",std::make_shared<Stage1>());
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
+	RegisterScene(L"Stage1",std::make_shared<Stage1>());
 	RegisterScene(L"Stage2",std::make_shared<Stage2>());
+	RegisterScene(L"Stage3",std::make_shared<Stage3>());
 	
 	// Ã¹ ¾À ·Îµå
 	LoadScene(L"TitleScene");

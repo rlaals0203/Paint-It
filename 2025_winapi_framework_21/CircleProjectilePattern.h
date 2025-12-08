@@ -14,7 +14,6 @@ public:
     virtual void SetUsed() override;
 protected:
     Boss* m_boss;
-    ProjectileType m_type;
     int m_count;
 };
 

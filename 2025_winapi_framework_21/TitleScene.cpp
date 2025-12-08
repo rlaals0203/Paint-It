@@ -25,15 +25,6 @@ void TitleScene::Init()
 		->Play(L"BGM");
 }
 
-void TitleScene::Update()
-{
-	Scene::Update();
-	/*if (GET_KEYDOWN(KEY_TYPE::P))
-	{
-		GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
-	}*/
-}
-
 void TitleScene::Release()
 {
 	GET_SINGLE(ResourceManager)
@@ -63,7 +54,6 @@ void TitleScene::Title()
 	
 	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 2  });
 	title->SetSize({ 300, 300 });
-
 	title->SetImage(L"brush");
 	
 	Vec2 size = title->GetSize();

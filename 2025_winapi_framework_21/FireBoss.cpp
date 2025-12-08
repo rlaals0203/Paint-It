@@ -44,7 +44,7 @@ FireBoss::FireBoss() : Boss()
 	AddModule(new DrawProjectilePattern(m_controller, L"knife", 0.075f, 10.f));
 	AddModule(new LazerPattern(m_controller, 5));
 	AddModule(new GuidedProjectilePattern(m_controller, ProjectileType::Enemy, 0.4f, 10));
-	AddModule(new CircleProjectilePattern(m_controller, ProjectileType::Enemy, 30));
+	AddModule(new CircleProjectilePattern(m_controller, ProjectileType::Enemy, 20));
 }
 
 FireBoss::~FireBoss()

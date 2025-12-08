@@ -36,6 +36,7 @@ void AroundLaserPattern::MakeLaser()
 	Vector2 pos = m_Controller->GetOwner()->GetPos();
 	float angle = (360 / m_count) * m_remainCount;
 	laser->SetWidth(20.f);
+	laser->SetColor(m_penType, m_brushType);
 	laser->InitLaser(pos, angle, 0.25f, 0.2f);
 	m_lasers.push(laser);
 }

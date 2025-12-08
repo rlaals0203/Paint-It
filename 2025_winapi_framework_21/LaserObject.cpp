@@ -7,6 +7,7 @@
 #include "RotateRender.h"
 #include "EntityHealth.h"
 #include "DamageText.h"
+#include "ResourceManager.h"
 
 LaserObject::LaserObject() : 
 	m_pos({}), 
@@ -36,6 +37,7 @@ void LaserObject::Update()
 
 		m_isDelay = false;
 		GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, 0.5f);
+		GET_SINGLE(ResourceManager)->Play(L"laser");
 	}
 }
 
@@ -56,7 +58,7 @@ void LaserObject::Render(HDC _hdc)
 void LaserObject::EnterCollision(Collider* _other)
 {
 	auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
-	health->ApplyDamage(10.f);
+	health->ApplyDamage(5.f);
 }
 
 void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _delay)
@@ -112,19 +114,18 @@ Vec2 LaserObject::GetLaserHitPoint()
 {
 	Vec2 start = GetPos();
 	Vec2 dir = m_dir;
-
-	float tx, ty;
+	float x, y, t;
 
 	if (dir.x > 0)
-		tx = (WINDOW_WIDTH - start.x) / dir.x;
+		x = (WINDOW_WIDTH - start.x) / dir.x;
 	else
-		tx = (0 - start.x) / dir.x;
+		x = (0 - start.x) / dir.x;
 
 	if (dir.y > 0)
-		ty = (WINDOW_HEIGHT - start.y) / dir.y;
+		y = (WINDOW_HEIGHT - start.y) / dir.y;
 	else
-		ty = (0 - start.y) / dir.y;
+		y = (0 - start.y) / dir.y;
 
-	float t = (tx < ty) ? tx : ty;
+	t = (x < y) ? x : y;
 	return start + dir * t;
 }

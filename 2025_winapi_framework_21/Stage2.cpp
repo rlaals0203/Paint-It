@@ -9,7 +9,6 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "Floor.h"
-#include "FireBoss.h"
 #include "PlayerFindManager.h"
 #include "SpriteObject.h"
 #include "UIPanel.h"
@@ -23,7 +22,7 @@ void Stage2::Init()
 	AddObject(m_mainPanel, Layer::UI);
 
 	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
-	bossHP->SetText(L"보스 [유화]");
+	bossHP->SetText(L"보스 [프리즘]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
 
