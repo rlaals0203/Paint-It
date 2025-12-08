@@ -214,6 +214,12 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"bossshield", L"Texture\\bossshield.bmp");
 	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
 	LoadTexture(L"torch", L"Texture\\torch.bmp");
+	LoadTexture(L"background3", L"Texture\\background3.bmp");
+	LoadTexture(L"oil1", L"Texture\\oil1.bmp");
+	LoadTexture(L"oil2", L"Texture\\oil2.bmp");
+	LoadTexture(L"oil3", L"Texture\\oil3.bmp");
+	LoadTexture(L"skull", L"Texture\\skull.bmp");
+	LoadTexture(L"playerbullet", L"Texture\\playerbullet.bmp");
 	LoadTexture(L"button", L"Texture\\UIButton.bmp");
 	LoadTexture(L"buttonhover", L"Texture\\UIButton_HoverRed.bmp");
 	LoadTexture(L"panel", L"Texture\\UIPanel.bmp");
@@ -221,6 +227,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"slidericon", L"Texture\\UISliderIcon.bmp");
 	LoadTexture(L"sliderfill", L"Texture\\UISliderFull.bmp");
 	LoadTexture(L"xbutton", L"Texture\\UIXButton.bmp");
+	LoadTexture(L"crosshair", L"Texture\\crosshair.bmp");
 }
 
 

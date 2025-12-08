@@ -51,6 +51,9 @@ private:
 	float m_burstCoolTime = 3.f;
 	float m_burstCooldown = 0.f;
 
+	float m_dashCoolTime = 0.25f;
+	float m_currentDashTime;
+
 	std::wstring m_playerIdle;
 	std::wstring m_rplayerIdle;
 	std::wstring m_playerMove;

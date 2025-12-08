@@ -30,9 +30,14 @@ void GuidedProjectilePattern::Update()
 		Vec2 dir = m_player->GetPos() - pos;
 		dir.Normalize();
 
+		float offsetX = Random::Range(-50, 50);
+		float offsetY = Random::Range(-50, 50);
+		Vec2 offset = { offsetX, offsetY };
+		Vec2 finalPos = pos + offset;
+
 		SkullProjectile* proj = new SkullProjectile();
-		proj->Init(2.f, 10, 8.f);
-		proj->SetPos(pos);
+		proj->Init(1.5f, 10, 5.f);
+		proj->SetPos(finalPos);
 	}
 
 	if (m_count == 0)

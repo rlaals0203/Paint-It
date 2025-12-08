@@ -28,5 +28,8 @@ private:
     std::wstring m_rbskullName;
     bool m_isRight;
     float m_lifeTime;
+
+    bool m_isExplosed;
+    float m_deadTime;
 };
 

@@ -83,7 +83,6 @@ void TitleScene::Title()
 	Texture* titleImage = GET_SINGLE(ResourceManager)->GetTexture(L"brush");
 
 	title->SetImage(titleImage);
-	
 	Vec2 size = title->GetSize();
 
 }
@@ -98,9 +97,8 @@ void TitleScene::Start()
 	start->SetAllTexture(button , buttonHover, nullptr);
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Stage1");
+			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
 		});
-
 }
 
 void TitleScene::Setting()

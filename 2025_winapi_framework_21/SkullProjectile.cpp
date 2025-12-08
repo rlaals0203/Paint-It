@@ -5,8 +5,10 @@
 #include "Animation.h"
 #include "Collider.h"
 #include "PlayerFindManager.h"
+#include "EffectManager.h"
+#include "ImpulseManager.h"
 
-SkullProjectile::SkullProjectile()
+SkullProjectile::SkullProjectile() : m_isExplosed(false)
 {
 	m_skullName = L"skullprojectile";
 	m_rskullName = L"rskullprojectile";
@@ -70,18 +72,27 @@ void SkullProjectile::Update()
 	Translate({ dir.x * m_speed * 100 * fDT,  dir.y * m_speed * 100 * fDT });
 
 	m_lifeTime -= fDT;
-	if (m_lifeTime <= 0.f)
+	if (m_lifeTime <= 0.f && m_isExplosed == false) {
 		Explosion();
+	}
 
-	wstring animParam;
+	if (m_isExplosed) {
+		m_deadTime -= fDT;
+		if (m_deadTime <= 0.f) {
+			SetDead();
+		}
+	}
+	else
+	{
+		wstring animParam;
+		animParam = m_isRight ? m_rskullName : m_skullName;
 
-	animParam = m_isRight ? m_rskullName : m_skullName;
+		if (m_isBlink)
+			animParam = m_isRight ? m_rbskullName : m_bskullName;
 
-	if (m_isBlink)
-		animParam = m_isRight ? m_rbskullName : m_bskullName;
-	
-	if (animParam != m_animator->GetCurrent()->GetName())
-		m_animator->Play(animParam);
+		if (animParam != m_animator->GetCurrent()->GetName())
+			m_animator->Play(animParam);
+	}
 
 	Object::Update();
 }
@@ -97,5 +108,8 @@ void SkullProjectile::EnterCollision(Collider* _other)
 
 void SkullProjectile::Explosion()
 {
-	SetDead();
+	m_isExplosed = true;
+	GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, GetPos(), { 5, 5 }, 1.f);
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.2f);
+	m_animator->Stop();
 }

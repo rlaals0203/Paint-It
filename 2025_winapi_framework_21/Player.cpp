@@ -150,7 +150,7 @@ void Player::Update()
 	Translate({ dir.x * 100.f * fDT, dir.y * 100.f * fDT });
 	m_coolTime -= fDT;
 
-	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime < 0.f)
+	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime <= 0.f)
 	{
 		Vec2 playerPos = GetPos();
 		Vec2 mousePos = GET_MOUSEPOS;
@@ -158,23 +158,27 @@ void Player::Update()
 		dir.Normalize();
 
 		float centerAngle = atan2f(dir.y, dir.x) * (180.f / PI);
-		float angles[3] = { centerAngle, centerAngle - 15.f, centerAngle + 15.f };
+		float angles[3] = { centerAngle, centerAngle - 10.f, centerAngle + 10.f };
 
 		for (int i = 0; i < 3; i++)
 		{
 			GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
 				50.f, playerPos, angles[i], 20.f, true);
-		}
+		}  
 
 		m_coolTime = m_delay;
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
+	m_currentDashTime -= fDT;
+
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_currentDashTime <= 0.f)
 	{
 		int direction = m_isRight ? 1 : -1;
 		float power = m_isOiled ? 1000 : 3500;
 		Vec2 dir = { (float)(direction * power), velo.y };
 		rb->SetVelocity(dir);
+
+		m_currentDashTime = m_dashCoolTime;
 	}
 
 	m_burstCooldown -= fDT;

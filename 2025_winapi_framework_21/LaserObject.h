@@ -16,8 +16,8 @@ public:
 public:
     void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
-    void HideLineWithAnim();
     void SetLine();
+    void SetLength(float _length) { m_length = _length; }
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
     void SetWidth(float _width) { m_width = _width; }
     void SetColor(PenType _pen, BrushType _brush)
