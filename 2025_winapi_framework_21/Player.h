@@ -29,6 +29,14 @@ public:
 		m_speed = 1.f;
 	}
 
+	void SetAnimationParam();
+	void FireProjectile();
+	void PlayerMovement();
+	void Dash();
+	void Move();
+
+	void SetCompletedFire() { m_completedFire = true; }
+	void SetCompletedPrism() { m_completedPrism = true; }
 private:
 	Texture* m_pTexture;
 	Texture* m_rpTexture;
@@ -42,6 +50,9 @@ private:
 	bool m_isDie;
 	bool m_isGrounded;
 	bool m_isOiled;
+	bool m_completedFire;
+	bool m_completedPrism;
+
 	float m_coolTime;
 	float m_isMoving;
 	float m_speed = 3.f;

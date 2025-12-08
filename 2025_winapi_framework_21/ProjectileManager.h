@@ -6,6 +6,7 @@ enum ProjectileType
 	PlayerProjectile,
 	DrawProjectile,
 	Enemy,
+	ExplosionProjectile,
 	None
 };
 

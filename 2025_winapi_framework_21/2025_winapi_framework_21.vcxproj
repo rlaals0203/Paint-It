@@ -192,6 +192,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityHealth.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="ExplosionProjectile.h" />
     <ClInclude Include="FallingPattern.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="framework.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="BossShield.cpp" />
     <ClCompile Include="BurstSkill.cpp" />
     <ClCompile Include="DrawProjectilePattern.cpp" />
+    <ClCompile Include="ExplosionProjectile.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />

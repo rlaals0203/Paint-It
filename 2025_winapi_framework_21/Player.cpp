@@ -85,7 +85,6 @@ Player::Player()
 		{ 0.f,0.f }, { 64.f, 64.f },
 		{ 64.f,0.f }, 8, 0.1f);
 
-
 	m_animator->Play(m_playerIdle);
 #pragma endregion
 }
@@ -119,14 +118,76 @@ void Player::ExitCollision(Collider* _other)
 	}
 }
 
-void Player::Update()
+void Player::SetAnimationParam()
 {
-	Object::Update();
-
-	Vec2 dir = {};
-	Rigidbody* rb = GetComponent<Rigidbody>();
-	Vec2 velo = rb->GetVelocity();
 	wstring animParam;
+
+	if (!m_isGrounded)
+		animParam = m_isRight ? m_rPlayerJump : m_playerJump;
+	else if (m_isMoving)
+		animParam = m_isRight ? m_rplayerMove : m_playerMove;
+	else
+		animParam = m_isRight ? m_rplayerIdle : m_playerIdle;
+
+	if (m_isBlink)
+		animParam = m_isRight ? m_bplayer : m_brplayer;
+
+	if (animParam != m_animator->GetCurrent()->GetName())
+		m_animator->Play(animParam);
+}
+
+void Player::FireProjectile()
+{
+	Vec2 playerPos = GetPos();
+	Vec2 mousePos = GET_MOUSEPOS;
+	Vec2 dir = mousePos - playerPos;
+	dir.Normalize();
+
+	float centerAngle = atan2f(dir.y, dir.x) * (180.f / PI);
+	float angles[3] = { centerAngle, centerAngle - 10.f, centerAngle + 10.f };
+
+	for (int i = 0; i < 3; i++)
+	{
+		GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
+			50.f, playerPos, angles[i], 20.f, true);
+	}
+
+	m_coolTime = m_delay;
+}
+
+void Player::PlayerMovement()
+{
+	Move();
+
+	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded)
+		Jump();
+
+	m_coolTime -= fDT;
+
+	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime <= 0.f)
+		FireProjectile();
+
+	m_currentDashTime -= fDT;
+
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_currentDashTime <= 0.f)
+		Dash();
+}
+
+void Player::Dash()
+{
+	auto* rb = GetComponent<Rigidbody>();
+
+	int direction = m_isRight ? 1 : -1;
+	float power = m_isOiled ? 1000 : 3500;
+	Vec2 dir = { (float)(direction * power), rb->GetVelocity().y};
+	rb->SetVelocity(dir);
+
+	m_currentDashTime = m_dashCoolTime;
+}
+
+void Player::Move()
+{
+	Vec2 dir = {};
 	m_isMoving = false;
 
 	if (GET_KEY(KEY_TYPE::D))
@@ -142,44 +203,12 @@ void Player::Update()
 		dir.x -= m_speed;
 	}
 
-	if (GET_KEY(KEY_TYPE::SPACE) && m_isGrounded)
-	{
-		Jump();
-	}
-
 	Translate({ dir.x * 100.f * fDT, dir.y * 100.f * fDT });
-	m_coolTime -= fDT;
+}
 
-	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime <= 0.f)
-	{
-		Vec2 playerPos = GetPos();
-		Vec2 mousePos = GET_MOUSEPOS;
-		Vec2 dir = mousePos - playerPos;
-		dir.Normalize();
-
-		float centerAngle = atan2f(dir.y, dir.x) * (180.f / PI);
-		float angles[3] = { centerAngle, centerAngle - 10.f, centerAngle + 10.f };
-
-		for (int i = 0; i < 3; i++)
-		{
-			GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
-				50.f, playerPos, angles[i], 20.f, true);
-		}  
-
-		m_coolTime = m_delay;
-	}
-
-	m_currentDashTime -= fDT;
-
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_currentDashTime <= 0.f)
-	{
-		int direction = m_isRight ? 1 : -1;
-		float power = m_isOiled ? 1000 : 3500;
-		Vec2 dir = { (float)(direction * power), velo.y };
-		rb->SetVelocity(dir);
-
-		m_currentDashTime = m_dashCoolTime;
-	}
+void Player::Update()
+{
+	Object::Update();
 
 	m_burstCooldown -= fDT;
 	if (GET_KEYDOWN(KEY_TYPE::E) && m_burstCooldown <= 0.f)
@@ -188,18 +217,8 @@ void Player::Update()
 		m_burstCooldown = m_burstCoolTime;
 	}
 
-	if (!m_isGrounded)
-		animParam = m_isRight ? m_rPlayerJump : m_playerJump;
-	else if (m_isMoving)
-		animParam = m_isRight ? m_rplayerMove : m_playerMove;
-	else
-		animParam = m_isRight ? m_rplayerIdle : m_playerIdle;
-
-	if (m_isBlink)
-		animParam = m_isRight ? m_bplayer : m_brplayer;
-
-	if (animParam != m_animator->GetCurrent()->GetName())
-		m_animator->Play(animParam);
+	PlayerMovement();
+	SetAnimationParam();
 
 	if (m_isOiled)
 	{
