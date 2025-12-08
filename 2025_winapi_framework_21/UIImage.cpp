@@ -56,9 +56,9 @@ void UIImage::SetSize(Vec2 size)
 	Object::SetPos(setPos);
 }
 
-void UIImage::SetImage(wstring imageName)
+void UIImage::SetImage(Texture* image)
 {
-	m_image = GET_SINGLE(ResourceManager)->GetTexture(imageName);
+	m_image = image;
 	if (m_image)
 	{
 		m_width = m_image->GetWidth();

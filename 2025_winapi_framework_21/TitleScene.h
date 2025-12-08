@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+class Texture;
 class UIPanel;
 class TitleScene : public Scene
 {
@@ -15,6 +15,14 @@ private:
 	void Exit();
 	void SettingPanel();
 private:
+	Texture* panel;
+	Texture* button;
+	Texture* buttonHover;
+
+	Texture* slider;
+	Texture* sliderHandle;
+	Texture* sliderFill;
+
 	UIPanel* m_mainPanel;
 	UIPanel* m_settingPanel;
 };

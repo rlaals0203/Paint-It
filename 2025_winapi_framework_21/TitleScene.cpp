@@ -11,6 +11,25 @@
 
 void TitleScene::Init()
 {
+	panel = GET_SINGLE(ResourceManager)
+		->GetTexture(L"panel");
+
+	button = GET_SINGLE(ResourceManager)
+		->GetTexture(L"button");
+
+	buttonHover = GET_SINGLE(ResourceManager)
+		->GetTexture(L"buttonhover");
+
+	slider = GET_SINGLE(ResourceManager)
+		->GetTexture(L"slider");
+
+	sliderFill = GET_SINGLE(ResourceManager)
+		->GetTexture(L"sliderfill");
+
+	sliderHandle = GET_SINGLE(ResourceManager)
+		->GetTexture(L"slidericon");
+
+
 	CreatePanel();
 
 	Title();
@@ -44,6 +63,12 @@ void TitleScene::CreatePanel()
 	m_settingPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 
 	AddObject(m_settingPanel, Layer::UI);
+
+	UIImage* settingImage = m_settingPanel->AddUIElement<UIImage>();
+
+	settingImage->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	settingImage->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+	settingImage->SetImage(panel);
 	
 	m_settingPanel->SetActive(false);
 }
@@ -54,7 +79,10 @@ void TitleScene::Title()
 	
 	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 3  });
 	title->SetSize({ 300, 300 });
-	title->SetImage(L"brush");
+
+	Texture* titleImage = GET_SINGLE(ResourceManager)->GetTexture(L"brush");
+
+	title->SetImage(titleImage);
 	
 	Vec2 size = title->GetSize();
 
@@ -64,15 +92,10 @@ void TitleScene::Start()
 {
 	UIButton* start = m_mainPanel->AddUIElement<UIButton>();
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
-	start->SetText(L"시작");
-	start->SetSize({ 100, 50 });
+	start->SetText(L"start");
+	start->SetSize({ 160, 64 });
 
-	Texture* normal = GET_SINGLE(ResourceManager)->GetTexture(L"floor");
-	Texture* hover = GET_SINGLE(ResourceManager)->GetTexture(L"fireboss");
-	Texture* pressed = GET_SINGLE(ResourceManager)->GetTexture(L"brush");
-
-
-	start->SetAllTexture(normal , hover, pressed);
+	start->SetAllTexture(button , buttonHover, nullptr);
 	start->SetCallback([=]()
 		{
 			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
@@ -84,8 +107,11 @@ void TitleScene::Setting()
 {
 	UIButton* setting = m_mainPanel->AddUIElement<UIButton>();
 	setting->SetPos({ WINDOW_WIDTH / 2, 570 });
-	setting->SetText(L"설정");
-	setting->SetSize({ 100, 50 });
+	setting->SetText(L"setting");
+	setting->SetSize({ 160, 64 });
+
+	setting->SetAllTexture(button, buttonHover, nullptr);
+
 	setting->SetCallback([=]()
 		{
 			m_mainPanel->SetActive(false);
@@ -99,9 +125,11 @@ void TitleScene::Exit()
 	
 	exit->SetPos({ WINDOW_WIDTH / 2, 640 });
 
-	exit->SetSize({ 100, 50 });
+	exit->SetSize({ 160, 64	 });
 
-	exit->SetText(L"나가다");
+	exit->SetAllTexture(button, buttonHover, nullptr);
+
+	exit->SetText(L"exit");
 	
 	exit->SetCallback([=]()
 		{
@@ -127,7 +155,7 @@ void TitleScene::SettingPanel()
 
 	BGMslider->SetThunbRadius(25);
 
-	BGMslider->SetSize({ 500, 50 });
+	BGMslider->SetSize({ 324, 108 });
 
 	BGMslider->SetCallback([=](float value)
 		{
@@ -139,6 +167,10 @@ void TitleScene::SettingPanel()
 	
 	BGMslider->SetValue(1);
 
+	BGMslider->SetFillTexture(sliderFill);
+	BGMslider->SetThumbTexture(sliderHandle);
+	BGMslider->SetTrackTexture(slider);
+
 
 	UISlider* EFFECTslider = m_settingPanel->AddUIElement<UISlider>();
 	
@@ -148,7 +180,7 @@ void TitleScene::SettingPanel()
 			, WINDOW_HEIGHT / 2
 		});
 
-	EFFECTslider->SetSize({ 500, 50 });
+	EFFECTslider->SetSize({ 324, 108 });
 
 	EFFECTslider->SetCallback([=](float value)
 		{
@@ -160,12 +192,19 @@ void TitleScene::SettingPanel()
 	
 	EFFECTslider->SetValue(1);
 
+	EFFECTslider->SetFillTexture(sliderFill);
+	EFFECTslider->SetThumbTexture(sliderHandle);
+	EFFECTslider->SetTrackTexture(slider);
+
+	EFFECTslider->SetThunbRadius(25);
+
+
 	UIText* Settingtext = m_settingPanel->AddUIElement<UIText>();
 
 	Settingtext->SetPos(
 		{
 			WINDOW_WIDTH / 2
-			, WINDOW_HEIGHT / 10
+			, WINDOW_HEIGHT / 5
 		});
 
 	Settingtext->SetSize({ 280,40 });
@@ -202,11 +241,12 @@ void TitleScene::SettingPanel()
 	//close Btn
 	UIButton* exit = m_settingPanel->AddUIElement<UIButton>();
 
-	exit->SetPos({ WINDOW_WIDTH - 100, 100 });
+	exit->SetPos({ WINDOW_WIDTH - 150, 160 });
 
-	exit->SetSize({ 40, 40 });
+	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"xbutton");
+	exit->SetAllTexture(tex, tex, nullptr);
 
-	exit->SetText(L"X");
+	exit->SetSize({ 80, 80 });
 
 	exit->SetCallback([=]()
 		{

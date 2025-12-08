@@ -51,8 +51,21 @@ void UIButton::Render(HDC _hdc)
 		Vec2 pos = GetPos();
 		Vec2 size = GetSize();
 
-		int drawX = pos.x - size.x / 2;
-		int drawY = pos.y - size.y / 2;
+		int drawX;
+		int drawY;
+		if (m_currentTexture == m_hoverTexture && m_normalTexture)
+		{
+			int cWidth = m_normalTexture->GetWidth();
+			int cHeight = m_normalTexture->GetHeight();
+			
+			drawX = (pos.x - size.x / 2) * (width / cWidth);
+			drawY = (pos.y - size.y / 2) * (height / cHeight);;
+		}
+		else
+		{
+			drawX = pos.x - size.x / 2;
+			drawY = pos.y - size.y / 2;
+		}
 
 		TransparentBlt(
 			_hdc,
