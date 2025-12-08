@@ -52,7 +52,7 @@ void TitleScene::Title()
 {
 	UIImage* title = m_mainPanel->AddUIElement<UIImage>();
 	
-	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 2  });
+	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 3  });
 	title->SetSize({ 300, 300 });
 	title->SetImage(L"brush");
 	
@@ -159,6 +159,19 @@ void TitleScene::SettingPanel()
 	EFFECTslider->SetRange(0, 1);
 	
 	EFFECTslider->SetValue(1);
+
+	UIText* Settingtext = m_settingPanel->AddUIElement<UIText>();
+
+	Settingtext->SetPos(
+		{
+			WINDOW_WIDTH / 2
+			, WINDOW_HEIGHT / 10
+		});
+
+	Settingtext->SetSize({ 280,40 });
+
+	Settingtext->SetText(L"Setting");
+	Settingtext->SetTextColor(RGB(255, 255, 255));
 
 	UIText* BGMtext = m_settingPanel->AddUIElement<UIText>();
 	
