@@ -26,5 +26,5 @@ void CircleProjectilePattern::SetUsed()
 	Vec2 torch1Pos = { 100, -50 };
 	Vec2 torch2pos = { WINDOW_WIDTH - 100, -50 };
 	auto* torch1 = new TorchObject(m_count, torch1Pos, 1.5f);
-	auto* torch2 = new TorchObject(m_count, torch2pos, 1.5f);
+	auto* torch2 = new TorchObject(m_count, torch2pos);
 }

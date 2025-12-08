@@ -6,13 +6,18 @@
 #include "EntityHealth.h"
 #include "DOTweenCompo.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
+#include "Collider.h"
 
-TorchObject::TorchObject(int _count, Vec2 _pos, float _offset)
+TorchObject::TorchObject(int _count, Vec2 _pos, float _offset) :
+	m_isDead(false)
 {
 	m_pos = _pos;
 	m_count = _count;
 	m_time = _offset;
 	m_delay = 3.f;
+
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMY);
 
 	m_animName = L"torch";
 	auto* texture = GET_SINGLE(ResourceManager)->GetTexture(L"torch");
@@ -23,26 +28,45 @@ TorchObject::TorchObject(int _count, Vec2 _pos, float _offset)
 
 	m_animator->Play(m_animName);
 
-	auto* healthCompo = new EntityHealth();
-	healthCompo->SetDefaultHP(100);
-	healthCompo->SubscribeHealthThreshold([this]() {HandleDead(); }, 0.f);
+	m_healthCompo = new EntityHealth();
+	m_healthCompo->SetDefaultHP(100);
+	m_healthCompo->SubscribeHealthThreshold([this]() {HandleDead(); }, 0.f);
 
-	DOTweenCompo* dotweenCompo = AddComponent<DOTweenCompo>();
-	dotweenCompo->DOLocalMoveY(200.f, 1.f);
+	SetSize({ 4, 6 });
+	SetPos(_pos);
+	m_dotween = AddComponent<DOTweenCompo>();
+	m_dotween->DOLocalMoveY(150.f, 1.f, EaseOutBack);
+
+	AddComponent<Collider>();
 }
 
 TorchObject::~TorchObject()
 {
+}
+
+void TorchObject::Render(HDC _hdc)
+{
+	ComponentRender(_hdc);
+}
+
+void TorchObject::Update()
+{
 	m_time -= fDT;
+	m_lifeTime -= fDT;
 	if (m_time <= 0.f) {
 		m_time = m_delay;
 		FireProjectile();
+	}
+
+	if (m_lifeTime <= 0.f && m_isDead == false) {
+		HandleDead();
 	}
 }
 
 void TorchObject::HandleDead()
 {
-	SetDead();
+	m_isDead = true;
+	m_dotween->DOLocalMoveY(-150.f, 0.5f, EaseInBack, [this]() { SetDead(); });
 }
 
 void TorchObject::FireProjectile()
