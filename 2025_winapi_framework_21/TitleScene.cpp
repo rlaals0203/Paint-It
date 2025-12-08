@@ -75,7 +75,7 @@ void TitleScene::Start()
 	start->SetAllTexture(normal , hover, pressed);
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Stage1");
+			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
 		});
 
 }

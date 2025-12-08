@@ -177,8 +177,8 @@ SoundInfo* ResourceManager::FindSound(const wstring& _key)
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
-	LoadSound(L"Shoot", L"Sound\\laserShoot.wav", false);
+	LoadSound(L"laser", L"Sound\\laser.mp3", false);
+	LoadSound(L"smash", L"Sound\\smash.mp3", false);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)

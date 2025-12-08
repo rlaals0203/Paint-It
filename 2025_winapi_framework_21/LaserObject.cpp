@@ -7,6 +7,7 @@
 #include "RotateRender.h"
 #include "EntityHealth.h"
 #include "DamageText.h"
+#include "ResourceManager.h"
 
 LaserObject::LaserObject() : 
 	m_pos({}), 
@@ -36,6 +37,7 @@ void LaserObject::Update()
 
 		m_isDelay = false;
 		GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, 0.5f);
+		GET_SINGLE(ResourceManager)->Play(L"laser");
 	}
 }
 
