@@ -229,6 +229,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"xbutton", L"Texture\\UIXButton.bmp");
 	LoadTexture(L"crosshair", L"Texture\\crosshair.bmp");
 	LoadTexture(L"platform", L"Texture\\platform.bmp");
+	LoadTexture(L"blackhole", L"Texture\\blackhole.bmp");
 }
 
 

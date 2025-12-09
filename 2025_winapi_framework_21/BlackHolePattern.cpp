@@ -3,6 +3,7 @@
 #include "DOTweenCompo.h"
 #include "ProjectileManager.h"
 #include "ImpulseManager.h"
+#include "EffectManager.h"
 
 BlackHolePattern::BlackHolePattern(BossController* _controller, int _count)
 	: BossPattern(_controller)
@@ -38,7 +39,9 @@ void BlackHolePattern::Update()
 void BlackHolePattern::SetUsed()
 {
 	m_currentCount = m_count;
-	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, m_delay * m_count);
+	float duration = m_delay * m_count;
+	GET_SINGLE(EffectManager)->PlayEffect(EffectType::BlackHole, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { 2, 2 }, duration, true);
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, duration);
 	BossPattern::SetUsed();
 }
 

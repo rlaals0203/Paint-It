@@ -7,6 +7,7 @@ enum class EffectType
 	TestPlayer,
 	SmashSmoke,
 	FireExplosion,
+	BlackHole,
 	None
 };
 

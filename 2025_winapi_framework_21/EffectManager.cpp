@@ -12,6 +12,10 @@ void EffectManager::Init()
     RegisterEffect(EffectType::FireExplosion, L"FireExplosion",
         GET_SINGLE(ResourceManager)->GetTexture(L"fireexplosion")
         , { 0.f, 0.f }, { 32.f, 32.f }, { 32.f ,0.f }, 8, 0.1f);
+
+    RegisterEffect(EffectType::BlackHole, L"BlackHole",
+        GET_SINGLE(ResourceManager)->GetTexture(L"blackhole")
+        , { 0.f, 0.f }, { 96.f, 64.f }, { 96.f ,0.f }, 6, 0.1f);
 }
 
 void EffectManager::RegisterEffect(EffectType type, wstring animName, Texture* tex,
