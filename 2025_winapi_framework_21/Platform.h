@@ -1,6 +1,5 @@
 #pragma once
 #include "SpriteObject.h"
-#include "Player.h"
 #include "Collider.h"
 
 class Platform :
@@ -11,9 +10,7 @@ public:
     ~Platform();
 
     void Render(HDC _hdc) override;
-    void Update() override;
 private:
-    Player* m_player;
     Collider* m_collider;
 };
 

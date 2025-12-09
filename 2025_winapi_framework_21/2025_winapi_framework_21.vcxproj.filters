@@ -342,6 +342,7 @@
     </ClInclude>
     <ClInclude Include="Platform.h" />
     <ClInclude Include="GroundChecker.h" />
+    <ClInclude Include="ColorRoomPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -590,5 +591,6 @@
     </ClCompile>
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="GroundChecker.cpp" />
+    <ClCompile Include="ColorRoomPattern.cpp" />
   </ItemGroup>
 </Project>

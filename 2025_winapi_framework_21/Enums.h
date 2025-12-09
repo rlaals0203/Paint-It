@@ -3,6 +3,7 @@ enum class Layer
 {
 	BACKGROUND,
 	DEFAULT,
+	BACKDAMAGEABLE,
 	PLAYER,
 	PLATFORM,
 	GROUNDCHECKER,
@@ -19,12 +20,25 @@ enum class Layer
 
 enum class PenType
 {
-	RED, GREEN, DANGER1, DANGER2, LIGHTRED, LAZER, LAZER2, END
+	RED, 
+	GREEN, 
+	DANGER1, 
+	DANGER2, 
+	LIGHTRED, 
+	LAZER, 
+	LAZER2, 
+	END
 };
 
 enum class BrushType
 {
-	HOLLOW, RED, GREEN, LIGHTRED, LAZER, LAZER2, END
+	HOLLOW, 
+	RED, 
+	GREEN, 
+	LIGHTRED, 
+	LAZER, 
+	LAZER2, 
+	END
 };
 
 enum class FontType

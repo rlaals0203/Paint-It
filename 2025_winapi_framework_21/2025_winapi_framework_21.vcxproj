@@ -178,6 +178,7 @@
     <ClInclude Include="CircleProjectilePattern.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="ColorRoomPattern.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DamageText.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="BossPatternModule.cpp" />
     <ClCompile Include="BossShield.cpp" />
     <ClCompile Include="BurstSkill.cpp" />
+    <ClCompile Include="ColorRoomPattern.cpp" />
     <ClCompile Include="DrawProjectilePattern.cpp" />
     <ClCompile Include="ExplosionProjectile.cpp" />
     <ClCompile Include="GameOverScene.cpp" />

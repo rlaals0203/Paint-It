@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Texture.h"
 class DangerGizmo :
     public Object
 {
@@ -12,6 +13,9 @@ public:
 public:
     void SetDangerGizmo(Vec2 _pos, Vec2 _size, float _angle, float _duration, float delay = 0.f);
 private:
+    Texture* m_texture1;
+    Texture* m_texture2;
+
     float m_lifeTime;
     float m_colorTime;
     float m_delay;

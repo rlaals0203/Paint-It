@@ -230,6 +230,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"crosshair", L"Texture\\crosshair.bmp");
 	LoadTexture(L"platform", L"Texture\\platform.bmp");
 	LoadTexture(L"blackhole", L"Texture\\blackhole.bmp");
+	LoadTexture(L"dangermark1", L"Texture\\dangermark1.bmp");
+	LoadTexture(L"dangermark2", L"Texture\\dangermark2.bmp");
 }
 
 

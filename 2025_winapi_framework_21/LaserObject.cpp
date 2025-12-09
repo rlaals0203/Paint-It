@@ -22,9 +22,7 @@ LaserObject::LaserObject() :
 	m_collider = AddComponent<Collider>();
 }
 
-LaserObject::~LaserObject()
-{
-}
+LaserObject::~LaserObject() { }
 
 void LaserObject::Update()
 {
@@ -70,6 +68,7 @@ void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _d
 
 	SetRotation(m_angle);
 	SetLine();
+
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
 }
 
@@ -78,21 +77,15 @@ void LaserObject::SetLine()
 	m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
 	m_dir.Normalize();
 	SetPos(m_pos);
-
 	SetSize({ 0.f, m_width });
 
-	float halfLen = GetSize().x * 0.5f;
-	Vec2 offset = m_dir * halfLen;
-
-	m_collider->SetOffSetPos(offset);
-	m_collider->SetRotation(m_angle);
-
+	Vec2 finalOffset = m_dir * (m_length * 0.5f);
 	Vec2 finalSize = { m_length, m_width };
-	Vec2 finalOffset = m_dir * (finalSize.x * 0.5f);
 	Vec2 finalPos = m_pos + finalOffset;
-	ShowDangerGizmo(finalPos, finalSize);
 
-	Vec2 pos = GetLaserHitPoint();
+	m_collider->SetOffSetPos(finalOffset);
+	m_collider->SetRotation(m_angle);
+	ShowDangerGizmo(finalPos, finalSize);
 }
 
 void LaserObject::HideLine()
@@ -108,6 +101,18 @@ void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
 	auto* dangerGizmo = new DangerGizmo();
 	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
+}
+
+void LaserObject::ConnectLaser(Vec2 _start, Vec2 _end, float _duration, float _delay)
+{
+	Vec2 dir = _end - _start;
+	SetLength(dir.Length());
+	dir.Normalize();
+	float angleInDegrees = atan2(dir.y, dir.x) * 180.f / PI;
+	if (angleInDegrees < 0)
+		angleInDegrees += 360.f;
+
+	InitLaser(_start, angleInDegrees, _duration, _delay);
 }
 
 Vec2 LaserObject::GetLaserHitPoint()

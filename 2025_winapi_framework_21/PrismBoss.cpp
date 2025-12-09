@@ -57,11 +57,13 @@ PrismBoss::PrismBoss() : Boss(),
 	AddModule(new AroundLaserPattern(m_controller, 10));
 	AddModule(new SkyLaserPattern(m_controller, 10));
 	AddModule(new GuidedLaserPattern(m_controller, 10));
+	
+
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(1000.f);
+	m_healthCompo->SetDefaultHP(10000.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	AddComponent<DOTweenCompo>();
 }

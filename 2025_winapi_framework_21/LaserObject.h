@@ -17,9 +17,11 @@ public:
     void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
     void SetLine();
+    void DisableCollider() { m_collider->SetActive(false); }
     void SetLength(float _length) { m_length = _length; }
     void ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize);
     void SetWidth(float _width) { m_width = _width; }
+    void ConnectLaser(Vec2 _start, Vec2 _end, float _duration, float _delay);
     void SetColor(PenType _pen, BrushType _brush)
     {
         m_penType = _pen;
