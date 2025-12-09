@@ -30,7 +30,7 @@ void Stage3::Init()
 
 	ArtBoss* boss = new ArtBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
-	boss->SetSize({ 5.f, 5.f });
+	boss->SetSize({ 3.f, 3.f });
 	boss->SetCanOutofBounds(false);
 	AddObject(boss, Layer::ENEMY);
 	bossHP->SetHealthCompo(boss->GetComponent<EntityHealth>());

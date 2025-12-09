@@ -26,7 +26,11 @@ enum class PenType
 	DANGER2, 
 	LIGHTRED, 
 	LAZER, 
-	LAZER2, 
+	LAZER2,
+	BLACK,
+	YELLOW,
+	BLUE,
+	WHITE,
 	END
 };
 
@@ -38,6 +42,10 @@ enum class BrushType
 	LIGHTRED, 
 	LAZER, 
 	LAZER2, 
+	BLACK,
+	YELLOW,
+	BLUE,
+	WHITE,
 	END
 };
 

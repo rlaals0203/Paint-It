@@ -37,8 +37,8 @@ void Collider::Render(HDC _hdc)
 	GDISelector pen(_hdc, colorPen);
 	GDISelector brush(_hdc, BrushType::HOLLOW);
 
-	RECT_RENDER(_hdc, m_updatedPos.x, m_updatedPos.y
-		, m_size.x, m_size.y);
+	//RECT_RENDER(_hdc, m_updatedPos.x, m_updatedPos.y
+	//	, m_size.x, m_size.y);
 }
 
 void Collider::Init()

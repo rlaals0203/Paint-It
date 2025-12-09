@@ -3,14 +3,15 @@
 #include "LaserObject.h"
 #include "DOTweenCompo.h"
 #include "SceneManager.h"
+#include "ColorObject.h"
 
 ColorRoomPattern::ColorRoomPattern(BossController* _controller, int _count, float _delay)
 	: BossPattern(_controller),
 	m_lineWidth(20.f),
 	m_faceWidth(110.f),
     m_threshold(50.f),
-    m_countX(6),
-    m_countY(4)
+    m_countX(8),
+    m_countY(5)
 {
     m_count = _count;
     m_delay = _delay;
@@ -34,12 +35,16 @@ void ColorRoomPattern::Update()
         m_isUsed = true;
     }
 
-    if (m_faceQueue.size() > 0) {
+    if (m_faceQueue.size() >= 3)
+    {
         m_dangerTime -= fDT;
         if (m_dangerTime <= 0.f) {
-            auto face = m_faceQueue.front();
-            m_faceQueue.pop();
-            FillFace(face);
+            for (int i = 0; i < 3; i++) {
+                auto face = m_faceQueue.front();
+                m_faceQueue.pop();
+                FillFace(face);
+            }
+
             m_dangerTime = m_delay;
         }
     }
@@ -50,7 +55,7 @@ void ColorRoomPattern::SetUsed()
     m_currentCount = m_count;
     m_currentDelay = m_delay;
 
-    GenerateMondrian(0, 0.2, m_lineWidth);
+    GenerateMondrian(0, 0, m_lineWidth);
     BossPattern::SetUsed();
 }
 
@@ -64,25 +69,33 @@ void ColorRoomPattern::FillFace(Face _face)
     m_gizmo.pop();
     gizmo->SetDead();
 
-    Object* obj = new Object();
-    GET_SINGLE(SceneManager)->GetCurScene()->AddObject(obj, Layer::EFFECT);
+    int idx = Random::Range(0, 5);
+
+    ColorObject* obj = new ColorObject(m_penTypes[idx], m_brushTypes[idx]);
+    GET_SINGLE(SceneManager)->GetCurScene()->AddObject(obj, Layer::BACKDAMAGEABLE);
     obj->SetPos(pos);
     auto* dotween = obj->AddComponent<DOTweenCompo>();
-    dotween->DOScale({width, height}, 0.2f, EaseInQuint);
+    dotween->DOScale({width - m_lineWidth / 2, height - m_lineWidth  / 2}, 0.2f, EaseInQuint);
 }
 
 void ColorRoomPattern::SelectFace()
 {
-    int idx = Random::Range(0, m_faces.size());
-    auto it = m_faces.begin() + idx;
-    auto face = *it;
-    m_faces.erase(it);
-    m_faceQueue.push(face);
+    for (int i = 0; i < 3; i++)
+    {
+        if (m_faces.empty())
+            return;
 
-    auto gizmo = new DangerGizmo();
-    Vec2 size = { face.width - 25, face.height - 25 };
-    gizmo->SetDangerGizmo(face.center, size, 0.f, m_delay);
-    m_gizmo.push(gizmo);
+        int idx = Random::Range(0, m_faces.size());
+        auto it = m_faces.begin() + idx;
+        auto face = *it;
+        m_faces.erase(it);
+        m_faceQueue.push(face);
+
+        auto gizmo = new DangerGizmo();
+        Vec2 size = { face.width - 25, face.height - 25 };
+        gizmo->SetDangerGizmo(face.center, size, 0.f, m_delay);
+        m_gizmo.push(gizmo);
+    }
 }
 
 void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laserWidth)
@@ -98,6 +111,7 @@ void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laser
         Vec2 end = { x, (float)WINDOW_HEIGHT };
 
         auto* laser = new LaserObject();
+        laser->SetColor(PenType::BLACK, BrushType::BLACK);
         laser->SetWidth(3.f);
         laser->DisableCollider();
         laser->ConnectLaser(start, end, duration, delay);
@@ -112,6 +126,7 @@ void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laser
 
         auto* laser = new LaserObject();
         laser->SetWidth(3.f);
+        laser->SetColor(PenType::BLACK, BrushType::BLACK);
         laser->DisableCollider();
         laser->ConnectLaser(start, end, duration, delay);
     }

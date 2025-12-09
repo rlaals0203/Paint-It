@@ -54,20 +54,28 @@ void ResourceManager::RegisterGDI()
 {
 	// BRUSH
 	m_Brushs[(UINT)BrushType::HOLLOW] = (HBRUSH)::GetStockObject(HOLLOW_BRUSH);
-	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 0));
 	m_Brushs[(UINT)BrushType::LIGHTRED] = (HBRUSH)::CreateSolidBrush(RGB(255, 150, 150));
 	m_Brushs[(UINT)BrushType::GREEN] = (HBRUSH)::CreateSolidBrush(RGB(134, 229, 134));
 	m_Brushs[(UINT)BrushType::LAZER] = (HBRUSH)::CreateSolidBrush(RGB(108, 141, 250));
 	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
+	m_Brushs[(UINT)BrushType::BLACK] = (HBRUSH)::CreateSolidBrush(RGB(0, 0, 0));
+	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 50, 50));
+	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(255, 200, 50));
+	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(50, 50, 255));
+	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
-	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	m_Pens[(UINT)PenType::DANGER1] = ::CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
 	m_Pens[(UINT)PenType::DANGER2] = ::CreatePen(PS_SOLID, 2, RGB(255, 125, 50));
 	m_Pens[(UINT)PenType::LIGHTRED] = ::CreatePen(PS_SOLID, 1, RGB(255, 150, 150));
 	m_Pens[(UINT)PenType::LAZER] = ::CreatePen(PS_SOLID, 5, RGB(140, 176, 255));
 	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
+	m_Pens[(UINT)PenType::BLACK] = ::CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 5, RGB(255, 50, 50));
+	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(255, 200, 50));
+	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 255));
+	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
@@ -212,7 +220,6 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"prismboss", L"Texture\\PrismBoss.bmp");
 	LoadTexture(L"bluebackground", L"Texture\\bluebackground.bmp");
 	LoadTexture(L"bossshield", L"Texture\\bossshield.bmp");
-	LoadTexture(L"burstSlash", L"Texture\\bossshield.bmp");
 	LoadTexture(L"torch", L"Texture\\torch.bmp");
 	LoadTexture(L"background3", L"Texture\\background3.bmp");
 	LoadTexture(L"oil1", L"Texture\\oil1.bmp");
@@ -232,6 +239,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"blackhole", L"Texture\\blackhole.bmp");
 	LoadTexture(L"dangermark1", L"Texture\\dangermark1.bmp");
 	LoadTexture(L"dangermark2", L"Texture\\dangermark2.bmp");
+	LoadTexture(L"artboss", L"Texture\\artboss.bmp");
 }
 
 

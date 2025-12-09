@@ -8,15 +8,15 @@
 
 ArtBoss::ArtBoss()
 {
-	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
+	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"artboss");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
 
-	m_animName = L"PrismBoss";
+	m_animName = L"ArtmBoss";
 	m_blinkName = L"PrismBossBlink";
 
 	m_animator->CreateAnimation(m_animName, m_texture,
-		{ 0.f, 0.f }, { 48.f, 48.f },
-		{ 48.f, 0.f }, 8, 0.1f);
+		{ 0.f, 0.f }, { 64.f, 64.f },
+		{ 64.f, 0.f }, 8, 0.1f);
 
 	m_animator->CreateAnimation(m_blinkName, m_blinkTexture,
 		{ 0.f, 0.f }, { 48.f, 48.f },

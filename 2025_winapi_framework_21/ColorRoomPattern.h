@@ -42,5 +42,8 @@ private:
     std::vector<Face> m_faces;
     std::vector<float> m_horizontal;
     std::vector<float> m_vertical;
+
+    PenType m_penTypes[5]{ PenType::RED, PenType::YELLOW, PenType::BLUE, PenType::WHITE, PenType::BLACK };
+    BrushType m_brushTypes[5]{ BrushType::RED, BrushType::YELLOW, BrushType::BLUE, BrushType::WHITE, BrushType::BLACK };
 };
 
