@@ -221,6 +221,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"slidericon", L"Texture\\UISliderIcon.bmp");
 	LoadTexture(L"sliderfill", L"Texture\\UISliderFull.bmp");
 	LoadTexture(L"xbutton", L"Texture\\UIXButton.bmp");
+	LoadTexture(L"originpoint", L"Texture\\Boss03_OriginPointSheet.bmp");
 }
 
 
