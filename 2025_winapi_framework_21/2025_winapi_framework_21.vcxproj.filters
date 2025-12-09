@@ -340,6 +340,8 @@
     <ClInclude Include="Floor.h">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="GroundChecker.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -586,5 +588,7 @@
     <ClCompile Include="Floor.cpp">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="GroundChecker.cpp" />
   </ItemGroup>
 </Project>

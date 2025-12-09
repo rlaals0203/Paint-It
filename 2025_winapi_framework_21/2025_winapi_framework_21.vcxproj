@@ -199,6 +199,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="GroundChecker.h" />
     <ClInclude Include="GuidedLaserPattern.h" />
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="DangerGizmo.cpp" />
     <ClCompile Include="DOTweenCompo.cpp" />
     <ClCompile Include="FallingPattern.cpp" />
+    <ClCompile Include="GroundChecker.cpp" />
     <ClCompile Include="GuidedLaserPattern.cpp" />
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />

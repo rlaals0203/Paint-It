@@ -29,6 +29,10 @@ Player::Player()
 	healthCompo->SetIsPlayer(false);
 	healthCompo->SetDefaultHP(100.f);
 
+	m_groundChecker = new GroundChecker();
+	m_groundChecker->SubscribeGroundChange([this](bool isGround) {HandleIsGround(isGround); });
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(m_groundChecker, Layer::GROUNDCHECKER);
+
 #pragma region  animation
 	m_playerIdle = L"playerIdle";
 	m_rplayerIdle = L"rplayerIdle";
@@ -96,26 +100,6 @@ Player::~Player()
 void Player::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
-}
-
-void Player::EnterCollision(Collider* _other)
-{
-	if (_other->GetName() == L"Floor")
-	{
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		m_isGrounded = true;
-		rb->SetGrounded(true);
-	}
-}
-
-void Player::ExitCollision(Collider* _other)
-{
-	if (_other->GetName() == L"Floor")
-	{
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(false);
-		m_isGrounded = false;
-	}
 }
 
 void Player::SetAnimationParam()
@@ -215,6 +199,13 @@ void Player::Move()
 	Translate({ dir.x * 100.f * fDT, dir.y * 100.f * fDT });
 }
 
+void Player::HandleIsGround(bool m_isGround)
+{
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	rb->SetGrounded(m_isGround);
+	m_isGrounded = m_isGround;
+}
+
 void Player::Update()
 {
 	Object::Update();
@@ -238,6 +229,10 @@ void Player::Update()
 			m_speed = 3.f;
 		}
 	}
+
+	Vec2 pos = GetPos();
+	pos.y += 40;
+	m_groundChecker->SetPos(pos);
 }
 
 void Player::Jump()

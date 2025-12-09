@@ -3,6 +3,8 @@
 #include "ProjectileLauncher.h"
 #include "Animator.h"
 #include "EntityHealth.h"
+#include "GroundChecker.h"
+
 class Texture;
 
 struct PlayerStat
@@ -20,8 +22,6 @@ public:
 	void Render(HDC _hdc) override;
 	void Jump();
 	void UseBurstSkill();
-	virtual void EnterCollision(Collider* _other)override;
-	virtual void ExitCollision(Collider* _other)override;
 	void SetSpeed(float _speed) { m_speed = _speed; }
 	void SetOiledTime(float _time) {
 		m_oiledTime = _time;
@@ -29,14 +29,17 @@ public:
 		m_speed = 1.f;
 	}
 
+	void SetCompletedFire() { m_completedFire = true; }
+	void SetCompletedPrism() { m_completedPrism = true; }
+private:
 	void SetAnimationParam();
 	void FireProjectile();
 	void PlayerMovement();
 	void Dash();
 	void Move();
 
-	void SetCompletedFire() { m_completedFire = true; }
-	void SetCompletedPrism() { m_completedPrism = true; }
+	void HandleIsGround(bool m_isGround);
+
 private:
 	Texture* m_pTexture;
 	Texture* m_rpTexture;
@@ -44,6 +47,7 @@ private:
 	Texture* m_rblinkTexture;
 
 	Animator* m_animator;
+	GroundChecker* m_groundChecker;
 	PlayerStat m_stat;
 	EntityHealth* m_healthCompo;
 private:
