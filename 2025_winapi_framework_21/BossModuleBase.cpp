@@ -5,7 +5,6 @@
 
 BossModuleBase::BossModuleBase(BossController* _controller)
  	: m_Active(false)
-	, m_AnimationKey(L"")
 {
 	m_Controller = _controller;
 }
@@ -27,9 +26,4 @@ void BossModuleBase::UpdateModule()
 void BossModuleBase::ExitModule()
 {
 	m_Active = false;
-}
-
-void BossModuleBase::SetAnimationKey(wstring _key)
-{
-	m_AnimationKey = _key;
 }

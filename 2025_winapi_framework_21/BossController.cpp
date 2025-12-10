@@ -17,8 +17,6 @@ BossController::~BossController()
 	m_ModuleMap.clear();
 }
 
-
-
 void BossController::SetBoss()
 {
 	Object* owner = GetOwner();
