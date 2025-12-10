@@ -21,7 +21,6 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void Jump();
-	void UseBurstSkill();
 	void SetSpeed(float _speed) { m_speed = _speed; }
 	void SetOiledTime(float _time) {
 		m_oiledTime = _time;
@@ -37,6 +36,8 @@ private:
 	void PlayerMovement();
 	void Dash();
 	void Move();
+	void ClampPlayer();
+	void SetGroundCheckerPos();
 
 	void HandleIsGround(bool m_isGround);
 
@@ -62,9 +63,6 @@ private:
 	float m_speed = 3.f;
 	float m_delay = 0.5f;
 	float m_oiledTime;
-
-	float m_burstCoolTime = 3.f;
-	float m_burstCooldown = 0.f;
 
 	float m_dashCoolTime = 0.25f;
 	float m_currentDashTime;

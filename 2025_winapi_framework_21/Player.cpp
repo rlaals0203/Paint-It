@@ -17,14 +17,11 @@
 
 Player::Player()
 	: m_pTexture(nullptr)
-	, m_burstCoolTime(3.f)
-	, m_burstCooldown(0.f)
 {
-	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
+	AddComponent<Rigidbody>();
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Player");
 
-	AddComponent<Rigidbody>();
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SetIsPlayer(false);
 	healthCompo->SetDefaultHP(100.f);
@@ -43,6 +40,7 @@ Player::Player()
 	m_bplayer = L"bplayer";
 	m_brplayer = L"brplayer";
 
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
 	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"player");
 	m_rpTexture = GET_SINGLE(ResourceManager)->GetTexture(L"rplayer");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"playerblink");
@@ -93,13 +91,31 @@ Player::Player()
 #pragma endregion
 }
 
-Player::~Player()
-{
-}
+Player::~Player() { }
 
 void Player::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
+}
+
+void Player::Update()
+{
+	Object::Update();
+
+	PlayerMovement();
+	SetAnimationParam();
+	ClampPlayer();
+	SetGroundCheckerPos();
+
+	if (m_isOiled)
+	{
+		m_oiledTime -= fDT;
+		if (m_oiledTime <= 0.f)
+		{
+			m_isOiled = false;
+			m_speed = 3.f;
+		}
+	}
 }
 
 void Player::SetAnimationParam()
@@ -156,12 +172,10 @@ void Player::PlayerMovement()
 		Jump();
 
 	m_coolTime -= fDT;
-
 	if (GET_KEY(KEY_TYPE::LBUTTON) && m_coolTime <= 0.f)
 		FireProjectile();
 
 	m_currentDashTime -= fDT;
-
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_currentDashTime <= 0.f)
 		Dash();
 }
@@ -181,58 +195,38 @@ void Player::Dash()
 void Player::Move()
 {
 	Vec2 dir = {};
-	m_isMoving = false;
 
 	if (GET_KEY(KEY_TYPE::D))
-	{
-		m_isRight = true;
-		m_isMoving = true;
 		dir.x += m_speed;
-	}
 	else if (GET_KEY(KEY_TYPE::A))
-	{
-		m_isRight = false;
-		m_isMoving = true;
 		dir.x -= m_speed;
-	}
+
+	m_isRight = dir.x > 0;
+	m_isMoving = fabs(dir.x) > 0.f;
 
 	Translate({ dir.x * 100.f * fDT, dir.y * 100.f * fDT });
 }
 
-void Player::HandleIsGround(bool m_isGround)
+void Player::ClampPlayer()
 {
-	Rigidbody* rb = GetComponent<Rigidbody>();
-	rb->SetGrounded(m_isGround);
-	m_isGrounded = m_isGround;
+	Vec2 pos = GetPos();
+	float x = std::clamp(pos.x, 0.f, 1280.f);
+	float y = std::clamp(pos.y, 0.f, 720.f);
+	SetPos({ x, y });
 }
 
-void Player::Update()
+void Player::SetGroundCheckerPos()
 {
-	Object::Update();
-
-	m_burstCooldown -= fDT;
-	if (GET_KEYDOWN(KEY_TYPE::E) && m_burstCooldown <= 0.f)
-	{
-		UseBurstSkill();
-		m_burstCooldown = m_burstCoolTime;
-	}
-
-	PlayerMovement();
-	SetAnimationParam();
-
-	if (m_isOiled)
-	{
-		m_oiledTime -= fDT;
-		if (m_oiledTime <= 0.f)
-		{
-			m_isOiled = false;
-			m_speed = 3.f;
-		}
-	}
-
 	Vec2 pos = GetPos();
 	pos.y += 40;
 	m_groundChecker->SetPos(pos);
+}
+
+void Player::HandleIsGround(bool _isGround)
+{
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	rb->SetGrounded(_isGround);
+	m_isGrounded = _isGround;
 }
 
 void Player::Jump()
@@ -240,11 +234,4 @@ void Player::Jump()
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetVelocity({ rb->GetVelocity().x, -550.f });
 	rb->SetGrounded(false);
-}
-
-void Player::UseBurstSkill()
-{
-	BurstSkill* burst = new BurstSkill();
-	burst->Init(GetPos(), 150.f, 0.5f);
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(burst, Layer::EFFECT);
 }

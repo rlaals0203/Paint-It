@@ -3,36 +3,100 @@
 #include "LaserObject.h"
 #include "DOTweenCompo.h"
 #include "SceneManager.h"
-#include "ColorObject.h"
+#include "Object.h"
 
-ColorRoomPattern::ColorRoomPattern(BossController* _controller, int _count, float _delay)
-	: BossPattern(_controller),
-	m_lineWidth(20.f),
-	m_faceWidth(110.f),
+ColorRoomPattern::ColorRoomPattern(BossController* _controller, float _delay)
+    : BossPattern(_controller),
+    m_lineWidth(20.f),
+    m_faceWidth(110.f),
     m_threshold(50.f),
     m_countX(8),
-    m_countY(5)
+    m_countY(5),
+    m_isDeleteMode(false)
 {
-    m_count = _count;
     m_delay = _delay;
     m_dangerTime = m_delay;
+    m_deleteTime = 2.f;
+    m_count = (m_countX + 1) * (m_countY + 1);
 }
 
-ColorRoomPattern::~ColorRoomPattern()
-{
-}
+ColorRoomPattern::~ColorRoomPattern() { }
 
 void ColorRoomPattern::Update()
 {
+    if (m_isDeleteMode)
+        RemoveSection();
+    else
+        FillSection();
+
+    if (m_count <= 0)
+        m_isDeleteMode = true;
+}
+
+void ColorRoomPattern::SetUsed()
+{
+    m_currentDelay = m_delay;
+
+    GenerateMondrian(0, 0, m_lineWidth);
+    BossPattern::SetUsed();
+}
+
+void ColorRoomPattern::FillFace(Face _face)
+{
+    Vec2 pos = _face.center;
+    float width = _face.width;
+    float height = _face.height;
+
+    auto* gizmo = m_gizmo.front();
+    m_gizmo.pop();
+    gizmo->SetDead();
+
+    int idx = Random::Range(0, 6);
+
+    ColorObject* obj = new ColorObject(m_penTypes[idx], m_brushTypes[idx]);
+    GET_SINGLE(SceneManager)->GetCurScene()->AddObject(obj, Layer::BACKDAMAGEABLE);
+    obj->SetPos(pos);
+    m_colorStack.push(obj);
+
+    auto* dotween = obj->AddComponent<DOTweenCompo>();
+    dotween->DOScale({width - m_lineWidth / 2, height - m_lineWidth  / 2}, 0.2f, EaseInQuint);
+    m_count--;
+}
+
+void ColorRoomPattern::SelectFace()
+{
+    if (m_faces.empty())
+        return;
+
+    int idx = Random::Range(0, m_faces.size());
+    auto it = m_faces.begin() + idx;
+    auto face = *it;
+    m_faces.erase(it);
+    m_faceQueue.push(face);
+
+    auto gizmo = new DangerGizmo();
+    Vec2 size = { face.width - 25, face.height - 25 };
+    gizmo->SetDangerGizmo(face.center, size, 0.f, m_delay);
+    m_gizmo.push(gizmo);
+}
+
+void ColorRoomPattern::RemoveFace()
+{
+    if (m_colorStack.size() == 0) return;
+    auto* colorObj = m_colorStack.top();
+    m_colorStack.pop();
+    auto* dotween = colorObj->GetComponent<DOTweenCompo>();
+    dotween->DOScale({ 0, 0 }, 0.3f, EaseInBack, [=]() {colorObj->SetDead(); });
+}
+
+void ColorRoomPattern::FillSection()
+{
     m_currentDelay -= fDT;
     if (m_currentDelay <= 0.f) {
-        SelectFace();
-        m_currentDelay = m_delay;
-        m_currentCount--;
-    }
+        for (int i = 0; i < 3; i++)
+            SelectFace();
 
-    if (m_currentCount == 0) {
-        m_isUsed = true;
+        m_currentDelay = m_delay;
     }
 
     if (m_faceQueue.size() >= 3)
@@ -50,51 +114,14 @@ void ColorRoomPattern::Update()
     }
 }
 
-void ColorRoomPattern::SetUsed()
+void ColorRoomPattern::RemoveSection()
 {
-    m_currentCount = m_count;
-    m_currentDelay = m_delay;
+    m_deleteTime -= fDT;
+    if (m_deleteTime <= 0.f) {
+        m_deleteTime = 1.f;
 
-    GenerateMondrian(0, 0, m_lineWidth);
-    BossPattern::SetUsed();
-}
-
-void ColorRoomPattern::FillFace(Face _face)
-{
-    Vec2 pos = _face.center;
-    float width = _face.width;
-    float height = _face.height;
-
-    auto* gizmo = m_gizmo.front();
-    m_gizmo.pop();
-    gizmo->SetDead();
-
-    int idx = Random::Range(0, 5);
-
-    ColorObject* obj = new ColorObject(m_penTypes[idx], m_brushTypes[idx]);
-    GET_SINGLE(SceneManager)->GetCurScene()->AddObject(obj, Layer::BACKDAMAGEABLE);
-    obj->SetPos(pos);
-    auto* dotween = obj->AddComponent<DOTweenCompo>();
-    dotween->DOScale({width - m_lineWidth / 2, height - m_lineWidth  / 2}, 0.2f, EaseInQuint);
-}
-
-void ColorRoomPattern::SelectFace()
-{
-    for (int i = 0; i < 3; i++)
-    {
-        if (m_faces.empty())
-            return;
-
-        int idx = Random::Range(0, m_faces.size());
-        auto it = m_faces.begin() + idx;
-        auto face = *it;
-        m_faces.erase(it);
-        m_faceQueue.push(face);
-
-        auto gizmo = new DangerGizmo();
-        Vec2 size = { face.width - 25, face.height - 25 };
-        gizmo->SetDangerGizmo(face.center, size, 0.f, m_delay);
-        m_gizmo.push(gizmo);
+        for (int i = 0; i < 3; i++)
+            RemoveFace();
     }
 }
 
@@ -133,14 +160,12 @@ void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laser
 
     std::sort(m_horizontal.begin(), m_horizontal.end());
     std::sort(m_vertical.begin(), m_vertical.end());
-
     m_faces = GetFaces();
 }
 
 std::vector<Face> ColorRoomPattern::GetFaces()
 {
     std::vector<Face> faces;
-
     std::vector<float> xSize = m_horizontal;
     std::vector<float> ySize = m_vertical;
 
@@ -150,15 +175,12 @@ std::vector<Face> ColorRoomPattern::GetFaces()
     xSize.insert(xSize.begin(), 0.f);
     xSize.push_back((float)WINDOW_WIDTH);
 
-    for (int y = 0; y < ySize.size() - 1; y++)
-    {
-        for (int x = 0; x < xSize.size() - 1; x++)
-        {
+    for (int y = 0; y < ySize.size() - 1; y++) {
+        for (int x = 0; x < xSize.size() - 1; x++) {
             float top = ySize[y];
             float bottom = ySize[y + 1];
             float left = xSize[x];
             float right = xSize[x + 1];
-
             float w = right - left;
             float h = bottom - top;
 
