@@ -61,10 +61,10 @@ void Boss::StopAnimation()
 	}
 }
 
-void Boss::ResetPattern()
+void Boss::BossReset()
 {
 	BossPatternModule* patternMoudle = (BossPatternModule*)(m_controller->GetModule(L"PatternModule"));
-	patternMoudle->PatternReset();
+	patternMoudle->BossReset();
 }
 
 void Boss::AddModule(BossPattern* addedPattern)

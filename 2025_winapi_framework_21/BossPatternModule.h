@@ -17,7 +17,7 @@ public:
     virtual void ExitModule() override;
 
 public:
-    void PatternReset();
+    void BossReset();
 
 public:
     void AddPattern(BossPattern* _addPattern);

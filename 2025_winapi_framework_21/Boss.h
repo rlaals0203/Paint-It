@@ -21,7 +21,7 @@ public:
 public:
     void SetAnimation(wstring animationKey);
     void StopAnimation();
-    void ResetPattern();
+    void BossReset();
     void AddModule(BossPattern* addedPattern);
     void AddMoveModule(MovePattern* addedPattern);
     void ClearModule();
