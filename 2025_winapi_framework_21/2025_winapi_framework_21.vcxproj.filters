@@ -352,6 +352,12 @@
     <ClInclude Include="ColorRoomPattern.h">
       <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
     </ClInclude>
+    <ClInclude Include="DotBombPattern.h" />
+    <ClInclude Include="BlockObject.h" />
+    <ClInclude Include="BombObject.h" />
+    <ClInclude Include="OriginPoint.h" />
+    <ClInclude Include="OriginPointPattern.h" />
+    <ClInclude Include="StringArtPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -610,5 +616,11 @@
     <ClCompile Include="ColorRoomPattern.cpp">
       <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
     </ClCompile>
+    <ClCompile Include="DotBombPattern.cpp" />
+    <ClCompile Include="BlockObject.cpp" />
+    <ClCompile Include="BombObject.cpp" />
+    <ClCompile Include="OriginPoint.cpp" />
+    <ClCompile Include="OriginPointPattern.cpp" />
+    <ClCompile Include="StringArtPattern.cpp" />
   </ItemGroup>
 </Project>
