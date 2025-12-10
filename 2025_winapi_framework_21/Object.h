@@ -27,6 +27,7 @@ public:
 
 	void OnHit();
 	void SetCanOutofBounds(bool canOut) { m_canOutofbounds = canOut; }
+	void SetDontDestroy() { m_dontDestroyOnComplete = true; }
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -74,7 +75,7 @@ protected:
 	bool m_isDie;
 	bool m_isRight; //오른쪽을 보고 있는지
 	bool m_isBlink;
-
+	bool m_dontDestroyOnComplete;
 private:
 	float m_rotation;
 	Vec2 m_pos;

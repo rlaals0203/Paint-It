@@ -30,8 +30,8 @@ ArtBoss::ArtBoss()
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
-	//AddModule(new BlackHolePattern(m_controller, 300));
-	AddModule(new ColorRoomPattern(m_controller, 1.f));
+	AddModule(new ColorRoomPattern(m_controller, 0.5f));
+	AddModule(new BlackHolePattern(m_controller, 300));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
