@@ -13,19 +13,7 @@ BossPatternModule::BossPatternModule(BossController* _controller)
 
 BossPatternModule:: ~BossPatternModule()
 {
-    for (int i = 0; i < m_Patterns.size(); i++)
-    {
-        delete m_Patterns[i];
-    }
-    m_Patterns.clear();
-
-    for (int i = 0; i < m_movePatterns.size(); i++)
-    {
-        delete m_movePatterns[i];
-    }
-    m_movePatterns.clear();
-
-    m_Orders.clear();
+    BossReset();
 }
 
 void BossPatternModule::EnterModule()
@@ -50,13 +38,21 @@ void BossPatternModule::ExitModule()
     BossModuleBase::ExitModule();
 }
 
-void BossPatternModule::PatternReset()
+void BossPatternModule::BossReset()
 {
     for (int i = 0; i < m_Patterns.size(); i++)
     {
         delete m_Patterns[i];
     }
     m_Patterns.clear();
+
+    for (int i = 0; i < m_movePatterns.size(); i++)
+    {
+        delete m_movePatterns[i];
+    }
+    m_movePatterns.clear();
+
+    m_Orders.clear();
 }
 
 void BossPatternModule::AddPattern(BossPattern* _addPattern)
