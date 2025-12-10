@@ -26,6 +26,9 @@ public:
     void AddMoveModule(MovePattern* addedPattern);
     void ClearModule();
 protected:
+    void GoStage(int stage);
+    void GoTitle();
+protected:
     BossController* m_controller;
     Animator* m_animator;
 
