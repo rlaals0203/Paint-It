@@ -33,6 +33,22 @@ StringArtPattern::StringArtPattern(BossController* _controller, float _laserDela
 
 StringArtPattern::~StringArtPattern()
 {
+    for (auto* pond : m_ponds)
+    {
+        if (pond && !pond->GetIsDead())
+            pond->SetDead();
+    }
+    m_ponds.clear();
+
+    while (!m_lasers.empty())
+    {
+        auto* laser = m_lasers.front();
+        m_lasers.pop();
+        if (laser && !laser->GetIsDead())
+            laser->SetDead();
+    }
+
+    m_pondPositions.clear();
 }
 
 void StringArtPattern::Update()

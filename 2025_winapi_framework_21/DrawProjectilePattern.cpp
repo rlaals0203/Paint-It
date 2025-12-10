@@ -22,6 +22,15 @@ DrawProjectilePattern::DrawProjectilePattern(BossController* _controller,
 
 DrawProjectilePattern::~DrawProjectilePattern()
 {
+	while (!m_projectiles.empty())
+	{
+		auto* proj = m_projectiles.top();
+		m_projectiles.pop();
+		if (proj && !proj->GetIsDead())
+			proj->SetDead();
+	}
+
+	m_brushObj = nullptr;
 }
 
 void DrawProjectilePattern::Update()
