@@ -241,6 +241,7 @@
     <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="Stage3.h" />
+    <ClInclude Include="StringArtPattern.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="FireBoss.h" />
     <ClInclude Include="Texture.h" />
@@ -332,6 +333,7 @@
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="Stage3.cpp" />
+    <ClCompile Include="StringArtPattern.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />

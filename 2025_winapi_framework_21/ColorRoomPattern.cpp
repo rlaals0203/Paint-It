@@ -3,6 +3,7 @@
 #include "DOTweenCompo.h"
 #include "SceneManager.h"
 #include "Object.h"
+#include "DangerGizmo.h"
 
 ColorRoomPattern::ColorRoomPattern(BossController* _controller, float _delay)
     : BossPattern(_controller),
