@@ -10,6 +10,7 @@
 #include "SmashPattern.h"
 #include "LazerPattern.h"
 #include "DrawProjectilePattern.h"
+#include "SceneManager.h"
 
 
 FireBoss::FireBoss() : Boss()
@@ -71,5 +72,5 @@ void FireBoss::Render(HDC _hdc)
 
 void FireBoss::HandleDaad()
 {
-
+	GET_SINGLE(SceneManager)->GetCurScene()->ClearScene();
 }

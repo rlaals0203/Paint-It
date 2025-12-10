@@ -21,6 +21,7 @@ void Projectile::Init(std::wstring _texture, float _damage)
 	auto* com = AddComponent<Collider>();
 	com->SetName(L"Proj");
 	com->SetTrigger(true);
+	SetDestroyOnComplete();
 }
 
 void Projectile::Update()

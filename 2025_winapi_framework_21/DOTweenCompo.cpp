@@ -71,6 +71,12 @@ void DOTweenCompo::LateUpdate()
             }
         }
     }
+
+    if (m_owner && m_owner->GetIsDead())
+    {
+        KillAllTweens();
+        return;
+    }
 }
 
 void DOTweenCompo::Render(HDC _hdc) {}
