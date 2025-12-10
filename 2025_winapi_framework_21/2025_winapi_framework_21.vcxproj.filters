@@ -340,10 +340,18 @@
     <ClInclude Include="Floor.h">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="GroundChecker.h" />
-    <ClInclude Include="ColorRoomPattern.h" />
-    <ClInclude Include="ColorObject.h" />
+    <ClInclude Include="Platform.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorObject.h">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundChecker.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorRoomPattern.h">
+      <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -590,9 +598,17 @@
     <ClCompile Include="Floor.cpp">
       <Filter>Engine\03. Object\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="GroundChecker.cpp" />
-    <ClCompile Include="ColorRoomPattern.cpp" />
-    <ClCompile Include="ColorObject.cpp" />
+    <ClCompile Include="Platform.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorObject.cpp">
+      <Filter>Engine\03. Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundChecker.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorRoomPattern.cpp">
+      <Filter>Engine\03. Object\Boss\Pattern\ArtBoss</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

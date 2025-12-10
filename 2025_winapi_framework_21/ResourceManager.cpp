@@ -53,20 +53,28 @@ void ResourceManager::RegisterGDI()
 {
 	// BRUSH
 	m_Brushs[(UINT)BrushType::HOLLOW] = (HBRUSH)::GetStockObject(HOLLOW_BRUSH);
-	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 0));
 	m_Brushs[(UINT)BrushType::LIGHTRED] = (HBRUSH)::CreateSolidBrush(RGB(255, 150, 150));
 	m_Brushs[(UINT)BrushType::GREEN] = (HBRUSH)::CreateSolidBrush(RGB(134, 229, 134));
 	m_Brushs[(UINT)BrushType::LAZER] = (HBRUSH)::CreateSolidBrush(RGB(108, 141, 250));
 	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
+	m_Brushs[(UINT)BrushType::BLACK] = (HBRUSH)::CreateSolidBrush(RGB(0, 0, 0));
+	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 50, 50));
+	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(255, 200, 50));
+	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(50, 50, 255));
+	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
-	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	m_Pens[(UINT)PenType::DANGER1] = ::CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
 	m_Pens[(UINT)PenType::DANGER2] = ::CreatePen(PS_SOLID, 2, RGB(255, 125, 50));
 	m_Pens[(UINT)PenType::LIGHTRED] = ::CreatePen(PS_SOLID, 1, RGB(255, 150, 150));
 	m_Pens[(UINT)PenType::LAZER] = ::CreatePen(PS_SOLID, 5, RGB(140, 176, 255));
 	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
+	m_Pens[(UINT)PenType::BLACK] = ::CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 5, RGB(255, 50, 50));
+	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(255, 200, 50));
+	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 255));
+	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);

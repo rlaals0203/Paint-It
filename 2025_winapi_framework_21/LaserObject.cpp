@@ -69,7 +69,7 @@ void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _d
 	SetRotation(m_angle);
 	SetLine();
 
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::BACKDAMAGEABLE);
 }
 
 void LaserObject::SetLine()

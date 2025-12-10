@@ -1,6 +1,8 @@
 #pragma once
 #include "BossPattern.h"
 #include "DangerGizmo.h"
+#include "ColorObject.h"
+#include "LaserObject.h"
 
 struct Face
 {
@@ -13,17 +15,19 @@ class ColorRoomPattern :
     public BossPattern
 {
 public:
-    ColorRoomPattern(BossController* _controller, int _count, float _delay);
+    ColorRoomPattern(BossController* _controller, float _delay);
     ~ColorRoomPattern();
 public:
     virtual void Update() override;
     virtual void SetUsed() override;
 private:
-    void SetLine();
     void GenerateMondrian(float duration, float delay, float laserWidth);
     std::vector<Face>GetFaces();
     void FillFace(Face _face);
     void SelectFace();
+    void RemoveFace();
+    void FillSection();
+    void RemoveSection();
 private:
     float m_lineWidth;
     float m_faceWidth;
@@ -32,18 +36,23 @@ private:
     int m_countY;
 
     int m_count;
-    int m_currentCount;
     float m_delay;
     float m_currentDelay;
     float m_dangerTime;
 
+    bool m_isDeleteMode;
+    float m_deleteTime;
+    bool m_isCompleted;
+
+    std::stack<ColorObject*> m_colorStack;
     std::queue<Face> m_faceQueue;
     std::queue<DangerGizmo*> m_gizmo;
     std::vector<Face> m_faces;
     std::vector<float> m_horizontal;
     std::vector<float> m_vertical;
+    std::vector<LaserObject*> m_lasers;
 
-    PenType m_penTypes[5]{ PenType::RED, PenType::YELLOW, PenType::BLUE, PenType::WHITE, PenType::BLACK };
-    BrushType m_brushTypes[5]{ BrushType::RED, BrushType::YELLOW, BrushType::BLUE, BrushType::WHITE, BrushType::BLACK };
+    PenType m_penTypes[6]{ PenType::RED, PenType::YELLOW, PenType::BLUE, PenType::WHITE, PenType::WHITE, PenType::BLACK };
+    BrushType m_brushTypes[6]{ BrushType::RED, BrushType::YELLOW, BrushType::BLUE, BrushType::WHITE, BrushType::WHITE, BrushType::BLACK };
 };
 
