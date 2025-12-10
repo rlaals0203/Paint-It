@@ -80,8 +80,6 @@ void Core::CleanUp()
 	::DeleteObject(m_hBackBit);
 	::ReleaseDC(m_hWnd, m_hDC);
 
+	GET_SINGLE(ProjectileManager)->Release();
 	GET_SINGLE(ResourceManager)->Release();
-
-	// 다른 싱글톤들도 정리 필요 (DECLARE_SINGLE 매크로에 따라)
-	// ProjectileManager, EffectManager 등의 정리가 필요할 수 있음
 }

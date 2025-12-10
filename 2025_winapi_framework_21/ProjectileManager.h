@@ -14,15 +14,7 @@ class ProjectileManager
     DECLARE_SINGLE(ProjectileManager);
 public:
     void Init();
-
-    ~ProjectileManager()
-    {
-        for (auto& pair : m_projectiles)
-        {
-            delete pair.second;
-        }
-        m_projectiles.clear();
-    }
+    void Release();
 
     void RegisterProjectile(ProjectileType _type, wstring _texture, float _damage);
     Projectile* SpawnProjectile(ProjectileType _type, float _size, Vec2 _pos,
