@@ -7,19 +7,19 @@ bool ResourceManager::Init()
 	//// todo: release build path
 	//m_resourcePath = curPath.parent_path() / L"Output\\build\\Resource\\";
 
-	wchar_t buf[MAX_PATH] = {}; // windows ÃÖ´ë °æ·Î ±æÀÌ
-	::GetModuleFileNameW(nullptr, buf, MAX_PATH); // ÇöÀç ½ÇÇàÁßÀÎ exe °æ·Î buf¿¡ ÀúÀå   
-	fs::path exeDir = fs::path(buf).parent_path();                //  buf ÀüÃ¼ °æ·Î¸¦ path °´Ã¼·Î °¡¼­ µð·ºÅä¸®¸¸ ÃßÃâ
-	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // release¸ðµåÀÏ¶§ build ÇÑ¹ø´õ ºÙÀÌ´Â°Å ¹«½Ã
+	wchar_t buf[MAX_PATH] = {}; // windows ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	::GetModuleFileNameW(nullptr, buf, MAX_PATH); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ exe ï¿½ï¿½ï¿½ bufï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½   
+	fs::path exeDir = fs::path(buf).parent_path();                //  buf ï¿½ï¿½Ã¼ ï¿½ï¿½Î¸ï¿½ path ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // releaseï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ build ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_resourcePath = resourceDir.native();
-	if (!RegisterFontFile(L"Font\\³ª´®¼Õ±Û¾¾ ¾Ï½ºÅ×¸£´ã.ttf"))
+	if (!RegisterFontFile(L"Font\\ï¿½ï¿½ï¿½ï¿½ï¿½Õ±Û¾ï¿½ ï¿½Ï½ï¿½ï¿½×¸ï¿½ï¿½ï¿½.ttf"))
 		return false;
 	if (!RegisterFontFile(L"Font\\DeterminationMonoK.ttf"))
 		return false;
 	RegisterGDI();
 	RegisterTexture();
 
-	FMOD::System_Create(&m_pSoundSystem); // ½Ã½ºÅÛ »ý¼º
+	FMOD::System_Create(&m_pSoundSystem); // ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (m_pSoundSystem != nullptr)
 		m_pSoundSystem->init(64, FMOD_INIT_NORMAL, nullptr);
 	RegisterSound();
@@ -60,8 +60,8 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
 	m_Brushs[(UINT)BrushType::BLACK] = (HBRUSH)::CreateSolidBrush(RGB(0, 0, 0));
 	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 50, 50));
-	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(255, 200, 65));
-	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(50, 50, 200));
+	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(255, 200, 50));
+	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(50, 50, 255));
 	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
@@ -73,12 +73,12 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
 	m_Pens[(UINT)PenType::BLACK] = ::CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
 	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 5, RGB(255, 50, 50));
-	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(255, 200, 65));
-	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 200));
+	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(255, 200, 50));
+	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 255));
 	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
-	// ÆùÆ® µî·Ï
-	RegisterFont(FontType::TITLE, L"³ª´®¼Õ±Û¾¾ ¾Ï½ºÅ×¸£´ã", 0);
+	// ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
+	RegisterFont(FontType::TITLE, L"ï¿½ï¿½ï¿½ï¿½ï¿½Õ±Û¾ï¿½ ï¿½Ï½ï¿½ï¿½×¸ï¿½ï¿½ï¿½", 0);
 	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
 
 }
@@ -88,7 +88,7 @@ void ResourceManager::ReleaseGDI()
 	for (int i = 0; i < (UINT)PenType::END; ++i)
 		::DeleteObject(m_Pens[i]);
 	for (int i = 1; i < (UINT)BrushType::END; ++i)
-		// Hollow Á¦¿ÜÇÏ°í
+		// Hollow ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 		::DeleteObject(m_Brushs[i]);
 	for (int i = 0; i < (UINT)FontType::END; ++i)
 		::DeleteObject(m_Fonts[i]);
@@ -123,16 +123,16 @@ void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool 
 	std::string str;
 	str.assign(strFilePath.begin(), strFilePath.end());
 
-	// ·çÇÁÇÒÁö ¸»Áö °áÁ¤
-	FMOD_MODE eMode = FMOD_LOOP_NORMAL; // ¹Ýº¹ Ãâ·Â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	FMOD_MODE eMode = FMOD_LOOP_NORMAL; // ï¿½Ýºï¿½ ï¿½ï¿½ï¿½
 	if (!_isLoop)
-		eMode = FMOD_DEFAULT; // »ç¿îµå 1¹ø¸¸ Ãâ·Â
+		eMode = FMOD_DEFAULT; // ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	FMOD::Sound* p = nullptr;
 
-	// BGM¸é stream, ¾Æ´Ï¸é sound
-	// ÆÑÅä¸®ÇÔ¼ö
-	//// »ç¿îµå °´Ã¼¸¦ ¸¸µå´Â °ÍÀº systemÀÓ.
-	//						//ÆÄÀÏ°æ·Î,  FMOD_MODE, NULL, &sound
+	// BGMï¿½ï¿½ stream, ï¿½Æ´Ï¸ï¿½ sound
+	// ï¿½ï¿½ï¿½ä¸®ï¿½Ô¼ï¿½
+	//// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ systemï¿½ï¿½.
+	//						//ï¿½ï¿½ï¿½Ï°ï¿½ï¿½,  FMOD_MODE, NULL, &sound
 	FMOD_RESULT r = _isLoop
 		? m_pSoundSystem->createStream(str.c_str(), eMode, nullptr, &p)
 		: m_pSoundSystem->createSound(str.c_str(), eMode, nullptr, &p);
@@ -155,7 +155,7 @@ void ResourceManager::Play(const wstring& _key)
 	SOUND_CHANNEL eChannel = SOUND_CHANNEL::BGM;
 	if (!pSound->IsLoop)
 		eChannel = SOUND_CHANNEL::EFFECT;
-	// »ç¿îµå Àç»ý ÇÔ¼ö. &channel·Î ¾î¶² Ã¤³ÎÀ» ÅëÇØ Àç»ýµÇ´ÂÁö Æ÷ÀÎÅÍ ³Ñ±è
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½. &channelï¿½ï¿½ ï¿½î¶² Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½
 	m_pSoundSystem->playSound(pSound->pSound, nullptr, false, &m_pChannel[(UINT)eChannel]);
 
 }
@@ -168,7 +168,7 @@ void ResourceManager::Stop(SOUND_CHANNEL _channel)
 
 void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
 {
-	// 0.0 ~ 1.0 º¼·ý Á¶Àý
+	// 0.0 ~ 1.0 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_pChannel[(UINT)_channel]->setVolume(_vol);
 
 }
@@ -240,8 +240,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"dangermark1", L"Texture\\dangermark1.bmp");
 	LoadTexture(L"dangermark2", L"Texture\\dangermark2.bmp");
 	LoadTexture(L"artboss", L"Texture\\artboss.bmp");
-	LoadTexture(L"artbossblink", L"Texture\\artbossblink.bmp");
-	LoadTexture(L"yellowprojectile", L"Texture\\yellowprojectile.bmp");
+	LoadTexture(L"originpoint", L"Texture\\Boss03_OriginPointSheet.bmp");
 }
 
 
@@ -249,19 +248,19 @@ void ResourceManager::RegisterTexture()
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
 {
 	Texture* pTex = GetTexture(_key);
-	// ¸øÃ£¾ÒÀ¸¸é ¸®ÅÏ
+	// ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (nullptr != pTex)
 		return;
-	// Ã³À½¿¡ ¾øÀ»°Å´Ï °æ·Î Ã£¾Æ¼­
+	// Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ ï¿½ï¿½ï¿½ Ã£ï¿½Æ¼ï¿½
 	wstring texPath = m_resourcePath;
 	texPath += _path;
 
-	// ¸¸µé¾î¼­
+	// ï¿½ï¿½ï¿½ï¿½î¼­
 	pTex = new Texture;
-	pTex->Load(texPath); // ÅØ½ºÃ³ ÀÚÃ¼ ·Îµå
-	pTex->SetKey(_key); // Å° °æ·Î ¼¼ÆÃ
+	pTex->Load(texPath); // ï¿½Ø½ï¿½Ã³ ï¿½ï¿½Ã¼ ï¿½Îµï¿½
+	pTex->SetKey(_key); // Å° ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	pTex->SetRelativePath(texPath);
-	m_mapTexture.insert({ _key,pTex }); // ¸Ê¿¡ ÀúÀå
+	m_mapTexture.insert({ _key,pTex }); // ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
 Texture* ResourceManager::GetTexture(const wstring& _key)

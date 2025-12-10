@@ -167,6 +167,9 @@
     <ClInclude Include="BaseLazerPattern.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="BlackHolePattern.h" />
+    <ClInclude Include="DotBombPattern.h" />
+    <ClInclude Include="BlockObject.h" />
+    <ClInclude Include="BombObject.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossController.h" />
     <ClInclude Include="BossIdleModule.h" />
@@ -213,6 +216,8 @@
     <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OilObject.h" />
+    <ClInclude Include="OriginPoint.h" />
+    <ClInclude Include="OriginPointPattern.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
@@ -259,6 +264,9 @@
     <ClCompile Include="BaseLazerPattern.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="BlackHolePattern.cpp" />
+    <ClCompile Include="DotBombPattern.cpp" />
+    <ClCompile Include="BlockObject.cpp" />
+    <ClCompile Include="BombObject.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossController.cpp" />
     <ClCompile Include="BossIdleModule.cpp" />
@@ -302,6 +310,8 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OilObject.cpp" />
     <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="OriginPoint.cpp" />
+    <ClCompile Include="OriginPointPattern.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFindManager.cpp" />
     <ClCompile Include="PrismBoss.cpp" />
