@@ -23,7 +23,38 @@ ColorRoomPattern::ColorRoomPattern(float _delay) :
     GenerateMondrian(0, 0, m_lineWidth);
 }
 
-ColorRoomPattern::~ColorRoomPattern() { }
+ColorRoomPattern::~ColorRoomPattern()
+{
+    while (!m_colorStack.empty())
+    {
+        auto* obj = m_colorStack.top();
+        m_colorStack.pop();
+        if (obj && !obj->GetIsDead())
+            obj->SetDead();
+    }
+
+    while (!m_gizmo.empty())
+    {
+        auto* gizmo = m_gizmo.front();
+        m_gizmo.pop();
+        if (gizmo && !gizmo->GetIsDead())
+            gizmo->SetDead();
+    }
+
+    for (auto* laser : m_lasers)
+    {
+        if (laser && !laser->GetIsDead())
+            laser->SetDead();
+    }
+    m_lasers.clear();
+
+    while (!m_faceQueue.empty())
+        m_faceQueue.pop();
+
+    m_faces.clear();
+    m_horizontal.clear();
+    m_vertical.clear();
+}
 
 void ColorRoomPattern::Update()
 {

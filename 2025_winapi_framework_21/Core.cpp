@@ -8,6 +8,7 @@
 #include "ProjectileManager.h"
 #include "EffectManager.h"
 #include "ImpulseManager.h"
+
 bool Core::Init(HWND _hWnd)
 {
 	m_hWnd = _hWnd;
@@ -78,5 +79,9 @@ void Core::CleanUp()
 	::DeleteDC(m_hBackDC);
 	::DeleteObject(m_hBackBit);
 	::ReleaseDC(m_hWnd, m_hDC);
+
 	GET_SINGLE(ResourceManager)->Release();
+
+	// 다른 싱글톤들도 정리 필요 (DECLARE_SINGLE 매크로에 따라)
+	// ProjectileManager, EffectManager 등의 정리가 필요할 수 있음
 }

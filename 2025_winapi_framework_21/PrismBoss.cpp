@@ -71,8 +71,10 @@ PrismBoss::PrismBoss() : Boss(),
 
 PrismBoss::~PrismBoss()
 {
-	if (m_shield != nullptr)
+	if (m_shield != nullptr && !m_shield->GetIsDead())
+	{
 		m_shield->SetDead();
+	}
 	m_shield = nullptr;
 }
 
