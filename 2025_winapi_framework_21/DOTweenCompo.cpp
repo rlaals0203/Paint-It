@@ -125,3 +125,14 @@ void DOTweenCompo::StartScale(Vec2 _target, float _duration, float(*_ease)(float
     m_isScaling = true;
     m_scaleCallback = _callback;
 }
+
+void DOTweenCompo::KillAllTweens()
+{
+    m_isMoving = false;
+    m_isScaling = false;
+    m_isParabola = false;
+
+    m_moveCallback = nullptr;
+    m_scaleCallback = nullptr;
+    m_paraCallback = nullptr;
+}

@@ -39,7 +39,6 @@ private:
 	void Move();
 	void ClampPlayer();
 	void SetGroundCheckerPos();
-
 	void HandleIsGround(bool m_isGround);
 
 private:

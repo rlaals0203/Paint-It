@@ -24,6 +24,7 @@ Player::Player()
 
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetIsPlayer(false);
+	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetDefaultHP(100.f);
 
 	m_groundChecker = new GroundChecker();
@@ -92,7 +93,12 @@ Player::Player()
 #pragma endregion
 }
 
-Player::~Player() { }
+Player::~Player()
+{
+	m_groundChecker = nullptr;
+	m_animator = nullptr;
+	m_healthCompo = nullptr;
+}
 
 void Player::Render(HDC _hdc)
 {
