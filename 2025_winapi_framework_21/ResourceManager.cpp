@@ -232,6 +232,9 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"dangermark2", L"Texture\\dangermark2.bmp");
 	LoadTexture(L"artboss", L"Texture\\artboss.bmp");
 	LoadTexture(L"originpoint", L"Texture\\Boss03_OriginPointSheet.bmp");
+	LoadTexture(L"explosion", L"Texture\\Boss03_ExplosionSheet.bmp");
+	LoadTexture(L"bomb", L"Texture\\Boss03_Bomb.bmp");
+	LoadTexture(L"bombblink", L"Texture\\Boss03_BombBlink.bmp");
 }
 
 

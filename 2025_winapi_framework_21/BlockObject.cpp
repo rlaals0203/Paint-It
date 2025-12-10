@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "BombObject.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 #include "Scene.h"
 
 BlockObject::BlockObject(float destroyTime, float bombTime, float blink,float damageTime , Vec2 _bombSize)
@@ -16,6 +17,15 @@ BlockObject::BlockObject(float destroyTime, float bombTime, float blink,float da
 	, m_bomb(nullptr)
 {
 	//텍스처 가져오기
+	m_textures[0] = GET_SINGLE(ResourceManager)
+		->GetTexture(L"bomb");
+
+	m_textures[1] = GET_SINGLE(ResourceManager)
+		->GetTexture(L"bombblink");
+
+	m_bomb = GET_SINGLE(ResourceManager)
+		->GetTexture(L"explosion");
+
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Wall");
 	col->SetTrigger(false);
@@ -43,10 +53,9 @@ void BlockObject::Update()
 	}
 	else
 	{
-		BombObject* bomb = new BombObject(m_damage, m_damageTime);
+		BombObject* bomb = new BombObject(m_damage, m_damageTime, m_bomb);
 		bomb->SetPos(GetPos());
 		bomb->SetSize(m_bombSize);
-		bomb->SetTexture(m_bomb);
 		bomb->SetDamage(m_damage);
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(bomb, Layer::ENEMYOBSTACLE);
 		SetDead();

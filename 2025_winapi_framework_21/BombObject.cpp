@@ -4,11 +4,20 @@
 #include "EntityHealth.h"
 #include "DamageText.h"
 #include "Texture.h"
+#include "Animator.h"
 
-BombObject::BombObject(int damage, float endtime)
+BombObject::BombObject(int damage, float endtime , Texture* tex)
 	: m_damage(damage)
 	, m_damageTime(endtime)
+	, m_bombTex(tex)
 {
+	Animator* ani = AddComponent<Animator>();
+	ani->CreateAnimation(
+		L"ani", m_bombTex,
+		{ 0.f,0.f }, { 32.f, 32.f },
+		{ 32.f,0.f }, 6, m_damageTime / 6
+	);
+	ani->Play(L"ani");
 }
 
 BombObject::~BombObject()
