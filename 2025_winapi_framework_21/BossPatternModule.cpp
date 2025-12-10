@@ -13,7 +13,7 @@ BossPatternModule::BossPatternModule(BossController* _controller)
 
 BossPatternModule:: ~BossPatternModule()
 {
-    
+    BossReset();
 }
 
 void BossPatternModule::EnterModule()
