@@ -17,6 +17,8 @@ private:
     void MakeDot();
 
 private:
+    bool once = false;
+    
     int m_baseCount;
     int m_count;
     int m_damage;
@@ -28,6 +30,7 @@ private:
     float m_bombTime;
     float m_blinkTime;
     float m_damageTime;
+    float m_waitTime;
 
     Vec2 m_dotSize;
     Vec2 m_bombSize;

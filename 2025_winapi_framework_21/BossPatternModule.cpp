@@ -42,9 +42,14 @@ void BossPatternModule::PatternReset()
 {
 	for (int i = 0; i < m_Patterns.size(); i++)
 	{
-		delete m_Patterns[i];
+		SAFE_DELETE(m_Patterns[i]);
+	}
+	for (int i = 0; i < m_movePatterns.size(); i++)
+	{
+		SAFE_DELETE(m_movePatterns[i]);
 	}
 	m_Patterns.clear();
+	m_movePatterns.clear();
 }
 
 void BossPatternModule::AddPattern(BossPattern* _addPattern)
@@ -60,8 +65,12 @@ void BossPatternModule::AddMovePattern(MovePattern* p)
 
 void BossPatternModule::ClearPattern()
 {
+	for (int i = 0; i < m_Patterns.size(); i++)
+	{
+		SAFE_DELETE(m_Patterns[i]);
+	}
 	m_Patterns.clear();
-}
+}	
 
 
 void BossPatternModule::SelectPattern()

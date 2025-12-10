@@ -5,7 +5,7 @@ class BombObject :
     public Object
 {
 public:
-    BombObject(int damage , float endtime);
+    BombObject(int damage , float endtime, Texture* tex);
     ~BombObject();
 public:
     virtual void Render(HDC _hdc) override;
@@ -13,7 +13,6 @@ public:
     virtual void EnterCollision(Collider* _other) override;
 
 public:
-    void SetTexture(Texture* tex) { m_bombTex = tex; }
     void SetDamage(int damage) { m_damage = damage; }
 
 private:
