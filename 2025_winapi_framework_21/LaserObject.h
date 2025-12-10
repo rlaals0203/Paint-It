@@ -14,6 +14,7 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
     void EnterCollision(Collider* _other) override;
+    void StayCollision(Collider* _other) override;
 public:
     void InitLaser(Vec2 _start, float _angle, float _duration, float _delay = 1.f);
     void HideLine();
@@ -27,6 +28,11 @@ public:
     {
         m_penType = _pen;
         m_brushType = _brush;
+    }
+    void SetDamagePerTick(float _damage, float _tickInterval)
+    {
+        m_damagePerTick = _damage;
+        m_tickInterval = _tickInterval;
     }
     Vec2 GetLaserHitPoint();
     Vec2 GetDirection() { return m_dir; }
@@ -46,5 +52,8 @@ private:
     float m_angle;
     float m_length;
     float m_width;
-};
 
+    float m_damagePerTick;
+    float m_tickInterval;
+    float m_tickTimer;
+};
