@@ -16,6 +16,7 @@ public:
     void SetLaser();
 private:
     float m_startDeleteTime;
+    LaserObject* m_laser;
     Player* m_player;
 };
 

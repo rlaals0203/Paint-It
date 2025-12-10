@@ -16,12 +16,14 @@ public:
 	void ApplyDamage(int _damage, bool _isDamageText = true);
 	void SetDefaultHP(int _hp) { m_maxHp = m_currentHp = _hp; }
 	void SetIsPlayer(bool _isBoss = true) { m_isBoss = _isBoss; }
+	void SetDamageMultiplier(float _multiplier) { m_damageMult = _multiplier; }
 	void SubscribeHealthThreshold(std::function<void()> _callback, float _threshold) 
 	{ m_callback = _callback; m_threshold = _threshold; }
 private:
 	int m_maxHp;
 	int m_currentHp;
 	float m_threshold;
+	float m_damageMult;
 	bool m_isBoss;
 	bool m_hasInvoked;
 	std::function<void()> m_callback;

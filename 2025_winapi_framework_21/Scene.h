@@ -40,6 +40,7 @@ public:
 	void RequestDestroy(Object* obj);
 	void RequestSpawn(Object* obj, Layer _type);
 	void FlushEvent();
+	void ClearScene();
 private:
 	void RemoveObject(Object* _obj);
 private:

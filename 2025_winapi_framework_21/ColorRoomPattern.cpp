@@ -5,8 +5,7 @@
 #include "Object.h"
 #include "DangerGizmo.h"
 
-ColorRoomPattern::ColorRoomPattern(BossController* _controller, float _delay)
-    : BossPattern(_controller),
+ColorRoomPattern::ColorRoomPattern(float _delay) :
     m_lineWidth(20.f),
     m_faceWidth(110.f),
     m_threshold(50.f),
@@ -19,6 +18,9 @@ ColorRoomPattern::ColorRoomPattern(BossController* _controller, float _delay)
     m_dangerTime = m_delay;
     m_deleteTime = 2.f;
     m_count = (m_countX + 1) * (m_countY + 1);
+
+    m_currentDelay = m_delay;
+    GenerateMondrian(0, 0, m_lineWidth);
 }
 
 ColorRoomPattern::~ColorRoomPattern() { }
@@ -43,14 +45,6 @@ void ColorRoomPattern::Update()
         m_isDeleteMode = true;
 }
 
-void ColorRoomPattern::SetUsed()
-{
-    m_currentDelay = m_delay;
-
-    GenerateMondrian(0, 0, m_lineWidth);
-    BossPattern::SetUsed();
-}
-
 void ColorRoomPattern::FillFace(Face _face)
 {
     Vec2 pos = _face.center;
@@ -68,8 +62,10 @@ void ColorRoomPattern::FillFace(Face _face)
     obj->SetPos(pos);
     m_colorStack.push(obj);
 
+    Vec2 size = { width - m_lineWidth / 2, height - m_lineWidth / 2 };
     auto* dotween = obj->AddComponent<DOTweenCompo>();
-    dotween->DOScale({width - m_lineWidth / 2, height - m_lineWidth  / 2}, 0.2f, EaseInQuint);
+    dotween->DOScale(size, 0.2f, EaseInQuint);
+    obj->GetComponent<Collider>()->SetSize(size);
     m_count--;
 }
 

@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "DOTweenCompo.h"
 #include "Collider.h"
+#include "DangerGizmo.h"
 
 class LaserObject :
     public Object
@@ -41,7 +42,7 @@ private:
     Collider* m_collider;
     Vec2 m_pos;
     Vec2 m_dir;
-
+    DangerGizmo* m_dangerGizmo;
     PenType m_penType;
     BrushType m_brushType;
 

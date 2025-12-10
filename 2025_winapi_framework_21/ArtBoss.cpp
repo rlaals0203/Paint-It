@@ -4,7 +4,6 @@
 #include "DOTweenCompo.h" 
 #include "ResourceManager.h"
 #include "BlackHolePattern.h"
-#include "ColorRoomPattern.h"
 #include "StringArtPattern.h"
 
 ArtBoss::ArtBoss()
@@ -31,28 +30,34 @@ ArtBoss::ArtBoss()
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
-	//AddModule(new BlackHolePattern(m_controller, 300));
-	//AddModule(new ColorRoomPattern(m_controller, 0.5f));
+	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetDefaultHP(300.f);
+	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	AddComponent<DOTweenCompo>();
 }
 
 ArtBoss::~ArtBoss()
 {
-	Boss::Update();
+
 }
 
 void ArtBoss::Update()
 {
+	Boss::Update();
 }
 
 void ArtBoss::Render(HDC _hdc)
 {
 	Object::Render(_hdc);
 	ComponentRender(_hdc);
+}
+
+void ArtBoss::HandlePhase()
+{
+	auto* colorRoom = new ColorRoomPattern(1.f);
 }

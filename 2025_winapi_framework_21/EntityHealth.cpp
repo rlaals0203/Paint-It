@@ -8,6 +8,7 @@ EntityHealth::EntityHealth() :
     m_maxHp(0),
     m_isBoss(true),
     m_hasInvoked(false),
+    m_damageMult(1.f),
 	m_currentHp(0) { }
 
 EntityHealth::~EntityHealth() { }
@@ -51,7 +52,7 @@ void EntityHealth::Render(HDC _hdc)
 void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
 {
     if (m_isActive == false) return;
-	m_currentHp -= _damage;
+	m_currentHp -= _damage * m_damageMult;
 	Object* owner = GetOwner();
 	owner->OnHit();
 
