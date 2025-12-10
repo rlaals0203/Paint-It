@@ -16,18 +16,19 @@ BlockObject::BlockObject(float destroyTime, float bombTime, float blink,float da
 	, m_damageTime(damageTime)
 	, m_bomb(nullptr)
 {
+	
 	//텍스처 가져오기
-	m_textures[0] = GET_SINGLE(ResourceManager)
-		->GetTexture(L"bomb");
+	m_textures.push_back(GET_SINGLE(ResourceManager)
+		->GetTexture(L"bomb"));
 
-	m_textures[1] = GET_SINGLE(ResourceManager)
-		->GetTexture(L"bombblink");
+	m_textures.push_back(GET_SINGLE(ResourceManager)
+		->GetTexture(L"bombblink"));
 
 	m_bomb = GET_SINGLE(ResourceManager)
 		->GetTexture(L"explosion");
 
 	auto* col = AddComponent<Collider>();
-	col->SetName(L"Wall");
+	col->SetSize({ 25,25 });
 	col->SetTrigger(false);
 }
 
@@ -58,7 +59,7 @@ void BlockObject::Update()
 		bomb->SetSize(m_bombSize);
 		bomb->SetDamage(m_damage);
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(bomb, Layer::ENEMYOBSTACLE);
-		SetDead();
+		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
 	}
 }
 
@@ -74,12 +75,16 @@ void BlockObject::Render(HDC hdc)
 		Vec2 pos = GetPos();
 		Vec2 size = GetSize();
 
+		int x = (int)(pos.x - size.x / 2);
+		int y = (int)(pos.y - size.y / 2);
+
 		::TransparentBlt(hdc
-			, pos.x
-			, pos.y
+			, x
+			, y
 			, size.x
 			, size.y
 			, tex->GetTextureDC(),
 			0, 0, width, height, RGB(255, 0, 255));
 	}
+	ComponentRender(hdc);
 }

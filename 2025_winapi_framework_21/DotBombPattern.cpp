@@ -11,11 +11,12 @@ DotBombPattern::DotBombPattern(BossController* _controller, int count)
 	, m_spawnTime(0.15f)
 	, m_timer(0.15f)
 	, m_destroyTime(3.5f)
+	, m_waitTime(1.5f)
 	, m_bombTime(1.f)
 	, m_blinkTime(0.1f)
-	, m_damageTime(0.3f)
+	, m_damageTime(0.6f)
 	, m_dotSize({50,50})
-	, m_bombSize({100,100})
+	, m_bombSize({5,5})
 	, m_damage(5)
 {
 
@@ -30,19 +31,28 @@ void DotBombPattern::Update()
 	m_timer -= fDT;
 	if (m_timer <= 0)
 	{
-		for (int i = 0; i < m_count; ++i)
+		if (!once)
 		{
-			MakeDot();
+			for (int i = 0; i < m_count; ++i)
+			{
+				MakeDot();
+			}
+			once = true;
 		}
-		m_isUsed = false;
-
+		
 	}
+	m_waitTime -= fDT;
+	if (m_waitTime > 0)
+		return;
+	m_isUsed = false;
 }
 
 void DotBombPattern::SetUsed()
 {
 	m_count = m_baseCount;
 	m_timer = m_spawnTime;
+	m_waitTime = 1.5f;
+	once = false;
 	BossPattern::SetUsed();
 }
 
@@ -61,5 +71,5 @@ void DotBombPattern::MakeDot()
 
 	block->SetPos(point);
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(block, Layer::ENEMYOBSTACLE);
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(block, Layer::PLATFORM);
 }
