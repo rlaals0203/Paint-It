@@ -31,6 +31,8 @@ public:
     bool IsMoving() const { return m_isMoving; }
     bool IsScaling() const { return m_isScaling; }
 
+    void KillAllTweens();
+
 private:
     void StartMove(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback = nullptr);
     void StartScale(Vec2 _target, float _duration, float(*_ease)(float), std::function<void()> _callback = nullptr);

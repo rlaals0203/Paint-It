@@ -153,5 +153,5 @@ void PrismBoss::HandlePhase()
 
 void PrismBoss::HandleDaad()
 {
-
+	GoStage(3);
 }

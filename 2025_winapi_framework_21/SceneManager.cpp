@@ -6,6 +6,7 @@
 #include "Collider.h"
 #include "Stage2.h"
 #include "Stage3.h"
+#include "GameOverScene.h"
 
 void SceneManager::PhysicsSyncColliders()
 {
@@ -39,6 +40,7 @@ void SceneManager::Init()
 	RegisterScene(L"Stage1",std::make_shared<Stage1>());
 	RegisterScene(L"Stage2",std::make_shared<Stage2>());
 	RegisterScene(L"Stage3",std::make_shared<Stage3>());
+	RegisterScene(L"GameOverScene",std::make_shared<GameOverScene>());
 	
 	// Ã¹ ¾À ·Îµå
 	LoadScene(L"TitleScene");
