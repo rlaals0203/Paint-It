@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+
 bool ResourceManager::Init()
 {
 	//fs::path curPath  = fs::current_path();
@@ -12,8 +13,6 @@ bool ResourceManager::Init()
 	fs::path exeDir = fs::path(buf).parent_path();                //  buf 전체 경로를 path 객체로 가서 디렉토리만 추출
 	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // release모드일때 build 한번더 붙이는거 무시
 	m_resourcePath = resourceDir.native();
-	if (!RegisterFontFile(L"Font\\나눔손글씨 암스테르담.ttf"))
-		return false;
 	if (!RegisterFontFile(L"Font\\DeterminationMonoK.ttf"))
 		return false;
 	RegisterGDI();
@@ -54,31 +53,23 @@ void ResourceManager::RegisterGDI()
 {
 	// BRUSH
 	m_Brushs[(UINT)BrushType::HOLLOW] = (HBRUSH)::GetStockObject(HOLLOW_BRUSH);
+	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 0));
 	m_Brushs[(UINT)BrushType::LIGHTRED] = (HBRUSH)::CreateSolidBrush(RGB(255, 150, 150));
 	m_Brushs[(UINT)BrushType::GREEN] = (HBRUSH)::CreateSolidBrush(RGB(134, 229, 134));
 	m_Brushs[(UINT)BrushType::LAZER] = (HBRUSH)::CreateSolidBrush(RGB(108, 141, 250));
 	m_Brushs[(UINT)BrushType::LAZER2] = (HBRUSH)::CreateSolidBrush(RGB(200, 250, 250));
-	m_Brushs[(UINT)BrushType::BLACK] = (HBRUSH)::CreateSolidBrush(RGB(0, 0, 0));
-	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 50, 50));
-	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(255, 200, 50));
-	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(50, 50, 255));
-	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
+	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	m_Pens[(UINT)PenType::DANGER1] = ::CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
 	m_Pens[(UINT)PenType::DANGER2] = ::CreatePen(PS_SOLID, 2, RGB(255, 125, 50));
 	m_Pens[(UINT)PenType::LIGHTRED] = ::CreatePen(PS_SOLID, 1, RGB(255, 150, 150));
 	m_Pens[(UINT)PenType::LAZER] = ::CreatePen(PS_SOLID, 5, RGB(140, 176, 255));
 	m_Pens[(UINT)PenType::LAZER2] = ::CreatePen(PS_SOLID, 5, RGB(150, 200, 250));
-	m_Pens[(UINT)PenType::BLACK] = ::CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
-	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 5, RGB(255, 50, 50));
-	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(255, 200, 50));
-	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 255));
-	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
-	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
+	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);
 	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
 
 }
