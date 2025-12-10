@@ -60,6 +60,8 @@ void Stage3::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::GROUNDCHECKER, Layer::PLATFORM);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
+
+
 }
 
 void Stage3::Update()

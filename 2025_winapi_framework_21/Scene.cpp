@@ -102,6 +102,17 @@ void Scene::FlushEvent()
 	m_killObject.clear();
 }
 
+void Scene::ClearScene()
+{
+	for (UINT i = 0; i < (UINT)Layer::END; ++i)
+	{
+		auto& vec = m_vecObj[i];
+		for (auto* obj : vec)
+			if (obj->IsDestroyOnComplete())
+				obj->SetDead();
+	}
+}
+
 void Scene::RequestSpawn(Object* _obj, Layer _type)
 {
 	SpawnObject newObj;

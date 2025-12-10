@@ -242,7 +242,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"originpoint", L"Texture\\Boss03_OriginPointSheet.bmp");
 	LoadTexture(L"yellowprojectile", L"Texture\\yellowprojectile.bmp");
 	LoadTexture(L"artbossblink", L"Texture\\artbossblink.bmp");
-	LoadTexture(L"pond", L"Texture\Pond.bmp");
+	LoadTexture(L"pond", L"Texture\\Pond.bmp");
 }
 
 

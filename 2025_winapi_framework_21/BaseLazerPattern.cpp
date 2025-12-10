@@ -14,7 +14,10 @@ BaseLazerPattern::BaseLazerPattern(BossController* _controller, int _count, bool
 	m_remainDeleteTime = _deleteTime;
 }
 
-BaseLazerPattern::~BaseLazerPattern() { }
+BaseLazerPattern::~BaseLazerPattern()
+{
+
+}
 
 void BaseLazerPattern::Update()
 {

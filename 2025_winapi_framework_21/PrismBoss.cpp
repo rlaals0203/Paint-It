@@ -63,13 +63,16 @@ PrismBoss::PrismBoss() : Boss(),
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(10000.f);
+	m_healthCompo->SetDefaultHP(300.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	AddComponent<DOTweenCompo>();
 }
 
 PrismBoss::~PrismBoss()
 {
+	if (m_shield != nullptr)
+		m_shield->SetDead();
+	m_shield = nullptr;
 }
 
 void PrismBoss::Update()
@@ -142,4 +145,5 @@ void PrismBoss::HandlePhase()
 {
 	m_isChanging = true;
 	m_animator->Play(m_changingName);
+	GET_SINGLE(SceneManager)->GetCurScene()->ClearScene();
 }

@@ -3,7 +3,6 @@
 #include "Ease.h"
 #include "SceneManager.h"
 #include "ImpulseManager.h"
-#include "DangerGizmo.h"
 #include "RotateRender.h"
 #include "EntityHealth.h"
 #include "DamageText.h"
@@ -20,9 +19,14 @@ LaserObject::LaserObject() :
 {
 	m_dotweenCompo = AddComponent<DOTweenCompo>();
 	m_collider = AddComponent<Collider>();
+	SetDestroyOnComplete();
 }
 
-LaserObject::~LaserObject() { }
+LaserObject::~LaserObject()
+{
+	if (m_dangerGizmo != nullptr)
+		SAFE_DELETE(m_dangerGizmo);
+}
 
 void LaserObject::Update()
 {
@@ -99,8 +103,8 @@ void LaserObject::HideLine()
 
 void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
-	auto* dangerGizmo = new DangerGizmo();
-	dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
+	m_dangerGizmo = new DangerGizmo();
+	m_dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
 }
 
 void LaserObject::ConnectLaser(Vec2 _start, Vec2 _end, float _duration, float _delay)
