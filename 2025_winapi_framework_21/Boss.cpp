@@ -5,6 +5,7 @@
 #include "BossIdleModule.h"
 #include "BossPatternModule.h"
 #include "EntityHealth.h"
+#include "SceneManager.h"
 
 Boss::Boss() : Object(),
 	m_controller(nullptr)
@@ -34,6 +35,17 @@ void Boss::Update()
 		m_isBlinking = m_isBlink;
 		m_animator->Play(m_isBlinking ? m_blinkName : m_animName);
 	}
+}
+
+void Boss::GoStage(int stage)
+{
+	std::wstring sceneName = L"Stage" + std::to_wstring(stage);
+	GET_SINGLE(SceneManager)->LoadScene(sceneName);
+}
+
+void Boss::GoTitle()
+{
+	GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 }
 
 void Boss::SetAnimation(wstring animationKey)

@@ -72,4 +72,5 @@ void FireBoss::Render(HDC _hdc)
 void FireBoss::HandleDaad()
 {
 
+	GoStage(2);
 }
