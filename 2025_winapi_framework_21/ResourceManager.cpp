@@ -7,19 +7,19 @@ bool ResourceManager::Init()
 	//// todo: release build path
 	//m_resourcePath = curPath.parent_path() / L"Output\\build\\Resource\\";
 
-	wchar_t buf[MAX_PATH] = {}; // windows �ִ� ��� ����
-	::GetModuleFileNameW(nullptr, buf, MAX_PATH); // ���� �������� exe ��� buf�� ����   
-	fs::path exeDir = fs::path(buf).parent_path();                //  buf ��ü ��θ� path ��ü�� ���� ���丮�� ����
-	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // release����϶� build �ѹ��� ���̴°� ����
+	wchar_t buf[MAX_PATH] = {}; // windows 최대 경로 길이
+	::GetModuleFileNameW(nullptr, buf, MAX_PATH); // 현재 실행중인 exe 경로 buf에 저장   
+	fs::path exeDir = fs::path(buf).parent_path();                //  buf 전체 경로를 path 객체로 가서 디렉토리만 추출
+	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // release모드일때 build 한번더 붙이는거 무시
 	m_resourcePath = resourceDir.native();
-	if (!RegisterFontFile(L"Font\\�����ձ۾� �Ͻ��׸���.ttf"))
+	if (!RegisterFontFile(L"Font\\나눔손글씨 암스테르담.ttf"))
 		return false;
 	if (!RegisterFontFile(L"Font\\DeterminationMonoK.ttf"))
 		return false;
 	RegisterGDI();
 	RegisterTexture();
 
-	FMOD::System_Create(&m_pSoundSystem); // �ý��� ����
+	FMOD::System_Create(&m_pSoundSystem); // 시스템 생성
 	if (m_pSoundSystem != nullptr)
 		m_pSoundSystem->init(64, FMOD_INIT_NORMAL, nullptr);
 	RegisterSound();
@@ -77,8 +77,8 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(50, 50, 255));
 	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
-	// ��Ʈ ���
-	RegisterFont(FontType::TITLE, L"�����ձ۾� �Ͻ��׸���", 0);
+	// 폰트 등록
+	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);
 	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
 
 }
@@ -88,7 +88,7 @@ void ResourceManager::ReleaseGDI()
 	for (int i = 0; i < (UINT)PenType::END; ++i)
 		::DeleteObject(m_Pens[i]);
 	for (int i = 1; i < (UINT)BrushType::END; ++i)
-		// Hollow �����ϰ�
+		// Hollow 제외하고
 		::DeleteObject(m_Brushs[i]);
 	for (int i = 0; i < (UINT)FontType::END; ++i)
 		::DeleteObject(m_Fonts[i]);
@@ -123,16 +123,16 @@ void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool 
 	std::string str;
 	str.assign(strFilePath.begin(), strFilePath.end());
 
-	// �������� ���� ����
-	FMOD_MODE eMode = FMOD_LOOP_NORMAL; // �ݺ� ���
+	// 루프할지 말지 결정
+	FMOD_MODE eMode = FMOD_LOOP_NORMAL; // 반복 출력
 	if (!_isLoop)
-		eMode = FMOD_DEFAULT; // ���� 1���� ���
+		eMode = FMOD_DEFAULT; // 사운드 1번만 출력
 	FMOD::Sound* p = nullptr;
 
-	// BGM�� stream, �ƴϸ� sound
-	// ���丮�Լ�
-	//// ���� ��ü�� ����� ���� system��.
-	//						//���ϰ��,  FMOD_MODE, NULL, &sound
+	// BGM면 stream, 아니면 sound
+	// 팩토리함수
+	//// 사운드 객체를 만드는 것은 system임.
+	//						//파일경로,  FMOD_MODE, NULL, &sound
 	FMOD_RESULT r = _isLoop
 		? m_pSoundSystem->createStream(str.c_str(), eMode, nullptr, &p)
 		: m_pSoundSystem->createSound(str.c_str(), eMode, nullptr, &p);
@@ -155,7 +155,7 @@ void ResourceManager::Play(const wstring& _key)
 	SOUND_CHANNEL eChannel = SOUND_CHANNEL::BGM;
 	if (!pSound->IsLoop)
 		eChannel = SOUND_CHANNEL::EFFECT;
-	// ���� ��� �Լ�. &channel�� � ä���� ���� ����Ǵ��� ������ �ѱ�
+	// 사운드 재생 함수. &channel로 어떤 채널을 통해 재생되는지 포인터 넘김
 	m_pSoundSystem->playSound(pSound->pSound, nullptr, false, &m_pChannel[(UINT)eChannel]);
 
 }
@@ -168,7 +168,7 @@ void ResourceManager::Stop(SOUND_CHANNEL _channel)
 
 void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
 {
-	// 0.0 ~ 1.0 ���� ����
+	// 0.0 ~ 1.0 볼륨 조절
 	m_pChannel[(UINT)_channel]->setVolume(_vol);
 
 }
@@ -248,19 +248,19 @@ void ResourceManager::RegisterTexture()
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
 {
 	Texture* pTex = GetTexture(_key);
-	// ��ã������ ����
+	// 못찾았으면 리턴
 	if (nullptr != pTex)
 		return;
-	// ó���� �����Ŵ� ��� ã�Ƽ�
+	// 처음에 없을거니 경로 찾아서
 	wstring texPath = m_resourcePath;
 	texPath += _path;
 
-	// ����
+	// 만들어서
 	pTex = new Texture;
-	pTex->Load(texPath); // �ؽ�ó ��ü �ε�
-	pTex->SetKey(_key); // Ű ��� ����
+	pTex->Load(texPath); // 텍스처 자체 로드
+	pTex->SetKey(_key); // 키 경로 세팅
 	pTex->SetRelativePath(texPath);
-	m_mapTexture.insert({ _key,pTex }); // �ʿ� ����
+	m_mapTexture.insert({ _key,pTex }); // 맵에 저장
 }
 
 Texture* ResourceManager::GetTexture(const wstring& _key)
@@ -270,5 +270,3 @@ Texture* ResourceManager::GetTexture(const wstring& _key)
 		return iter->second;
 	return nullptr;
 }
-
-
