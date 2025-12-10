@@ -138,14 +138,18 @@ void TitleScene::Exit()
 void TitleScene::SettingPanel()
 {
 	//slider
-
-	POINT p;
-	p.x = (LONG)(WINDOW_WIDTH / 2);
-	
-	p.y = (LONG)(WINDOW_HEIGHT / 2.5);
-
 	UISlider* BGMslider = m_settingPanel->AddUIElement<UISlider>();
-	BGMslider->SetPos(p);
+	BGMslider->SetPos(
+		{
+			WINDOW_WIDTH / 2
+			, WINDOW_HEIGHT / 3
+		});
+	BGMslider->SetTrackTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"floor"));
+	BGMslider->SetThumbTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"brush"));
+	BGMslider->SetFillTexture(GET_SINGLE(ResourceManager)
+		->GetTexture(L"background1"));
 
 	BGMslider->SetThunbRadius(25);
 
@@ -207,10 +211,12 @@ void TitleScene::SettingPanel()
 	Settingtext->SetTextColor(RGB(255, 255, 255));
 
 	UIText* BGMtext = m_settingPanel->AddUIElement<UIText>();
-
-	p.x = (LONG)(WINDOW_WIDTH / 3.5f);
-
-	BGMtext->SetPos(p);
+	
+	BGMtext->SetPos(
+		{
+			(LONG)(WINDOW_WIDTH / 3.5f)
+			, WINDOW_HEIGHT / 3
+		});
 
 	BGMtext->SetSize({ 120,40 });
 
@@ -219,7 +225,6 @@ void TitleScene::SettingPanel()
 	
 	UIText* EFFECTText = m_settingPanel->AddUIElement<UIText>();
 
-
 	EFFECTText->SetPos(
 		{
 			(LONG)(WINDOW_WIDTH / 3.5f)
@@ -227,7 +232,6 @@ void TitleScene::SettingPanel()
 		});
 
 	EFFECTText->SetSize({ 120,40 });
-
 
 	EFFECTText->SetText(L"SFX");
 	EFFECTText->SetTextColor(RGB(255,255,255));
