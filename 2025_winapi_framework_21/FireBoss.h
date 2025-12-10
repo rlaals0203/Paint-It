@@ -10,6 +10,8 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 private:
+    void HandleDaad();
+private:
     Texture* m_texture;
     Texture* m_blinkTexture;
     std::wstring _animName;

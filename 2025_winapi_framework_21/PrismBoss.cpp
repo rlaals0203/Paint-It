@@ -65,6 +65,7 @@ PrismBoss::PrismBoss() : Boss(),
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetDefaultHP(300.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
+	m_healthCompo->SubscribeHealthThreshold([this]() { HandleDaad(); }, 0.f);
 	AddComponent<DOTweenCompo>();
 }
 
@@ -146,4 +147,9 @@ void PrismBoss::HandlePhase()
 	m_isChanging = true;
 	m_animator->Play(m_changingName);
 	GET_SINGLE(SceneManager)->GetCurScene()->ClearScene();
+}
+
+void PrismBoss::HandleDaad()
+{
+
 }

@@ -27,6 +27,7 @@ private:
     void Changing();
     void AddAwakenPattern();
     void HandlePhase();
+    void HandleDaad();
 private:
     EntityHealth* m_healthCompo;
     Texture* m_texture;

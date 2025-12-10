@@ -3,6 +3,7 @@
 #include "DangerGizmo.h"
 #include "ColorObject.h"
 #include "LaserObject.h"
+#include "Object.h"
 
 struct Face
 {
@@ -11,15 +12,13 @@ struct Face
     float height;
 };
 
-class ColorRoomPattern :
-    public BossPattern
+class ColorRoomPattern : Object
 {
 public:
-    ColorRoomPattern(BossController* _controller, float _delay);
+    ColorRoomPattern(float _delay);
     ~ColorRoomPattern();
 public:
-    virtual void Update() override;
-    virtual void SetUsed() override;
+    void Update() override;
 private:
     void GenerateMondrian(float duration, float delay, float laserWidth);
     std::vector<Face>GetFaces();

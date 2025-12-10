@@ -21,6 +21,8 @@ FireBoss::FireBoss() : Boss()
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	auto* healthCompo = AddComponent<EntityHealth>();
+	healthCompo->SubscribeHealthThreshold([this]() { HandleDaad(); }, 0.f);
+
 	healthCompo->SetDefaultHP(3000.f);
 	AddComponent<DOTweenCompo>();
 
@@ -65,4 +67,9 @@ void FireBoss::Render(HDC _hdc)
 {
 	Object::Render(_hdc);
 	ComponentRender(_hdc);
+}
+
+void FireBoss::HandleDaad()
+{
+
 }

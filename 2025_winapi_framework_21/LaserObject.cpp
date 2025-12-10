@@ -23,6 +23,7 @@ LaserObject::LaserObject() :
 {
     m_dotweenCompo = AddComponent<DOTweenCompo>();
     m_collider = AddComponent<Collider>();
+    SetDestroyOnComplete();
 }
 
 LaserObject:: ~LaserObject() {}

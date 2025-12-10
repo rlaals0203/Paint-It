@@ -27,9 +27,10 @@ public:
 		m_isOiled = true;
 		m_speed = 1.f;
 	}
-
+	void SetDamageMult(float _mult) { m_healthCompo->SetDamageMultiplier(_mult); }
 	void SetCompletedFire() { m_completedFire = true; }
 	void SetCompletedPrism() { m_completedPrism = true; }
+	void ApplyDamage(int _damage) { m_healthCompo->ApplyDamage(_damage); }
 private:
 	void SetAnimationParam();
 	void FireProjectile();

@@ -22,13 +22,14 @@ Player::Player()
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Player");
 
-	auto* healthCompo = AddComponent<EntityHealth>();
-	healthCompo->SetIsPlayer(false);
-	healthCompo->SetDefaultHP(100.f);
+	m_healthCompo = AddComponent<EntityHealth>();
+	m_healthCompo->SetIsPlayer(false);
+	m_healthCompo->SetDefaultHP(100.f);
 
 	m_groundChecker = new GroundChecker();
 	m_groundChecker->SubscribeGroundChange([this](bool isGround) {HandleIsGround(isGround); });
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(m_groundChecker, Layer::GROUNDCHECKER);
+	GET_SINGLE(PlayerFindManager)->SetPlayer(this);
 
 #pragma region  animation
 	m_playerIdle = L"playerIdle";
