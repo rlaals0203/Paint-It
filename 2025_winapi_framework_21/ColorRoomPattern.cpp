@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ColorRoomPattern.h"
-#include "LaserObject.h"
 #include "DOTweenCompo.h"
 #include "SceneManager.h"
 #include "Object.h"
@@ -12,7 +11,8 @@ ColorRoomPattern::ColorRoomPattern(BossController* _controller, float _delay)
     m_threshold(50.f),
     m_countX(8),
     m_countY(5),
-    m_isDeleteMode(false)
+    m_isDeleteMode(false),
+    m_isCompleted(false)
 {
     m_delay = _delay;
     m_dangerTime = m_delay;
@@ -24,8 +24,17 @@ ColorRoomPattern::~ColorRoomPattern() { }
 
 void ColorRoomPattern::Update()
 {
+    if (m_isCompleted) return;
+
     if (m_isDeleteMode)
+    {
         RemoveSection();
+        if (m_colorStack.size() == 0) {
+            for (auto* laser : m_lasers)
+                laser->HideLine();
+            m_isCompleted = true;
+        }
+    }
     else
         FillSection();
 
@@ -91,6 +100,8 @@ void ColorRoomPattern::RemoveFace()
 
 void ColorRoomPattern::FillSection()
 {
+    if (m_count <= 0) return;
+
     m_currentDelay -= fDT;
     if (m_currentDelay <= 0.f) {
         for (int i = 0; i < 3; i++)
@@ -142,6 +153,7 @@ void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laser
         laser->SetWidth(3.f);
         laser->DisableCollider();
         laser->ConnectLaser(start, end, duration, delay);
+        m_lasers.push_back(laser);
     }
 
     for (int i = 0; i < m_countY; ++i)
@@ -156,6 +168,7 @@ void ColorRoomPattern::GenerateMondrian(float duration, float delay, float laser
         laser->SetColor(PenType::BLACK, BrushType::BLACK);
         laser->DisableCollider();
         laser->ConnectLaser(start, end, duration, delay);
+        m_lasers.push_back(laser);
     }
 
     std::sort(m_horizontal.begin(), m_horizontal.end());

@@ -9,7 +9,7 @@ BlackHolePattern::BlackHolePattern(BossController* _controller, int _count)
 	: BossPattern(_controller)
 {
 	m_count = _count;
-	m_delay = 0.04f;
+	m_delay = 0.03f;
 }
 
 BlackHolePattern::~BlackHolePattern()
@@ -24,23 +24,24 @@ void BlackHolePattern::Update()
 
 		Vec2 finalPos = GetRandomOutsidePos();
 		auto* proj = GET_SINGLE(ProjectileManager)->SpawnProjectile(
-			BlackHoleProjectile, 30.f, finalPos, 0.f, 0.f);
+			BlackHoleProjectile, Random::Range(20.f, 35.f), finalPos, 0.f, 0.f);
 		auto* dotween = proj->AddComponent<DOTweenCompo>();
 		dotween->DOMove({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 },
 			2.f, EaseInQuart, [proj]() {proj->SetDead(); });
 
 		m_currentCount--;
+		cout << m_currentCount << endl;
 	}
 
 	if (m_currentCount == 0)
-		m_isUsed = true;
+		m_isUsed = false;
 }
 
 void BlackHolePattern::SetUsed()
 {
 	m_currentCount = m_count;
-	float duration = m_delay * m_count;
-	GET_SINGLE(EffectManager)->PlayEffect(EffectType::BlackHole, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { 2, 2 }, duration, true);
+	float duration = m_delay * m_count + 3.f;
+	GET_SINGLE(EffectManager)->PlayEffect(EffectType::BlackHole, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { 3, 3 }, duration, true);
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, duration);
 	BossPattern::SetUsed();
 }

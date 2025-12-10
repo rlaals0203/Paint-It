@@ -2,6 +2,7 @@
 #include "BossPattern.h"
 #include "DangerGizmo.h"
 #include "ColorObject.h"
+#include "LaserObject.h"
 
 struct Face
 {
@@ -41,6 +42,7 @@ private:
 
     bool m_isDeleteMode;
     float m_deleteTime;
+    bool m_isCompleted;
 
     std::stack<ColorObject*> m_colorStack;
     std::queue<Face> m_faceQueue;
@@ -48,6 +50,7 @@ private:
     std::vector<Face> m_faces;
     std::vector<float> m_horizontal;
     std::vector<float> m_vertical;
+    std::vector<LaserObject*> m_lasers;
 
     PenType m_penTypes[6]{ PenType::RED, PenType::YELLOW, PenType::BLUE, PenType::WHITE, PenType::WHITE, PenType::BLACK };
     BrushType m_brushTypes[6]{ BrushType::RED, BrushType::YELLOW, BrushType::BLUE, BrushType::WHITE, BrushType::WHITE, BrushType::BLACK };

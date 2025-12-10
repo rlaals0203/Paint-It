@@ -240,6 +240,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"dangermark1", L"Texture\\dangermark1.bmp");
 	LoadTexture(L"dangermark2", L"Texture\\dangermark2.bmp");
 	LoadTexture(L"artboss", L"Texture\\artboss.bmp");
+	LoadTexture(L"artbossblink", L"Texture\\artbossblink.bmp");
+	LoadTexture(L"yellowprojectile", L"Texture\\yellowprojectile.bmp");
 }
 
 

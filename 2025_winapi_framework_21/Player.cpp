@@ -210,7 +210,7 @@ void Player::Move()
 void Player::ClampPlayer()
 {
 	Vec2 pos = GetPos();
-	float x = std::clamp(pos.x, 0.f, 1280.f);
+	float x = std::clamp(pos.x, 15.f, WINDOW_WIDTH - 15.f);
 	float y = std::clamp(pos.y, 0.f, 720.f);
 	SetPos({ x, y });
 }
