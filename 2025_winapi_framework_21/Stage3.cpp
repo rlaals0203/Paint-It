@@ -15,6 +15,7 @@
 #include "UIBossHP.h"
 #include "EntityHealth.h"
 #include "Platform.h"
+#include "GameSaveManager.h"
 
 
 void Stage3::Init()
@@ -40,12 +41,13 @@ void Stage3::Init()
 			GET_SINGLE(SceneManager)->RequestDestroy(obj2);
 		});
 
+	GET_SINGLE(GameSaveManager)->SetStage(3);
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);
 
 	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
-	bossHP->SetText(L"º¸½º [À¯È­]");
+	bossHP->SetText(L"ë³´ìŠ¤[ë¯¸ì •]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
 

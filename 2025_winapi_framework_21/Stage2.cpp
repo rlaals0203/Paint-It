@@ -15,9 +15,11 @@
 #include "UIBossHP.h"
 #include "EntityHealth.h"
 #include "ColorObject.h"
+#include "GameSaveManager.h"
 
 void Stage2::Init()
 {
+	GET_SINGLE(GameSaveManager)->SetStage(2);
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 
@@ -38,13 +40,13 @@ void Stage2::Init()
 			GET_SINGLE(SceneManager)->RequestDestroy(obj1);
 			GET_SINGLE(SceneManager)->RequestDestroy(obj2);
 		});
-
+		
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);
 
 	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
-	bossHP->SetText(L"º¸½º [ÇÁ¸®Áò]");
+	bossHP->SetText(L"ë³´ìŠ¤ [í”„ë¦¬ì¦˜]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
 
