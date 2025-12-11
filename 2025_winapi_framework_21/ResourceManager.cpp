@@ -191,6 +191,9 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"laser", L"Sound\\laser.mp3", false);
 	LoadSound(L"smash", L"Sound\\smash.mp3", false);
+	LoadSound(L"blackhole", L"Sound\\blackhole.mp3", false);
+	LoadSound(L"hit", L"Sound\\hit.mp3", false);
+	LoadSound(L"shield", L"Sound\\shield.mp3", false);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)

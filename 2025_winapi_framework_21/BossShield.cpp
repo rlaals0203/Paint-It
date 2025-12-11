@@ -33,5 +33,6 @@ void BossShield::EnterCollision(Collider* _other)
 		_other->GetOwner()->SetDead();
 		DamageText* text = new DamageText();
 		text->Init(L"MISS", _other->GetOwner()->GetPos());
+		GET_SINGLE(ResourceManager)->Play(L"shield");
 	}
 }
