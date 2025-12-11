@@ -213,14 +213,14 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"smash", L"Sound\\smash.mp3", false);
 	LoadSound(L"click", L"Sound\\Click.mp3", false);
 	LoadSound(L"hover", L"Sound\\Hover.mp3", false);
-	LoadSound(L"blackhole", L"Sound\\blackhole.mp3", false);
+	LoadSound(L"blackhole", L"Sound\\blackhole.wav", false);
 	LoadSound(L"hit", L"Sound\\hit.mp3", false);
-	LoadSound(L"shield", L"Sound\\shield.mp3", false);
-	LoadSound(L"exlosion", L"Sound\\exlosion.mp3", false);
-	LoadSound(L"prismbreak", L"Sound\\prismbreak.mp3", false);
-	LoadSound(L"boss1", L"Sound\\boss01.mp3", true);
-	LoadSound(L"boss2", L"Sound\\boss02.mp3", true);
-	LoadSound(L"boss3", L"Sound\\boss03.mp3", true);
+	LoadSound(L"shield", L"Sound\\shield.wav", false);
+	LoadSound(L"exlosion", L"Sound\\exlosion.wav", false);
+	LoadSound(L"prismbreak", L"Sound\\prismbreak.wav", false);
+	LoadSound(L"boss1", L"Sound\\boss01.wav", true);
+	LoadSound(L"boss2", L"Sound\\boss02.wav", true);
+	LoadSound(L"boss3", L"Sound\\boss03.wav", true);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)
