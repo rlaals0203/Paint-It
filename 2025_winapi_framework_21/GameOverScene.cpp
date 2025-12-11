@@ -4,6 +4,7 @@
 #include "UIPanel.h"
 #include "UIText.h"
 #include "UIButton.h"
+#include "GameSaveManager.h"
 
 void GameOverScene::Init()
 {
@@ -31,11 +32,12 @@ void GameOverScene::ReGameBtn()
 {
 	UIButton* start = m_mainPanel->AddUIElement<UIButton>();
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
-	start->SetText(L"다시 처음부터");
+	start->SetText(L"다시");
 	start->SetSize({ 100, 50 });
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Stage1");
+			std::wstring sceneName = L"Stage" + std::to_wstring(GET_SINGLE(GameSaveManager)->GetStage());
+			GET_SINGLE(SceneManager)->LoadScene(sceneName);
 		});
 }
 

@@ -8,7 +8,7 @@ PrismObject::PrismObject(Vec2 _pos, PrismBoss* _boss)
 {
 	m_boss = _boss;
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(100);
+	m_healthCompo->SetDefaultHP(30);
 	m_healthCompo->SubscribeHealthThreshold([this]() {OnDead(); }, 0.f);
 	AddComponent<Collider>();
 	SetPos(_pos);
