@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "BaseLazerPattern.h"
+#include "SceneManager.h"
 
 BaseLazerPattern::BaseLazerPattern(BossController* _controller, int _count, bool _isAwaken,
     float _delay, float _deleteTime)
@@ -20,8 +21,10 @@ BaseLazerPattern::~BaseLazerPattern()
     {
         auto* laser = m_lasers.front();
         m_lasers.pop();
-        if (laser && !laser->GetIsDead())
+        if (laser && !laser->GetIsDead()) {
             laser->SetDead();
+            GET_SINGLE(SceneManager)->RequestDestroy(laser);
+        }
     }
 }
 

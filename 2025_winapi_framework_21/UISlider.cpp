@@ -2,7 +2,8 @@
 #include "UISlider.h"
 #include "Texture.h"
 #include "InputManager.h"
-
+#undef max
+#undef min
 
 UISlider::UISlider() 
 {

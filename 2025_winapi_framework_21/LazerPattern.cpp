@@ -8,6 +8,7 @@ LazerPattern::LazerPattern(BossController* _controller, int _count)
 
 LazerPattern::~LazerPattern()
 {
+	m_lineVec.clear();
 }
 
 void LazerPattern::Update()
@@ -17,7 +18,8 @@ void LazerPattern::Update()
 	{
 		for (auto line : m_lineVec)
 		{
-			line->HideLine();
+			if (line)
+				line->HideLine();
 		}
 
 		m_lineVec.clear();

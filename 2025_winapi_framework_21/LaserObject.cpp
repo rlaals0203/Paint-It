@@ -117,8 +117,13 @@ void LaserObject::HideLine()
     if (!m_dotweenCompo)
         m_dotweenCompo = AddComponent<DOTweenCompo>();
 
+    if (GetIsDead()) return;
     m_collider->SetActive(false);
-    m_dotweenCompo->DOScaleY(0.f, 0.3f, EaseInBack, [this]() {SetDead(); });
+    m_dotweenCompo->DOScaleY(0.f, 0.3f, EaseInBack, [this]() 
+        {
+            SetDead(); 
+            GET_SINGLE(SceneManager)->RequestDestroy(this);
+        });
 }
 
 void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
