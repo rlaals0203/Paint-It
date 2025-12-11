@@ -16,9 +16,8 @@ TorchObject::TorchObject(int _count, Vec2 _pos, float _offset) :
 	m_count = _count;
 	m_time = _offset;
 	m_delay = 3.f;
-
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMY);
 	m_animName = L"torch";
+
 	auto* texture = GET_SINGLE(ResourceManager)->GetTexture(L"torch");
 	m_animator = AddComponent<Animator>();
 	m_animator->CreateAnimation(m_animName, texture,

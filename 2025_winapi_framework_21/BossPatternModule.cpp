@@ -78,6 +78,8 @@ void BossPatternModule::ClearPattern()
 
 void BossPatternModule::SelectPattern()
 {
+    if (m_Patterns.size() <= 0) return;
+
     if (m_isMoveTurn && m_movePatterns.size() > 0)
     {
         int idx = rand() % m_movePatterns.size();

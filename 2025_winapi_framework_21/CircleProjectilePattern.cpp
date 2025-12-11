@@ -31,8 +31,8 @@ void CircleProjectilePattern::SetUsed()
     auto* torch2 = new TorchObject(m_count, torch2pos);
 
     Scene* scene = GET_SINGLE(SceneManager)->GetCurScene().get();
-    scene->AddObject(torch1, Layer::ENEMYOBSTACLE);
-    scene->AddObject(torch2, Layer::ENEMYOBSTACLE);
+    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(torch1, Layer::ENEMYOBSTACLE);
+    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(torch2, Layer::ENEMYOBSTACLE);
 
     m_isUsed = false;
 }

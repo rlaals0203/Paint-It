@@ -95,8 +95,6 @@ void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _d
 
     SetRotation(m_angle);
     SetLine();
-
-    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::BACKDAMAGEABLE);
 }
 
 void LaserObject::SetLine()
@@ -132,7 +130,6 @@ void LaserObject::HideLine()
 void LaserObject::ShowDangerGizmo(Vec2 finalPos, Vec2 finalSize)
 {
     auto* dangerGizmo = new DangerGizmo();
-    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(dangerGizmo, Layer::GIZMO);
     dangerGizmo->SetDangerGizmo(finalPos, finalSize, m_angle, m_delay);
 }
 

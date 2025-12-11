@@ -15,7 +15,7 @@ public:
 protected:
     void SetDeleteTime(float _time) { m_deleteTime = _time; }
 protected:
-    std::queue<LaserObject*> m_lasers;
+    std::queue<LaserObject*> m_lasers = std::queue<LaserObject*>();
     PenType m_penType;
     BrushType m_brushType;
     float m_remainDeleteTime;
