@@ -97,7 +97,7 @@ void TitleScene::Start()
 	start->SetAllTexture(button , buttonHover, nullptr);
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
+			GET_SINGLE(SceneManager)->LoadScene(L"Stage1");
 		});
 }
 

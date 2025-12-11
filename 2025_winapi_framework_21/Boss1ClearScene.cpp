@@ -24,7 +24,7 @@ void Boss1ClearScene::OverText()
 	UIText* title = m_mainPanel->AddUIElement<UIText>();
 
 	title->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 });
-	title->SetText(L"처치 완료 [폭발 투사체] 능력 획득!");
+	title->SetText(L"스테이지1 클리어");
 	title->SetSize({ 300, 150 });
 }
 

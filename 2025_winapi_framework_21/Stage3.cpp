@@ -88,6 +88,7 @@ void Stage3::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::BACKDAMAGEABLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::GROUNDCHECKER, Layer::PLATFORM);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::HEALPACK);
 }
 
 void Stage3::Update()
