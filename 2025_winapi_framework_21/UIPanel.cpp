@@ -17,15 +17,28 @@ UIPanel::~UIPanel()
 
 void UIPanel::Update()
 {
-	if (!m_isActive)
-		return;
+    if (!m_isActive)
+        return;
 
-	Object::Update();
+    auto iter = m_children.begin();
+    while (iter != m_children.end())
+    {
+        if ((*iter)->GetIsDead())
+        {
+            delete (*iter);
+            iter = m_children.erase(iter);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+    Object::Update();
 
-	for (UIElement* child : m_children)
-	{
-		child->Update();
-	}
+    for (UIElement* child : m_children)
+    {
+        child->Update();
+    }
 }
 
 void UIPanel::Render(HDC _hdc)

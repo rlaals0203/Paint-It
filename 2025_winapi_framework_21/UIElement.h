@@ -11,6 +11,11 @@ enum class UIState
 
 class UIElement : public Object
 {
+private:
+	bool m_isDead = false;
+public:
+	void SetDead() { m_isDead = true; }
+	bool GetIsDead() { return m_isDead; }
 public:
 	UIElement();
 	virtual ~UIElement();
