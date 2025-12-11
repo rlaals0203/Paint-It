@@ -5,10 +5,9 @@
 #include "ResourceManager.h"
 #include "BlackHolePattern.h"
 #include "StringArtPattern.h"
-#include "OriginPointPattern.h"
-#include "DotBombPattern.h"
 
 ArtBoss::ArtBoss()
+	: m_roomPattern(nullptr)
 {
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"artboss");
 	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"artbossblink");
@@ -34,8 +33,6 @@ ArtBoss::ArtBoss()
 
 	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
-	AddModule(new OriginPointPattern(m_controller, 10));
-	AddModule(new DotBombPattern(m_controller, 3));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
@@ -47,12 +44,18 @@ ArtBoss::ArtBoss()
 
 ArtBoss::~ArtBoss()
 {
-
+	if (m_roomPattern)
+	{
+		delete m_roomPattern;
+		m_roomPattern = nullptr;
+	}
 }
 
 void ArtBoss::Update()
 {
 	Boss::Update();
+	if (m_roomPattern)
+		m_roomPattern->Update();
 }
 
 void ArtBoss::Render(HDC _hdc)
@@ -63,5 +66,10 @@ void ArtBoss::Render(HDC _hdc)
 
 void ArtBoss::HandlePhase()
 {
-	auto* colorRoom = new ColorRoomPattern(1.f);
+	if (m_roomPattern)
+	{
+		delete m_roomPattern;
+		m_roomPattern = nullptr;
+	}
+	m_roomPattern = new ColorRoomPattern(1.f);
 }

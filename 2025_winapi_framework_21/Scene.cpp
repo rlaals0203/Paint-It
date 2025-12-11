@@ -58,7 +58,6 @@ void Scene::LateUpdate()
 			{
 				delete (*iter);
 				(*iter) = nullptr;
-
 				iter = vec.erase(iter);
 			}
 			else
