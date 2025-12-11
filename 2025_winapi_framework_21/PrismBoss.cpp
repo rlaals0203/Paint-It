@@ -20,11 +20,13 @@ PrismBoss::PrismBoss() : Boss(),
 {
 	m_animName = L"PrismBoss";
 	m_blinkName = L"PrismBossBlink";
+	m_blinkName2 = L"PrismBossBlink2";
 	m_awakenName = L"PrismAwaken";
 	m_changingName = L"PrismChanging";
 
 	m_texture = GET_SINGLE(ResourceManager)->GetTexture(L"prismboss");
-	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"firebossblink");
+	m_blinkTexture = GET_SINGLE(ResourceManager)->GetTexture(L"prismbossblink");
+	m_blinkTexture2 = GET_SINGLE(ResourceManager)->GetTexture(L"prismbossblink2");
 	m_shieldTexture = GET_SINGLE(ResourceManager)->GetTexture(L"bossshield");
 
 	m_animator->CreateAnimation(m_animName, m_texture,

@@ -33,10 +33,12 @@ private:
     Texture* m_texture;
     Texture* m_shieldTexture;
     Texture* m_blinkTexture;
+    Texture* m_blinkTexture2;
     BossShield* m_shield;
     bool m_isShieldMode;
     std::wstring m_awakenName;
     std::wstring m_changingName;
+    std::wstring m_blinkName2;
     std::vector<PrismObject*> m_prismObjects;
 
     bool m_awakenMode;

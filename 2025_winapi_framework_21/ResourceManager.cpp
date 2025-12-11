@@ -62,7 +62,7 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(200, 150, 30));
 	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(30, 30, 200));
 	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
-	m_Brushs[(UINT)BrushType::STRINGLASER] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
+	m_Brushs[(UINT)BrushType::STRINGLASER] = (HBRUSH)::CreateSolidBrush(RGB(200, 100, 25));
 
 	// PEN 
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
@@ -76,12 +76,11 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(200, 150, 30));
 	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(30, 30, 200));
 	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
-	m_Pens[(UINT)PenType::STRINGLASER] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
+	m_Pens[(UINT)PenType::STRINGLASER] = ::CreatePen(PS_SOLID, 5, RGB(200, 125, 30));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);
 	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
-
 }
 
 void ResourceManager::ReleaseGDI()
@@ -219,6 +218,9 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"shield", L"Sound\\shield.mp3", false);
 	LoadSound(L"exlosion", L"Sound\\exlosion.mp3", false);
 	LoadSound(L"prismbreak", L"Sound\\prismbreak.mp3", false);
+	LoadSound(L"boss1", L"Sound\\boss01.mp3", true);
+	LoadSound(L"boss2", L"Sound\\boss02.mp3", true);
+	LoadSound(L"boss3", L"Sound\\boss03.mp3", true);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)
@@ -279,6 +281,10 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"artbossblink", L"Texture\\artbossblink.bmp");
 	LoadTexture(L"pond", L"Texture\\Pond.bmp");
 	LoadTexture(L"healpack", L"Texture\\healpack.bmp");
+	LoadTexture(L"prismbossblink2", L"Texture\\prismbossblink2.bmp");
+	LoadTexture(L"prismbossblink", L"Texture\\prismbossblink.bmp");
+	LoadTexture(L"playerredbullet", L"Texture\\playerredbullet.bmp");
+	LoadTexture(L"prismcrystal", L"Texture\\prismcrystal.bmp");
 }
 
 

@@ -32,12 +32,12 @@ void ColorObject::EnterCollision(Collider* _other)
 	if (m_penType == PenType::BLUE)
 		m_player->SetOiledTime(10.f);
 	else if (m_penType == PenType::YELLOW)
-		m_player->SetDamageMult(1.5f);
+		m_player->SetDamageMult(2.f);
 }
 
 void ColorObject::StayCollision(Collider* _other)
 {
-	if (m_player == nullptr) return;
+	if (m_player == nullptr || m_penType != PenType::RED) return;
 
 	m_dealTime -= fDT;
 	if (m_dealTime <= 0.f) {
