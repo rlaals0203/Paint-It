@@ -24,6 +24,7 @@ Boss::Boss() : Object(),
 
 Boss::~Boss()
 {
+
 }
 
 void Boss::Update()
@@ -39,7 +40,7 @@ void Boss::Update()
 
 void Boss::GoStage(int stage)
 {
-	std::wstring sceneName = L"Stage" + std::to_wstring(stage);
+	std::wstring sceneName = L"ClearScene" + std::to_wstring(stage - 1);
 	GET_SINGLE(SceneManager)->LoadScene(sceneName);
 }
 
