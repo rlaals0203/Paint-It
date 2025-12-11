@@ -81,5 +81,6 @@ void UIBossHP::Render(HDC _hdc)
         SelectObject(_hdc, oldBrush);
         DeleteObject(hBrush);
     }
-    UIText::Render(_hdc);
+    UIElement::Render(_hdc);
+    //UIText::Render(_hdc);
 }

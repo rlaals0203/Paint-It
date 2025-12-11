@@ -13,7 +13,7 @@ bool ResourceManager::Init()
 	fs::path exeDir = fs::path(buf).parent_path();                //  buf 전체 경로를 path 객체로 가서 디렉토리만 추출
 	fs::path resourceDir = exeDir.parent_path() / L"build" / L"Resource\\"; // release모드일때 build 한번더 붙이는거 무시
 	m_resourcePath = resourceDir.native();
-	if (!RegisterFontFile(L"Font\\DeterminationMonoK.ttf"))
+	if (!RegisterFontFile(L"Font\\NeoDunggeunmoPro-Regular.ttf"))
 		return false;
 	RegisterGDI();
 	RegisterTexture();
@@ -79,8 +79,8 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::STRINGLASER] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
-	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);
-	RegisterFont(FontType::UI, L"DeterminationMonoK", 0);
+	RegisterFont(FontType::TITLE, L"NeoDunggeunmoPro-Regular", 0);
+	RegisterFont(FontType::UI, L"NeoDunggeunmoPro-Regular", 0);
 
 }
 
