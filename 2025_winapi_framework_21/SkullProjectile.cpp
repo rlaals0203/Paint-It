@@ -7,6 +7,7 @@
 #include "PlayerFindManager.h"
 #include "EffectManager.h"
 #include "ImpulseManager.h"
+#include "DamageCaster.h"
 
 SkullProjectile::SkullProjectile() : m_isExplosed(false)
 {
@@ -110,6 +111,10 @@ void SkullProjectile::EnterCollision(Collider* _other)
 void SkullProjectile::Explosion()
 {
 	m_isExplosed = true;
+
+	DamageCaster* caster = new DamageCaster();
+	caster->CastDamage(GetPos(), { 150, 150 }, 10);
+
 	GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, GetPos(), { 5, 5 }, 1.f);
 	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.2f);
 	m_animator->Stop();
