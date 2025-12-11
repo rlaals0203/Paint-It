@@ -4,6 +4,8 @@
 #include "UIText.h"
 #include "UIButton.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
+#include "Texture.h"
 
 void Boss1ClearScene::Init()
 {
@@ -31,9 +33,18 @@ void Boss1ClearScene::NextGameBtn()
 	UIButton* start = m_mainPanel->AddUIElement<UIButton>();
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
 	start->SetText(L"다음보스");
-	start->SetSize({ 100, 50 });
 	start->SetCallback([=]()
 		{
 			GET_SINGLE(SceneManager)->LoadScene(L"Stage2");
 		});
+
+	start->SetSize({ 160, 64 });
+
+	Texture* button = GET_SINGLE(ResourceManager)
+		->GetTexture(L"button");
+
+	Texture* buttonHover = GET_SINGLE(ResourceManager)
+		->GetTexture(L"buttonhover");
+
+	start->SetAllTexture(button, buttonHover, nullptr);
 }
