@@ -5,6 +5,7 @@
 #include "BossIdleModule.h"
 #include "BossPatternModule.h"
 #include "EntityHealth.h"
+#include "ColorObject.h"
 #include "SceneManager.h"
 
 Boss::Boss() : Object(),
@@ -41,7 +42,27 @@ void Boss::Update()
 void Boss::GoStage(int stage)
 {
 	std::wstring sceneName = L"ClearScene" + std::to_wstring(stage - 1);
-	GET_SINGLE(SceneManager)->LoadScene(sceneName);
+	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
+	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
+
+	obj1->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	obj1->SetPos({ WINDOW_WIDTH / 2, -WINDOW_HEIGHT / 2 });
+	obj2->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	obj2->SetPos({ (float)WINDOW_WIDTH / 2, WINDOW_HEIGHT * 1.5f });
+
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(obj1, Layer::LOADINGSCREEN);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(obj2, Layer::LOADINGSCREEN);
+
+	auto* tween1 = obj1->AddComponent<DOTweenCompo>();
+	auto* tween2 = obj2->AddComponent<DOTweenCompo>();
+
+	tween1->DOMoveY(0, 3.f, EaseOutCubic);
+	tween2->DOMoveY(WINDOW_HEIGHT, 3.f, EaseOutCubic, [=]()
+		{
+			GET_SINGLE(SceneManager)->RequestDestroy(obj1);
+			GET_SINGLE(SceneManager)->RequestDestroy(obj2);
+			GET_SINGLE(SceneManager)->RequestLoadScene(sceneName);
+		});
 }
 
 void Boss::GoTitle()

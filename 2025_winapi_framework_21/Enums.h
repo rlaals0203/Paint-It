@@ -16,6 +16,7 @@ enum class Layer
 	EFFECT,
 	SHIELD,
 	UI,
+	LOADINGSCREEN,
 	END
 };
 

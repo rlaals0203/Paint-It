@@ -55,10 +55,16 @@ void SceneManager::Update()
 {
 	if (m_curScene == nullptr)
 		return;
+
 	m_curScene->Update();
 	m_curScene->LateUpdate();
-}
 
+	if (!m_nextScene.empty())
+	{
+		LoadScene(m_nextScene);
+		m_nextScene.clear();
+	}
+}
 void SceneManager::Release()
 {
 	m_curScene = nullptr;
@@ -74,7 +80,6 @@ void SceneManager::Render(HDC _hdc)
 }
 
 
-
 void SceneManager::RegisterScene(const wstring& _name, std::shared_ptr<Scene> _scene)
 {
 	if (_name.empty() || _scene == nullptr)
@@ -84,7 +89,6 @@ void SceneManager::RegisterScene(const wstring& _name, std::shared_ptr<Scene> _s
 
 void SceneManager::LoadScene(const wstring& _name)
 {
-	// 씬이 이미 로드되어있다는것
 	if (m_curScene != nullptr)
 	{
 		m_curScene->Release();
@@ -97,4 +101,12 @@ void SceneManager::LoadScene(const wstring& _name)
 		m_curScene = iter->second;
 		m_curScene->Init();
 	}
+}
+
+void SceneManager::RequestLoadScene(const std::wstring& _name)
+{
+	if (_name.empty())
+		return;
+
+	m_nextScene = _name;
 }

@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "CollisionManager.h"
 #include "Rigidbody.h"
+#include "DOTweenCompo.h"
 
 void Scene::FixedUpdate(float _fixedDT)
 {
@@ -91,6 +92,9 @@ void Scene::Release()
 		auto& vec = m_vecObj[i];
 		for (auto* obj : vec)
 		{
+			if (auto tween = obj->GetComponent<DOTweenCompo>())
+				tween->KillAllTweens();
+
 			if (obj)
 				delete obj;
 		}

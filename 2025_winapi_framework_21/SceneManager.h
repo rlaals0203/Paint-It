@@ -19,6 +19,7 @@ public:
 	}
 	void RegisterScene(const wstring& _name, std::shared_ptr<Scene> _scene);
 	void LoadScene(const wstring& _name);
+	void RequestLoadScene(const std::wstring& _name);
 public:
 	const std::shared_ptr<Scene>& GetCurScene() const
 	{
@@ -26,6 +27,7 @@ public:
 	}
 private:
 	//Scene* m_scene;
+	std::wstring m_nextScene;
 	std::shared_ptr<Scene> m_curScene;
 	std::unordered_map<wstring, std::shared_ptr<Scene>> m_mapScenes;
 	//vector<int> v;

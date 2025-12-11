@@ -10,6 +10,8 @@
 #include "SmashPattern.h"
 #include "LazerPattern.h"
 #include "DrawProjectilePattern.h"
+#include "ColorObject.h"
+#include "SceneManager.h"
 
 
 FireBoss::FireBoss() : Boss()
