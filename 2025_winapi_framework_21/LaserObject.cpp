@@ -44,7 +44,7 @@ void LaserObject::Update()
         m_dotweenCompo->DOScaleX(m_length, m_duration, EaseInExpo);
 
         m_isDelay = false;
-        GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, 0.5f);
+        GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, m_duration);
         GET_SINGLE(ResourceManager)->Play(L"laser");
     }
 }

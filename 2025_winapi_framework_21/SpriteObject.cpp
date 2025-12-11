@@ -34,6 +34,4 @@ void SpriteObject::Render(HDC _hdc)
             width, height, SRCCOPY
         );
     }
-
-	ComponentRender(_hdc);
 }

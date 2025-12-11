@@ -8,7 +8,7 @@ EntityHealth::EntityHealth() :
     m_maxHp(0),
     m_isBoss(true),
     m_hasInvoked(false),
-    m_dead(nullptr),
+    m_deadCallback(nullptr),
     m_damageMult(1.f),
 	m_currentHp(0) { }
 
@@ -64,14 +64,13 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
     }
     if((float)m_currentHp / m_maxHp <= 0.f)
     {
-        if (m_dead != nullptr)
+        if (m_deadCallback != nullptr)
         {
-            m_dead();
+            m_deadCallback();
+            owner->SetDead();
             return;
         }
     }
-
-    
 
     if ((float)m_currentHp / m_maxHp <= m_threshold)
     {
@@ -82,13 +81,4 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
             return;
         }
     }
-
-	if (m_currentHp <= 0.f)
-	{
-        if (m_isBoss == false)
-        {
-            GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
-        }
-	    owner->SetDead();
-	}
 }

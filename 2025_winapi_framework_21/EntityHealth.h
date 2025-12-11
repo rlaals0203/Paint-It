@@ -21,7 +21,7 @@ public:
 	{ m_callback = _callback; m_threshold = _threshold; }
 	void SubscribeDeath(std::function<void()> _callback)
 	{
-		m_dead = _callback;
+		m_deadCallback = _callback;
 	}
 private:
 	int m_maxHp;
@@ -31,6 +31,6 @@ private:
 	bool m_isBoss;
 	bool m_hasInvoked;
 	std::function<void()> m_callback;
-	std::function<void()> m_dead;
+	std::function<void()> m_deadCallback;
 };
 
