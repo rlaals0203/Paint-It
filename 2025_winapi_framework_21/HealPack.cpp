@@ -26,8 +26,8 @@ void HealPack::EnterCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Player")
 	{
-		//auto* health =_other->GetOwner()->GetComponent<EntityHealth>();
-		//health->ApplyDamage(-m_healAmount);
+		auto* health =_other->GetOwner()->GetComponent<EntityHealth>();
+		health->ApplyDamage(-m_healAmount);
 
 		SetDead();
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);

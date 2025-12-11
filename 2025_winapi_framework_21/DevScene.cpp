@@ -14,6 +14,7 @@
 #include "UIPanel.h"
 #include "UIBossHP.h"
 #include "EntityHealth.h"
+#include "HealPackSpawner.h"
 
 
 void Stage1::Init()
@@ -48,6 +49,9 @@ void Stage1::Init()
 	SpriteObject* floor = new SpriteObject(L"floor", Layer::BACKGROUND, false);
 	floor->SetSize({ WINDOW_WIDTH, 100 });
 	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
+
+	auto* healpack = new HealPackSpawner();
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::BACKGROUND);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);
