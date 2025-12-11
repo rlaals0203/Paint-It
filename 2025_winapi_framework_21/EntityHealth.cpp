@@ -72,7 +72,6 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
         if (m_deadCallback != nullptr)
         {
             m_deadCallback();
-            return;
         }
     }
 

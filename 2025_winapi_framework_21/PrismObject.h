@@ -5,7 +5,7 @@
 #include "Animator.h"
 
 class PrismObject :
-    public Object
+    public SpriteObject
 {
 public:
     PrismObject(Vec2 _pos, PrismBoss* _boss);
@@ -15,7 +15,6 @@ public:
     void OnDead();
 private:
     EntityHealth* m_healthCompo;
-    Animator* m_animator;
     PrismBoss* m_boss;
 };
 

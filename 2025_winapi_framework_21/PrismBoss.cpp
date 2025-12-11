@@ -150,7 +150,7 @@ void PrismBoss::HandlePhase()
 {
 	m_isChanging = true;
 	m_animator->Play(m_changingName);
-	GET_SINGLE(SceneManager)->GetCurScene()->ClearScene();
+	//GET_SINGLE(SceneManager)->GetCurScene()->ClearScene();
 }
 
 void PrismBoss::HandleDaad()
