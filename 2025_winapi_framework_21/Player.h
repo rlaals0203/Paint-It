@@ -40,6 +40,7 @@ private:
 	void ClampPlayer();
 	void SetGroundCheckerPos();
 	void HandleIsGround(bool m_isGround);
+	void HandleDead();
 
 private:
 	Texture* m_pTexture;

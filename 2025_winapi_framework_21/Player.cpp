@@ -26,6 +26,7 @@ Player::Player()
 	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetDefaultHP(50.f);
+	m_healthCompo->SubscribeDeath([this]() {HandleDead(); });
 
 	m_groundChecker = new GroundChecker();
 	m_groundChecker->SubscribeGroundChange([this](bool isGround) {HandleIsGround(isGround); });
@@ -237,6 +238,11 @@ void Player::HandleIsGround(bool _isGround)
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(_isGround);
 	m_isGrounded = _isGround;
+}
+
+void Player::HandleDead()
+{
+	GET_SINGLE(SceneManager)->RequestLoadScene(L"GameOverScene");
 }
 
 void Player::Jump()
