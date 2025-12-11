@@ -20,11 +20,27 @@ void UIPanel::Update()
 	if (!m_isActive)
 		return;
 
+	auto iter = m_children.begin();
+	while (iter != m_children.end())
+	{
+		if ((*iter)->GetIsDead())
+		{
+			delete (*iter);
+			iter = m_children.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 	Object::Update();
 
-	for (UIElement* child : m_children)
+	for (size_t i = 0; i < m_children.size(); ++i)
 	{
-		child->Update();
+		if (m_children[i])
+		{
+			m_children[i]->Update();
+		}
 	}
 }
 
