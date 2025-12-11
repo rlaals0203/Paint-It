@@ -153,12 +153,39 @@ void ResourceManager::Play(const wstring& _key)
 	SoundInfo* pSound = FindSound(_key);
 	if (!pSound)
 		return;
+
 	SOUND_CHANNEL eChannel = SOUND_CHANNEL::BGM;
 	if (!pSound->IsLoop)
 		eChannel = SOUND_CHANNEL::EFFECT;
-	// 사운드 재생 함수. &channel로 어떤 채널을 통해 재생되는지 포인터 넘김
-	m_pSoundSystem->playSound(pSound->pSound, nullptr, false, &m_pChannel[(UINT)eChannel]);
 
+	FMOD::Channel* pNewChannel = nullptr;
+	m_pSoundSystem->playSound(pSound->pSound, nullptr, false, &pNewChannel);
+
+	// 재생 직후 바로 볼륨 적용!
+	if (pNewChannel)
+	{
+		pNewChannel->setVolume(m_Volume[(UINT)eChannel]);  // 저장된 볼륨 값 적용
+	}
+
+	m_pChannel[(UINT)eChannel] = pNewChannel;
+}
+
+void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
+{
+	// 볼륨 값 저장
+	m_Volume[(UINT)_channel] = _vol;
+
+	// 현재 재생 중인 채널에도 적용
+	if (m_pChannel[(UINT)_channel])
+	{
+		bool isPlaying = false;
+		m_pChannel[(UINT)_channel]->isPlaying(&isPlaying);
+
+		if (isPlaying)
+		{
+			m_pChannel[(UINT)_channel]->setVolume(_vol);
+		}
+	}
 }
 
 void ResourceManager::Stop(SOUND_CHANNEL _channel)
@@ -167,12 +194,6 @@ void ResourceManager::Stop(SOUND_CHANNEL _channel)
 
 }
 
-void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
-{
-	// 0.0 ~ 1.0 볼륨 조절
-	m_pChannel[(UINT)_channel]->setVolume(_vol);
-
-}
 
 void ResourceManager::Pause(SOUND_CHANNEL _channel, bool _ispause)
 {
@@ -191,6 +212,8 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"laser", L"Sound\\laser.mp3", false);
 	LoadSound(L"smash", L"Sound\\smash.mp3", false);
+	LoadSound(L"click", L"Sound\\Click.mp3", false);
+	LoadSound(L"hover", L"Sound\\Hover.mp3", false);
 	LoadSound(L"blackhole", L"Sound\\blackhole.mp3", false);
 	LoadSound(L"hit", L"Sound\\hit.mp3", false);
 	LoadSound(L"shield", L"Sound\\shield.mp3", false);

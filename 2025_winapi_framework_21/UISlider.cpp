@@ -32,8 +32,6 @@ void UISlider::Render(HDC hdc)
     Vector2 size = GetSize();
 
     int trackHeight = (int)(size.y * 0.3f);
-    //int centerX = (int)(pos.x + size.x * 0.5f);
-    //지금은 pos.x가 가운데가 아닌 왼쪽 끝을 나타냄 이를 바꿀것
     int centerY = (int)(pos.y + size.y * 0.5f);
 
     m_trackRect = {
@@ -42,8 +40,6 @@ void UISlider::Render(HDC hdc)
         (LONG)(pos.x + size.x),
         (LONG)(centerY + trackHeight / 2)
     };
-
-    LONG width = 0, height = 0;
 
     if (m_trackTex)
     {
@@ -76,7 +72,7 @@ void UISlider::Render(HDC hdc)
         int width = m_fillTex->GetWidth();
         int height = m_fillTex->GetHeight();
 
-        int corner = 6; // 양쪽 폭 6px
+        const int corner = 6; // 양쪽 폭 6px
 
         int drawX = m_trackRect.left;
         int drawY = m_trackRect.top;
@@ -152,7 +148,8 @@ void UISlider::Render(HDC hdc)
     {
         HBRUSH brush = CreateSolidBrush(RGB(50, 150, 250));
         HBRUSH old = (HBRUSH)SelectObject(hdc, brush);
-        Ellipse(hdc, thumbX - m_thumbRadius, thumbY - m_thumbRadius, thumbX + m_thumbRadius, thumbY + m_thumbRadius);
+        Ellipse(hdc, thumbX - m_thumbRadius, thumbY - m_thumbRadius
+            , thumbX + m_thumbRadius, thumbY + m_thumbRadius);
         SelectObject(hdc, old);
         DeleteObject(brush);
     }

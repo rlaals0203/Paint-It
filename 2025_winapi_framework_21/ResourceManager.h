@@ -58,6 +58,7 @@ public:
 	}
 private:
 	//std::filesystem::path m_resourcePath;
+	float m_Volume[(UINT)SOUND_CHANNEL::END] = { 1.0f, 1.0f };
 	fs::path m_resourcePath;
 	std::unordered_map<wstring, Texture*> m_mapTexture;
 	HBRUSH m_Brushs[(UINT)BrushType::END] = {};

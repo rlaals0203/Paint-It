@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "UIButton.h"
 #include "InputManager.h"
+#include "ResourceManager.h"
 #include "Texture.h"
 
 UIButton::UIButton()
@@ -34,11 +35,21 @@ void UIButton::Render(HDC _hdc)
 	{
 	case UIState::NORMAL:
 		SetTexture(m_normalTexture, m_normalColor);
+		m_hoverPlayOnce = false;
+		m_clickPlayOnce = false;
 		break;
 	case UIState::HOVER:
+		if(!m_hoverPlayOnce)
+			GET_SINGLE(ResourceManager)->Play(L"hover");
+		m_hoverPlayOnce = true;
+		m_clickPlayOnce = false;
 		SetTexture(m_hoverTexture, m_hoverColor);
 		break;
 	case UIState::PRESSED:
+		if(!m_clickPlayOnce)
+			GET_SINGLE(ResourceManager)->Play(L"click");
+		m_hoverPlayOnce = true;
+		m_clickPlayOnce = true;
 		SetTexture(m_pressedTexture, m_pressedColor);
 		break;
 	}
