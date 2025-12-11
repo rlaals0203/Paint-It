@@ -33,6 +33,7 @@ enum class PenType
 	YELLOW,
 	BLUE,
 	WHITE,
+	STRINGLASER,
 	END
 };
 
@@ -48,6 +49,7 @@ enum class BrushType
 	YELLOW,
 	BLUE,
 	WHITE,
+	STRINGLASER,
 	END
 };
 

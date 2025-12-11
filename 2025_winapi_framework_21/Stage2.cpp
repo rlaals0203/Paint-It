@@ -67,7 +67,7 @@ void Stage2::Init()
 	bg->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::PLATFORM, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });
 
-	SpriteObject* floor = new SpriteObject(L"floor", Layer::BACKGROUND, false);
+	SpriteObject* floor = new SpriteObject(L"floor2", Layer::BACKGROUND, false);
 	floor->SetSize({ WINDOW_WIDTH, 100 });
 	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
 
@@ -75,6 +75,7 @@ void Stage2::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::SHIELD);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::OIL);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::BACKDAMAGEABLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::GROUNDCHECKER, Layer::PLATFORM);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
 }

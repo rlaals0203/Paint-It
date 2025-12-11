@@ -62,6 +62,7 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(200, 150, 30));
 	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(30, 30, 200));
 	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
+	m_Brushs[(UINT)BrushType::STRINGLASER] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
@@ -75,6 +76,7 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(200, 150, 30));
 	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(30, 30, 200));
 	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
+	m_Pens[(UINT)PenType::STRINGLASER] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);
@@ -212,6 +214,9 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"smash", L"Sound\\smash.mp3", false);
 	LoadSound(L"click", L"Sound\\Click.mp3", false);
 	LoadSound(L"hover", L"Sound\\Hover.mp3", false);
+	LoadSound(L"blackhole", L"Sound\\blackhole.mp3", false);
+	LoadSound(L"hit", L"Sound\\hit.mp3", false);
+	LoadSound(L"shield", L"Sound\\shield.mp3", false);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)
@@ -235,7 +240,9 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"brush", L"Texture\\Brush.bmp");
 	LoadTexture(L"background1", L"Texture\\background1.bmp");
 	LoadTexture(L"smashsmoke", L"Texture\\BossSmashSmoke.bmp");
-	LoadTexture(L"floor", L"Texture\\floor.bmp");
+	LoadTexture(L"floor1", L"Texture\\floor1.bmp");
+	LoadTexture(L"floor2", L"Texture\\floor2.bmp");
+	LoadTexture(L"floor3", L"Texture\\floor3.bmp");
 	LoadTexture(L"knife", L"Texture\\knife.bmp");
 	LoadTexture(L"fireexplosion", L"Texture\\fireexplosion.bmp");
 	LoadTexture(L"firebullet", L"Texture\\firebossbullet.bmp");
@@ -271,7 +278,6 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"pond", L"Texture\\Pond.bmp");
 	LoadTexture(L"healpack", L"Texture\\healpack.bmp");
 }
-
 
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

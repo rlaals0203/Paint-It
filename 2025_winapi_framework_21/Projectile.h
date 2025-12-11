@@ -14,9 +14,9 @@ public:
     virtual void Init(std::wstring _texture, float _damage);
     virtual void EnterCollision(Collider* _other) override;
 public:
-    void SetAngle(float _f)
+    void SetAngle(float _angle)
     {
-        m_angle = _f;
+        m_angle = _angle;
         m_isAngle = true;
     }
     void SetDir(Vec2 _dir)

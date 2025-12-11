@@ -9,6 +9,7 @@
 #include "SpriteObject.h"
 #include "OilObject.h"
 #include "SceneManager.h"
+#include "DamageCaster.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -70,6 +71,10 @@ void SmashPattern::FallState()
 	GET_SINGLE(ResourceManager)->Play(L"smash");
 	GET_SINGLE(EffectManager)->PlayEffect(EffectType::SmashSmoke, 
 		{ winSize.x / 2, winSize.y - 400 }, { 10.f, 10.f }, 2.f);
+
+	auto* damageCaster = new DamageCaster();
+	damageCaster->CastDamage({ winSize.x / 2, winSize.y - 175 }, { 500.f, 150.f }, 20);
+
 	m_state = State::Ground;
 }
 

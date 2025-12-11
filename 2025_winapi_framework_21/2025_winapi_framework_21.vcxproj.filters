@@ -358,6 +358,12 @@
     <ClInclude Include="OriginPoint.h" />
     <ClInclude Include="OriginPointPattern.h" />
     <ClInclude Include="StringArtPattern.h" />
+    <ClInclude Include="Boss1ClearScene.h" />
+    <ClInclude Include="Boss2ClearScene.h" />
+    <ClInclude Include="Boss3ClearScene.h" />
+    <ClInclude Include="HealPack.h" />
+    <ClInclude Include="HealPackSpawner.h" />
+    <ClInclude Include="DamageCaster.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_21.rc">
@@ -622,5 +628,14 @@
     <ClCompile Include="OriginPoint.cpp" />
     <ClCompile Include="OriginPointPattern.cpp" />
     <ClCompile Include="StringArtPattern.cpp" />
+    <ClCompile Include="Boss1ClearScene.cpp" />
+    <ClCompile Include="Boss2ClearScene.cpp" />
+    <ClCompile Include="Boss3ClearScene.cpp" />
+    <ClCompile Include="HealPack.cpp" />
+    <ClCompile Include="HealPackSpawner.cpp" />
+    <ClCompile Include="DamageCaster.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

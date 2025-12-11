@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "DamageText.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 
 EntityHealth::EntityHealth() :
     m_maxHp(0),
@@ -54,8 +55,13 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
 {
     if (m_isActive == false) return;
 	m_currentHp -= _damage * m_damageMult;
+    m_currentHp = std::clamp(m_currentHp, 0, m_maxHp);
+
 	Object* owner = GetOwner();
 	owner->OnHit();
+
+    if (m_isBoss)
+        GET_SINGLE(ResourceManager)->Play(L"blackhole");
 
     if (_isDamageText)
     {
@@ -67,7 +73,6 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
         if (m_deadCallback != nullptr)
         {
             m_deadCallback();
-            owner->SetDead();
             return;
         }
     }
@@ -81,4 +86,7 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
             return;
         }
     }
+
+    if(m_currentHp <= 0)
+        owner->SetDead();
 }

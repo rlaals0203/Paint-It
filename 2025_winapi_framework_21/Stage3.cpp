@@ -70,7 +70,7 @@ void Stage3::Init()
 	bg->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::PLATFORM, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });
 
-	SpriteObject* floor = new SpriteObject(L"floor", Layer::BACKGROUND, false);
+	SpriteObject* floor = new SpriteObject(L"floor3", Layer::BACKGROUND, false);
 	floor->SetSize({ WINDOW_WIDTH, 100 });
 	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
 

@@ -12,7 +12,7 @@ StringArtPattern::StringArtPattern(BossController* _controller, float _laserDela
     m_laserDelay(_laserDelay),
     m_pondToLaserDelay(0.7f),
     m_currentTime(0.f),
-    m_deleteTime(0.3f),
+    m_deleteTime(0.1f),
     m_remainDeleteTime(0.f),
     m_isDangerPhase(true),
     m_isPondSpawned(false),
@@ -204,7 +204,7 @@ void StringArtPattern::FireNextLaser()
     laser->SetWidth(12.f);
     laser->SetColor(PenType::YELLOW, BrushType::YELLOW);
     laser->SetDamagePerTick(1.f, 0.1f);
-    laser->ConnectLaser(startPos, endPos, 0.05f, 0.f);
+    laser->ConnectLaser(startPos, endPos, 0.15f, 0.f);
 
     m_lasers.push(laser);
 }
