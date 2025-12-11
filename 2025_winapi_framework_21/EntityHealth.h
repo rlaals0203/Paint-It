@@ -19,6 +19,10 @@ public:
 	void SetDamageMultiplier(float _multiplier) { m_damageMult = _multiplier; }
 	void SubscribeHealthThreshold(std::function<void()> _callback, float _threshold) 
 	{ m_callback = _callback; m_threshold = _threshold; }
+	void SubscribeDeath(std::function<void()> _callback)
+	{
+		m_dead = _callback;
+	}
 private:
 	int m_maxHp;
 	int m_currentHp;
@@ -27,5 +31,6 @@ private:
 	bool m_isBoss;
 	bool m_hasInvoked;
 	std::function<void()> m_callback;
+	std::function<void()> m_dead;
 };
 
