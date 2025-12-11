@@ -55,6 +55,7 @@ void Stage1::Init()
 
 	auto* healpack = new HealPackSpawner();
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Play(L"boss01");
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);

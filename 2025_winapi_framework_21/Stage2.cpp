@@ -16,6 +16,7 @@
 #include "EntityHealth.h"
 #include "ColorObject.h"
 #include "GameSaveManager.h"
+#include "HealPackSpawner.h"
 
 void Stage2::Init()
 {
@@ -66,6 +67,10 @@ void Stage2::Init()
 	bg->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
 	bg->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	Spawn<Floor>(Layer::PLATFORM, { WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 }, { 2000.f, 100.f });
+
+	auto* healpack = new HealPackSpawner();
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Play(L"boss02");
 
 	SpriteObject* floor = new SpriteObject(L"floor2", Layer::BACKGROUND, false);
 	floor->SetSize({ WINDOW_WIDTH, 100 });

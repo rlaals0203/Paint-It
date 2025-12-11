@@ -16,6 +16,7 @@
 #include "EntityHealth.h"
 #include "Platform.h"
 #include "GameSaveManager.h"
+#include "HealPackSpawner.h"
 
 
 void Stage3::Init()
@@ -50,6 +51,10 @@ void Stage3::Init()
 	bossHP->SetText(L"보스[미정]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
+
+	auto* healpack = new HealPackSpawner();
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Play(L"boss03");
 
 	ArtBoss* boss = new ArtBoss();
 	boss->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 });
