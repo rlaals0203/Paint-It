@@ -36,7 +36,7 @@ void GuidedProjectilePattern::Update()
 		Vec2 finalPos = pos + offset;
 
 		SkullProjectile* proj = new SkullProjectile();
-		proj->Init(1.5f, 10, 5.f);
+		proj->Init(1.5f, 12, 5.f);
 		proj->SetPos(finalPos);
 	}
 
