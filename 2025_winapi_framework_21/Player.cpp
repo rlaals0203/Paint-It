@@ -16,7 +16,9 @@
 #include "BurstSkill.h"
 
 Player::Player()
-	: m_pTexture(nullptr)
+	: m_pTexture(nullptr),
+	m_completedFire(false),
+	m_completedPrism(false)
 {
 	AddComponent<Rigidbody>();
 	auto* col = AddComponent<Collider>();

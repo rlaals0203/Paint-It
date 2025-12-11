@@ -285,6 +285,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"prismbossblink", L"Texture\\prismbossblink.bmp");
 	LoadTexture(L"playerredbullet", L"Texture\\playerredbullet.bmp");
 	LoadTexture(L"prismcrystal", L"Texture\\prismcrystal.bmp");
+	LoadTexture(L"title", L"Texture\\title.bmp");
 }
 
 
