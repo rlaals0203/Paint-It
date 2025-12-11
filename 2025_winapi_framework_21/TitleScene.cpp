@@ -77,10 +77,10 @@ void TitleScene::Title()
 {
 	UIImage* title = m_mainPanel->AddUIElement<UIImage>();
 	
-	title->SetPos({ WINDOW_WIDTH / 2 , WINDOW_HEIGHT / 3  });
-	title->SetSize({ 300, 300 });
+	title->SetPos({ WINDOW_WIDTH / 2 - 50 , WINDOW_HEIGHT / 3  });
+	title->SetSize({ 1000, 300 });
 
-	Texture* titleImage = GET_SINGLE(ResourceManager)->GetTexture(L"brush");
+	Texture* titleImage = GET_SINGLE(ResourceManager)->GetTexture(L"title");
 
 	title->SetImage(titleImage);
 	Vec2 size = title->GetSize();
