@@ -64,4 +64,5 @@ void Projectile::EnterCollision(Collider* _other)
     }
 
     SetDead();
+    GET_SINGLE(SceneManager)->RequestDestroy(this);
 }

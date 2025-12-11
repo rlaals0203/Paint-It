@@ -8,6 +8,7 @@
 #include "EffectManager.h"
 #include "SpriteObject.h"
 #include "OilObject.h"
+#include "SceneManager.h"
 
 SmashPattern::SmashPattern(BossController* _controller) 
 	: BossPattern(_controller), 
@@ -91,6 +92,7 @@ void SmashPattern::GroundState()
 			Vec2 pos = drop->GetPos();
 			oil->SetPos(pos);
 			drop->SetDead();
+			GET_SINGLE(SceneManager)->RequestDestroy(drop);
 		});
 
 	if (--m_count <= 0)

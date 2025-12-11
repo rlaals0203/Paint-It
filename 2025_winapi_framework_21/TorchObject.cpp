@@ -62,7 +62,11 @@ void TorchObject::Update()
 void TorchObject::HandleDead()
 {
 	m_isDead = true;
-	m_dotweenCompo->DOLocalMoveY(-150.f, 0.5f, EaseInBack, [this]() { SetDead(); });
+	m_dotweenCompo->DOLocalMoveY(-150.f, 0.5f, EaseInBack, [this]() 
+		{ 
+			SetDead(); 
+			GET_SINGLE(SceneManager)->RequestDestroy(this);
+		});
 }
 
 void TorchObject::FireProjectile()

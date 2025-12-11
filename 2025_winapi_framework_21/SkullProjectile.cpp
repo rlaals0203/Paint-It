@@ -80,6 +80,7 @@ void SkullProjectile::Update()
 		m_deadTime -= fDT;
 		if (m_deadTime <= 0.f) {
 			SetDead();
+			GET_SINGLE(SceneManager)->RequestDestroy(this);
 		}
 	}
 	else
