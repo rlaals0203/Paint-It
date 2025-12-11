@@ -134,14 +134,6 @@ float CollisionManager::Dot(Vec2 a, Vec2 b)
 
 bool CollisionManager::IsCollision(Collider* A, Collider* B)
 {
-#pragma region 이전 코드
-	/*Vec2 leftPos = A->GetUpdatedPos();
-	Vec2 rightPos = B->GetUpdatedPos();
-	Vec2 leftSize = A->GetSize();
-	Vec2 rightSize = B->GetSize();
-	return (fabsf(rightPos.x - leftPos.x) < (leftSize.x + rightSize.x) / 2.f
-		&& fabsf(rightPos.y - leftPos.y) < (leftSize.y + rightSize.y) / 2.f);*/
-#pragma endregion
 
 	if (A->IsActive() == false || B->IsActive() == false) return false;
 
