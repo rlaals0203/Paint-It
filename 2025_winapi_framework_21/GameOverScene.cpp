@@ -5,6 +5,7 @@
 #include "UIText.h"
 #include "UIButton.h"
 #include "GameSaveManager.h"
+#include "ResourceManager.h"
 
 void GameOverScene::Init()
 {
@@ -33,12 +34,21 @@ void GameOverScene::ReGameBtn()
 	UIButton* start = m_mainPanel->AddUIElement<UIButton>();
 	start->SetPos({ WINDOW_WIDTH / 2, 500 });
 	start->SetText(L"´Ù½Ã");
-	start->SetSize({ 100, 50 });
 	start->SetCallback([=]()
 		{
 			std::wstring sceneName = L"Stage" + std::to_wstring(GET_SINGLE(GameSaveManager)->GetStage());
 			GET_SINGLE(SceneManager)->LoadScene(sceneName);
 		});
+
+	start->SetSize({ 160, 64 });
+
+	Texture* button = GET_SINGLE(ResourceManager)
+		->GetTexture(L"button");
+
+	Texture* buttonHover = GET_SINGLE(ResourceManager)
+		->GetTexture(L"buttonhover");
+
+	start->SetAllTexture(button, buttonHover, nullptr);
 }
 
 void GameOverScene::ExitBtn()
@@ -55,4 +65,14 @@ void GameOverScene::ExitBtn()
 		{
 			::PostQuitMessage(0);
 		});
+
+	exit->SetSize({ 160, 64 });
+
+	Texture* button = GET_SINGLE(ResourceManager)
+		->GetTexture(L"button");
+
+	Texture* buttonHover = GET_SINGLE(ResourceManager)
+		->GetTexture(L"buttonhover");
+
+	exit->SetAllTexture(button, buttonHover, nullptr);
 }
