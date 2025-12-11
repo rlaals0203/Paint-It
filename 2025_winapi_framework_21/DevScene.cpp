@@ -50,8 +50,8 @@ void Stage1::Init()
 	floor->SetSize({ WINDOW_WIDTH, 100 });
 	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
 
-	auto* healpack = new HealPackSpawner();
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::BACKGROUND);
+	//auto* healpack = new HealPackSpawner();
+	//GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::BACKGROUND);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);

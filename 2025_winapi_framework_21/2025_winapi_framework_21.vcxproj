@@ -211,6 +211,8 @@
     <ClInclude Include="GuidedLaserPattern.h" />
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="GuidedProjectilePattern.h" />
+    <ClInclude Include="HealPack.h" />
+    <ClInclude Include="HealPackSpawner.h" />
     <ClInclude Include="ImpulseManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LaserObject.h" />
@@ -294,6 +296,8 @@
     <ClCompile Include="GuidedLaserPattern.cpp" />
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="GuidedProjectilePattern.cpp" />
+    <ClCompile Include="HealPack.cpp" />
+    <ClCompile Include="HealPackSpawner.cpp" />
     <ClCompile Include="ImpulseManager.cpp" />
     <ClCompile Include="CircleProjectilePattern.cpp" />
     <ClCompile Include="Collider.cpp" />

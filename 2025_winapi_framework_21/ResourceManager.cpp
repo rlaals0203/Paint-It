@@ -246,6 +246,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"yellowprojectile", L"Texture\\yellowprojectile.bmp");
 	LoadTexture(L"artbossblink", L"Texture\\artbossblink.bmp");
 	LoadTexture(L"pond", L"Texture\\Pond.bmp");
+	LoadTexture(L"healpack", L"Texture\\healpack.bmp");
 }
 
 
