@@ -14,6 +14,7 @@ public:
 private:
     bool m_isCastFrame = false;
     bool m_deleteNextFrame = false;
+    float m_time;
     int m_damage;
 };
 
