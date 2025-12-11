@@ -60,8 +60,7 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
 	Object* owner = GetOwner();
 	owner->OnHit();
 
-    if (m_isBoss)
-        GET_SINGLE(ResourceManager)->Play(L"blackhole");
+    GET_SINGLE(ResourceManager)->Play(L"hit");
 
     if (_isDamageText)
     {

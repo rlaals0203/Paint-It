@@ -31,6 +31,7 @@ void ExplosionProjectile::Init(std::wstring _texture, float _damage)
 void ExplosionProjectile::EnterCollision(Collider* _other)
 {
 	Projectile::EnterCollision(_other);
+	GET_SINGLE(ResourceManager)->Play(L"explosion");
 	GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, 
 		GetPos(), { 3, 3 }, m_explosionTime);
 

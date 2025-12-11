@@ -35,5 +35,6 @@ void PrismObject::Render(HDC _hdc)
 
 void PrismObject::OnDead()
 {
+	GET_SINGLE(ResourceManager)->Play(L"prismbreak");
 	m_boss->RemovePrism();
 }

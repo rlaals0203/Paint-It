@@ -194,6 +194,8 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"blackhole", L"Sound\\blackhole.mp3", false);
 	LoadSound(L"hit", L"Sound\\hit.mp3", false);
 	LoadSound(L"shield", L"Sound\\shield.mp3", false);
+	LoadSound(L"exlosion", L"Sound\\exlosion.mp3", false);
+	LoadSound(L"prismbreak", L"Sound\\prismbreak.mp3", false);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)

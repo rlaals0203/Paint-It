@@ -39,6 +39,7 @@ void BlackHolePattern::Update()
 
 void BlackHolePattern::SetUsed()
 {
+	GET_SINGLE(ResourceManager)->Play(L"blackhole");
 	m_currentCount = m_count;
 	float duration = m_delay * m_count + 3.f;
 	GET_SINGLE(EffectManager)->PlayEffect(EffectType::BlackHole, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { 3, 3 }, duration, true);
