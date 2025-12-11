@@ -160,7 +160,10 @@ void Player::FireProjectile()
 			int rand = Random::Range(0, 5);
 			if (rand == 1)
 			{
+				GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerProjectile,
+					50.f, playerPos, angles[i], 20.f, true);
 
+				continue;
 			}
 		}
 

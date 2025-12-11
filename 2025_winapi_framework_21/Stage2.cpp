@@ -14,9 +14,31 @@
 #include "UIPanel.h"
 #include "UIBossHP.h"
 #include "EntityHealth.h"
+#include "ColorObject.h"
 
 void Stage2::Init()
 {
+	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
+	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
+
+	obj1->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	obj1->SetPos({WINDOW_WIDTH / 2, 0});
+	obj2->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	obj2->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT });
+
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(obj1, Layer::LOADINGSCREEN);
+	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(obj2, Layer::LOADINGSCREEN);
+
+	auto* tween1 = obj1->AddComponent<DOTweenCompo>();
+	auto* tween2 = obj2->AddComponent<DOTweenCompo>();
+
+	tween1->DOMoveY(-WINDOW_HEIGHT / 2, 3.f, EaseOutCubic);
+	tween2->DOMoveY(WINDOW_HEIGHT * 1.5f, 3.f, EaseOutCubic, [=]()
+		{
+			GET_SINGLE(SceneManager)->RequestDestroy(obj1);
+			GET_SINGLE(SceneManager)->RequestDestroy(obj2);
+		});
+
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);
