@@ -22,7 +22,7 @@ void Boss1ClearScene::OverText()
 	UIText* title = m_mainPanel->AddUIElement<UIText>();
 
 	title->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 });
-	title->SetText(L"º¸½º 1 ±þ ¤º¤º");
+	title->SetText(L"Ã³Ä¡ ¿Ï·á [Æø¹ß Åõ»çÃ¼] ´É·Â È¹µæ!");
 	title->SetSize({ 300, 150 });
 }
 

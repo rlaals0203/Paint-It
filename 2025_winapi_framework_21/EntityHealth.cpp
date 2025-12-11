@@ -54,6 +54,8 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
 {
     if (m_isActive == false) return;
 	m_currentHp -= _damage * m_damageMult;
+    m_currentHp = std::clamp(m_currentHp, 0, m_maxHp);
+
 	Object* owner = GetOwner();
 	owner->OnHit();
 

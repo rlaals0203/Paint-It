@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "HealPackSpawner.h"
-#include "SceneManager.h"
 
 HealPackSpawner::HealPackSpawner() : m_delay(15.f)
 {

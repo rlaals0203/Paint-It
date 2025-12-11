@@ -5,10 +5,9 @@
 #include "SceneManager.h"
 
 HealPack::HealPack(std::wstring _texture, Layer _layer)
-	: SpriteObject(_texture, _layer, true),
+	: SpriteObject(_texture, _layer, true), 
 	m_healAmount(10)
 {
-	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::HEALPACK);
 	AddComponent<Collider>();
 	SetSize({ 100, 100 });
 }
@@ -27,7 +26,8 @@ void HealPack::EnterCollision(Collider* _other)
 	if (_other->GetName() == L"Player")
 	{
 		auto* health =_other->GetOwner()->GetComponent<EntityHealth>();
-		health->ApplyDamage(-m_healAmount);
+		if (health != nullptr)
+			health->ApplyDamage(-m_healAmount, false);
 
 		SetDead();
 		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
