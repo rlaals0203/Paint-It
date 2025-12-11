@@ -2,6 +2,7 @@
 #include "LaserObject.h"
 #include "Ease.h"
 #include "SceneManager.h"
+#include "Scene.h"
 #include "ImpulseManager.h"
 #include "DangerGizmo.h"
 #include "RotateRender.h"
@@ -17,13 +18,15 @@ LaserObject::LaserObject() :
     m_width(15.f),
     m_penType(PenType::LAZER),
     m_brushType(BrushType::LAZER),
-    m_damagePerTick(1.f),       // 기본 틱당 데미지
-    m_tickInterval(0.1f),       // 기본 틱 간격 0.1초
+    m_damagePerTick(1.f),
+    m_tickInterval(0.1f),
     m_tickTimer(0.f)
 {
     m_dotweenCompo = AddComponent<DOTweenCompo>();
     m_collider = AddComponent<Collider>();
     SetDestroyOnComplete();
+
+    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
 }
 
 LaserObject:: ~LaserObject() {}
@@ -36,43 +39,30 @@ void LaserObject::Update()
     if (m_tickTimer > 0.f)
         m_tickTimer -= fDT;
 
-    if (m_delay <= 0.f && m_isDelay)
+    if (m_delay <= 0.f)
     {
-        m_dotweenCompo->DOScaleX(m_length, m_duration, EaseInExpo);
-
         m_isDelay = false;
-        GET_SINGLE(ImpulseManager)->ApplyImpulse(8.f, 0.5f);
-        GET_SINGLE(ResourceManager)->Play(L"laser");
     }
 }
 
 void LaserObject::Render(HDC _hdc)
 {
-    GDISelector pen(_hdc, m_penType);
-    GDISelector brush(_hdc, m_brushType);
-    Vec2 pos = GetPos();
-    Vec2 size = GetSize();
-
-    float halfLen = size.x * 0.5f;
-    Vec2 renderOffset = m_dir * halfLen;
-    pos = pos + renderOffset;
-    RotateRender::RotateRectRender(_hdc, pos, size, m_angle);
+    if (m_isDelay)
+    {
+        // 딜레이 중일 때 (예고선 등)
+    }
+    else
+    {
+        SetLine();
+        RotateRender::RotateRectRender(_hdc, GetPos() + m_collider->GetOffSetPos(), GetSize(), m_angle);
+    }
     ComponentRender(_hdc);
 }
 
 void LaserObject::EnterCollision(Collider* _other)
 {
-    auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
-    if (health)
-    {
-        health->ApplyDamage(m_damagePerTick);
-        m_tickTimer = m_tickInterval;
-    }
-}
-
-void LaserObject::StayCollision(Collider* _other)
-{
-    if (m_tickTimer <= 0.f)
+    if (m_isDelay) return;
+    if (_other->GetName() == L"Player")
     {
         auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
         if (health)
@@ -83,24 +73,33 @@ void LaserObject::StayCollision(Collider* _other)
     }
 }
 
-void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _delay)
+void LaserObject::StayCollision(Collider* _other)
 {
-    m_angle = _angle;
-    m_pos = _start;
-    m_duration = _duration;
-    m_delay = _delay;
-
-    SetRotation(m_angle);
-    SetLine();
-
-    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::BACKDAMAGEABLE);
+    if (m_isDelay) return;
+    if (_other->GetName() == L"Player")
+    {
+        if (m_tickTimer <= 0.f)
+        {
+            auto* health = _other->GetOwner()->GetComponent<EntityHealth>();
+            if (health)
+            {
+                health->ApplyDamage(m_damagePerTick);
+                m_tickTimer = m_tickInterval;
+            }
+        }
+    }
 }
 
-void LaserObject::SetLine()
+void LaserObject::InitLaser(Vec2 _start, float _angle, float _duration, float _delay)
 {
-    m_dir = Vec2(cosf(m_angle * PI / 180.f), sinf(m_angle * PI / 180.f));
-    m_dir.Normalize();
-    SetPos(m_pos);
+    SetPos(_start);
+    m_angle = _angle;
+    m_delay = _delay;
+
+    Vec2 dir = { cosf(_angle * PI / 180.f), sinf(_angle * PI / 180.f) };
+    dir.Normalize();
+    m_dir = dir;
+
     SetSize({ 0.f, m_width });
 
     Vec2 finalOffset = m_dir * (m_length * 0.5f);
@@ -133,28 +132,17 @@ void LaserObject::ConnectLaser(Vec2 _start, Vec2 _end, float _duration, float _d
     SetLength(dir.Length());
     dir.Normalize();
     float angleInDegrees = atan2(dir.y, dir.x) * 180.f / PI;
-    if (angleInDegrees < 0)
-        angleInDegrees += 360.f;
+    if (angleInDegrees < 0) angleInDegrees += 360.f;
 
     InitLaser(_start, angleInDegrees, _duration, _delay);
 }
 
 Vec2 LaserObject::GetLaserHitPoint()
 {
-    Vec2 start = GetPos();
-    Vec2 dir = m_dir;
-    float x, y, t;
+    return m_pos + m_dir * m_length;
+}
 
-    if (dir.x > 0)
-        x = (WINDOW_WIDTH - start.x) / dir.x;
-    else
-        x = (0 - start.x) / dir.x;
-
-    if (dir.y > 0)
-        y = (WINDOW_HEIGHT - start.y) / dir.y;
-    else
-        y = (0 - start.y) / dir.y;
-
-    t = (x < y) ? x : y;
-    return start + dir * t;
+void LaserObject::SetLine()
+{
+    SetSize({ m_length, m_width });
 }
