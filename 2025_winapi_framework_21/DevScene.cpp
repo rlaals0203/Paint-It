@@ -15,10 +15,13 @@
 #include "UIBossHP.h"
 #include "EntityHealth.h"
 #include "HealPackSpawner.h"
+#include "GameSaveManager.h"
 
 
 void Stage1::Init()
 {
+
+	GET_SINGLE(GameSaveManager)->SetStage(1);
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);

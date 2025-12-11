@@ -14,9 +14,11 @@
 #include "UIPanel.h"
 #include "UIBossHP.h"
 #include "EntityHealth.h"
+#include "GameSaveManager.h"
 
 void Stage2::Init()
 {
+	GET_SINGLE(GameSaveManager)->SetStage(2);
 	m_mainPanel = new UIPanel();
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	AddObject(m_mainPanel, Layer::UI);

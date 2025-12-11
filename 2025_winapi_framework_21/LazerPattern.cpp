@@ -34,6 +34,7 @@ void LazerPattern::SetUsed()
 		angle += 20.f;
 		auto* lazer = new LaserObject();
 		lazer->InitLaser({ WINDOW_WIDTH / 2, -50 }, angle, 0.15f, 0.5f);
+		lazer->SetDamagePerTick(8, 0.1f);
 		m_lineVec.push_back(lazer);
 	}
 

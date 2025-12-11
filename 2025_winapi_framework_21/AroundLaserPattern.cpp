@@ -38,5 +38,6 @@ void AroundLaserPattern::MakeLaser()
 	laser->SetWidth(20.f);
 	laser->SetColor(m_penType, m_brushType);
 	laser->InitLaser(pos, angle, 0.25f, 0.2f);
+	laser->SetDamagePerTick(10, 0.1f);
 	m_lasers.push(laser);
 }

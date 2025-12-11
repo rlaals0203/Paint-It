@@ -63,7 +63,7 @@ PrismBoss::PrismBoss() : Boss(),
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(300.f);
+	m_healthCompo->SetDefaultHP(1200.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	m_healthCompo->SubscribeDeath([this]() { HandleDaad(); });
 	AddComponent<DOTweenCompo>();
