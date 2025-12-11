@@ -212,7 +212,9 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"brush", L"Texture\\Brush.bmp");
 	LoadTexture(L"background1", L"Texture\\background1.bmp");
 	LoadTexture(L"smashsmoke", L"Texture\\BossSmashSmoke.bmp");
-	LoadTexture(L"floor", L"Texture\\floor.bmp");
+	LoadTexture(L"floor1", L"Texture\\floor1.bmp");
+	LoadTexture(L"floor2", L"Texture\\floor2.bmp");
+	LoadTexture(L"floor3", L"Texture\\floor3.bmp");
 	LoadTexture(L"knife", L"Texture\\knife.bmp");
 	LoadTexture(L"fireexplosion", L"Texture\\fireexplosion.bmp");
 	LoadTexture(L"firebullet", L"Texture\\firebossbullet.bmp");

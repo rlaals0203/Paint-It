@@ -170,6 +170,7 @@
     <ClInclude Include="Boss1ClearScene.h" />
     <ClInclude Include="Boss2ClearScene.h" />
     <ClInclude Include="Boss3ClearScene.h" />
+    <ClInclude Include="DamageCaster.h" />
     <ClInclude Include="DotBombPattern.h" />
     <ClInclude Include="BlockObject.h" />
     <ClInclude Include="BombObject.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="Boss1ClearScene.cpp" />
     <ClCompile Include="Boss2ClearScene.cpp" />
     <ClCompile Include="Boss3ClearScene.cpp" />
+    <ClCompile Include="DamageCaster.cpp" />
     <ClCompile Include="DotBombPattern.cpp" />
     <ClCompile Include="BlockObject.cpp" />
     <ClCompile Include="BombObject.cpp" />

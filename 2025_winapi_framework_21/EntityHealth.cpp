@@ -69,7 +69,6 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
         if (m_deadCallback != nullptr)
         {
             m_deadCallback();
-            owner->SetDead();
             return;
         }
     }
@@ -83,4 +82,7 @@ void EntityHealth::ApplyDamage(int _damage, bool _isDamageText)
             return;
         }
     }
+
+    if(m_currentHp <= 0)
+        owner->SetDead();
 }
