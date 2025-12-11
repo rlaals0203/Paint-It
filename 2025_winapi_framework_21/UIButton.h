@@ -36,6 +36,9 @@ private:
 	void SetTexture(Texture* texture, COLORREF color);
 
 private:
+	bool m_hoverPlayOnce = false;
+	bool m_clickPlayOnce = false;
+
 	Texture* m_currentTexture;
 
 	Texture* m_normalTexture;

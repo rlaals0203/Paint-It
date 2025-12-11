@@ -72,7 +72,7 @@ void UISlider::Render(HDC hdc)
         int width = m_fillTex->GetWidth();
         int height = m_fillTex->GetHeight();
 
-        int corner = 6; // 剧率 气 6px
+        const int corner = 6; // 剧率 气 6px
 
         int drawX = m_trackRect.left;
         int drawY = m_trackRect.top;
@@ -148,7 +148,8 @@ void UISlider::Render(HDC hdc)
     {
         HBRUSH brush = CreateSolidBrush(RGB(50, 150, 250));
         HBRUSH old = (HBRUSH)SelectObject(hdc, brush);
-        Ellipse(hdc, thumbX - m_thumbRadius, thumbY - m_thumbRadius, thumbX + m_thumbRadius, thumbY + m_thumbRadius);
+        Ellipse(hdc, thumbX - m_thumbRadius, thumbY - m_thumbRadius
+            , thumbX + m_thumbRadius, thumbY + m_thumbRadius);
         SelectObject(hdc, old);
         DeleteObject(brush);
     }
