@@ -59,6 +59,12 @@ void SceneManager::Update()
 	m_curScene->LateUpdate();
 }
 
+void SceneManager::Release()
+{
+	m_curScene = nullptr;
+	m_mapScenes.clear();
+}
+
 
 void SceneManager::Render(HDC _hdc)
 {

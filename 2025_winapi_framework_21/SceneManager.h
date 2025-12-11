@@ -7,6 +7,7 @@ class SceneManager
 public:
 	void Init();
 	void Update();
+	void Release();
 	void FixedUpdate(float _fixedDT);
 	void PhysicsSyncColliders();
 	void Render(HDC _hdc);

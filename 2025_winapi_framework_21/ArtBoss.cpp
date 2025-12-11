@@ -5,6 +5,8 @@
 #include "ResourceManager.h"
 #include "BlackHolePattern.h"
 #include "StringArtPattern.h"
+#include "OriginPointPattern.h"
+#include "DotBombPattern.h"
 
 ArtBoss::ArtBoss()
 {
@@ -32,6 +34,8 @@ ArtBoss::ArtBoss()
 
 	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
+	AddModule(new OriginPointPattern(m_controller, 10));
+	AddModule(new DotBombPattern(m_controller, 3));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });

@@ -82,4 +82,5 @@ void Core::CleanUp()
 
 	GET_SINGLE(ProjectileManager)->Release();
 	GET_SINGLE(ResourceManager)->Release();
+	GET_SINGLE(SceneManager)->Release();
 }
