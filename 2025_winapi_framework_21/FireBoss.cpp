@@ -25,7 +25,7 @@ FireBoss::FireBoss() : Boss()
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SubscribeHealthThreshold([this]() { HandleDaad(); }, 0.f);
 
-	healthCompo->SetDefaultHP(100.f);
+	healthCompo->SetDefaultHP(1040.f);
 	AddComponent<DOTweenCompo>();
 
 	m_animator->CreateAnimation(m_animName, m_texture,
@@ -45,7 +45,7 @@ FireBoss::FireBoss() : Boss()
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
 	AddModule(new SmashPattern(m_controller));
-	AddModule(new DrawProjectilePattern(m_controller, L"knife", 0.075f, 10.f));
+	AddModule(new DrawProjectilePattern(m_controller, L"knife", 0.075f, 12.f));
 	AddModule(new GuidedProjectilePattern(m_controller, ProjectileType::Enemy, 0.65f, 6));
 	AddModule(new CircleProjectilePattern(m_controller, ProjectileType::Enemy, 20));
 }

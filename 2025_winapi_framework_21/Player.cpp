@@ -25,7 +25,7 @@ Player::Player()
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetIsPlayer(false);
-	m_healthCompo->SetDefaultHP(100.f);
+	m_healthCompo->SetDefaultHP(50.f);
 
 	m_groundChecker = new GroundChecker();
 	m_groundChecker->SubscribeGroundChange([this](bool isGround) {HandleIsGround(isGround); });

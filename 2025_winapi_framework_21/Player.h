@@ -25,7 +25,7 @@ public:
 	void SetOiledTime(float _time) {
 		m_oiledTime = _time;
 		m_isOiled = true;
-		m_speed = 1.f;
+		m_speed = 1.5f;
 	}
 	void SetDamageMult(float _mult) { m_healthCompo->SetDamageMultiplier(_mult); }
 	void SetCompletedFire() { m_completedFire = true; }
