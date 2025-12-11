@@ -25,7 +25,7 @@ FireBoss::FireBoss() : Boss()
 	auto* healthCompo = AddComponent<EntityHealth>();
 	healthCompo->SubscribeHealthThreshold([this]() { HandleDaad(); }, 0.f);
 
-	healthCompo->SetDefaultHP(140.f);
+	healthCompo->SetDefaultHP(1400.f);
 	AddComponent<DOTweenCompo>();
 
 	m_animator->CreateAnimation(m_animName, m_texture,

@@ -24,7 +24,7 @@ void Boss2ClearScene::OverText()
 	UIText* title = m_mainPanel->AddUIElement<UIText>();
 
 	title->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 });
-	title->SetText(L"보스 2 깸 ㅊㅊ");
+	title->SetText(L"스테이지 2 클리어");
 	title->SetSize({ 300, 150 });
 }
 

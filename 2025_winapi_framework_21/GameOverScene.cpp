@@ -25,7 +25,7 @@ void GameOverScene::OverText()
 	UIText* title = m_mainPanel->AddUIElement<UIText>();
 
 	title->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 });
-	title->SetText(L"´ëÃæ ³Ê Á×À½");
+	title->SetText(L"GameOver");
 	title->SetSize({ 300, 150 });
 }
 
