@@ -46,7 +46,7 @@ void Stage2::Init()
 	AddObject(m_mainPanel, Layer::UI);
 
 	UIBossHP* bossHP = m_mainPanel->AddUIElement<UIBossHP>();
-	bossHP->SetText(L"���� [������]");
+	bossHP->SetText(L"보스 [프리즘]");
 	bossHP->SetPos({ WINDOW_WIDTH / 2 , 35 });
 	bossHP->SetSize({ WINDOW_WIDTH / 2 , 30 });
 
