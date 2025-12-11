@@ -24,7 +24,7 @@ void BossPatternModule::EnterModule()
 
 void BossPatternModule::UpdateModule()
 {
-    if (!m_CurrentPattern->IsUsed())
+    if (!m_CurrentPattern || !m_CurrentPattern->IsUsed())
     {
         m_isMoveTurn = !m_isMoveTurn;
         m_Controller->ChangeModule(L"IdleModule");
@@ -68,6 +68,7 @@ void BossPatternModule::AddMovePattern(MovePattern* p)
 
 void BossPatternModule::ClearPattern()
 {
+    m_CurrentPattern = nullptr;
     for (int i = 0; i < m_Patterns.size(); i++)
     {
         delete m_Patterns[i];
