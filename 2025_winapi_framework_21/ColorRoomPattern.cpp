@@ -16,7 +16,7 @@ ColorRoomPattern::ColorRoomPattern(float _delay) :
 {
     m_delay = _delay;
     m_dangerTime = m_delay;
-    m_deleteTime = 2.f;
+    m_deleteTime = 5.f;
     m_count = (m_countX + 1) * (m_countY + 1);
 
     m_currentDelay = m_delay;

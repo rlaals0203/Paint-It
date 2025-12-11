@@ -26,7 +26,7 @@ LaserObject::LaserObject() :
     m_collider = AddComponent<Collider>();
     SetDestroyOnComplete();
 
-    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::ENEMYOBSTACLE);
+    GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(this, Layer::BACKDAMAGEABLE);
 }
 
 LaserObject:: ~LaserObject() {}

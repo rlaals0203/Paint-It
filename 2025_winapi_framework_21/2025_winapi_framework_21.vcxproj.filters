@@ -635,4 +635,7 @@
     <ClCompile Include="HealPackSpawner.cpp" />
     <ClCompile Include="DamageCaster.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>

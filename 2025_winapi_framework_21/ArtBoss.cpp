@@ -5,6 +5,8 @@
 #include "ResourceManager.h"
 #include "BlackHolePattern.h"
 #include "StringArtPattern.h"
+#include "OriginPointPattern.h"
+#include "DotBombPattern.h"
 
 ArtBoss::ArtBoss()
 	: m_roomPattern(nullptr)
@@ -33,6 +35,8 @@ ArtBoss::ArtBoss()
 
 	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
+	AddModule(new OriginPointPattern(m_controller, 40));
+	AddModule(new DotBombPattern(m_controller, 5));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
@@ -71,5 +75,6 @@ void ArtBoss::HandlePhase()
 		delete m_roomPattern;
 		m_roomPattern = nullptr;
 	}
+
 	m_roomPattern = new ColorRoomPattern(1.f);
 }

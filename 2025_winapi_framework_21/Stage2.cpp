@@ -75,6 +75,7 @@ void Stage2::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::SHIELD);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYOBSTACLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::OIL);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::BACKDAMAGEABLE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::GROUNDCHECKER, Layer::PLATFORM);
 	GET_SINGLE(PlayerFindManager)->SetPlayer(player);
 }

@@ -3,6 +3,7 @@
 
 HealPackSpawner::HealPackSpawner() : m_delay(15.f)
 {
+	m_currentTime = m_delay;
 }
 
 HealPackSpawner::~HealPackSpawner()

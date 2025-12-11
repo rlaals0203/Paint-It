@@ -62,6 +62,7 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::YELLOW] = (HBRUSH)::CreateSolidBrush(RGB(200, 150, 30));
 	m_Brushs[(UINT)BrushType::BLUE] = (HBRUSH)::CreateSolidBrush(RGB(30, 30, 200));
 	m_Brushs[(UINT)BrushType::WHITE] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
+	m_Brushs[(UINT)BrushType::STRINGLASER] = (HBRUSH)::CreateSolidBrush(RGB(255, 255, 255));
 
 	// PEN 
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
@@ -75,6 +76,7 @@ void ResourceManager::RegisterGDI()
 	m_Pens[(UINT)PenType::YELLOW] = ::CreatePen(PS_SOLID, 5, RGB(200, 150, 30));
 	m_Pens[(UINT)PenType::BLUE] = ::CreatePen(PS_SOLID, 5, RGB(30, 30, 200));
 	m_Pens[(UINT)PenType::WHITE] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
+	m_Pens[(UINT)PenType::STRINGLASER] = ::CreatePen(PS_SOLID, 5, RGB(255, 255, 255));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"DeterminationMonoK", 0);
@@ -250,7 +252,6 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"pond", L"Texture\\Pond.bmp");
 	LoadTexture(L"healpack", L"Texture\\healpack.bmp");
 }
-
 
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
