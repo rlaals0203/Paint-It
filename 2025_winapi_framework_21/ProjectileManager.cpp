@@ -8,6 +8,7 @@ void ProjectileManager::Init()
     RegisterProjectile(DrawProjectile, L"firebullet", 10.f);
     RegisterProjectile(Enemy, L"bullet", 7.f);
     RegisterProjectile(BlackHoleProjectile, L"yellowprojectile", 1.f);
+    RegisterProjectile(PlayerRedBullet, L"playerredbullet", 20.f);
 }
 
 void ProjectileManager::Release()

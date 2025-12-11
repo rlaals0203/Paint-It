@@ -6,7 +6,8 @@ enum ProjectileType
     PlayerProjectile,
     DrawProjectile,
     Enemy,
-    BlackHoleProjectile
+    BlackHoleProjectile,
+    PlayerRedBullet
 };
 
 class ProjectileManager
