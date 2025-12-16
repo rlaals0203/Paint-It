@@ -35,7 +35,7 @@ void Boss3ClearScene::NextGameBtn()
 	start->SetText(L"타이틀로");
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Title");
+			GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 		});
 	start->SetSize({ 160, 64 });
 
