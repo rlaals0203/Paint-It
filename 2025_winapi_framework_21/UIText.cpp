@@ -2,6 +2,14 @@
 #include "UIText.h"
 #include "ResourceManager.h"
 
+UIText::UIText()
+{
+}
+
+UIText::~UIText()
+{
+}
+
 void UIText::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
