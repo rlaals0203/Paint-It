@@ -39,15 +39,11 @@ void TitleScene::Init()
 	Start();
 	Setting();
 	Exit();
-
-	GET_SINGLE(ResourceManager)
-		->Play(L"BGM");
 }
 
 void TitleScene::Release()
 {
-	GET_SINGLE(ResourceManager)
-		->Stop(SOUND_CHANNEL::BGM);
+	Scene::Release();
 }
 
 void TitleScene::CreatePanel()
