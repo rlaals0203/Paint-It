@@ -9,6 +9,14 @@
 #include "UISlider.h"
 #include "UIImage.h"
 
+TitleScene::TitleScene()
+{
+}
+
+TitleScene::~TitleScene()
+{
+}
+
 void TitleScene::Init()
 {
 	panel = GET_SINGLE(ResourceManager)

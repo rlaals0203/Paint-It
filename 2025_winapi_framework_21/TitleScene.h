@@ -5,6 +5,9 @@ class UIPanel;
 class TitleScene : public Scene
 {
 public:
+	TitleScene();
+	~TitleScene();
+public:
 	void Init() override;
 	void Release() override;
 private:
