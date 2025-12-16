@@ -29,6 +29,7 @@ void TitleScene::Init()
 	sliderHandle = GET_SINGLE(ResourceManager)
 		->GetTexture(L"slidericon");
 
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 
 	CreatePanel();
 

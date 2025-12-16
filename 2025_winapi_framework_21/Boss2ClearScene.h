@@ -5,6 +5,9 @@ class Boss2ClearScene :
     public Scene
 {
 public:
+	Boss2ClearScene();
+	~Boss2ClearScene();
+public:
 	void Init() override;
 private:
 	void OverText();

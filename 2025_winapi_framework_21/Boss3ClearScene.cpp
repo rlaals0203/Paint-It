@@ -7,6 +7,14 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 
+Boss3ClearScene::Boss3ClearScene()
+{
+}
+
+Boss3ClearScene::~Boss3ClearScene()
+{
+}
+
 void Boss3ClearScene::Init()
 {
 	m_mainPanel = new UIPanel();

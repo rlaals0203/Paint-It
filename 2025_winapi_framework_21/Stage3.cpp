@@ -19,6 +19,14 @@
 #include "HealPackSpawner.h"
 
 
+Stage3::Stage3()
+{
+}
+
+Stage3::~Stage3()
+{
+}
+
 void Stage3::Init()
 {
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
@@ -54,6 +62,7 @@ void Stage3::Init()
 
 	auto* healpack = new HealPackSpawner();
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"boss03");
 
 	ArtBoss* boss = new ArtBoss();
