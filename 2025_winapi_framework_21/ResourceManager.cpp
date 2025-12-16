@@ -206,7 +206,7 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"hit", L"Sound\\hit.mp3", false);
 	LoadSound(L"shield", L"Sound\\shield.wav", false);
 	LoadSound(L"exlosion", L"Sound\\exlosion.wav", false);
-	LoadSound(L"prismbreak", L"Sound\\prismbreak.wav", false);
+	LoadSound(L"prismbreak", L"Sound\\prismbreak.mp3", false);
 	LoadSound(L"boss01", L"Sound\\boss01.wav", true);
 	LoadSound(L"boss02", L"Sound\\boss02.wav", true);
 	LoadSound(L"boss03", L"Sound\\boss03.wav", true);
