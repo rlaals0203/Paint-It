@@ -160,7 +160,7 @@ void Player::FireProjectile()
 	{
 		if (m_completedFire)
 		{
-			int rand = Random::Range(0, 5);
+			int rand = Random::Range(0, 10);
 			if (rand == 1)
 			{
 				GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerRedBullet,

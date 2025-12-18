@@ -53,8 +53,8 @@ PrismBoss::PrismBoss() : Boss(),
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.20f, WINDOW_HEIGHT * 0.20f }, 300.f, 0.5f));
 	AddMoveModule(new MovePattern(m_controller, { WINDOW_WIDTH * 0.30f, WINDOW_HEIGHT * 0.45f }, 300.f, 0.5f));
 
+	AddModule(new LazerPattern(m_controller, 6));
 	AddModule(new MakePrismPattern(m_controller));
-	AddModule(new LazerPattern(m_controller, 5));
 	AddModule(new ReflectLazerPattern(m_controller, 10));
 	AddModule(new AroundLaserPattern(m_controller, 10));
 	AddModule(new SkyLaserPattern(m_controller, 10));

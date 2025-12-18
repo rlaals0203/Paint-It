@@ -38,6 +38,7 @@ void BaseLazerPattern::Update()
             m_lasers.pop();
             laser->HideLine();
             m_remainDeleteTime = m_deleteTime;
+            cout << m_remainCount << endl;
         }
     }
 

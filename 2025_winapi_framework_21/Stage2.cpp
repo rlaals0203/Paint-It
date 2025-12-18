@@ -69,6 +69,7 @@ void Stage2::Init()
 	Player* player = new Player();
 	player->SetPos({ WINDOW_WIDTH / 2, 550 });
 	player->SetSize({ 1.25f, 1.25f });
+	player->SetCompletedFire();
 	AddObject(player, Layer::PLAYER);
 
 	SpriteObject* bg = new SpriteObject(L"bluebackground", Layer::BACKGROUND, false);

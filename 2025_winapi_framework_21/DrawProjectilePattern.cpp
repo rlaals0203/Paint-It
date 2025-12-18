@@ -53,7 +53,8 @@ void DrawProjectilePattern::Update()
 		auto* dotween = proj->AddComponent<DOTweenCompo>();
 		dotween->DOMove(m_player->GetPos(), 0.4f, EaseInCubic, [proj]()
 			{
-				GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, proj->GetPos(), { 3.f, 3.f }, 0.9f);
+				GET_SINGLE(EffectManager)->PlayEffect(EffectType::FireExplosion, 
+				proj->GetPos(), { 3.f, 3.f }, 0.9f);
 				GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.5f);
 				proj->SetDead();
 			});
