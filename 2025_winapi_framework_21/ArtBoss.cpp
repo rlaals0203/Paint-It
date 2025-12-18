@@ -36,12 +36,12 @@ ArtBoss::ArtBoss()
 	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
 	AddModule(new OriginPointPattern(m_controller, 40));
-	AddModule(new DotBombPattern(m_controller, 5));
+	AddModule(new DotBombPattern(m_controller, 18));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(1600.0f);
+	m_healthCompo->SetDefaultHP(2800.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.3f);
 	m_healthCompo->SubscribeDeath([this]() { GoStage(4); });
 	AddComponent<DOTweenCompo>();

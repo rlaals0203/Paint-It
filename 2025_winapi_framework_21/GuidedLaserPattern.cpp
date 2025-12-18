@@ -40,7 +40,10 @@ void GuidedLaserPattern::SetLaser()
 		m_player = GET_SINGLE(PlayerFindManager)->GetPlayer();
 
 	LaserObject* laser = new LaserObject();
-	laser->SetDamagePerTick(1, 0.1f);
+
+	float damage = m_isAwaken ? 4 : 6;
+	laser->SetDamagePerTick(damage, 0.1f);
+
 	float offset = Random::Range(-200, 200);
 	Vec2 spawnPos = { m_player->GetPos().x + offset, -25.f };
 	Vec2 dir = m_player->GetPos() - spawnPos;

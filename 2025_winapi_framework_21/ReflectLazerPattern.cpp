@@ -26,7 +26,9 @@ void ReflectLazerPattern::Update()
         auto* laser = new LaserObject();
         laser->SetColor(m_penType, m_brushType);
         laser->InitLaser(m_prevPos, m_prevAngle, m_delay, 0.25f);
-        laser->SetDamagePerTick(2, 0.1f);
+
+        float damage = m_isAwaken ? 6 : 8;
+        laser->SetDamagePerTick(damage, 0.1f);
 
         m_lasers.push(laser);
 

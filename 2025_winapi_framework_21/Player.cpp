@@ -27,7 +27,7 @@ Player::Player()
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetIsPlayer(false);
-	m_healthCompo->SetDefaultHP(50.f);
+	m_healthCompo->SetDefaultHP(75.f);
 	m_healthCompo->SubscribeDeath([this]() {HandleDead(); });
 
 	m_groundChecker = new GroundChecker();
@@ -160,7 +160,7 @@ void Player::FireProjectile()
 	{
 		if (m_completedFire)
 		{
-			int rand = Random::Range(0, 5);
+			int rand = Random::Range(0, 10);
 			if (rand == 1)
 			{
 				GET_SINGLE(ProjectileManager)->SpawnProjectile(ProjectileType::PlayerRedBullet,

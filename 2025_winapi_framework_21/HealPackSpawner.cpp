@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "HealPackSpawner.h"
 
-HealPackSpawner::HealPackSpawner() : m_delay(15.f)
+HealPackSpawner::HealPackSpawner() : m_delay(21.5f)
 {
 	m_currentTime = m_delay;
 }

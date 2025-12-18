@@ -6,7 +6,7 @@
 
 HealPack::HealPack(std::wstring _texture, Layer _layer)
 	: SpriteObject(_texture, _layer, true), 
-	m_healAmount(10)
+	m_healAmount(25)
 {
 	AddComponent<Collider>();
 	SetSize({ 100, 100 });

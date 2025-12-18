@@ -47,6 +47,8 @@ void SkyLaserPattern::MakeLaser()
 	laser->SetWidth(WINDOW_WIDTH / m_count);
 	laser->SetColor(m_penType, m_brushType);
 	laser->InitLaser(pos, 90, 0.05f, 0.2f);
-	laser->SetDamagePerTick(5, 0.1f);
+
+	float damage = m_isAwaken ? 15 : 20;
+	laser->SetDamagePerTick(damage, 0.1f);
 	m_lasers.push(laser);
 }

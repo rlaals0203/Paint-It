@@ -24,6 +24,7 @@ protected:
     float m_delay;
     int m_count;
     float m_deleteTime;
+    bool m_isAwaken;
 private:
 };
 

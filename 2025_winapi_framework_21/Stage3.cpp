@@ -29,6 +29,8 @@ Stage3::~Stage3()
 
 void Stage3::Init()
 {
+	m_isEnd = false;
+
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 
@@ -87,8 +89,6 @@ void Stage3::Init()
 	SpriteObject* floor = new SpriteObject(L"floor3", Layer::BACKGROUND, false);
 	floor->SetSize({ WINDOW_WIDTH, 100 });
 	floor->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50 });
-
-	auto* plat1 = new Platform({ -100, 500 }, { 200, 500 });
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::SHIELD);

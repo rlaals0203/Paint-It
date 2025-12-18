@@ -7,6 +7,7 @@ enum ProjectileType
     DrawProjectile,
     Enemy,
     BlackHoleProjectile,
+    BlackHoleProjectile2,
     PlayerRedBullet
 };
 

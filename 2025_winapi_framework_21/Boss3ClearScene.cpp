@@ -17,6 +17,7 @@ Boss3ClearScene::~Boss3ClearScene()
 
 void Boss3ClearScene::Init()
 {
+	m_isEnd = false;
 	m_mainPanel = new UIPanel();
 
 	m_mainPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });

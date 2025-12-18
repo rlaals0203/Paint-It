@@ -28,6 +28,8 @@ Stage2::~Stage2()
 
 void Stage2::Init()
 {
+	m_isEnd = false;
+
 	GET_SINGLE(GameSaveManager)->SetStage(2);
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
@@ -69,6 +71,7 @@ void Stage2::Init()
 	Player* player = new Player();
 	player->SetPos({ WINDOW_WIDTH / 2, 550 });
 	player->SetSize({ 1.25f, 1.25f });
+	player->SetCompletedFire();
 	AddObject(player, Layer::PLAYER);
 
 	SpriteObject* bg = new SpriteObject(L"bluebackground", Layer::BACKGROUND, false);

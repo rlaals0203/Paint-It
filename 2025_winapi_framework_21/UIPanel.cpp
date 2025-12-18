@@ -18,45 +18,41 @@ UIPanel::~UIPanel()
 
 void UIPanel::Update()
 {
-	if (!m_isActive || m_isEnd)
-		return;
+    if (!m_isActive || m_isEnd)
+        return;
 
-	auto iter = m_children.begin();
-	while (iter != m_children.end())
-	{
-		if (m_isEnd)
-			return;
-		if ((*iter)->GetIsDead())
-		{
-			delete (*iter);
-			iter = m_children.erase(iter);
-		}
-		else
-		{
-			++iter;
-		}
-	}
+    auto iter = m_children.begin();
+    while (iter != m_children.end())
+    {
+        if ((*iter)->GetIsDead())
+        {
+            delete (*iter);
+            iter = m_children.erase(iter);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
 
-	if (m_isEnd)
-		return;
-	Object::Update();
+    if (m_isEnd)
+        return;
 
-	if (m_isEnd)
-		return;
+    Object::Update();
 
-	for (size_t i = 0; i < m_children.size(); ++i)
-	{
-		if (m_isEnd)
-			return;
-		if (!m_isEnd || m_children[i])
-		{
-			if (m_isEnd)
-				return;
-			m_children[i]->Update();
-		}
-		else if (m_isEnd)
-			return;
-	}
+    if (m_isEnd)
+        return;
+
+    for (size_t i = 0; i < m_children.size(); ++i)
+    {
+        if (m_isEnd)
+            return;
+
+        if (m_children[i])
+        {
+            m_children[i]->Update();
+        }
+    }
 }
 
 void UIPanel::Render(HDC _hdc)

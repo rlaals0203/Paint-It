@@ -19,6 +19,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
+	m_isEnd = false;
+
 	panel = GET_SINGLE(ResourceManager)
 		->GetTexture(L"panel");
 
@@ -102,7 +104,7 @@ void TitleScene::Start()
 	start->SetAllTexture(button , buttonHover, nullptr);
 	start->SetCallback([=]()
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"Stage1");
+			GET_SINGLE(SceneManager)->LoadScene(L"Stage3");
 		});
 }
 
