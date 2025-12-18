@@ -18,6 +18,14 @@
 #include "GameSaveManager.h"
 #include "HealPackSpawner.h"
 
+Stage2::Stage2()
+{
+}
+
+Stage2::~Stage2()
+{
+}
+
 void Stage2::Init()
 {
 	GET_SINGLE(GameSaveManager)->SetStage(2);
@@ -70,6 +78,7 @@ void Stage2::Init()
 
 	auto* healpack = new HealPackSpawner();
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"boss02");
 
 	SpriteObject* floor = new SpriteObject(L"floor2", Layer::BACKGROUND, false);

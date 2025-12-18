@@ -48,12 +48,17 @@ ATOM BaseWindow::MyRegisterClass()
 
 void BaseWindow::createWindow()
 {
+    DWORD style =
+        WS_OVERLAPPED |
+        WS_CAPTION |
+        WS_SYSMENU |
+        WS_MINIMIZEBOX;
     int screenX = ::GetSystemMetrics(SM_CXSCREEN);
     int screenY = ::GetSystemMetrics(SM_CYSCREEN);
     int winposx = (screenX - WINDOW_WIDTH) / 2;
     int winposy = (screenY - WINDOW_HEIGHT) / 2;
 
-    m_hWnd = ::CreateWindowW(L"GameP", L"2025 GameP", WS_OVERLAPPEDWINDOW,
+    m_hWnd = ::CreateWindowW(L"GameP", L"2025 GameP", style,
         winposx, winposy, WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, m_hInst, nullptr);
 
     RECT rtWindow = { winposx, winposy, winposx + WINDOW_WIDTH, winposy + WINDOW_HEIGHT };

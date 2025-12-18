@@ -31,6 +31,7 @@ void SkyLaserPattern::SetUsed()
 {
 	m_isGoRight = rand() % 2 == 0;
 	BaseLazerPattern::SetUsed();
+	m_remainCount = m_count + 1;
 }
 
 void SkyLaserPattern::MakeLaser()
@@ -39,9 +40,9 @@ void SkyLaserPattern::MakeLaser()
 	Vector2 pos;
 
 	if (m_isGoRight)
-		pos = { (WINDOW_WIDTH / m_count) * (m_count - m_remainCount) , 0 };
+		pos = { (WINDOW_WIDTH / m_count) * (m_count - (m_remainCount - 1)) , 0 };
 	else
-		pos = {(WINDOW_WIDTH / m_count) * m_remainCount , 0};
+		pos = {(WINDOW_WIDTH / m_count) * (m_remainCount - 1) , 0};
 
 	laser->SetWidth(WINDOW_WIDTH / m_count);
 	laser->SetColor(m_penType, m_brushType);

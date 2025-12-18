@@ -28,6 +28,7 @@ public:
 
 private:
 	bool m_isActive;
+	bool m_isEnd = false;
 
 	vector<UIElement*> m_children;
 	COLORREF m_backgroundColor = RGB(50, 50, 50);

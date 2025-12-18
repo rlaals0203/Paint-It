@@ -3,7 +3,9 @@
 class UIText :
     public UIElement
 {
-
+public:
+    UIText();
+    ~UIText();
 public:
     virtual void Render(HDC _hdc) override;
 public:

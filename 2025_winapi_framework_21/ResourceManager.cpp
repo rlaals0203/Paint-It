@@ -173,18 +173,7 @@ void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
 {
 	// 볼륨 값 저장
 	m_Volume[(UINT)_channel] = _vol;
-
-	// 현재 재생 중인 채널에도 적용
-	if (m_pChannel[(UINT)_channel])
-	{
-		bool isPlaying = false;
-		m_pChannel[(UINT)_channel]->isPlaying(&isPlaying);
-
-		if (isPlaying)
-		{
-			m_pChannel[(UINT)_channel]->setVolume(_vol);
-		}
-	}
+	m_pChannel[(UINT)_channel]->setVolume(_vol);
 }
 
 void ResourceManager::Stop(SOUND_CHANNEL _channel)
@@ -217,10 +206,10 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"hit", L"Sound\\hit.mp3", false);
 	LoadSound(L"shield", L"Sound\\shield.wav", false);
 	LoadSound(L"exlosion", L"Sound\\exlosion.wav", false);
-	LoadSound(L"prismbreak", L"Sound\\prismbreak.wav", false);
-	LoadSound(L"boss1", L"Sound\\boss01.wav", true);
-	LoadSound(L"boss2", L"Sound\\boss02.wav", true);
-	LoadSound(L"boss3", L"Sound\\boss03.wav", true);
+	LoadSound(L"prismbreak", L"Sound\\prismbreak.mp3", false);
+	LoadSound(L"boss01", L"Sound\\boss01.wav", true);
+	LoadSound(L"boss02", L"Sound\\boss02.wav", true);
+	LoadSound(L"boss03", L"Sound\\boss03.wav", true);
 }
 
 void ResourceManager::RegisterFont(FontType _type, const wstring& _name, int _height, int _weight, bool _italic, int _quality)

@@ -7,6 +7,14 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 
+Boss2ClearScene::Boss2ClearScene()
+{
+}
+
+Boss2ClearScene::~Boss2ClearScene()
+{
+}
+
 void Boss2ClearScene::Init()
 {
 	m_mainPanel = new UIPanel();

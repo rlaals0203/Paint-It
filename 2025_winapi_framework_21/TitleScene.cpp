@@ -9,6 +9,14 @@
 #include "UISlider.h"
 #include "UIImage.h"
 
+TitleScene::TitleScene()
+{
+}
+
+TitleScene::~TitleScene()
+{
+}
+
 void TitleScene::Init()
 {
 	panel = GET_SINGLE(ResourceManager)
@@ -29,6 +37,7 @@ void TitleScene::Init()
 	sliderHandle = GET_SINGLE(ResourceManager)
 		->GetTexture(L"slidericon");
 
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 
 	CreatePanel();
 
@@ -39,15 +48,11 @@ void TitleScene::Init()
 	Start();
 	Setting();
 	Exit();
-
-	GET_SINGLE(ResourceManager)
-		->Play(L"BGM");
 }
 
 void TitleScene::Release()
 {
-	GET_SINGLE(ResourceManager)
-		->Stop(SOUND_CHANNEL::BGM);
+	Scene::Release();
 }
 
 void TitleScene::CreatePanel()

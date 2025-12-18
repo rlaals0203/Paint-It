@@ -18,6 +18,14 @@
 #include "GameSaveManager.h"
 
 
+Stage1::Stage1()
+{
+}
+
+Stage1::~Stage1()
+{
+}
+
 void Stage1::Init()
 {
 
@@ -55,6 +63,7 @@ void Stage1::Init()
 
 	auto* healpack = new HealPackSpawner();
 	GET_SINGLE(SceneManager)->GetCurScene()->RequestSpawn(healpack, Layer::HEALPACK);
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"boss01");
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYERPROJECTILE, Layer::ENEMY);
