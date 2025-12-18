@@ -36,7 +36,7 @@ ArtBoss::ArtBoss()
 	AddModule(new BlackHolePattern(m_controller, 300));
 	AddModule(new StringArtPattern(m_controller, 0.12f));
 	AddModule(new OriginPointPattern(m_controller, 40));
-	AddModule(new DotBombPattern(m_controller, 5));
+	AddModule(new DotBombPattern(m_controller, 18));
 
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });

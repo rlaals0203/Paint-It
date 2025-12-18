@@ -10,9 +10,9 @@ DotBombPattern::DotBombPattern(BossController* _controller, int count)
 	, m_count(count)
 	, m_spawnTime(0.15f)
 	, m_timer(0.15f)
-	, m_destroyTime(3.5f)
-	, m_waitTime(1.5f)
-	, m_bombTime(1.f)
+	, m_destroyTime(1.5f)
+	, m_waitTime(0.7f)
+	, m_bombTime(0.5f)
 	, m_blinkTime(0.1f)
 	, m_damageTime(0.6f)
 	, m_dotSize({50,50})
@@ -51,7 +51,7 @@ void DotBombPattern::SetUsed()
 {
 	m_count = m_baseCount;
 	m_timer = m_spawnTime;
-	m_waitTime = 1.5f;
+	m_waitTime = 0.7f;
 	once = false;
 	BossPattern::SetUsed();
 }

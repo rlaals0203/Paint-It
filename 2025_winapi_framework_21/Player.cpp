@@ -27,7 +27,7 @@ Player::Player()
 	m_healthCompo = AddComponent<EntityHealth>();
 	m_healthCompo->SetIsPlayer(false);
 	m_healthCompo->SetIsPlayer(false);
-	m_healthCompo->SetDefaultHP(50.f);
+	m_healthCompo->SetDefaultHP(75.f);
 	m_healthCompo->SubscribeDeath([this]() {HandleDead(); });
 
 	m_groundChecker = new GroundChecker();
