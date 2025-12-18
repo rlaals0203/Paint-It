@@ -77,5 +77,5 @@ void TorchObject::FireProjectile()
 			angle * i, 10.f);
 	}
 
-	GET_SINGLE(ImpulseManager)->ApplyImpulse(20.f, 0.4f);
+	GET_SINGLE(ImpulseManager)->ApplyImpulse(10.f, 0.4f);
 }

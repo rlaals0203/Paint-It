@@ -42,7 +42,7 @@ void ColorObject::StayCollision(Collider* _other)
 	m_dealTime -= fDT;
 	if (m_dealTime <= 0.f) {
 		m_dealTime = 0.1f;
-		m_player->ApplyDamage(1);
+		m_player->ApplyDamage(2);
 	}
 }
 

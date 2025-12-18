@@ -17,7 +17,7 @@ DotBombPattern::DotBombPattern(BossController* _controller, int count)
 	, m_damageTime(0.6f)
 	, m_dotSize({50,50})
 	, m_bombSize({5,5})
-	, m_damage(5)
+	, m_damage(30)
 {
 
 }

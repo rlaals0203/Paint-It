@@ -202,8 +202,8 @@ void StringArtPattern::FireNextLaser()
 
     LaserObject* laser = new LaserObject();
     laser->SetWidth(12.f);
-    laser->SetColor(PenType::YELLOW, BrushType::YELLOW);
-    laser->SetDamagePerTick(1.f, 0.1f);
+    laser->SetColor(PenType::STRINGLASER, BrushType::STRINGLASER);
+    laser->SetDamagePerTick(10.f, 0.1f);
     laser->ConnectLaser(startPos, endPos, 0.15f, 0.f);
 
     m_lasers.push(laser);

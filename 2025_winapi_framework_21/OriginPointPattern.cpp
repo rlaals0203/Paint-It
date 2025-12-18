@@ -44,7 +44,7 @@ void OriginPointPattern::Update()
 	m_spawnTime = 0.001f;
 	float angle = ((float)(rand() % 3600)) / 10;
 	GET_SINGLE(ProjectileManager)->SpawnProjectile(
-		BlackHoleProjectile , 100.f, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 },
+		BlackHoleProjectile2, 100.f, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 },
 		angle, 10.f);
 	m_count--;
 	if (m_count <= 0)

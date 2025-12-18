@@ -13,6 +13,7 @@ BaseLazerPattern::BaseLazerPattern(BossController* _controller, int _count, bool
     m_penType = _isAwaken ? PenType::LAZER2 : PenType::LAZER;
     m_brushType = _isAwaken ? BrushType::LAZER2 : BrushType::LAZER;
     m_remainDeleteTime = _deleteTime;
+    m_isAwaken = _isAwaken;
 }
 
 BaseLazerPattern::~BaseLazerPattern()

@@ -65,7 +65,7 @@ PrismBoss::PrismBoss() : Boss(),
 	auto* col = AddComponent<Collider>();
 	col->SetSize({ 100, 100 });
 	m_healthCompo = AddComponent<EntityHealth>();
-	m_healthCompo->SetDefaultHP(1500.f);
+	m_healthCompo->SetDefaultHP(2000.f);
 	m_healthCompo->SubscribeHealthThreshold([this]() { HandlePhase(); }, 0.5f);
 	m_healthCompo->SubscribeDeath([this]() { HandleDaad(); });
 	AddComponent<DOTweenCompo>();
@@ -140,10 +140,10 @@ void PrismBoss::Changing()
 void PrismBoss::AddAwakenPattern()
 {
 	AddModule(new MakePrismPattern(m_controller));
-	AddModule(new AroundLaserPattern(m_controller, 15, true, 0.05f, 1.f));
+	AddModule(new AroundLaserPattern(m_controller, 16, true, 0.05f, 1.f));
 	AddModule(new SkyLaserPattern(m_controller, 6, true, 0.34f, 0.28f));
 	AddModule(new GuidedLaserPattern(m_controller, 20, true, 0.05f, 0.5f));
-	AddModule(new ReflectLazerPattern(m_controller, 13, true, 0.075f, 0.5f));
+	AddModule(new ReflectLazerPattern(m_controller, 15, true, 0.075f, 0.5f));
 }
 
 void PrismBoss::HandlePhase()
