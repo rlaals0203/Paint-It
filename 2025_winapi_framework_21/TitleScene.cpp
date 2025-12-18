@@ -19,6 +19,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
+	m_isEnd = false;
+
 	panel = GET_SINGLE(ResourceManager)
 		->GetTexture(L"panel");
 
