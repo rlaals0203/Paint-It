@@ -8,6 +8,7 @@ UIPanel::UIPanel()
 
 UIPanel::~UIPanel()
 {
+	m_isEnd = true;
 	for (UIElement* child : m_children)
 	{
 		delete child;
@@ -17,12 +18,14 @@ UIPanel::~UIPanel()
 
 void UIPanel::Update()
 {
-	if (!m_isActive)
+	if (!m_isActive || m_isEnd)
 		return;
 
 	auto iter = m_children.begin();
 	while (iter != m_children.end())
 	{
+		if (m_isEnd)
+			return;
 		if ((*iter)->GetIsDead())
 		{
 			delete (*iter);
@@ -33,14 +36,26 @@ void UIPanel::Update()
 			++iter;
 		}
 	}
+
+	if (m_isEnd)
+		return;
 	Object::Update();
+
+	if (m_isEnd)
+		return;
 
 	for (size_t i = 0; i < m_children.size(); ++i)
 	{
-		if (m_children[i])
+		if (m_isEnd)
+			return;
+		if (!m_isEnd || m_children[i])
 		{
+			if (m_isEnd)
+				return;
 			m_children[i]->Update();
 		}
+		else if (m_isEnd)
+			return;
 	}
 }
 
