@@ -29,6 +29,8 @@ Stage3::~Stage3()
 
 void Stage3::Init()
 {
+	m_isEnd = false;
+
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 

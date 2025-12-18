@@ -35,11 +35,17 @@ Scene::~Scene()
 
 void Scene::Update()
 {
+	if (m_isEnd)
+		return;
 	for (UINT i = 0; i < (UINT)Layer::END; ++i)
 	{
+		if (m_isEnd)
+			return;
 		auto& vec = m_vecObj[i];
 		for (auto* obj : vec)
 		{
+			if (m_isEnd)
+				return;
 			if (!obj->GetIsDead())
 				obj->Update();
 		}
@@ -85,6 +91,7 @@ void Scene::Render(HDC _hdc)
 
 void Scene::Release()
 {
+	m_isEnd = true;
 	FlushEvent();
 
 	for (UINT i = 0; i < (UINT)Layer::END; ++i)

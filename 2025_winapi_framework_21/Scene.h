@@ -43,6 +43,8 @@ public:
 	void ClearScene();
 private:
 	void RemoveObject(Object* _obj);
+protected:
+	bool m_isEnd = false;
 private:
 	vector<Object*> m_vecObj[(UINT)Layer::END];
 	vector<Object*> m_killObject;

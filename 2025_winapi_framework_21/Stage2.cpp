@@ -28,6 +28,8 @@ Stage2::~Stage2()
 
 void Stage2::Init()
 {
+	m_isEnd = false;
+
 	GET_SINGLE(GameSaveManager)->SetStage(2);
 	ColorObject* obj1 = new ColorObject(PenType::BLACK, BrushType::BLACK);
 	ColorObject* obj2 = new ColorObject(PenType::BLACK, BrushType::BLACK);

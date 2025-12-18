@@ -28,6 +28,7 @@ Stage1::~Stage1()
 
 void Stage1::Init()
 {
+	m_isEnd = false;
 
 	GET_SINGLE(GameSaveManager)->SetStage(1);
 	m_mainPanel = new UIPanel();
